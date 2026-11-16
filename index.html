@@ -4,411 +4,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050505">
-<title>PKDEV — Ideas into Digital Reality</title>
+<meta name="theme-color" content="#080808">
+<title>PKDEV — Digital Development</title>
 
 <style>
 :root {
-  --bg: #050505;
-  --surface: #101010;
-  --white: #ffffff;
-  --gray: #999999;
+  --bg: #080808;
+  --surface: #111;
+  --text: #eee;
+  --muted: #999;
   --border: #292929;
+  --width: 900px;
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
+  background: var(--bg);
   scroll-behavior: smooth;
 }
 
 body {
   background: var(--bg);
-  color: var(--white);
+  color: var(--text);
   font-family: Inter, Arial, sans-serif;
-  line-height: 1.6;
+  line-height: 1.85;
+  min-height: 100vh;
 }
 
 a {
-  color: inherit;
+  color: white;
   text-decoration: none;
 }
 
+a:hover {
+  color: #999;
+}
+
+/* TECH BACKGROUND */
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+  background-size: 55px 55px;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 5%;
+  right: -250px;
+  border: 1px solid #222;
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 55px rgba(255,255,255,.012),
+    0 0 0 110px rgba(255,255,255,.008);
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  bottom: -200px;
+  left: -200px;
+  border: 1px solid #252525;
+  border-radius: 50%;
+}
+
+/* LAYOUT */
+
 .container {
-  width: min(1160px, 90%);
+  position: relative;
+  z-index: 1;
+  width: min(var(--width), 90%);
   margin: auto;
 }
 
-/* NAVBAR */
+/* HEADER */
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(5,5,5,.88);
-  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
+}
+
+.header {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  font-size: 14px;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #777;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
 }
 
 nav {
-  height: 75px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 23px;
 }
 
-.logo {
-  font-size: 19px;
-  font-weight: 900;
-  letter-spacing: 4px;
-}
-
-.logo span {
-  border: 1px solid white;
-  padding: 5px 8px;
-  margin-right: 10px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 30px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--gray);
+nav button {
+  color: #888;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: .3s;
+  padding: 8px 0;
+  transition: .2s;
 }
 
-.nav-links a:hover {
+nav button:hover,
+nav button.active {
   color: white;
 }
 
-/* HERO */
-
-.hero {
-  min-height: 680px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
+nav button.active {
+  border-bottom: 1px solid white;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  right: -250px;
-  border: 1px solid #242424;
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 70px #090909,
-    0 0 0 71px #202020,
-    0 0 0 140px #080808,
-    0 0 0 141px #202020;
+/* PAGES */
+
+main {
+  min-height: calc(100vh - 160px);
+  padding: 85px 0 110px;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 100px 0;
+.page {
+  display: none;
+  animation: appear .35s ease;
 }
 
-.eyebrow {
-  color: var(--gray);
-  font-size: 11px;
-  letter-spacing: 4px;
+.page.active {
+  display: block;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TYPOGRAPHY */
+
+.label {
+  color: #777;
   text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 3px;
 }
 
 h1 {
-  font-size: clamp(55px, 9vw, 110px);
-  line-height: .98;
-  letter-spacing: -7px;
-  margin: 30px 0;
-}
-
-h1 span {
-  color: #777;
-}
-
-.hero p {
-  color: var(--gray);
-  max-width: 530px;
-  font-size: 17px;
-}
-
-.buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 35px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 13px 20px;
-  border: 1px solid white;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: .3s;
-}
-
-.btn.primary {
-  background: white;
-  color: black;
-}
-
-.btn:hover {
-  background: white;
-  color: black;
-  transform: translateY(-3px);
-}
-
-/* SECTIONS */
-
-section.content-section {
-  padding: 110px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.section-label {
-  color: #777;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-size: clamp(45px, 8vw, 75px);
+  line-height: 1.1;
+  letter-spacing: -5px;
+  margin: 20px 0;
 }
 
 h2 {
-  font-size: clamp(35px, 5vw, 58px);
-  letter-spacing: -3px;
-  margin: 12px 0 45px;
+  font-size: 26px;
+  margin: 35px 0 15px;
+  letter-spacing: -1px;
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 70px;
+h3 {
+  font-size: 17px;
+  margin-bottom: 5px;
 }
 
-.about-text {
-  font-size: 25px;
-  line-height: 1.6;
-  color: #bbb;
+p {
+  color: #aaa;
+  margin-bottom: 17px;
 }
 
-.about-text strong {
-  color: white;
+.intro {
+  font-size: 17px;
+  max-width: 720px;
+  line-height: 2;
 }
 
-.facts {
-  border-top: 1px solid var(--border);
-}
+/* LINKS */
 
-.fact {
-  padding: 17px 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-}
-
-.fact span:first-child {
-  color: #777;
-}
-
-/* PROJECTS */
-
-.projects {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-.project {
-  background: linear-gradient(145deg, #141414, #090909);
-  border: 1px solid var(--border);
-  padding: 30px;
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: .3s;
-}
-
-.project:hover {
-  transform: translateY(-5px);
-  border-color: #888;
-}
-
-.project small {
-  color: #777;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.project h3 {
-  font-size: 25px;
-  margin-bottom: 8px;
-}
-
-.project p {
-  color: #999;
-  font-size: 13px;
-}
-
-/* SKILLS */
-
-.skills {
+.links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 22px;
+  margin-top: 30px;
 }
 
-.skill {
-  border: 1px solid #333;
-  padding: 10px 15px;
-  color: #bbb;
+.links a {
   font-size: 13px;
-  transition: .3s;
+  border-bottom: 1px solid #555;
+  padding-bottom: 4px;
 }
 
-.skill:hover {
-  background: white;
-  color: black;
-}
+/* DIVIDER */
 
-/* PRINCIPLES */
-
-.principles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.divider {
+  border: none;
   border-top: 1px solid var(--border);
+  margin: 40px 0;
 }
 
-.principle {
-  padding: 25px;
-  border-right: 1px solid var(--border);
+/* CONTENT LIST */
+
+.list {
+  border-top: 1px solid var(--border);
+  margin-top: 25px;
 }
 
-.principle h3 {
-  margin: 20px 0 10px;
+.item {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.principle p {
-  color: var(--gray);
+.item-label {
+  color: #777;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.item p {
   font-size: 13px;
+  margin: 0;
 }
 
-/* CONTACT */
+/* TECHNOLOGY */
 
-.contact {
+.tags {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 25px;
 }
 
-.contact-links {
-  min-width: 250px;
+.tag {
+  border: 1px solid #333;
+  padding: 6px 13px;
+  font-size: 12px;
+  color: #bbb;
+  transition: .25s;
 }
 
-.contact-links a {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 0;
-  border-bottom: 1px solid #333;
-  color: #aaa;
-  font-size: 13px;
-  transition: .3s;
-}
-
-.contact-links a:hover {
-  color: white;
+.tag:hover {
+  color: black;
+  background: white;
 }
 
 /* FOOTER */
 
 footer {
-  padding: 30px 0;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
   color: #666;
   font-size: 11px;
-  letter-spacing: 1px;
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
-/* ANIMATIONS */
+/* MOBILE */
 
-.reveal {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: .8s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 750px) {
-  .nav-links {
-    gap: 12px;
-  }
-
-  .nav-links a {
-    font-size: 10px;
-  }
-
-  h1 {
-    letter-spacing: -4px;
-  }
-
-  .about-grid,
-  .projects,
-  .principles {
-    grid-template-columns: 1fr;
-  }
-
-  .contact {
+@media(max-width:650px) {
+  .header {
     flex-direction: column;
     align-items: flex-start;
+    padding: 17px 0;
   }
 
-  .contact-links {
+  nav {
     width: 100%;
+    overflow-x: auto;
+    gap: 20px;
   }
 
-  .principle {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+  nav button {
+    white-space: nowrap;
+  }
+
+  main {
+    padding: 60px 0 80px;
+  }
+
+  .item {
+    grid-template-columns: 1fr;
+    gap: 5px;
   }
 
   footer {
     flex-direction: column;
-    gap: 10px;
   }
 }
 
-@media(prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+@media(prefers-reduced-motion:reduce) {
   *, *::before, *::after {
+    animation: none !important;
     transition: none !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
   }
 }
 </style>
@@ -416,281 +347,454 @@ footer {
 
 <body>
 
+<div class="background"></div>
+
+<div class="container">
+
 <header>
-  <nav class="container">
-    <a href="#home" class="logo">
-      <span>PK</span>PKDEV
+  <div class="header">
+
+    <a href="#home" class="brand" data-page="home">
+      <span class="brand-icon">PK</span>
+      PKDEV
     </a>
 
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Stack</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <nav>
+      <button class="active" data-page="home">Home</button>
+      <button data-page="about">About</button>
+      <button data-page="projects">Projects</button>
+      <button data-page="stack">Stack</button>
+      <button data-page="contact">Contact</button>
+    </nav>
+
+  </div>
 </header>
 
 <main>
 
-<!-- HERO -->
+<!-- HOME -->
 
-<section class="hero" id="home">
-  <div class="container hero-content reveal">
+<section class="page active" id="home">
 
-    <div class="eyebrow">
-      Independent Digital Studio
-    </div>
-
-    <h1>
-      Ideas into<br>
-      <span>digital reality.</span>
-    </h1>
-
-    <p>
-      PKDEV is an independent development brand
-      focused on software, web technologies,
-      digital products and creative experiments.
-    </p>
-
-    <div class="buttons">
-      <a href="#projects" class="btn primary">
-        Explore Projects ↘
-      </a>
-
-      <a href="https://github.com/resurect63"
-         target="_blank"
-         class="btn">
-        GitHub ↗
-      </a>
-    </div>
-
+  <div class="label">
+    Independent Developer & Digital Creator
   </div>
+
+  <h1>
+    PKDEV
+  </h1>
+
+  <p class="intro">
+    Hey! I'm <strong style="color:white">Resurect</strong>,
+    the creator behind PKDEV.
+
+    I build software, explore technologies,
+    develop digital experiences and turn
+    creative ideas into practical projects.
+  </p>
+
+  <p class="intro">
+    PKDEV is my independent development brand.
+    A place where engineering, creativity and
+    experimentation come together to create
+    something meaningful.
+  </p>
+
+  <p style="color:white">
+    Ideas into digital reality.
+  </p>
+
+  <div class="links">
+    <a href="https://github.com/resurect63" target="_blank">
+      GitHub ↗
+    </a>
+
+    <a href="mailto:itznightitznight16@gmail.com">
+      Email ↗
+    </a>
+
+    <a href="#projects" data-page="projects">
+      Explore projects →
+    </a>
+  </div>
+
+  <hr class="divider">
+
+  <div class="label">Areas of Interest</div>
+
+  <p style="margin-top:15px">
+    Software Development · Web Technologies ·
+    Minecraft Development · Digital Products ·
+    Developer Tools · UI Systems
+  </p>
+
 </section>
 
 <!-- ABOUT -->
 
-<section class="content-section" id="about">
-  <div class="container">
+<section class="page" id="about">
 
-    <div class="section-label">01 / About</div>
-    <h2>Built with intent.</h2>
+  <div class="label">Introduction</div>
 
-    <div class="about-grid reveal">
+  <h1>About Me</h1>
 
-      <p class="about-text">
-        I'm <strong>Resurect</strong>, the creator
-        behind PKDEV. I work across software
-        development, web technologies and digital
-        environments — turning ideas into practical
-        experiences.
-      </p>
+  <p class="intro">
+    I'm Resurect, founder and creator of PKDEV.
+    My work revolves around software development,
+    digital technologies and building useful
+    experiences.
+  </p>
 
-      <div class="facts">
+  <p>
+    I enjoy exploring different areas of development,
+    understanding how systems work and combining
+    technologies to create complete projects.
+  </p>
 
-        <div class="fact">
-          <span>Brand</span>
-          <span>PKDEV</span>
-        </div>
+  <p>
+    From Minecraft server systems and plugins
+    to desktop applications and web platforms,
+    every project is an opportunity to learn,
+    experiment and improve.
+  </p>
 
-        <div class="fact">
-          <span>Creator</span>
-          <span>Resurect</span>
-        </div>
+  <p>
+    My approach is based on continuous learning,
+    attention to detail and building things
+    that have a real purpose.
+  </p>
 
-        <div class="fact">
-          <span>Focus</span>
-          <span>Software & Digital Products</span>
-        </div>
+  <hr class="divider">
 
-        <div class="fact">
-          <span>GitHub</span>
-          <span>@resurect63</span>
-        </div>
+  <div class="label">Profile</div>
 
+  <div class="list">
+
+    <div class="item">
+      <div class="item-label">Brand</div>
+      <div>
+        <h3>PKDEV</h3>
+        <p>Independent development brand.</p>
       </div>
     </div>
+
+    <div class="item">
+      <div class="item-label">Creator</div>
+      <div>
+        <h3>Resurect</h3>
+        <p>Founder and developer behind PKDEV.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Focus</div>
+      <div>
+        <h3>Software & Digital Products</h3>
+        <p>Applications, web experiences and development tools.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Philosophy</div>
+      <div>
+        <h3>Learn by Building</h3>
+        <p>Experiment, improve and create meaningful projects.</p>
+      </div>
+    </div>
+
   </div>
+
 </section>
 
 <!-- PROJECTS -->
 
-<section class="content-section" id="projects">
-  <div class="container">
+<section class="page" id="projects">
 
-    <div class="section-label">02 / Selected Work</div>
-    <h2>Things in progress.</h2>
+  <div class="label">Selected Work</div>
 
-    <div class="projects">
+  <h1>Projects</h1>
 
-      <article class="project reveal">
-        <small>01 / Security</small>
-        <div>
-          <h3>PKDEV.Security</h3>
-          <p>Security-related tools and development experiments.</p>
-        </div>
-      </article>
+  <p class="intro">
+    A collection of projects, experiments and
+    development initiatives connected to the
+    PKDEV ecosystem.
+  </p>
 
-      <article class="project reveal">
-        <small>02 / Launcher</small>
-        <div>
-          <h3>Imperial Launcher</h3>
-          <p>A Minecraft Java launcher project.</p>
-        </div>
-      </article>
+  <div class="list">
 
-      <article class="project reveal">
-        <small>03 / Learning</small>
-        <div>
-          <h3>Moderator Academy</h3>
-          <p>A learning project for moderation and community management.</p>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <small>04 / Platform</small>
-        <div>
-          <h3>PKDEV.Hub</h3>
-          <p>A central hub concept for digital tools and projects.</p>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <small>05 / Experiment</small>
-        <div>
-          <h3>Project Delta</h3>
-          <p>An experimental project in the Minecraft ecosystem.</p>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <small>06 / Community</small>
-        <div>
-          <h3>SWAT Force</h3>
-          <p>A community and server-related project.</p>
-        </div>
-      </article>
-
+    <div class="item">
+      <div class="item-label">Security</div>
+      <div>
+        <h3>PKDEV.Security</h3>
+        <p>
+          A security-oriented project exploring
+          monitoring systems, technical workflows
+          and digital tools.
+        </p>
+      </div>
     </div>
+
+    <div class="item">
+      <div class="item-label">Desktop</div>
+      <div>
+        <h3>Imperial Launcher</h3>
+        <p>
+          A Minecraft Java launcher focused on
+          version management, mod-loader support
+          and a polished desktop experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Education</div>
+      <div>
+        <h3>Moderator Academy</h3>
+        <p>
+          An educational project designed to help
+          Minecraft community staff understand
+          moderation responsibilities and workflows.
+        </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Platform</div>
+      <div>
+        <h3>PKDEV.Hub</h3>
+        <p>
+          A central platform concept for connecting
+          digital tools and projects.
+        </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Minecraft</div>
+      <div>
+        <h3>Project Delta</h3>
+        <p>
+          An Arena Breakout-inspired Minecraft
+          project built around exploration,
+          equipment, loot and extraction gameplay.
+        </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Community</div>
+      <div>
+        <h3>SWAT Force</h3>
+        <p>
+          A community-oriented project in the
+          gaming and server ecosystem.
+        </p>
+      </div>
+    </div>
+
   </div>
+
+  <p style="font-size:12px;margin-top:20px">
+    Project descriptions represent their general
+    direction. Check the repositories for current
+    status and implementation details.
+  </p>
+
 </section>
 
-<!-- SKILLS -->
+<!-- STACK -->
 
-<section class="content-section" id="skills">
-  <div class="container">
+<section class="page" id="stack">
 
-    <div class="section-label">03 / Toolbox</div>
-    <h2>Tools of the trade.</h2>
+  <div class="label">Technologies & Tools</div>
 
-    <div class="skills reveal">
-      <span class="skill">Java</span>
-      <span class="skill">JavaScript</span>
-      <span class="skill">TypeScript</span>
-      <span class="skill">PHP</span>
-      <span class="skill">HTML</span>
-      <span class="skill">CSS</span>
-      <span class="skill">React</span>
-      <span class="skill">Node.js</span>
-      <span class="skill">MySQL</span>
-      <span class="skill">MongoDB</span>
-      <span class="skill">Paper</span>
-      <span class="skill">Spigot</span>
-      <span class="skill">Linux</span>
-      <span class="skill">Docker</span>
-      <span class="skill">Git</span>
-      <span class="skill">GitHub</span>
+  <h1>My Stack</h1>
+
+  <p class="intro">
+    Technologies and tools I use or explore
+    across software development, web applications,
+    infrastructure and Minecraft development.
+  </p>
+
+  <div class="list">
+
+    <div class="item">
+      <div class="item-label">Languages</div>
+      <div>
+        <h3>Java · JavaScript · TypeScript · PHP</h3>
+        <p>Application, web and server-side development.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Frontend</div>
+      <div>
+        <h3>HTML · CSS · React</h3>
+        <p>Modern websites and digital interfaces.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Backend</div>
+      <div>
+        <h3>Node.js · PHP</h3>
+        <p>Application logic and backend development.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Database</div>
+      <div>
+        <h3>MySQL · MongoDB</h3>
+        <p>Data storage and database management.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Minecraft</div>
+      <div>
+        <h3>Paper · Spigot</h3>
+        <p>Plugins, server systems and gameplay features.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-label">Environment</div>
+      <div>
+        <h3>Linux · Docker · Git · GitHub</h3>
+        <p>Development environments and version control.</p>
+      </div>
     </div>
 
   </div>
-</section>
 
-<!-- PRINCIPLES -->
-
-<section class="content-section">
-  <div class="container">
-
-    <div class="section-label">04 / Principles</div>
-    <h2>Less noise. More meaning.</h2>
-
-    <div class="principles reveal">
-
-      <div class="principle">
-        <small>01</small>
-        <h3>Useful by design</h3>
-        <p>Build things that solve problems and make tasks easier.</p>
-      </div>
-
-      <div class="principle">
-        <small>02</small>
-        <h3>Keep exploring</h3>
-        <p>Learn through experiments and continuous improvement.</p>
-      </div>
-
-      <div class="principle">
-        <small>03</small>
-        <h3>Make it clear</h3>
-        <p>Simple interfaces and reliable foundations matter.</p>
-      </div>
-
-    </div>
+  <div class="tags">
+    <span class="tag">Java</span>
+    <span class="tag">JavaScript</span>
+    <span class="tag">TypeScript</span>
+    <span class="tag">PHP</span>
+    <span class="tag">React</span>
+    <span class="tag">Node.js</span>
+    <span class="tag">MySQL</span>
+    <span class="tag">MongoDB</span>
+    <span class="tag">Paper</span>
+    <span class="tag">Linux</span>
+    <span class="tag">Docker</span>
+    <span class="tag">Git</span>
   </div>
+
 </section>
 
 <!-- CONTACT -->
 
-<section class="content-section" id="contact">
-  <div class="container contact reveal">
+<section class="page" id="contact">
 
-    <div>
-      <div class="section-label">05 / Contact</div>
-      <h2>Have an idea?<br>Let's make it real.</h2>
+  <div class="label">Get in Touch</div>
+
+  <h1>Contact</h1>
+
+  <p class="intro">
+    Have a project idea, a question about my work
+    or an opportunity to collaborate?
+
+    Feel free to reach out through the contact
+    channels below.
+  </p>
+
+  <div class="list">
+
+    <div class="item">
+      <div class="item-label">Email</div>
+      <div>
+        <h3>
+          <a href="mailto:itznightitznight16@gmail.com">
+            itznightitznight16@gmail.com
+          </a>
+        </h3>
+        <p>For project inquiries and professional messages.</p>
+      </div>
     </div>
 
-    <div class="contact-links">
-
-      <a href="mailto:itznightitznight16@gmail.com">
-        <span>Email</span>
-        <span>↗</span>
-      </a>
-
-      <a href="https://github.com/resurect63" target="_blank">
-        <span>GitHub · @resurect63</span>
-        <span>↗</span>
-      </a>
-
-      <a href="https://discord.com/" target="_blank">
-        <span>Discord · resurect.</span>
-        <span>↗</span>
-      </a>
-
+    <div class="item">
+      <div class="item-label">GitHub</div>
+      <div>
+        <h3>
+          <a href="https://github.com/resurect63" target="_blank">
+            @resurect63 ↗
+          </a>
+        </h3>
+        <p>Source code, repositories and development activity.</p>
+      </div>
     </div>
+
+    <div class="item">
+      <div class="item-label">Discord</div>
+      <div>
+        <h3>resurect.</h3>
+        <p>Discord username. Direct profile link can be added later.</p>
+      </div>
+    </div>
+
   </div>
+
 </section>
 
 </main>
 
-<footer class="container">
+<footer>
   <span>© <span id="year"></span> PKDEV</span>
   <span>Ideas into digital reality. — Created by Resurect</span>
 </footer>
 
+</div>
+
 <script>
+const pages = document.querySelectorAll(".page");
+const buttons = document.querySelectorAll("[data-page]");
+const navButtons = document.querySelectorAll("nav button");
+
+function showPage(name) {
+
+  const selected = document.getElementById(name);
+
+  if (!selected) return;
+
+  pages.forEach(page => {
+    page.classList.remove("active");
+  });
+
+  selected.classList.add("active");
+
+  navButtons.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === name
+    );
+  });
+
+  history.replaceState(null, "", "#" + name);
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+buttons.forEach(button => {
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    showPage(button.dataset.page);
+  });
+});
+
+window.addEventListener("load", () => {
+  const page = location.hash.substring(1);
+
+  if (page) showPage(page);
+});
+
 document.getElementById("year").textContent =
   new Date().getFullYear();
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll(".reveal").forEach(element => {
-  observer.observe(element);
-});
 </script>
 
 </body>
