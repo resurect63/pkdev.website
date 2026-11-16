@@ -4,798 +4,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-<title>PKDEV — Digital Development</title>
-
+<meta name="theme-color" content="#050505">
+<title>RESURECT — Ideas into Digital Reality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080808;
-  --surface: #111;
-  --text: #eee;
-  --muted: #999;
-  --border: #292929;
-  --width: 900px;
+  --bg:#050505;
+  --surface:rgba(18,18,18,.72);
+  --text:#f5f5f5;
+  --muted:#999;
+  --line:rgba(255,255,255,.12);
+  --accent:#fff;
+  --font:'Inter',sans-serif;
 }
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--font);min-height:100vh;
+  overflow-x:hidden;transition:background .35s,color .35s
 }
-
-html {
-  background: var(--bg);
-  scroll-behavior: smooth;
+body.light{
+  --bg:#f4f4f4;--surface:rgba(255,255,255,.78);
+  --text:#101010;--muted:#666;
+  --line:rgba(0,0,0,.15);--accent:#111;
 }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: Inter, Arial, sans-serif;
-  line-height: 1.85;
-  min-height: 100vh;
+body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl}
+button,a{font:inherit;color:inherit}
+a{text-decoration:none}
+button{cursor:pointer}
+.background{
+  position:fixed;inset:0;z-index:-3;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.84),rgba(0,0,0,.27) 52%,rgba(0,0,0,.42)),
+    linear-gradient(0deg,rgba(0,0,0,.72),transparent 65%),
+    url('resurect-background.jpg') center 55%/cover no-repeat;
+  transform:scale(1.025);
+  animation:backgroundMove 24s ease-in-out infinite alternate;
 }
-
-a {
-  color: white;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #999;
-}
-
-/* TECH BACKGROUND */
-
-.background {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-
+body.light .background{filter:invert(.88) grayscale(1);opacity:.22}
+@keyframes backgroundMove{to{transform:scale(1.08) translateY(-8px)}}
+.grid{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
   background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-
-  background-size: 55px 55px;
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:linear-gradient(to bottom,black,transparent 95%);
 }
-
-.background::before {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  top: 5%;
-  right: -250px;
-  border: 1px solid #222;
-  border-radius: 50%;
-
-  box-shadow:
-    0 0 0 55px rgba(255,255,255,.012),
-    0 0 0 110px rgba(255,255,255,.008);
+body.light .grid{
+  background-image:
+    linear-gradient(rgba(0,0,0,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.045) 1px,transparent 1px);
 }
-
-.background::after {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  bottom: -200px;
-  left: -200px;
-  border: 1px solid #252525;
-  border-radius: 50%;
+.noise{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
 }
-
-/* LAYOUT */
-
-.container {
-  position: relative;
-  z-index: 1;
-  width: min(var(--width), 90%);
-  margin: auto;
+header{
+  height:76px;position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4%;border-bottom:1px solid var(--line);
+  background:rgba(5,5,5,.68);backdrop-filter:blur(18px)
 }
-
-/* HEADER */
-
-header {
-  border-bottom: 1px solid var(--border);
+body.light header{background:rgba(245,245,245,.78)}
+.brand{display:flex;align-items:center;gap:13px;font-weight:800;letter-spacing:2px}
+.brand svg{width:38px;height:38px}
+.brand span{font-size:15px}
+nav{display:flex;gap:27px;align-items:center}
+nav button,.header-actions button{
+  background:none;border:0;color:var(--muted);
+  font-size:13px;transition:.25s
 }
-
-.header {
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+nav button:hover,nav button.active{color:var(--text)}
+nav button.active{position:relative}
+nav button.active:after{
+  content:"";position:absolute;bottom:-29px;left:0;right:0;
+  height:2px;background:var(--text)
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 900;
-  letter-spacing: 4px;
-  font-size: 14px;
+.header-actions{display:flex;align-items:center;gap:17px}
+.header-actions button{padding:8px}
+.header-actions button:hover{color:var(--text)}
+.mobile-menu{display:none!important}
+main{padding-top:76px}
+.page{display:none;min-height:calc(100vh - 76px);animation:pageIn .45s ease}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero{
+  min-height:calc(100vh - 76px);position:relative;
+  display:grid;grid-template-columns:1.1fr .9fr;
+  align-items:center;padding:65px 6% 120px;overflow:hidden
 }
-
-.brand-icon {
-  width: 32px;
-  height: 32px;
-  border: 1px solid #777;
-  display: grid;
-  place-items: center;
-  font-size: 11px;
+.hero-copy{position:relative;z-index:3;max-width:650px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--line);border-radius:40px;
+  padding:9px 15px;font-size:12px;color:var(--muted);
+  background:var(--surface);margin-bottom:25px
 }
-
-nav {
-  display: flex;
-  gap: 23px;
+.dot{width:8px;height:8px;background:#ddd;border-radius:50%;box-shadow:0 0 12px white}
+.hero h1{font-size:clamp(58px,8vw,112px);font-weight:900;letter-spacing:-5px;line-height:1}
+.hero h1 span{background:linear-gradient(110deg,#fff 25%,#777 55%,#fff 80%);background-clip:text;color:transparent}
+body.light .hero h1 span{background-image:linear-gradient(110deg,#111,#888,#111);background-clip:text}
+.tagline{font-size:clamp(22px,3vw,37px);margin:18px 0;color:var(--text);font-weight:400}
+.description{font-size:15px;line-height:1.9;color:var(--muted);max-width:520px}
+.buttons{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+.btn{
+  border:1px solid var(--line);border-radius:40px;padding:14px 23px;
+  font-size:13px;display:inline-flex;align-items:center;gap:12px;
+  transition:.25s;background:rgba(255,255,255,.04)
 }
-
-nav button {
-  color: #888;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 8px 0;
-  transition: .2s;
+.btn.primary{background:#fff;color:#080808;border-color:#fff;font-weight:700}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 30px #ffffff18}
+body.light .btn.primary{background:#111;color:#fff;border-color:#111}
+.socials{display:flex;gap:19px;margin-top:38px;color:var(--muted);font-size:13px}
+.socials a:hover{color:var(--text)}
+.hero-art{
+  position:relative;display:grid;place-items:center;
+  min-height:470px;perspective:900px
 }
-
-nav button:hover,
-nav button.active {
-  color: white;
+.logo-stage{
+  width:min(390px,75vw);aspect-ratio:1;position:relative;
+  display:grid;place-items:center;
+  animation:float 6s ease-in-out infinite;
+  filter:drop-shadow(0 0 24px #fff4)
 }
-
-nav button.active {
-  border-bottom: 1px solid white;
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-17px) rotate(2deg)}}
+.logo-stage:before{
+  content:"";position:absolute;width:65%;height:65%;border-radius:50%;
+  background:radial-gradient(circle,#ffffff28,transparent 68%);
+  filter:blur(20px)
 }
-
-/* PAGES */
-
-main {
-  min-height: calc(100vh - 160px);
-  padding: 85px 0 110px;
+.logo-symbol{width:56%;height:56%;position:relative;z-index:2;filter:drop-shadow(0 0 12px #fff9)}
+.orbit{
+  position:absolute;width:100%;height:38%;border:1px solid #ffffff85;
+  border-radius:50%;transform:rotate(-27deg);
+  animation:orbit 12s linear infinite
 }
-
-.page {
-  display: none;
-  animation: appear .35s ease;
+.orbit.two{width:112%;height:48%;transform:rotate(53deg);animation-direction:reverse;opacity:.45}
+.orbit.three{width:90%;height:30%;transform:rotate(75deg);opacity:.3;animation-duration:18s}
+@keyframes orbit{to{transform:rotate(333deg)}}
+.orbit:after{
+  content:"";position:absolute;width:7px;height:7px;background:#fff;
+  border-radius:50%;top:4%;left:18%;box-shadow:0 0 18px 5px #fff
 }
-
-.page.active {
-  display: block;
+.art-caption{
+  position:absolute;bottom:6%;right:0;color:var(--muted);
+  font-size:11px;letter-spacing:3px
 }
-
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+.skills-section{
+  padding:0 6% 38px;position:relative;z-index:4
+}
+.section-kicker{font-size:12px;color:var(--muted);letter-spacing:2px;margin-bottom:18px}
+.skills-row{display:flex;gap:12px;flex-wrap:wrap}
+.skill{
+  min-width:83px;min-height:82px;padding:12px 13px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;border:1px solid var(--line);border-radius:14px;
+  background:rgba(12,12,12,.68);backdrop-filter:blur(10px);
+  transition:.3s
+}
+body.light .skill{background:rgba(255,255,255,.78)}
+.skill:hover{transform:translateY(-7px);border-color:var(--glow);box-shadow:0 0 24px color-mix(in srgb,var(--glow) 30%,transparent)}
+.skill img{width:29px;height:29px;object-fit:contain;filter:drop-shadow(0 0 8px var(--glow))}
+.skill span{font-size:10px;color:var(--muted)}
+.bottom-line{
+  border-top:1px solid var(--line);padding:20px 6%;
+  display:flex;justify-content:space-between;align-items:center;
+  color:var(--muted);font-size:12px
+}
+.availability{display:flex;align-items:center;gap:9px}
+.availability i{width:7px;height:7px;border-radius:50%;background:#ddd;box-shadow:0 0 10px #fff}
+.page-content{max-width:1150px;margin:auto;padding:90px 6% 100px}
+.page-heading{font-size:clamp(42px,7vw,76px);font-weight:800;letter-spacing:-3px;margin-bottom:15px}
+.page-intro{color:var(--muted);max-width:650px;line-height:1.9;margin-bottom:45px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{
+  padding:27px;border:1px solid var(--line);border-radius:17px;
+  background:var(--surface);backdrop-filter:blur(12px);transition:.3s
+}
+.card:hover{transform:translateY(-5px);border-color:#888}
+.card small{color:var(--muted);letter-spacing:2px;font-size:10px}
+.card h3{font-size:21px;margin:15px 0 10px}
+.card p{font-size:13px;line-height:1.8;color:var(--muted)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.tags span{font-size:10px;border:1px solid var(--line);padding:6px 9px;border-radius:20px;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px}
+.about-block{padding:25px 0;border-top:1px solid var(--line)}
+.about-block h3{margin-bottom:14px}
+.about-block p,.about-block li{color:var(--muted);font-size:14px;line-height:2}
+.about-block ul{padding-inline-start:20px}
+.uses-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.use-item{padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.use-item strong{display:block;margin-bottom:7px;font-size:14px}
+.use-item span{font-size:12px;color:var(--muted)}
+.empty-note{border:1px dashed var(--line);padding:45px;border-radius:16px;color:var(--muted);text-align:center}
+footer{padding:25px 6%;border-top:1px solid var(--line);color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:900px){
+  nav{gap:13px}nav button{font-size:11px}
+  .hero{grid-template-columns:1fr;padding-top:65px}
+  .hero-art{position:absolute;right:-100px;top:50px;opacity:.36;pointer-events:none}
+  .hero-copy{max-width:650px}
+  .skills-section{padding-top:20px}
+}
+@media(max-width:650px){
+  header{padding:0 5%;height:66px}
+  .brand span{font-size:12px}
+  .brand svg{width:31px}
+  nav{
+    display:none;position:absolute;top:66px;left:0;right:0;
+    padding:18px;background:var(--bg);border-bottom:1px solid var(--line);
+    flex-wrap:wrap;justify-content:center
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* TYPOGRAPHY */
-
-.label {
-  color: #777;
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-h1 {
-  font-size: clamp(45px, 8vw, 75px);
-  line-height: 1.1;
-  letter-spacing: -5px;
-  margin: 20px 0;
-}
-
-h2 {
-  font-size: 26px;
-  margin: 35px 0 15px;
-  letter-spacing: -1px;
-}
-
-h3 {
-  font-size: 17px;
-  margin-bottom: 5px;
-}
-
-p {
-  color: #aaa;
-  margin-bottom: 17px;
-}
-
-.intro {
-  font-size: 17px;
-  max-width: 720px;
-  line-height: 2;
-}
-
-/* LINKS */
-
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  margin-top: 30px;
-}
-
-.links a {
-  font-size: 13px;
-  border-bottom: 1px solid #555;
-  padding-bottom: 4px;
-}
-
-/* DIVIDER */
-
-.divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 40px 0;
-}
-
-/* CONTENT LIST */
-
-.list {
-  border-top: 1px solid var(--border);
-  margin-top: 25px;
-}
-
-.item {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 20px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.item-label {
-  color: #777;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.item p {
-  font-size: 13px;
-  margin: 0;
-}
-
-/* TECHNOLOGY */
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 25px;
-}
-
-.tag {
-  border: 1px solid #333;
-  padding: 6px 13px;
-  font-size: 12px;
-  color: #bbb;
-  transition: .25s;
-}
-
-.tag:hover {
-  color: black;
-  background: white;
-}
-
-/* FOOTER */
-
-footer {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border);
-  padding: 25px 0;
-  color: #666;
-  font-size: 11px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-/* MOBILE */
-
-@media(max-width:650px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 17px 0;
-  }
-
-  nav {
-    width: 100%;
-    overflow-x: auto;
-    gap: 20px;
-  }
-
-  nav button {
-    white-space: nowrap;
-  }
-
-  main {
-    padding: 60px 0 80px;
-  }
-
-  .item {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
-
-  footer {
-    flex-direction: column;
-  }
-}
-
-@media(prefers-reduced-motion:reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+  nav.open{display:flex}
+  nav button.active:after{bottom:-7px}
+  .mobile-menu{display:block!important}
+  .header-actions{gap:7px}
+  .hero{min-height:750px;padding:65px 6% 55px}
+  .hero h1{font-size:58px;letter-spacing:-3px}
+  .hero-art{right:-140px;top:70px}
+  .description{font-size:13px}
+  .skills-row{display:grid;grid-template-columns:repeat(4,1fr)}
+  .skill{min-width:0}
+  .bottom-line{gap:12px;flex-wrap:wrap}
+  .cards,.about-grid{grid-template-columns:1fr}
+  .uses-list{grid-template-columns:repeat(2,1fr)}
+  .page-content{padding-top:65px}
 }
 </style>
 </head>
-
 <body>
-
-<div class="background"></div>
-
-<div class="container">
+<div class="background"></div><div class="grid"></div><div class="noise"></div>
 
 <header>
-  <div class="header">
+  <a class="brand" href="#home" aria-label="RESURECT Home">
+    <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      <path d="M12 13H66L89 37H45L77 68H54L27 43V88H12V13Z" fill="currentColor"/>
+      <path d="M39 43H72L88 59H57L39 43Z" fill="#888"/>
+    </svg>
+    <span>RESURECT</span>
+  </a>
 
-    <a href="#home" class="brand" data-page="home">
-      <span class="brand-icon">PK</span>
-      PKDEV
-    </a>
+  <nav id="nav">
+    <button class="active" data-page="home" data-en="Home" data-fa="خانه">Home</button>
+    <button data-page="projects" data-en="Projects" data-fa="پروژه‌ها">Projects</button>
+    <button data-page="blog" data-en="Blog" data-fa="وبلاگ">Blog</button>
+    <button data-page="talks" data-en="Talks" data-fa="ارائه‌ها">Talks</button>
+    <button data-page="uses" data-en="Uses" data-fa="ابزارها">Uses</button>
+    <button data-page="photos" data-en="Photos" data-fa="تصاویر">Photos</button>
+    <button data-page="about" data-en="About" data-fa="درباره من">About</button>
+  </nav>
 
-    <nav>
-      <button class="active" data-page="home">Home</button>
-      <button data-page="about">About</button>
-      <button data-page="projects">Projects</button>
-      <button data-page="stack">Stack</button>
-      <button data-page="contact">Contact</button>
-    </nav>
-
+  <div class="header-actions">
+    <button id="langBtn" aria-label="Change language">EN / FA</button>
+    <button id="themeBtn" aria-label="Change theme">☼</button>
+    <button class="mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
   </div>
 </header>
 
 <main>
-
-<!-- HOME -->
-
 <section class="page active" id="home">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="dot"></span><span data-en="Independent Developer" data-fa="توسعه‌دهنده مستقل">Independent Developer</span></div>
+      <h1><span>RESURECT</span></h1>
+      <div class="tagline" data-en="Ideas into digital reality." data-fa="ایده‌ها به واقعیت دیجیتال.">Ideas into digital reality.</div>
+      <p class="description"
+         data-en="I'm Resurect, an independent developer and project creator. I build software, explore technologies, and turn ideas into meaningful digital experiences."
+         data-fa="من Resurect هستم؛ توسعه‌دهنده مستقل و سازنده پروژه‌های دیجیتال. نرم‌افزار می‌سازم، فناوری‌های جدید را بررسی می‌کنم و ایده‌ها را به تجربه‌های دیجیتال کاربردی تبدیل می‌کنم.">
+        I'm Resurect, an independent developer and project creator. I build software, explore technologies, and turn ideas into meaningful digital experiences.
+      </p>
+      <div class="buttons">
+        <button class="btn primary" data-goto="projects"><span data-en="Explore My Work" data-fa="مشاهده پروژه‌ها">Explore My Work</span> ↗</button>
+        <button class="btn" data-goto="about"><span data-en="About Me" data-fa="درباره من">About Me</span> ↓</button>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/resurect63" target="_blank">GitHub ↗</a>
+        <a href="mailto:itznightitznight16@gmail.com">Email ↗</a>
+        <a href="https://t.me/Resurect63" target="_blank">Telegram ↗</a>
+      </div>
+    </div>
 
-  <div class="label">
-    Independent Developer & Digital Creator
+    <div class="hero-art" aria-label="Animated Resurect logo">
+      <div class="logo-stage">
+        <div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div>
+        <svg class="logo-symbol" viewBox="0 0 300 300" fill="none">
+          <defs>
+            <linearGradient id="metal" x1="45" y1="20" x2="250" y2="280" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff"/><stop offset=".35" stop-color="#aaa"/>
+              <stop offset=".58" stop-color="#f8f8f8"/><stop offset="1" stop-color="#555"/>
+            </linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <path d="M42 37H178C235 37 263 65 263 112C263 151 239 177 199 185L267 265H190L111 169V265H42V37Z" fill="url(#metal)" filter="url(#glow)"/>
+          <path d="M111 99H177C194 99 202 107 202 120C202 134 193 142 177 142H111V99Z" fill="#090909"/>
+          <path d="M111 169L190 265H111V169Z" fill="#888"/>
+          <path d="M42 37H178" stroke="white" stroke-width="3" opacity=".8"/>
+        </svg>
+      </div>
+    </div>
   </div>
 
-  <h1>
-    PKDEV
-  </h1>
-
-  <p class="intro">
-    Hey! I'm <strong style="color:white">Resurect</strong>,
-    the creator behind PKDEV.
-
-    I build software, explore technologies,
-    develop digital experiences and turn
-    creative ideas into practical projects.
-  </p>
-
-  <p class="intro">
-    PKDEV is my independent development brand.
-    A place where engineering, creativity and
-    experimentation come together to create
-    something meaningful.
-  </p>
-
-  <p style="color:white">
-    Ideas into digital reality.
-  </p>
-
-  <div class="links">
-    <a href="https://github.com/resurect63" target="_blank">
-      GitHub ↗
-    </a>
-
-    <a href="mailto:itznightitznight16@gmail.com">
-      Email ↗
-    </a>
-
-    <a href="#projects" data-page="projects">
-      Explore projects →
-    </a>
+  <div class="skills-section">
+    <div class="section-kicker" data-en="⌘ &nbsp; TECHNOLOGIES I WORK WITH" data-fa="⌘ &nbsp; فناوری‌هایی که با آن‌ها کار می‌کنم">⌘ &nbsp; TECHNOLOGIES I WORK WITH</div>
+    <div class="skills-row">
+      <div class="skill" style="--glow:#f89820"><img src="https://skillicons.dev/icons?i=java" alt="Java"><span>Java</span></div>
+      <div class="skill" style="--glow:#f7df1e"><img src="https://skillicons.dev/icons?i=js" alt="JavaScript"><span>JavaScript</span></div>
+      <div class="skill" style="--glow:#3178c6"><img src="https://skillicons.dev/icons?i=ts" alt="TypeScript"><span>TypeScript</span></div>
+      <div class="skill" style="--glow:#777bb4"><img src="https://skillicons.dev/icons?i=php" alt="PHP"><span>PHP</span></div>
+      <div class="skill" style="--glow:#e34f26"><img src="https://skillicons.dev/icons?i=html" alt="HTML"><span>HTML5</span></div>
+      <div class="skill" style="--glow:#1572b6"><img src="https://skillicons.dev/icons?i=css" alt="CSS"><span>CSS3</span></div>
+      <div class="skill" style="--glow:#61dafb"><img src="https://skillicons.dev/icons?i=react" alt="React"><span>React</span></div>
+      <div class="skill" style="--glow:#ffffff"><img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js"><span>Next.js</span></div>
+      <div class="skill" style="--glow:#68a063"><img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js"><span>Node.js</span></div>
+      <div class="skill" style="--glow:#00758f"><img src="https://skillicons.dev/icons?i=mysql" alt="MySQL"><span>MySQL</span></div>
+      <div class="skill" style="--glow:#47a248"><img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB"><span>MongoDB</span></div>
+      <div class="skill" style="--glow:#2496ed"><img src="https://skillicons.dev/icons?i=docker" alt="Docker"><span>Docker</span></div>
+      <div class="skill" style="--glow:#fcc624"><img src="https://skillicons.dev/icons?i=linux" alt="Linux"><span>Linux</span></div>
+      <div class="skill" style="--glow:#f05032"><img src="https://skillicons.dev/icons?i=git" alt="Git"><span>Git</span></div>
+      <div class="skill" style="--glow:#ffffff"><img src="https://skillicons.dev/icons?i=c" alt="C"><span>C</span></div>
+    </div>
   </div>
 
-  <hr class="divider">
-
-  <div class="label">Areas of Interest</div>
-
-  <p style="margin-top:15px">
-    Software Development · Web Technologies ·
-    Minecraft Development · Digital Products ·
-    Developer Tools · UI Systems
-  </p>
-
+  <div class="bottom-line">
+    <div class="availability"><i></i><span data-en="Open to new opportunities." data-fa="آماده برای فرصت‌های جدید.">Open to new opportunities.</span></div>
+    <span data-en="Scroll to explore ↓" data-fa="برای مشاهده بیشتر اسکرول کنید ↓">Scroll to explore ↓</span>
+  </div>
 </section>
-
-<!-- ABOUT -->
-
-<section class="page" id="about">
-
-  <div class="label">Introduction</div>
-
-  <h1>About Me</h1>
-
-  <p class="intro">
-    I'm Resurect, founder and creator of PKDEV.
-    My work revolves around software development,
-    digital technologies and building useful
-    experiences.
-  </p>
-
-  <p>
-    I enjoy exploring different areas of development,
-    understanding how systems work and combining
-    technologies to create complete projects.
-  </p>
-
-  <p>
-    From Minecraft server systems and plugins
-    to desktop applications and web platforms,
-    every project is an opportunity to learn,
-    experiment and improve.
-  </p>
-
-  <p>
-    My approach is based on continuous learning,
-    attention to detail and building things
-    that have a real purpose.
-  </p>
-
-  <hr class="divider">
-
-  <div class="label">Profile</div>
-
-  <div class="list">
-
-    <div class="item">
-      <div class="item-label">Brand</div>
-      <div>
-        <h3>PKDEV</h3>
-        <p>Independent development brand.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Creator</div>
-      <div>
-        <h3>Resurect</h3>
-        <p>Founder and developer behind PKDEV.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Focus</div>
-      <div>
-        <h3>Software & Digital Products</h3>
-        <p>Applications, web experiences and development tools.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Philosophy</div>
-      <div>
-        <h3>Learn by Building</h3>
-        <p>Experiment, improve and create meaningful projects.</p>
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- PROJECTS -->
 
 <section class="page" id="projects">
-
-  <div class="label">Selected Work</div>
-
-  <h1>Projects</h1>
-
-  <p class="intro">
-    A collection of projects, experiments and
-    development initiatives connected to the
-    PKDEV ecosystem.
-  </p>
-
-  <div class="list">
-
-    <div class="item">
-      <div class="item-label">Security</div>
-      <div>
-        <h3>PKDEV.Security</h3>
-        <p>
-          A security-oriented project exploring
-          monitoring systems, technical workflows
-          and digital tools.
-        </p>
-      </div>
+  <div class="page-content">
+    <div class="section-kicker">01 / SELECTED WORK</div>
+    <h2 class="page-heading" data-en="Projects." data-fa="پروژه‌ها.">Projects.</h2>
+    <p class="page-intro" data-en="A selection of ideas, experiments, and digital products I'm building." data-fa="مجموعه‌ای از ایده‌ها، آزمایش‌ها و محصولات دیجیتالی که روی آن‌ها کار می‌کنم.">A selection of ideas, experiments, and digital products I'm building.</p>
+    <div class="cards">
+      <article class="card"><small>01 / SOFTWARE</small><h3>Imperial Launcher</h3><p>A desktop launcher project focused on a modern interface and application management.</p><div class="tags"><span>JavaScript</span><span>Electron</span><span>Desktop</span></div></article>
+      <article class="card"><small>02 / SECURITY</small><h3>PKDEV.Security</h3><p>A security-focused digital project exploring tools, interfaces, and technical workflows.</p><div class="tags"><span>Web</span><span>Security</span></div></article>
+      <article class="card"><small>03 / PLATFORM</small><h3>Moderator Academy</h3><p>An educational platform for structured learning, documentation, and community knowledge.</p><div class="tags"><span>Education</span><span>Web</span></div></article>
+      <article class="card"><small>04 / SOFTWARE</small><h3>PKDEV.Hub</h3><p>A central concept for connecting digital projects and services.</p><div class="tags"><span>Platform</span><span>Development</span></div></article>
     </div>
-
-    <div class="item">
-      <div class="item-label">Desktop</div>
-      <div>
-        <h3>Imperial Launcher</h3>
-        <p>
-          A Minecraft Java launcher focused on
-          version management, mod-loader support
-          and a polished desktop experience.
-        </p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Education</div>
-      <div>
-        <h3>Moderator Academy</h3>
-        <p>
-          An educational project designed to help
-          Minecraft community staff understand
-          moderation responsibilities and workflows.
-        </p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Platform</div>
-      <div>
-        <h3>PKDEV.Hub</h3>
-        <p>
-          A central platform concept for connecting
-          digital tools and projects.
-        </p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Minecraft</div>
-      <div>
-        <h3>Project Delta</h3>
-        <p>
-          An Arena Breakout-inspired Minecraft
-          project built around exploration,
-          equipment, loot and extraction gameplay.
-        </p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Community</div>
-      <div>
-        <h3>SWAT Force</h3>
-        <p>
-          A community-oriented project in the
-          gaming and server ecosystem.
-        </p>
-      </div>
-    </div>
-
   </div>
-
-  <p style="font-size:12px;margin-top:20px">
-    Project descriptions represent their general
-    direction. Check the repositories for current
-    status and implementation details.
-  </p>
-
 </section>
 
-<!-- STACK -->
-
-<section class="page" id="stack">
-
-  <div class="label">Technologies & Tools</div>
-
-  <h1>My Stack</h1>
-
-  <p class="intro">
-    Technologies and tools I use or explore
-    across software development, web applications,
-    infrastructure and Minecraft development.
-  </p>
-
-  <div class="list">
-
-    <div class="item">
-      <div class="item-label">Languages</div>
-      <div>
-        <h3>Java · JavaScript · TypeScript · PHP</h3>
-        <p>Application, web and server-side development.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Frontend</div>
-      <div>
-        <h3>HTML · CSS · React</h3>
-        <p>Modern websites and digital interfaces.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Backend</div>
-      <div>
-        <h3>Node.js · PHP</h3>
-        <p>Application logic and backend development.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Database</div>
-      <div>
-        <h3>MySQL · MongoDB</h3>
-        <p>Data storage and database management.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Minecraft</div>
-      <div>
-        <h3>Paper · Spigot</h3>
-        <p>Plugins, server systems and gameplay features.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Environment</div>
-      <div>
-        <h3>Linux · Docker · Git · GitHub</h3>
-        <p>Development environments and version control.</p>
-      </div>
-    </div>
-
+<section class="page" id="blog">
+  <div class="page-content">
+    <div class="section-kicker">02 / WRITING</div>
+    <h2 class="page-heading" data-en="Blog." data-fa="وبلاگ.">Blog.</h2>
+    <p class="page-intro" data-en="Notes, ideas, technical discoveries, and things I learn along the way." data-fa="یادداشت‌ها، ایده‌ها، کشفیات فنی و چیزهایی که در مسیر یاد می‌گیرم.">Notes, ideas, technical discoveries, and things I learn along the way.</p>
+    <div class="empty-note" data-en="New articles and technical notes will appear here." data-fa="مقاله‌ها و یادداشت‌های فنی جدید در این قسمت قرار می‌گیرند.">New articles and technical notes will appear here.</div>
   </div>
-
-  <div class="tags">
-    <span class="tag">Java</span>
-    <span class="tag">JavaScript</span>
-    <span class="tag">TypeScript</span>
-    <span class="tag">PHP</span>
-    <span class="tag">React</span>
-    <span class="tag">Node.js</span>
-    <span class="tag">MySQL</span>
-    <span class="tag">MongoDB</span>
-    <span class="tag">Paper</span>
-    <span class="tag">Linux</span>
-    <span class="tag">Docker</span>
-    <span class="tag">Git</span>
-  </div>
-
 </section>
 
-<!-- CONTACT -->
-
-<section class="page" id="contact">
-
-  <div class="label">Get in Touch</div>
-
-  <h1>Contact</h1>
-
-  <p class="intro">
-    Have a project idea, a question about my work
-    or an opportunity to collaborate?
-
-    Feel free to reach out through the contact
-    channels below.
-  </p>
-
-  <div class="list">
-
-    <div class="item">
-      <div class="item-label">Email</div>
-      <div>
-        <h3>
-          <a href="mailto:itznightitznight16@gmail.com">
-            itznightitznight16@gmail.com
-          </a>
-        </h3>
-        <p>For project inquiries and professional messages.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">GitHub</div>
-      <div>
-        <h3>
-          <a href="https://github.com/resurect63" target="_blank">
-            @resurect63 ↗
-          </a>
-        </h3>
-        <p>Source code, repositories and development activity.</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-label">Discord</div>
-      <div>
-        <h3>resurect.</h3>
-        <p>Discord username. Direct profile link can be added later.</p>
-      </div>
-    </div>
-
+<section class="page" id="talks">
+  <div class="page-content">
+    <div class="section-kicker">03 / PRESENTATIONS</div>
+    <h2 class="page-heading" data-en="Talks." data-fa="ارائه‌ها.">Talks.</h2>
+    <p class="page-intro" data-en="Presentations, workshops, and topics worth sharing." data-fa="ارائه‌ها، کارگاه‌ها و موضوعاتی برای به‌اشتراک‌گذاری.">Presentations, workshops, and topics worth sharing.</p>
+    <div class="empty-note" data-en="Talks and presentations will be listed here when available." data-fa="ارائه‌ها پس از آماده‌شدن در این قسمت نمایش داده می‌شوند.">Talks and presentations will be listed here when available.</div>
   </div>
-
 </section>
 
+<section class="page" id="uses">
+  <div class="page-content">
+    <div class="section-kicker">04 / WORKSPACE</div>
+    <h2 class="page-heading" data-en="Uses." data-fa="ابزارها.">Uses.</h2>
+    <p class="page-intro" data-en="Software, tools, and technologies I use in my development workflow." data-fa="نرم‌افزارها، ابزارها و فناوری‌هایی که در روند توسعه استفاده می‌کنم.">Software, tools, and technologies I use in my development workflow.</p>
+    <div class="uses-list">
+      <div class="use-item"><strong>IntelliJ IDEA</strong><span>Development environment</span></div>
+      <div class="use-item"><strong>Visual Studio Code</strong><span>Code editor</span></div>
+      <div class="use-item"><strong>Git & GitHub</strong><span>Version control</span></div>
+      <div class="use-item"><strong>Docker</strong><span>Container platform</span></div>
+      <div class="use-item"><strong>Linux</strong><span>Development environment</span></div>
+      <div class="use-item"><strong>Node.js</strong><span>JavaScript runtime</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="photos">
+  <div class="page-content">
+    <div class="section-kicker">05 / VISUALS</div>
+    <h2 class="page-heading" data-en="Photos." data-fa="تصاویر.">Photos.</h2>
+    <p class="page-intro" data-en="A visual collection of my workspace, interests, and inspirations." data-fa="مجموعه‌ای تصویری از محیط کار، علایق و الهام‌های من.">A visual collection of my workspace, interests, and inspirations.</p>
+    <div class="empty-note" data-en="The gallery is being prepared." data-fa="گالری تصاویر در حال آماده‌سازی است.">The gallery is being prepared.</div>
+  </div>
+</section>
+
+<section class="page" id="about">
+  <div class="page-content">
+    <div class="section-kicker">06 / THE PERSON BEHIND THE CODE</div>
+    <h2 class="page-heading" data-en="About me." data-fa="درباره من.">About me.</h2>
+    <p class="page-intro" data-en="I'm Resurect — an independent developer, project creator, and technology enthusiast." data-fa="من Resurect هستم؛ توسعه‌دهنده مستقل، سازنده پروژه و علاقه‌مند به فناوری.">I'm Resurect — an independent developer, project creator, and technology enthusiast.</p>
+    <div class="about-grid">
+      <div class="about-block"><h3 data-en="What I do" data-fa="حوزه فعالیت">What I do</h3><p data-en="I work across software development, web technologies, backend systems, and digital project creation. I enjoy learning, experimenting, and building useful things." data-fa="در زمینه توسعه نرم‌افزار، فناوری‌های وب، سیستم‌های بک‌اند و ساخت پروژه‌های دیجیتال فعالیت می‌کنم. از یادگیری، آزمایش و ساخت ابزارهای کاربردی لذت می‌برم.">I work across software development, web technologies, backend systems, and digital project creation. I enjoy learning, experimenting, and building useful things.</p></div>
+      <div class="about-block"><h3 data-en="Technical areas" data-fa="مهارت‌های فنی">Technical areas</h3><ul><li>Software Development</li><li>Frontend & Backend Development</li><li>Database Design & Integration</li><li>Project Planning & Management</li><li>Linux & Development Infrastructure</li></ul></div>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer>
-  <span>© <span id="year"></span> PKDEV</span>
-  <span>Ideas into digital reality. — Created by Resurect</span>
-</footer>
-
-</div>
+<footer>© <span id="year"></span> RESURECT — IDEAS INTO DIGITAL REALITY.</footer>
 
 <script>
-const pages = document.querySelectorAll(".page");
-const buttons = document.querySelectorAll("[data-page]");
-const navButtons = document.querySelectorAll("nav button");
+const pages=[...document.querySelectorAll('.page')];
+const navButtons=[...document.querySelectorAll('nav button[data-page]')];
+const nav=document.getElementById('nav');
 
-function showPage(name) {
-
-  const selected = document.getElementById(name);
-
-  if (!selected) return;
-
-  pages.forEach(page => {
-    page.classList.remove("active");
-  });
-
-  selected.classList.add("active");
-
-  navButtons.forEach(button => {
-    button.classList.toggle(
-      "active",
-      button.dataset.page === name
-    );
-  });
-
-  history.replaceState(null, "", "#" + name);
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+function showPage(name){
+  if(!document.getElementById(name)) name='home';
+  pages.forEach(p=>p.classList.toggle('active',p.id===name));
+  navButtons.forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+  history.replaceState(null,'','#'+name);
+  nav.classList.remove('open');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
+navButtons.forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.goto)));
+window.addEventListener('hashchange',()=>showPage(location.hash.slice(1)||'home'));
+showPage(location.hash.slice(1)||'home');
 
-buttons.forEach(button => {
-  button.addEventListener("click", event => {
-    event.preventDefault();
-    showPage(button.dataset.page);
+let language='en';
+document.getElementById('langBtn').addEventListener('click',()=>{
+  language=language==='en'?'fa':'en';
+  document.documentElement.lang=language;
+  document.body.classList.toggle('fa',language==='fa');
+  document.body.dir=language==='fa'?'rtl':'ltr';
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.innerHTML=el.dataset[language];
   });
+  document.getElementById('langBtn').textContent=language==='en'?'EN / FA':'FA / EN';
 });
 
-window.addEventListener("load", () => {
-  const page = location.hash.substring(1);
-
-  if (page) showPage(page);
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  document.body.classList.toggle('light');
+  document.getElementById('themeBtn').textContent=
+    document.body.classList.contains('light')?'☾':'☼';
 });
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+document.getElementById('menuBtn').addEventListener('click',()=>{
+  nav.classList.toggle('open');
+});
+document.getElementById('year').textContent=new Date().getFullYear();
 </script>
-
 </body>
 </html>
