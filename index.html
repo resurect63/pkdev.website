@@ -13,637 +13,397 @@
 
 <style>
 :root {
-  --bg: #090909;
-  --panel: #101010;
-  --panel2: #151515;
-  --white: #f4f4f4;
-  --gray: #999;
-  --muted: #686868;
-  --border: #252525;
-  --mono: "JetBrains Mono", monospace;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: "Inter", sans-serif;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
-}
-
-.container {
-  width: min(1050px, 88%);
-  margin: auto;
-}
-
-/* Animated background */
-
-#particles {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  opacity: .7;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 10%, transparent, #090909 85%);
-}
-
-/* Header */
-
-header {
-  height: 76px;
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(9,9,9,.85);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255,255,255,.07);
-}
-
-nav {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand {
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.brand span {
-  color: #888;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 24px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--gray);
-  font-size: 12px;
-  transition: .2s;
-}
-
-.nav-links a:hover {
-  color: white;
-}
-
-.social-icons {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.social-icon {
-  width: 35px;
-  height: 35px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  color: #aaa;
-  background: #111;
-  transition: .25s;
-}
-
-.social-icon:hover {
-  color: white;
-  border-color: #777;
-  background: #1b1b1b;
-  transform: translateY(-3px);
-}
-
-.social-icon svg {
-  width: 17px;
-  height: 17px;
-}
-
-/* Hero */
-
-.hero {
-  min-height: 590px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 100px 0;
-  position: relative;
-}
-
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--gray);
-  margin-bottom: 25px;
-}
-
-.eyebrow i {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ddd;
-  box-shadow: 0 0 10px #aaa;
-}
-
-.hero h1 {
-  font-size: clamp(65px, 11vw, 112px);
-  font-weight: 800;
-  letter-spacing: -8px;
-  line-height: 1;
-  margin-bottom: 30px;
-}
-
-.hero h1 span {
-  color: #777;
-}
-
-.hero-description {
-  max-width: 540px;
-  color: var(--gray);
-  font-size: 15px;
-  line-height: 2;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 35px;
-}
-
-.button {
-  padding: 11px 19px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 12px;
-  transition: .25s;
-}
-
-.button.primary {
-  color: #090909;
-  background: #eee;
-  border-color: #eee;
-  font-weight: 700;
-}
-
-.button:hover {
-  transform: translateY(-3px);
-  border-color: #aaa;
-}
-
-/* Sections */
-
-section.content-section {
-  padding: 90px 0;
-  border-top: 1px solid rgba(255,255,255,.07);
-}
-
-.section-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #aaa;
-  margin-bottom: 15px;
-}
-
-.section-title {
-  font-size: clamp(30px, 5vw, 42px);
-  letter-spacing: -2px;
-  margin-bottom: 18px;
-}
-
-.section-description {
-  max-width: 650px;
-  color: var(--gray);
-  font-size: 14px;
-  line-height: 2;
-}
-
-/* Skills */
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 13px;
-  margin-top: 35px;
-}
-
-.skill {
-  background: linear-gradient(145deg, #151515, #0d0d0d);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  padding: 19px;
-  transition: .25s;
-}
-
-.skill:hover {
-  transform: translateY(-4px);
-  border-color: #777;
-}
-
-.skill-name {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.skill-line {
-  height: 2px;
-  background: #292929;
-  overflow: hidden;
-  border-radius: 5px;
-}
-
-.skill-line span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: #ddd;
-}
-
-/* GitHub stats */
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 13px;
-  margin-top: 35px;
-}
-
-.stat-card {
-  padding: 22px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-}
-
-.stat-card p {
-  color: var(--muted);
-  font-size: 11px;
-  margin-bottom: 10px;
-}
-
-.stat-card strong {
-  font-size: 27px;
-  font-weight: 700;
-  letter-spacing: -1px;
-}
-
-.github-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-  color: #aaa;
-  font-size: 12px;
-}
-
-.github-profile img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 1px solid #444;
-}
-
-.github-profile a:hover {
-  color: white;
-}
-
-/* Projects */
-
-.project-heading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  margin-top: 35px;
-}
-
-.project-card {
-  min-height: 175px;
-  padding: 23px;
-  background: linear-gradient(145deg, #151515, #0d0d0d);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: .25s;
-}
-
-.project-card:hover {
-  transform: translateY(-4px);
-  border-color: #777;
-}
-
-.project-card h3 {
-  font-size: 17px;
-  margin-bottom: 8px;
-}
-
-.project-card p {
-  color: var(--gray);
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-.project-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-top: 25px;
-}
-
-.project-language {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: #999;
-}
-
-.project-links {
-  display: flex;
-  gap: 15px;
-}
-
-.project-links a {
-  color: #bbb;
-  font-size: 11px;
-}
-
-.project-links a:hover {
-  color: white;
-}
-
-.loading {
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 12px;
-  padding: 20px 0;
-}
-
-/* Console */
-
-.terminal {
-  margin-top: 32px;
-  background: #0b0b0b;
-  border: 1px solid #292929;
-  border-radius: 9px;
-  overflow: hidden;
-  box-shadow: 0 20px 70px rgba(0,0,0,.3);
-}
-
-.terminal-header {
-  height: 43px;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #141414;
-  border-bottom: 1px solid #262626;
-}
-
-.terminal-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.terminal-dots i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #666;
-}
-
-.terminal-title {
-  color: #777;
-  font-family: var(--mono);
-  font-size: 10px;
-}
-
-.terminal-body {
-  height: 240px;
-  padding: 18px;
-  overflow-y: auto;
-  font-family: var(--mono);
-  font-size: 12px;
-}
-
-.terminal-output {
-  color: #aaa;
-  white-space: pre-wrap;
-  line-height: 2;
-  margin-bottom: 12px;
-}
-
-.terminal-output strong {
-  color: #eee;
-}
-
-.terminal-input-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.terminal-prompt {
-  color: #ddd;
-}
-
-#terminalInput {
-  flex: 1;
-  min-width: 0;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: white;
-  font-family: var(--mono);
-  font-size: 12px;
-}
-
-#terminalInput::placeholder {
-  color: #505050;
-}
-
-/* Contact */
-
-.contact-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
-
-.contact-links {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.contact-links a {
-  color: var(--gray);
-  font-size: 12px;
-  transition: .2s;
-}
-
-.contact-links a:hover {
-  color: white;
-}
-
-/* Footer */
-
-footer {
-  padding: 25px 0;
-  border-top: 1px solid var(--border);
-}
-
-.footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.footer-brand {
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.footer-row p {
-  color: #666;
-  font-size: 10px;
-}
-
-/* Responsive */
-
-@media(max-width: 760px) {
-  .skills-grid,
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero h1 {
-    letter-spacing: -5px;
-  }
-}
-
-@media(max-width: 540px) {
-  header {
-    height: 68px;
-  }
-
-  .nav-right {
-    gap: 12px;
-  }
-
-  .nav-links {
-    gap: 11px;
-  }
-
-  .nav-links a {
-    font-size: 10px;
-  }
-
-  .social-icons {
-    gap: 5px;
-  }
-
-  .social-icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .social-icon svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  .hero {
-    min-height: 500px;
-  }
-
-  .hero h1 {
-    font-size: 65px;
-  }
-
-  section.content-section {
-    padding: 70px 0;
-  }
-}
-
-@media(max-width: 390px) {
-  .nav-links {
-    gap: 8px;
-  }
-
-  .nav-links a {
-    font-size: 9px;
-  }
-
-  .brand {
-    font-size: 18px;
-  }
-
-  .skills-grid,
-  .stats-grid {
-    gap: 9px;
+  --bg:#090909;
+  --panel:#111;
+  --panel2:#171717;
+  --white:#f4f4f4;
+  --gray:#999;
+  --muted:#666;
+  --border:#292929;
+  --mono:"JetBrains Mono",monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:Inter,sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(1050px,88%);margin:auto}
+
+/* LOADER */
+
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:#080808;
+  transition:opacity .7s ease,visibility .7s ease;
+}
+#loader.hide{opacity:0;visibility:hidden}
+.loader-logo{
+  font-size:clamp(45px,9vw,75px);
+  font-weight:800;
+  letter-spacing:-5px;
+  animation:logoPulse 1.8s ease-in-out infinite;
+}
+.loader-logo span{color:#777}
+.loader-subtitle{
+  font:10px var(--mono);
+  color:#777;
+  letter-spacing:4px;
+  margin-top:12px;
+}
+.loader-track{
+  width:190px;
+  height:2px;
+  background:#252525;
+  margin-top:35px;
+  overflow:hidden;
+}
+.loader-progress{
+  height:100%;
+  width:0;
+  background:#eee;
+  animation:loadProgress 1.7s ease forwards;
+}
+.loader-percent{
+  color:#777;
+  font:10px var(--mono);
+  margin-top:12px;
+}
+@keyframes loadProgress{to{width:100%}}
+@keyframes logoPulse{
+  50%{opacity:.55;transform:scale(.97)}
+}
+
+/* BACKGROUND */
+
+#particles{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.7;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 50% 10%,transparent,#090909 85%);
+}
+
+/* HEADER */
+
+header{
+  height:76px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(9,9,9,.86);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+nav{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+.brand span{color:#888}
+.nav-right{display:flex;align-items:center;gap:25px}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:var(--gray);font-size:12px;transition:.2s}
+.nav-links a:hover{color:white}
+.social-icons{display:flex;align-items:center;gap:9px}
+.social-icon{
+  width:35px;height:35px;
+  display:grid;place-items:center;
+  border:1px solid var(--border);
+  border-radius:7px;
+  color:#aaa;background:#111;
+  transition:.25s;cursor:pointer;
+}
+.social-icon:hover{
+  color:white;border-color:#888;
+  background:#1b1b1b;transform:translateY(-3px);
+}
+.social-icon svg{width:17px;height:17px}
+
+/* HERO */
+
+.hero{
+  min-height:590px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:100px 0;
+  position:relative;
+}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font:11px var(--mono);
+  letter-spacing:1px;color:var(--gray);
+  margin-bottom:25px;
+}
+.eyebrow i{
+  width:6px;height:6px;border-radius:50%;
+  background:#ddd;box-shadow:0 0 10px #aaa;
+}
+.hero h1{
+  font-size:clamp(65px,11vw,112px);
+  font-weight:800;letter-spacing:-8px;
+  line-height:1;margin-bottom:30px;
+}
+.hero h1 span{color:#777}
+.hero-description{
+  max-width:540px;color:var(--gray);
+  font-size:15px;line-height:2;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:35px}
+.button{
+  padding:11px 19px;border:1px solid var(--border);
+  border-radius:6px;font-size:12px;transition:.25s;
+}
+.button.primary{
+  color:#090909;background:#eee;
+  border-color:#eee;font-weight:700;
+}
+.button:hover{transform:translateY(-3px);border-color:#aaa}
+
+/* SECTIONS */
+
+section.content-section{
+  padding:90px 0;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.section-label{
+  font:10px var(--mono);
+  letter-spacing:2px;color:#aaa;margin-bottom:15px;
+}
+.section-title{
+  font-size:clamp(30px,5vw,42px);
+  letter-spacing:-2px;margin-bottom:18px;
+}
+.section-description{
+  max-width:650px;color:var(--gray);
+  font-size:14px;line-height:2;
+}
+
+/* SKILLS */
+
+.skill-category{margin-top:35px}
+.category-title{
+  color:#777;font:10px var(--mono);
+  letter-spacing:2px;margin-bottom:14px;
+}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+.skill{
+  background:linear-gradient(145deg,#171717,#0e0e0e);
+  border:1px solid var(--border);
+  border-radius:8px;padding:19px;
+  transition:.25s;position:relative;overflow:hidden;
+}
+.skill:hover{
+  transform:translateY(-4px);
+  border-color:#777;background:#191919;
+}
+.skill-top{
+  display:flex;align-items:center;gap:13px;
+  margin-bottom:17px;
+}
+.skill-logo{
+  width:37px;height:37px;
+  display:grid;place-items:center;
+  border:1px solid #333;border-radius:7px;
+  background:#202020;flex-shrink:0;
+}
+.skill-logo img{
+  width:23px;height:23px;
+  object-fit:contain;
+  filter:grayscale(1);
+}
+.skill-name{font-size:13px;font-weight:600}
+.skill-line{
+  height:2px;background:#292929;
+  overflow:hidden;border-radius:5px;
+}
+.skill-line span{
+  display:block;width:100%;height:100%;
+  background:#ddd;
+}
+
+/* GITHUB */
+
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:13px;margin-top:35px;
+}
+.stat-card{
+  padding:22px;background:var(--panel);
+  border:1px solid var(--border);border-radius:7px;
+}
+.stat-card p{color:var(--muted);font-size:11px;margin-bottom:10px}
+.stat-card strong{font-size:27px;font-weight:700;letter-spacing:-1px}
+.github-profile{
+  display:flex;align-items:center;gap:12px;
+  margin-top:20px;color:#aaa;font-size:12px;
+  flex-wrap:wrap;
+}
+.github-profile img{
+  width:35px;height:35px;border-radius:50%;
+  border:1px solid #444;
+}
+.github-profile a:hover{color:white}
+
+/* PROJECTS */
+
+.project-heading{
+  display:flex;align-items:end;
+  justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+.project-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:14px;margin-top:35px;
+}
+.project-card{
+  min-height:175px;padding:23px;
+  background:linear-gradient(145deg,#151515,#0d0d0d);
+  border:1px solid var(--border);border-radius:8px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;transition:.25s;
+}
+.project-card:hover{transform:translateY(-4px);border-color:#777}
+.project-card h3{font-size:17px;margin-bottom:8px}
+.project-card p{color:var(--gray);font-size:12px;line-height:1.8}
+.project-meta{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px;margin-top:25px;
+}
+.project-language{font:10px var(--mono);color:#999}
+.project-links{display:flex;gap:15px}
+.project-links a{color:#bbb;font-size:11px}
+.project-links a:hover{color:white}
+.loading{color:var(--muted);font:12px var(--mono);padding:20px 0}
+
+/* CONSOLE */
+
+.terminal{
+  margin-top:32px;background:#0b0b0b;
+  border:1px solid #292929;border-radius:9px;
+  overflow:hidden;box-shadow:0 20px 70px #0005;
+}
+.terminal-header{
+  height:43px;padding:0 16px;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  background:#141414;border-bottom:1px solid #262626;
+}
+.terminal-dots{display:flex;gap:6px}
+.terminal-dots i{width:8px;height:8px;border-radius:50%;background:#666}
+.terminal-title{color:#777;font:10px var(--mono)}
+.terminal-body{
+  height:240px;padding:18px;overflow-y:auto;
+  font:12px var(--mono);
+}
+.terminal-output{
+  color:#aaa;white-space:pre-wrap;
+  line-height:2;margin-bottom:12px;
+}
+.terminal-output strong{color:#eee}
+.terminal-input-row{display:flex;gap:10px;align-items:center}
+.terminal-prompt{color:#ddd}
+#terminalInput{
+  flex:1;min-width:0;background:transparent;
+  border:none;outline:none;color:white;
+  font:12px var(--mono);
+}
+#terminalInput::placeholder{color:#505050}
+
+/* CONTACT & FOOTER */
+
+.contact-row{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:25px;flex-wrap:wrap;margin-top:30px;
+}
+.contact-links{display:flex;gap:20px;flex-wrap:wrap}
+.contact-links a{color:var(--gray);font-size:12px;transition:.2s}
+.contact-links a:hover{color:white}
+footer{padding:25px 0;border-top:1px solid var(--border)}
+.footer-row{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:15px;flex-wrap:wrap;
+}
+.footer-brand{font-weight:800;letter-spacing:1px}
+.footer-row p{color:#666;font-size:10px}
+
+/* TOAST */
+
+.toast{
+  position:fixed;bottom:25px;left:50%;
+  transform:translate(-50%,20px);
+  background:#eee;color:#111;
+  padding:10px 17px;border-radius:6px;
+  font-size:12px;opacity:0;pointer-events:none;
+  transition:.3s;z-index:10000;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* RESPONSIVE */
+
+@media(max-width:760px){
+  .skills-grid,.stats-grid{grid-template-columns:repeat(2,1fr)}
+  .project-grid{grid-template-columns:1fr}
+  .hero h1{letter-spacing:-5px}
+}
+@media(max-width:540px){
+  header{height:68px}
+  .nav-right{gap:10px}
+  .nav-links{gap:9px}
+  .nav-links a{font-size:9px}
+  .social-icons{gap:4px}
+  .social-icon{width:29px;height:29px}
+  .social-icon svg{width:14px;height:14px}
+  .hero{min-height:500px}
+  .hero h1{font-size:65px}
+  section.content-section{padding:70px 0}
+  .skill{padding:14px}
+  .skill-top{gap:9px}
+  .skill-name{font-size:12px}
+}
+@media(max-width:390px){
+  .nav-links{gap:6px}
+  .nav-links a{font-size:8px}
+  .brand{font-size:17px}
+  .skills-grid,.stats-grid{gap:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
   }
 }
 </style>
@@ -651,13 +411,21 @@ footer {
 
 <body>
 
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-logo">PKDEV<span>.</span></div>
+  <div class="loader-subtitle">INDEPENDENT DEVELOPMENT</div>
+  <div class="loader-track"><div class="loader-progress"></div></div>
+  <div class="loader-percent" id="loaderPercent">0%</div>
+</div>
+
+<div class="toast" id="toast">Discord username copied</div>
 <canvas id="particles"></canvas>
 
 <header>
   <div class="container">
     <nav>
       <a href="#home" class="brand">PKDEV<span>.</span></a>
-
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
@@ -665,33 +433,25 @@ footer {
           <li><a href="#projects">Projects</a></li>
           <li><a href="#console">Console</a></li>
         </ul>
-
         <div class="social-icons">
 
-          <!-- Discord -->
-          <a class="social-icon" href="https://discord.com/users/Resurect"
-             target="_blank" rel="noopener" aria-label="Discord" title="Discord">
+          <button class="social-icon" onclick="copyDiscord()" aria-label="Copy Discord username" title="Copy Discord username">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M19.7 5.3A18.4 18.4 0 0 0 15.2 4l-.5 1a16.7 16.7 0 0 0-5.4 0l-.5-1a18.4 18.4 0 0 0-4.5 1.3C1.5 9.5.7 13.6 1.1 17.7a18.5 18.5 0 0 0 5.5 2.8l1.2-2a11.8 11.8 0 0 1-1.9-.9l.5-.4a13.2 13.2 0 0 0 11.2 0l.5.4a11.8 11.8 0 0 1-1.9.9l1.2 2a18.5 18.5 0 0 0 5.5-2.8c.5-4.7-.8-8.8-3.2-12.4ZM8.8 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.4 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/>
             </svg>
-          </a>
+          </button>
 
-          <!-- Telegram -->
-          <a class="social-icon" href="https://t.me/Resurect63"
-             target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
+          <a class="social-icon" href="https://t.me/Resurect63" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M21.8 4.2 18.5 20c-.2 1.1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-8c.4-.4-.1-.6-.6-.2L6.4 14l-4.6-1.4c-1-.3-1-1 .2-1.5L20 4.2c.9-.3 1.8.2 1.8 0Z"/>
             </svg>
           </a>
 
-          <!-- GitHub -->
-          <a class="social-icon" href="https://github.com/resurect63"
-             target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <a class="social-icon" href="https://github.com/resurect63" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 .9a11.1 11.1 0 0 0-3.5 21.6c.6.1.8-.3.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.2-5.1-5.5 0-1.2.4-2.2 1.2-3-.1-.3-.5-1.4.1-3 0 0 1-.3 3.1 1.2a10.7 10.7 0 0 1 5.6 0c2.1-1.5 3.1-1.2 3.1-1.2.6 1.6.2 2.7.1 3 .8.8 1.2 1.8 1.2 3 0 4.3-2.6 5.2-5.1 5.5.4.3.7 1 .7 2v3c0 .3.2.7.8.6A11.1 11.1 0 0 0 12 .9Z"/>
             </svg>
           </a>
-
         </div>
       </div>
     </nav>
@@ -711,8 +471,7 @@ footer {
     </p>
     <div class="hero-actions">
       <a href="#projects" class="button primary">Explore Projects</a>
-      <a href="https://github.com/resurect63" target="_blank"
-         rel="noopener" class="button">GitHub Profile ↗</a>
+      <a href="https://github.com/resurect63" target="_blank" rel="noopener" class="button">GitHub Profile ↗</a>
     </div>
   </section>
 </div>
@@ -735,17 +494,27 @@ footer {
     <p class="section-label">02 / SKILLS</p>
     <h2 class="section-title">Languages & Technologies.</h2>
     <p class="section-description">
-      Programming and web languages used across my development work.
+      Languages, frameworks and tools used across my development work.
     </p>
 
-    <div class="skills-grid">
-      <div class="skill"><div class="skill-name">Java</div><div class="skill-line"><span></span></div></div>
-      <div class="skill"><div class="skill-name">JavaScript</div><div class="skill-line"><span></span></div></div>
-      <div class="skill"><div class="skill-name">TypeScript</div><div class="skill-line"><span></span></div></div>
-      <div class="skill"><div class="skill-name">PHP</div><div class="skill-line"><span></span></div></div>
-      <div class="skill"><div class="skill-name">HTML</div><div class="skill-line"><span></span></div></div>
-      <div class="skill"><div class="skill-name">CSS</div><div class="skill-line"><span></span></div></div>
-      <div class="skill"><div class="skill-name">C</div><div class="skill-line"><span></span></div></div>
+    <div class="skill-category">
+      <h3 class="category-title">PROGRAMMING & WEB LANGUAGES</h3>
+      <div class="skills-grid" id="languageSkills"></div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="category-title">FRAMEWORKS & RUNTIME</h3>
+      <div class="skills-grid" id="frameworkSkills"></div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="category-title">DATABASES</h3>
+      <div class="skills-grid" id="databaseSkills"></div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="category-title">TOOLS & INFRASTRUCTURE</h3>
+      <div class="skills-grid" id="toolSkills"></div>
     </div>
   </div>
 </section>
@@ -754,34 +523,18 @@ footer {
   <div class="container">
     <p class="section-label">03 / GITHUB</p>
     <h2 class="section-title">GitHub Overview.</h2>
-    <p class="section-description">
-      A live overview of my public GitHub profile and repositories.
-    </p>
+    <p class="section-description">A live overview of my public GitHub profile and repositories.</p>
 
     <div class="stats-grid">
-      <div class="stat-card">
-        <p>Public Repositories</p>
-        <strong id="repoCount">—</strong>
-      </div>
-      <div class="stat-card">
-        <p>Followers</p>
-        <strong id="followerCount">—</strong>
-      </div>
-      <div class="stat-card">
-        <p>Total Stars</p>
-        <strong id="starCount">—</strong>
-      </div>
-      <div class="stat-card">
-        <p>Total Forks</p>
-        <strong id="forkCount">—</strong>
-      </div>
+      <div class="stat-card"><p>Public Repositories</p><strong id="repoCount">—</strong></div>
+      <div class="stat-card"><p>Followers</p><strong id="followerCount">—</strong></div>
+      <div class="stat-card"><p>Total Stars</p><strong id="starCount">—</strong></div>
+      <div class="stat-card"><p>Total Forks</p><strong id="forkCount">—</strong></div>
     </div>
 
     <div class="github-profile">
       <img id="githubAvatar" src="https://github.com/resurect63.png" alt="Resurect GitHub avatar">
-      <a href="https://github.com/resurect63" target="_blank" rel="noopener">
-        github.com/resurect63 ↗
-      </a>
+      <a href="https://github.com/resurect63" target="_blank" rel="noopener">github.com/resurect63 ↗</a>
       <span id="githubStatus">Loading profile...</span>
     </div>
   </div>
@@ -793,14 +546,10 @@ footer {
       <div>
         <p class="section-label">04 / PROJECTS</p>
         <h2 class="section-title">Selected Work.</h2>
-        <p class="section-description">
-          Projects and experiments from my public repositories.
-        </p>
+        <p class="section-description">Projects and experiments from my public repositories.</p>
       </div>
-      <a class="button" href="https://github.com/resurect63?tab=repositories"
-         target="_blank" rel="noopener">All Repositories ↗</a>
+      <a class="button" href="https://github.com/resurect63?tab=repositories" target="_blank" rel="noopener">All Repositories ↗</a>
     </div>
-
     <div class="project-grid" id="projectGrid">
       <div class="loading">Loading GitHub repositories...</div>
     </div>
@@ -811,9 +560,7 @@ footer {
   <div class="container">
     <p class="section-label">05 / CONSOLE</p>
     <h2 class="section-title">Interactive Console.</h2>
-    <p class="section-description">
-      Explore PKDEV using the terminal. Type help to see available commands.
-    </p>
+    <p class="section-description">Explore PKDEV using the terminal. Type help to see available commands.</p>
 
     <div class="terminal">
       <div class="terminal-header">
@@ -821,18 +568,11 @@ footer {
         <span class="terminal-title">pkdev@web:~</span>
         <span class="terminal-title">bash</span>
       </div>
-
       <div class="terminal-body" id="terminalBody">
-        <div class="terminal-output">
-          <strong>PKDEV Console</strong>
-          <br>Welcome. Type help to get started.
-        </div>
-
+        <div class="terminal-output"><strong>PKDEV Console</strong><br>Welcome. Type help to get started.</div>
         <div class="terminal-input-row">
           <span class="terminal-prompt">visitor@pkdev:~$</span>
-          <input id="terminalInput" type="text"
-                 placeholder="Type a command..."
-                 autocomplete="off" spellcheck="false">
+          <input id="terminalInput" type="text" placeholder="Type a command..." autocomplete="off" spellcheck="false">
         </div>
       </div>
     </div>
@@ -843,11 +583,7 @@ footer {
   <div class="container">
     <p class="section-label">06 / CONTACT</p>
     <h2 class="section-title">Connect with me.</h2>
-    <p class="section-description">
-      Interested in technology, development, or collaboration?
-      Find me through the links below.
-    </p>
-
+    <p class="section-description">Interested in technology, development, or collaboration? Find me through the links below.</p>
     <div class="contact-row">
       <div class="contact-links">
         <a href="https://github.com/resurect63" target="_blank" rel="noopener">GitHub ↗</a>
@@ -870,304 +606,365 @@ footer {
 </footer>
 
 <script>
-/* Footer */
+/* LOADER */
+const loader = document.getElementById("loader");
+const loaderPercent = document.getElementById("loaderPercent");
+let progress = 0;
+
+const progressTimer = setInterval(() => {
+  progress = Math.min(progress + Math.ceil(Math.random() * 13), 95);
+  loaderPercent.textContent = progress + "%";
+}, 140);
+
+function finishLoader(){
+  clearInterval(progressTimer);
+  loaderPercent.textContent = "100%";
+  setTimeout(() => loader.classList.add("hide"), 250);
+}
+
+window.addEventListener("load", finishLoader);
+setTimeout(finishLoader, 4000);
+
+/* FOOTER */
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* Animated white particles */
-(() => {
-  const canvas = document.getElementById("particles");
-  const ctx = canvas.getContext("2d");
-  let particles = [];
-  let width, height;
-  const count = window.innerWidth < 600 ? 35 : 65;
+/* SKILL LOGOS */
+const skillGroups = {
+  languageSkills: [
+    ["Java","java"],
+    ["JavaScript","javascript"],
+    ["TypeScript","typescript"],
+    ["PHP","php"],
+    ["HTML5","html5"],
+    ["CSS3","css3"],
+    ["C","c"]
+  ],
+  frameworkSkills: [
+    ["React","react"],
+    ["Next.js","nextdotjs"],
+    ["Node.js","nodedotjs"],
+    ["Tailwind CSS","tailwindcss"]
+  ],
+  databaseSkills: [
+    ["MySQL","mysql"],
+    ["MongoDB","mongodb"]
+  ],
+  toolSkills: [
+    ["Git","git"],
+    ["GitHub","github"],
+    ["Docker","docker"],
+    ["Linux","linux"]
+  ]
+};
 
-  function resize() {
-    width = canvas.width = window.innerWidth * devicePixelRatio;
-    height = canvas.height = window.innerHeight * devicePixelRatio;
-    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-    width = window.innerWidth;
-    height = window.innerHeight;
+function renderSkills(){
+  Object.entries(skillGroups).forEach(([containerId,skills])=>{
+    const container = document.getElementById(containerId);
+
+    skills.forEach(([name,slug])=>{
+      const card = document.createElement("article");
+      card.className = "skill";
+
+      const top = document.createElement("div");
+      top.className = "skill-top";
+
+      const logoBox = document.createElement("div");
+      logoBox.className = "skill-logo";
+
+      const img = document.createElement("img");
+      img.src = `https://cdn.simpleicons.org/${slug}/FFFFFF`;
+      img.alt = name + " logo";
+      img.loading = "lazy";
+
+      img.onerror = () => {
+        img.style.display = "none";
+        logoBox.textContent = name.charAt(0);
+        logoBox.style.color = "#eee";
+        logoBox.style.fontWeight = "700";
+      };
+
+      const title = document.createElement("span");
+      title.className = "skill-name";
+      title.textContent = name;
+
+      logoBox.appendChild(img);
+      top.append(logoBox,title);
+
+      const line = document.createElement("div");
+      line.className = "skill-line";
+      line.innerHTML = "<span></span>";
+
+      card.append(top,line);
+      container.appendChild(card);
+    });
+  });
+}
+renderSkills();
+
+/* DISCORD */
+async function copyDiscord(){
+  try{
+    await navigator.clipboard.writeText(".Resurect.");
+    showToast("Discord username copied: .Resurect.");
+  }catch{
+    showToast("Discord: .Resurect.");
+  }
+}
+function showToast(message){
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),2300);
+}
+
+/* PARTICLES */
+(()=>{
+  const canvas=document.getElementById("particles");
+  const ctx=canvas.getContext("2d");
+  let particles=[],width,height;
+  let count=window.innerWidth<600?35:65;
+
+  function resize(){
+    const dpr=window.devicePixelRatio||1;
+    canvas.width=window.innerWidth*dpr;
+    canvas.height=window.innerHeight*dpr;
+    canvas.style.width=window.innerWidth+"px";
+    canvas.style.height=window.innerHeight+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    width=window.innerWidth;height=window.innerHeight;
   }
 
-  function createParticles() {
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      radius: Math.random() * 1.5 + .3,
-      speedX: (Math.random() - .5) * .25,
-      speedY: (Math.random() - .5) * .3,
-      alpha: Math.random() * .45 + .12
+  function createParticles(){
+    particles=Array.from({length:count},()=>({
+      x:Math.random()*width,
+      y:Math.random()*height,
+      radius:Math.random()*1.5+.3,
+      speedX:(Math.random()-.5)*.25,
+      speedY:(Math.random()-.5)*.3,
+      alpha:Math.random()*.45+.12
     }));
   }
 
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-
-    particles.forEach((p, i) => {
-      p.x += p.speedX;
-      p.y += p.speedY;
-
-      if (p.x < 0) p.x = width;
-      if (p.x > width) p.x = 0;
-      if (p.y < 0) p.y = height;
-      if (p.y > height) p.y = 0;
+  function animate(){
+    ctx.clearRect(0,0,width,height);
+    particles.forEach((p,i)=>{
+      p.x+=p.speedX;p.y+=p.speedY;
+      if(p.x<0)p.x=width;
+      if(p.x>width)p.x=0;
+      if(p.y<0)p.y=height;
+      if(p.y>height)p.y=0;
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+      ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${p.alpha})`;
       ctx.fill();
 
-      for (let j = i + 1; j < particles.length; j++) {
-        const other = particles[j];
-        const dx = p.x - other.x;
-        const dy = p.y - other.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 105) {
+      for(let j=i+1;j<particles.length;j++){
+        const other=particles[j];
+        const dx=p.x-other.x,dy=p.y-other.y;
+        const distance=Math.sqrt(dx*dx+dy*dy);
+        if(distance<105){
           ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(other.x, other.y);
-          ctx.strokeStyle = `rgba(255,255,255,${.055 * (1 - distance / 105)})`;
-          ctx.lineWidth = .5;
+          ctx.moveTo(p.x,p.y);
+          ctx.lineTo(other.x,other.y);
+          ctx.strokeStyle=`rgba(255,255,255,${.055*(1-distance/105)})`;
+          ctx.lineWidth=.5;
           ctx.stroke();
         }
       }
     });
-
     requestAnimationFrame(animate);
   }
 
-  resize();
-  createParticles();
-  animate();
-
-  window.addEventListener("resize", () => {
-    resize();
-    createParticles();
+  resize();createParticles();animate();
+  window.addEventListener("resize",()=>{
+    count=window.innerWidth<600?35:65;
+    resize();createParticles();
   });
 })();
 
-/* GitHub live statistics */
-async function loadGitHub() {
-  const username = "resurect63";
-
-  try {
-    const [userResponse, repoResponse] = await Promise.all([
+/* GITHUB STATS */
+async function loadGitHub(){
+  const username="resurect63";
+  try{
+    const [userResponse,repoResponse]=await Promise.all([
       fetch(`https://api.github.com/users/${username}`),
       fetch(`https://api.github.com/users/${username}/repos?type=owner&per_page=100`)
     ]);
+    if(!userResponse.ok||!repoResponse.ok)throw new Error("API unavailable");
 
-    if (!userResponse.ok || !repoResponse.ok) {
-      throw new Error("GitHub API unavailable");
-    }
+    const user=await userResponse.json();
+    const repos=await repoResponse.json();
 
-    const user = await userResponse.json();
-    const repos = await repoResponse.json();
+    document.getElementById("repoCount").textContent=user.public_repos;
+    document.getElementById("followerCount").textContent=user.followers;
+    document.getElementById("githubAvatar").src=user.avatar_url;
+    document.getElementById("githubStatus").textContent="Public profile";
 
-    document.getElementById("repoCount").textContent = user.public_repos;
-    document.getElementById("followerCount").textContent = user.followers;
-    document.getElementById("githubAvatar").src = user.avatar_url;
-    document.getElementById("githubStatus").textContent = "Public profile";
-
-    const stars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-    const forks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
-
-    document.getElementById("starCount").textContent = stars;
-    document.getElementById("forkCount").textContent = forks;
-
-  } catch (error) {
-    document.getElementById("githubStatus").textContent = "Stats unavailable";
-    ["repoCount", "followerCount", "starCount", "forkCount"]
-      .forEach(id => document.getElementById(id).textContent = "—");
+    document.getElementById("starCount").textContent=
+      repos.reduce((sum,repo)=>sum+repo.stargazers_count,0);
+    document.getElementById("forkCount").textContent=
+      repos.reduce((sum,repo)=>sum+repo.forks_count,0);
+  }catch(error){
+    document.getElementById("githubStatus").textContent="Stats unavailable";
+    ["repoCount","followerCount","starCount","forkCount"]
+      .forEach(id=>document.getElementById(id).textContent="—");
   }
 }
-
 loadGitHub();
 
-/* GitHub repositories */
-const featuredOrder = [
-  "pkdev.security",
-  "imperial launcher",
-  "moderator academy",
-  "pkdev.hub",
-  "project delta",
-  "swat force"
+/* PROJECTS */
+const featuredOrder=[
+  "pkdev.security","imperial launcher",
+  "moderator academy","pkdev.hub",
+  "project delta","swat force"
 ];
 
-function createProject(repo) {
-  const card = document.createElement("article");
-  card.className = "project-card";
+function createProject(repo){
+  const card=document.createElement("article");
+  card.className="project-card";
 
-  const top = document.createElement("div");
-  const title = document.createElement("h3");
-  const description = document.createElement("p");
+  const top=document.createElement("div");
+  const title=document.createElement("h3");
+  const description=document.createElement("p");
 
-  title.textContent = repo.name;
-  description.textContent = repo.description || "Development project by Resurect.";
+  title.textContent=repo.name;
+  description.textContent=repo.description||"Development project by Resurect.";
+  top.append(title,description);
 
-  top.append(title, description);
+  const meta=document.createElement("div");
+  meta.className="project-meta";
 
-  const meta = document.createElement("div");
-  meta.className = "project-meta";
+  const language=document.createElement("span");
+  language.className="project-language";
+  language.textContent=repo.language||"Development";
 
-  const language = document.createElement("span");
-  language.className = "project-language";
-  language.textContent = repo.language || "Development";
+  const links=document.createElement("div");
+  links.className="project-links";
 
-  const links = document.createElement("div");
-  links.className = "project-links";
-
-  const github = document.createElement("a");
-  github.href = repo.html_url;
-  github.target = "_blank";
-  github.rel = "noopener";
-  github.textContent = "GitHub ↗";
+  const github=document.createElement("a");
+  github.href=repo.html_url;
+  github.target="_blank";
+  github.rel="noopener";
+  github.textContent="GitHub ↗";
   links.appendChild(github);
 
-  if (repo.homepage && /^https?:\/\//i.test(repo.homepage)) {
-    const website = document.createElement("a");
-    website.href = repo.homepage;
-    website.target = "_blank";
-    website.rel = "noopener";
-    website.textContent = "Website ↗";
+  if(repo.homepage&&/^https?:\/\//i.test(repo.homepage)){
+    const website=document.createElement("a");
+    website.href=repo.homepage;
+    website.target="_blank";
+    website.rel="noopener";
+    website.textContent="Website ↗";
     links.appendChild(website);
   }
 
-  meta.append(language, links);
-  card.append(top, meta);
-
+  meta.append(language,links);
+  card.append(top,meta);
   return card;
 }
 
-async function loadProjects() {
-  const grid = document.getElementById("projectGrid");
-
-  try {
-    const response = await fetch(
+async function loadProjects(){
+  const grid=document.getElementById("projectGrid");
+  try{
+    const response=await fetch(
       "https://api.github.com/users/resurect63/repos?type=owner&per_page=100&sort=updated"
     );
+    if(!response.ok)throw new Error("GitHub unavailable");
 
-    if (!response.ok) throw new Error("GitHub unavailable");
-
-    const repos = await response.json();
-
-    const visible = repos
-      .filter(repo => !repo.fork && !repo.archived)
-      .sort((a, b) => {
-        const aIndex = featuredOrder.indexOf(a.name.toLowerCase());
-        const bIndex = featuredOrder.indexOf(b.name.toLowerCase());
-
-        if (aIndex !== -1 && bIndex === -1) return -1;
-        if (aIndex === -1 && bIndex !== -1) return 1;
-        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-
-        return new Date(b.pushed_at) - new Date(a.pushed_at);
+    const repos=await response.json();
+    const visible=repos
+      .filter(repo=>!repo.fork&&!repo.archived)
+      .sort((a,b)=>{
+        const ai=featuredOrder.indexOf(a.name.toLowerCase());
+        const bi=featuredOrder.indexOf(b.name.toLowerCase());
+        if(ai!==-1&&bi===-1)return -1;
+        if(ai===-1&&bi!==-1)return 1;
+        if(ai!==-1&&bi!==-1)return ai-bi;
+        return new Date(b.pushed_at)-new Date(a.pushed_at);
       });
 
     grid.replaceChildren();
-
-    if (!visible.length) {
-      grid.textContent = "No public repositories found.";
+    if(!visible.length){
+      grid.textContent="No public repositories found.";
       return;
     }
-
-    visible.forEach(repo => grid.appendChild(createProject(repo)));
-
-  } catch {
-    grid.innerHTML = `
-      <p class="loading">
-        Unable to load repositories.
-        <a href="https://github.com/resurect63?tab=repositories"
-           target="_blank" rel="noopener">View GitHub ↗</a>
-      </p>`;
+    visible.forEach(repo=>grid.appendChild(createProject(repo)));
+  }catch{
+    grid.textContent="Unable to load repositories. Visit GitHub to see all projects.";
   }
 }
-
 loadProjects();
 
-/* Interactive console */
-const terminalBody = document.getElementById("terminalBody");
-const terminalInput = document.getElementById("terminalInput");
+/* INTERACTIVE CONSOLE */
+const terminalBody=document.getElementById("terminalBody");
+const terminalInput=document.getElementById("terminalInput");
 
-const commands = {
-  help:
-`Available commands:
+const commands={
+  help:`Available commands:
 help       Show available commands
 about      About PKDEV
 creator    Creator information
-skills     Programming languages
+skills     Programming languages and tools
 projects   Open GitHub repositories
 github     Open GitHub profile
 discord    Show Discord username
 telegram   Open Telegram
 clear      Clear terminal`,
 
-  about:
-"PKDEV is an independent development identity focused on software, web technologies and digital solutions.",
-
-  creator: "Created by Resurect.",
-
-  skills:
-"Java | JavaScript | TypeScript | PHP | HTML | CSS | C",
-
-  discord:
-"Discord username: .Resurect.",
-
-  telegram:
-"Opening Telegram profile..."
+  about:"PKDEV is an independent development identity focused on software, web technologies and digital solutions.",
+  creator:"Created by Resurect.",
+  skills:"Java | JavaScript | TypeScript | PHP | HTML | CSS | C | React | Next.js | Node.js | Tailwind CSS | MySQL | MongoDB | Git | GitHub | Docker | Linux",
+  discord:"Discord username: .Resurect.",
+  telegram:"Opening Telegram profile..."
 };
 
-function addLine(text, strong = false) {
-  const line = document.createElement("div");
-  line.className = "terminal-output";
-
-  if (strong) {
-    const bold = document.createElement("strong");
-    bold.textContent = text;
+function addLine(text,strong=false){
+  const line=document.createElement("div");
+  line.className="terminal-output";
+  if(strong){
+    const bold=document.createElement("strong");
+    bold.textContent=text;
     line.appendChild(bold);
-  } else {
-    line.textContent = text;
+  }else{
+    line.textContent=text;
   }
-
-  terminalBody.insertBefore(line, terminalBody.lastElementChild);
-  terminalBody.scrollTop = terminalBody.scrollHeight;
+  terminalBody.insertBefore(line,terminalBody.lastElementChild);
+  terminalBody.scrollTop=terminalBody.scrollHeight;
 }
 
-terminalInput.addEventListener("keydown", event => {
-  if (event.key !== "Enter") return;
+terminalInput.addEventListener("keydown",event=>{
+  if(event.key!=="Enter")return;
+  const command=terminalInput.value.trim().toLowerCase();
+  if(!command)return;
 
-  const command = terminalInput.value.trim().toLowerCase();
-  if (!command) return;
+  addLine("visitor@pkdev:~$ "+command,true);
+  terminalInput.value="";
 
-  addLine("visitor@pkdev:~$ " + command, true);
-  terminalInput.value = "";
-
-  if (command === "clear") {
-    terminalBody.querySelectorAll(".terminal-output").forEach(el => el.remove());
+  if(command==="clear"){
+    terminalBody.querySelectorAll(".terminal-output").forEach(el=>el.remove());
     return;
   }
 
-  if (command === "github" || command === "projects") {
+  if(command==="github"||command==="projects"){
     addLine("Opening GitHub...");
     window.open(
-      command === "github"
-        ? "https://github.com/resurect63"
-        : "https://github.com/resurect63?tab=repositories",
-      "_blank",
-      "noopener"
+      command==="github"
+        ?"https://github.com/resurect63"
+        :"https://github.com/resurect63?tab=repositories",
+      "_blank","noopener"
     );
     return;
   }
 
-  if (command === "telegram") {
+  if(command==="telegram"){
     addLine(commands.telegram);
-    window.open("https://t.me/Resurect63", "_blank", "noopener");
+    window.open("https://t.me/Resurect63","_blank","noopener");
     return;
   }
 
-  if (commands[command]) {
+  if(commands[command]){
     addLine(commands[command]);
-  } else {
+  }else{
     addLine("Command not found. Type help.");
   }
 });
