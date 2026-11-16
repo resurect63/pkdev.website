@@ -4,22 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080808">
-  <meta name="description" content="Resurect — Personal website. Technology, development and innovation.">
-  <title>Resurect</title>
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="PKDEV — Independent development and technology. Created by Resurect.">
+  <title>PKDEV — Created by Resurect</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #080808;
+      --bg: #090909;
       --surface: #101010;
-      --text: #f4f4f4;
+      --surface2: #151515;
+      --text: #f2f2f2;
       --muted: #858585;
-      --accent: #a8cce5;
-      --border: #202020;
+      --soft: #bcbcbc;
+      --orange: #ff9b52;
+      --border: #252525;
+      --mono: "DM Mono", monospace;
     }
 
     * {
@@ -30,14 +33,26 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
       line-height: 1.7;
       overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 75% 8%, rgba(255,255,255,.045), transparent 35%),
+        radial-gradient(ellipse at 10% 45%, rgba(255,155,82,.025), transparent 35%);
     }
 
     a {
@@ -45,271 +60,574 @@
       text-decoration: none;
     }
 
+    button {
+      font: inherit;
+    }
+
     .container {
-      width: min(1080px, 88%);
+      width: min(1050px, 88%);
       margin: auto;
     }
 
-    /* Navigation */
+    /* Header */
 
     header {
-      height: 82px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 76px;
+      background: rgba(9,9,9,.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
     nav {
+      height: 100%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      width: 100%;
+      justify-content: space-between;
     }
 
-    .logo {
+    .brand {
       font-size: 21px;
       font-weight: 800;
-      letter-spacing: -1px;
+      letter-spacing: -1.2px;
     }
 
-    .logo span {
-      color: var(--accent);
+    .brand span {
+      color: var(--orange);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
     }
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 25px;
       list-style: none;
     }
 
     .nav-links a {
-      color: #999;
-      font-size: 13px;
-      transition: .25s;
+      color: var(--muted);
+      font-size: 12px;
+      transition: .2s;
     }
 
     .nav-links a:hover {
       color: white;
     }
 
+    .discord-button {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: #c9c9c9;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .discord-button:hover {
+      color: white;
+      border-color: #626262;
+      transform: translateY(-2px);
+    }
+
+    .discord-button svg {
+      width: 19px;
+      height: 19px;
+    }
+
     /* Hero */
 
     .hero {
-      min-height: 680px;
+      min-height: 570px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      position: relative;
       padding: 100px 0;
+      position: relative;
     }
 
-    .hero::before {
+    .hero::after {
       content: "";
       position: absolute;
-      width: 420px;
-      height: 420px;
-      right: -100px;
+      width: 360px;
+      height: 360px;
+      right: 0;
       top: 100px;
-      background: radial-gradient(circle, rgba(168,204,229,.09), transparent 70%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.055), transparent 70%);
+      filter: blur(15px);
       pointer-events: none;
     }
 
     .eyebrow {
-      color: var(--accent);
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1px;
       margin-bottom: 25px;
     }
 
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 12px rgba(255,155,82,.5);
+    }
+
     .hero h1 {
-      font-size: clamp(58px, 11vw, 112px);
+      font-size: clamp(65px, 11vw, 115px);
       line-height: 1;
-      letter-spacing: -7px;
+      letter-spacing: -8px;
       font-weight: 800;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
     .hero h1 span {
-      color: var(--accent);
+      color: var(--orange);
     }
 
     .hero-description {
-      max-width: 510px;
       color: var(--muted);
-      font-size: 16px;
+      max-width: 520px;
+      font-size: 15px;
       line-height: 2;
     }
 
     .hero-actions {
       display: flex;
-      gap: 14px;
-      margin-top: 38px;
+      gap: 12px;
+      margin-top: 35px;
       flex-wrap: wrap;
     }
 
     .button {
-      padding: 12px 22px;
+      padding: 11px 19px;
       border: 1px solid var(--border);
-      border-radius: 5px;
-      font-size: 13px;
+      border-radius: 6px;
+      font-size: 12px;
       transition: .25s;
     }
 
     .button.primary {
-      background: var(--accent);
-      color: #080808;
-      border-color: var(--accent);
+      background: #f1f1f1;
+      color: #101010;
+      border-color: #f1f1f1;
       font-weight: 700;
     }
 
     .button:hover {
       transform: translateY(-3px);
-      border-color: var(--accent);
+      border-color: var(--orange);
     }
 
     /* Sections */
 
     section {
-      padding: 100px 0;
-      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 95px 0;
+      border-top: 1px solid rgba(255,255,255,.065);
     }
 
     .section-label {
-      color: var(--accent);
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+      color: var(--orange);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
     }
 
     .section-title {
-      font-size: clamp(30px, 5vw, 44px);
+      font-size: clamp(30px, 5vw, 42px);
       letter-spacing: -2px;
-      margin-bottom: 25px;
+      margin-bottom: 18px;
     }
 
     .section-description {
-      color: var(--muted);
       max-width: 650px;
-      font-size: 15px;
+      color: var(--muted);
+      font-size: 14px;
       line-height: 2;
     }
 
-    /* Expertise */
+    /* Skills */
 
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 35px;
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+      margin-top: 38px;
     }
 
     .skill {
-      padding: 10px 16px;
-      background: var(--surface);
+      padding: 19px;
       border: 1px solid var(--border);
-      border-radius: 4px;
-      color: #bdbdbd;
-      font-size: 12px;
+      border-radius: 7px;
+      background: linear-gradient(145deg, #131313, #0d0d0d);
       transition: .25s;
     }
 
     .skill:hover {
-      color: var(--accent);
-      border-color: #526b7c;
+      transform: translateY(-4px);
+      border-color: #555;
+      background: #151515;
+    }
+
+    .skill-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .skill-line {
+      height: 2px;
+      width: 100%;
+      background: #292929;
+      overflow: hidden;
+      border-radius: 5px;
+    }
+
+    .skill-line span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--orange);
+      box-shadow: 0 0 9px rgba(255,155,82,.3);
+    }
+
+    /* Projects */
+
+    .project-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .github-link {
+      color: var(--soft);
+      font-size: 12px;
+      border-bottom: 1px solid #555;
+      padding-bottom: 4px;
+      transition: .2s;
+    }
+
+    .github-link:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .project-card {
+      min-height: 175px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: linear-gradient(145deg, #131313, #0d0d0d);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: .25s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: #555;
+    }
+
+    .project-card h3 {
+      font-size: 17px;
+      letter-spacing: -.4px;
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .project-language {
+      color: #999;
+      font-family: var(--mono);
+      font-size: 10px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .project-links a {
+      color: var(--soft);
+      font-size: 11px;
+      transition: .2s;
+    }
+
+    .project-links a:hover {
+      color: var(--orange);
+    }
+
+    .loading {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 25px 0;
+    }
+
+    /* Console */
+
+    .terminal {
+      margin-top: 35px;
+      border: 1px solid #292929;
+      border-radius: 9px;
+      background: #0b0b0b;
+      overflow: hidden;
+      box-shadow: 0 20px 70px rgba(0,0,0,.25);
+    }
+
+    .terminal-header {
+      height: 43px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #141414;
+      border-bottom: 1px solid #262626;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dots i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #555;
+    }
+
+    .terminal-title {
+      color: #777;
+      font-family: var(--mono);
+      font-size: 10px;
+    }
+
+    .terminal-body {
+      height: 240px;
+      padding: 19px;
+      overflow-y: auto;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .terminal-output {
+      color: #aaa;
+      white-space: pre-wrap;
+      line-height: 2;
+      margin-bottom: 12px;
+    }
+
+    .terminal-output .orange {
+      color: var(--orange);
+    }
+
+    .terminal-input-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .terminal-prompt {
+      color: var(--orange);
+    }
+
+    #terminalInput {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-family: var(--mono);
+      font-size: 12px;
+      caret-color: var(--orange);
+    }
+
+    #terminalInput::placeholder {
+      color: #505050;
     }
 
     /* Contact */
 
-    .contact-content {
+    .contact-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 30px;
+      gap: 25px;
       flex-wrap: wrap;
+      margin-top: 30px;
     }
 
     .socials {
       display: flex;
-      gap: 22px;
+      gap: 20px;
       flex-wrap: wrap;
     }
 
     .socials a {
       color: var(--muted);
-      font-size: 13px;
-      transition: .25s;
+      font-size: 12px;
+      transition: .2s;
     }
 
     .socials a:hover {
-      color: var(--accent);
+      color: var(--orange);
     }
 
     /* Footer */
 
     footer {
-      padding: 28px 0;
-      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
     }
 
-    .footer-content {
+    .footer-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 15px;
       flex-wrap: wrap;
     }
 
-    footer p {
-      color: #666;
-      font-size: 11px;
+    .footer-brand {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    .footer-name {
-      color: #aaa;
-      font-weight: 700;
-      letter-spacing: 1px;
+    .footer-brand span {
+      color: var(--orange);
+    }
+
+    footer p {
+      color: #666;
+      font-size: 10px;
+    }
+
+    /* Toast */
+
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      padding: 10px 16px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      background: #171717;
+      color: white;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+      z-index: 50;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
     }
 
     /* Responsive */
 
-    @media (max-width: 650px) {
-      header {
-        height: 70px;
+    @media (max-width: 760px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .nav-links {
-        gap: 15px;
-      }
-
-      .nav-links a {
-        font-size: 11px;
-      }
-
-      .hero {
-        min-height: 580px;
+      .project-grid {
+        grid-template-columns: 1fr;
       }
 
       .hero h1 {
-        letter-spacing: -4px;
-      }
-
-      section {
-        padding: 75px 0;
+        letter-spacing: -5px;
       }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 520px) {
+      header {
+        height: 68px;
+      }
+
       .nav-links {
-        gap: 10px;
+        gap: 13px;
       }
 
       .nav-links a {
         font-size: 10px;
       }
 
-      .logo {
+      .nav-right {
+        gap: 13px;
+      }
+
+      .hero {
+        min-height: 510px;
+      }
+
+      .hero h1 {
+        font-size: 65px;
+        letter-spacing: -5px;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      .terminal-body {
+        height: 220px;
+        padding: 14px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: 9px;
+      }
+
+      .brand {
         font-size: 18px;
       }
     }
@@ -318,124 +636,436 @@
 
 <body>
 
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#home" class="logo">Resurect<span>.</span></a>
+<header>
+  <div class="container">
+    <nav>
+      <a href="#home" class="brand">PKDEV<span>.</span></a>
 
+      <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#console">Console</a></li>
         </ul>
-      </nav>
-    </div>
-  </header>
 
-  <main>
+        <button class="discord-button" id="discordButton"
+          aria-label="Copy Discord username" title="Copy Discord username">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.7 5.3A18.4 18.4 0 0 0 15.2 4l-.5 1a16.7 16.7 0 0 0-5.4 0l-.5-1a18.4 18.4 0 0 0-4.5 1.3C1.5 9.5.7 13.6 1.1 17.7a18.5 18.5 0 0 0 5.5 2.8l1.2-2a11.8 11.8 0 0 1-1.9-.9l.5-.4a13.2 13.2 0 0 0 11.2 0l.5.4a11.8 11.8 0 0 1-1.9.9l1.2 2a18.5 18.5 0 0 0 5.5-2.8c.5-4.7-.8-8.8-3.2-12.4ZM8.8 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.4 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
 
+<main>
+
+  <div class="container">
+    <section class="hero" id="home">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        INDEPENDENT DEVELOPMENT
+      </div>
+
+      <h1>PKDEV<span>.</span></h1>
+
+      <p class="hero-description">
+        Building software, exploring technology, and creating
+        digital experiences with purpose. An independent
+        development identity created by Resurect.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="button primary">Explore Projects</a>
+        <a href="https://github.com/resurect63" target="_blank" rel="noopener" class="button">GitHub ↗</a>
+      </div>
+    </section>
+  </div>
+
+  <section id="about">
     <div class="container">
-      <section class="hero" id="home">
-        <p class="eyebrow">Independent · Technology · Innovation</p>
-
-        <h1>Resurect<span>.</span></h1>
-
-        <p class="hero-description">
-          Exploring technology, building digital experiences,
-          and turning ideas into meaningful solutions.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#about" class="button primary">Discover More</a>
-          <a href="#contact" class="button">Get in Touch</a>
-        </div>
-      </section>
+      <p class="section-label">01 / ABOUT</p>
+      <h2 class="section-title">Behind PKDEV.</h2>
+      <p class="section-description">
+        PKDEV is an independent development identity focused on
+        software, web technologies, and digital solutions.
+        Created by Resurect, with an interest in building useful
+        products and continuously exploring new ideas.
+      </p>
     </div>
+  </section>
 
-    <section id="about">
-      <div class="container">
-        <p class="section-label">01 / About</p>
-        <h2 class="section-title">A little about me.</h2>
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">02 / SKILLS</p>
+      <h2 class="section-title">Languages I work with.</h2>
+      <p class="section-description">
+        Programming and web languages used across my development work.
+      </p>
 
-        <p class="section-description">
-          I'm Resurect, a developer interested in software engineering,
-          web technologies, and digital products. I enjoy exploring
-          new ideas, learning through building, and creating solutions
-          with a focus on simplicity and quality.
-        </p>
-      </div>
-    </section>
+      <div class="skills-grid">
+        <div class="skill">
+          <div class="skill-name">Java</div>
+          <div class="skill-line"><span></span></div>
+        </div>
 
-    <section id="expertise">
-      <div class="container">
-        <p class="section-label">02 / Expertise</p>
-        <h2 class="section-title">Technologies I work with.</h2>
+        <div class="skill">
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-line"><span></span></div>
+        </div>
 
-        <p class="section-description">
-          A collection of technologies and tools across software
-          development, web engineering, and infrastructure.
-        </p>
+        <div class="skill">
+          <div class="skill-name">TypeScript</div>
+          <div class="skill-line"><span></span></div>
+        </div>
 
-        <div class="skills">
-          <span class="skill">Java</span>
-          <span class="skill">JavaScript</span>
-          <span class="skill">TypeScript</span>
-          <span class="skill">PHP</span>
-          <span class="skill">HTML</span>
-          <span class="skill">CSS</span>
-          <span class="skill">React</span>
-          <span class="skill">Next.js</span>
-          <span class="skill">Node.js</span>
-          <span class="skill">MySQL</span>
-          <span class="skill">MongoDB</span>
-          <span class="skill">Docker</span>
-          <span class="skill">Linux</span>
-          <span class="skill">Git</span>
-          <span class="skill">Tailwind CSS</span>
-          <span class="skill">Paper</span>
-          <span class="skill">Spigot</span>
-          <span class="skill">Velocity</span>
+        <div class="skill">
+          <div class="skill-name">PHP</div>
+          <div class="skill-line"><span></span></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-name">HTML</div>
+          <div class="skill-line"><span></span></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-name">CSS</div>
+          <div class="skill-line"><span></span></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-name">C</div>
+          <div class="skill-line"><span></span></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact">
-      <div class="container">
-        <div class="contact-content">
-          <div>
-            <p class="section-label">03 / Contact</p>
-            <h2 class="section-title">Let's connect.</h2>
-            <p class="section-description">
-              Have a question or want to get in touch?
-              Feel free to reach out.
-            </p>
+  <section id="projects">
+    <div class="container">
+      <div class="project-top">
+        <div>
+          <p class="section-label">03 / PROJECTS</p>
+          <h2 class="section-title">Selected work.</h2>
+          <p class="section-description">
+            A selection of projects from my public GitHub repositories.
+          </p>
+        </div>
+
+        <a class="github-link" href="https://github.com/resurect63?tab=repositories"
+          target="_blank" rel="noopener">All repositories ↗</a>
+      </div>
+
+      <div id="projectGrid" class="project-grid">
+        <div class="loading">Loading public repositories...</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="console">
+    <div class="container">
+      <p class="section-label">04 / TERMINAL</p>
+      <h2 class="section-title">Interactive console.</h2>
+      <p class="section-description">
+        A small terminal to explore information about PKDEV.
+        Type <code>help</code> to see available commands.
+      </p>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <i></i><i></i><i></i>
+          </div>
+          <span class="terminal-title">pkdev@web:~</span>
+          <span class="terminal-title">bash</span>
+        </div>
+
+        <div class="terminal-body" id="terminalBody">
+          <div class="terminal-output">
+            <span class="orange">PKDEV Console</span>
+            <br>Welcome. Type <span class="orange">help</span> to get started.
           </div>
 
-          <div class="socials">
-            <a href="https://github.com/resurect63" target="_blank" rel="noopener">GitHub ↗</a>
-            <a href="https://t.me/Resurect63" target="_blank" rel="noopener">Telegram ↗</a>
-            <a href="mailto:itznightitznight16@gmail.com">Email ↗</a>
+          <div class="terminal-input-row">
+            <span class="terminal-prompt">visitor@pkdev:~$</span>
+            <input id="terminalInput" type="text"
+              placeholder="Type a command..." autocomplete="off"
+              spellcheck="false">
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
-
-  <footer>
+  <section id="contact">
     <div class="container">
-      <div class="footer-content">
-        <p class="footer-name">RESURECT.</p>
-        <p>© <span id="year"></span> Resurect. All rights reserved.</p>
+      <p class="section-label">05 / CONTACT</p>
+      <h2 class="section-title">Connect with me.</h2>
+      <p class="section-description">
+        Interested in technology, development, or collaboration?
+        Find me through the links below.
+      </p>
+
+      <div class="contact-row">
+        <div class="socials">
+          <a href="https://github.com/resurect63" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://t.me/Resurect63" target="_blank" rel="noopener">Telegram ↗</a>
+          <a href="mailto:itznightitznight16@gmail.com">Email ↗</a>
+        </div>
+        <a href="https://github.com/resurect63" class="button" target="_blank" rel="noopener">View GitHub Profile</a>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <div class="footer-brand">PKDEV<span>.</span></div>
+      <p>Created by Resurect · © <span id="year"></span> PKDEV</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Toast message
+  let toastTimer;
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2200);
+  }
+
+  // Discord username copy
+  document.getElementById("discordButton").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(".Resurect.");
+      showToast("Discord username copied: .Resurect.");
+    } catch {
+      showToast("Discord: .Resurect.");
+    }
+  });
+
+  // GitHub projects
+  const projectGrid = document.getElementById("projectGrid");
+
+  const featuredProjects = [
+    "PKDEV.Security",
+    "Imperial Launcher",
+    "Moderator Academy",
+    "PKDEV.Hub",
+    "Project Delta",
+    "SWAT Force"
+  ];
+
+  function escapeHTML(value = "") {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[char]);
+  }
+
+  function createProjectCard(repo) {
+    const description = repo.description || "Development project by Resurect.";
+    const language = repo.language || "Development";
+    const homepage = repo.homepage && /^https?:\/\//i.test(repo.homepage)
+      ? repo.homepage
+      : "";
+
+    const card = document.createElement("article");
+    card.className = "project-card";
+
+    const top = document.createElement("div");
+
+    const title = document.createElement("h3");
+    title.textContent = repo.name;
+
+    const desc = document.createElement("p");
+    desc.textContent = description;
+
+    top.append(title, desc);
+
+    const meta = document.createElement("div");
+    meta.className = "project-meta";
+
+    const lang = document.createElement("span");
+    lang.className = "project-language";
+    lang.textContent = language;
+
+    const links = document.createElement("div");
+    links.className = "project-links";
+
+    const github = document.createElement("a");
+    github.href = repo.html_url;
+    github.target = "_blank";
+    github.rel = "noopener";
+    github.textContent = "GitHub ↗";
+    links.appendChild(github);
+
+    if (homepage) {
+      const site = document.createElement("a");
+      site.href = homepage;
+      site.target = "_blank";
+      site.rel = "noopener";
+      site.textContent = "Website ↗";
+      links.appendChild(site);
+    }
+
+    meta.append(lang, links);
+    card.append(top, meta);
+
+    return card;
+  }
+
+  async function loadProjects() {
+    try {
+      const response = await fetch(
+        "https://api.github.com/users/resurect63/repos?type=owner&sort=updated&per_page=100"
+      );
+
+      if (!response.ok) {
+        throw new Error("GitHub API unavailable");
+      }
+
+      const repositories = await response.json();
+
+      const visibleRepos = repositories
+        .filter(repo => !repo.fork && !repo.archived)
+        .sort((a, b) => {
+          const aIndex = featuredProjects.findIndex(name =>
+            name.toLowerCase() === a.name.toLowerCase()
+          );
+          const bIndex = featuredProjects.findIndex(name =>
+            name.toLowerCase() === b.name.toLowerCase()
+          );
+
+          if (aIndex !== -1 && bIndex === -1) return -1;
+          if (aIndex === -1 && bIndex !== -1) return 1;
+          if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+
+          return new Date(b.pushed_at) - new Date(a.pushed_at);
+        });
+
+      projectGrid.replaceChildren();
+
+      if (!visibleRepos.length) {
+        projectGrid.innerHTML =
+          '<p class="loading">No public projects found.</p>';
+        return;
+      }
+
+      visibleRepos.forEach(repo => {
+        projectGrid.appendChild(createProjectCard(repo));
+      });
+
+    } catch (error) {
+      projectGrid.innerHTML = `
+        <div class="loading">
+          Unable to load repositories right now.
+          <br>
+          <a href="https://github.com/resurect63?tab=repositories"
+             target="_blank" rel="noopener"
+             style="color:var(--orange)">Open GitHub repositories ↗</a>
+        </div>`;
+    }
+  }
+
+  loadProjects();
+
+  // Interactive console
+  const terminalBody = document.getElementById("terminalBody");
+  const terminalInput = document.getElementById("terminalInput");
+
+  const commands = {
+    help: `Available commands:
+help       Show available commands
+about      About PKDEV
+creator    Show creator information
+skills     Show programming languages
+projects   Open GitHub repositories
+github     Open GitHub profile
+discord    Show Discord username
+clear      Clear the console`,
+
+    about: "PKDEV is an independent development identity focused on software, web technologies and digital solutions.",
+
+    creator: "Created by Resurect.",
+
+    skills: "Java | JavaScript | TypeScript | PHP | HTML | CSS | C",
+
+    projects: "Opening PKDEV GitHub repositories...",
+
+    github: "Opening GitHub profile...",
+
+    discord: "Discord username: .Resurect."
+  };
+
+  function addTerminalLine(content, className = "") {
+    const line = document.createElement("div");
+    line.className = "terminal-output " + className;
+    line.textContent = content;
+    terminalBody.insertBefore(line, terminalBody.lastElementChild);
+  }
+
+  terminalInput.addEventListener("keydown", event => {
+    if (event.key !== "Enter") return;
+
+    const command = terminalInput.value.trim().toLowerCase();
+
+    if (!command) return;
+
+    addTerminalLine("visitor@pkdev:~$ " + command, "orange");
+    terminalInput.value = "";
+
+    if (command === "clear") {
+      terminalBody.querySelectorAll(".terminal-output").forEach(line => line.remove());
+      return;
+    }
+
+    if (command === "projects" || command === "github") {
+      addTerminalLine(commands[command]);
+      window.open(
+        command === "github"
+          ? "https://github.com/resurect63"
+          : "https://github.com/resurect63?tab=repositories",
+        "_blank",
+        "noopener"
+      );
+      return;
+    }
+
+    if (command === "discord") {
+      addTerminalLine(commands.discord);
+      return;
+    }
+
+    if (commands[command]) {
+      addTerminalLine(commands[command]);
+    } else {
+      addTerminalLine("Command not found: " + command + ". Type help.");
+    }
+
+    terminalBody.scrollTop = terminalBody.scrollHeight;
+  });
+</script>
 
 </body>
 </html>
