@@ -1,77 +1,19 @@
+
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>PKDEV. — Built by Resurect</title>
-<meta name="description" content="PKDEV is an independent development brand built by Resurect. Explore software, Minecraft and web development projects.">
-<meta name="author" content="Resurect">
-<meta name="theme-color" content="#ffffff">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://pkdev.ir/">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="PKDEV. — Ideas into digital reality">
-<meta property="og:description" content="An independent development brand built by Resurect.">
-<meta property="og:url" content="https://pkdev.ir/">
-<meta property="og:site_name" content="PKDEV">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "PKDEV",
-  "url": "https://pkdev.ir/",
-  "founder": {
-    "@type": "Person",
-    "name": "Resurect"
-  },
-  "description": "Independent development brand focused on software, Minecraft and web projects."
-}
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>PKDEV — Ideas into Digital Reality</title>
 
 <style>
 :root {
-  --orange: #f28c28;
-  --orange-soft: rgba(242,140,40,.12);
-  --green: #39ad76;
-  --red: #e46e64;
-  --mono: "DM Mono", monospace;
-  --font: "Manrope", sans-serif;
-  --container: 1160px;
-}
-
-html[data-theme="light"] {
-  --bg: #fff;
-  --surface: #f7f7f7;
-  --surface-2: #f0f0f0;
-  --card: #fff;
-  --text: #171717;
-  --muted: #777;
-  --line: #e9e9e9;
-  --nav: rgba(255,255,255,.88);
-  --terminal: #151515;
-  --terminal-head: #202020;
-  --shadow: 0 18px 50px rgba(0,0,0,.07);
-}
-
-html[data-theme="dark"] {
-  --bg: #111;
-  --surface: #171717;
-  --surface-2: #202020;
-  --card: #191919;
-  --text: #f3f3f3;
-  --muted: #999;
-  --line: #303030;
-  --nav: rgba(17,17,17,.9);
-  --terminal: #090909;
-  --terminal-head: #171717;
-  --shadow: 0 18px 50px rgba(0,0,0,.22);
+  --bg: #050505;
+  --surface: #101010;
+  --white: #ffffff;
+  --gray: #999999;
+  --border: #292929;
 }
 
 * {
@@ -82,21 +24,13 @@ html[data-theme="dark"] {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
 }
 
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: var(--font);
-  line-height: 1.7;
-  overflow-x: hidden;
-  transition: background .3s, color .3s;
-}
-
-body::selection {
-  background: var(--orange);
-  color: white;
+  color: var(--white);
+  font-family: Inter, Arial, sans-serif;
+  line-height: 1.6;
 }
 
 a {
@@ -104,297 +38,66 @@ a {
   text-decoration: none;
 }
 
-button, input, textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
 .container {
-  width: min(var(--container), calc(100% - 48px));
-  margin-inline: auto;
+  width: min(1160px, 90%);
+  margin: auto;
 }
 
-.mono {
-  font-family: var(--mono);
-}
+/* NAVBAR */
 
-.orange {
-  color: var(--orange);
-}
-
-.section {
-  padding: 110px 0;
-}
-
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font: 11px var(--mono);
-  color: var(--orange);
-  letter-spacing: 1.5px;
-  margin-bottom: 17px;
-}
-
-.section-label::before {
-  content: "";
-  width: 22px;
-  height: 1px;
-  background: var(--orange);
-}
-
-.section-heading {
-  font-size: clamp(32px,5vw,47px);
-  line-height: 1.2;
-  letter-spacing: -2px;
-  font-weight: 800;
-}
-
-.section-description {
-  color: var(--muted);
-  max-width: 560px;
-  margin-top: 14px;
-  font-size: 14px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 13px 21px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 800;
-  transition: .25s;
-  border: 1px solid transparent;
-}
-
-.btn-primary {
-  color: white;
-  background: var(--text);
-}
-
-.btn-primary:hover {
-  background: var(--orange);
-  color: white;
-  transform: translateY(-3px);
-}
-
-.btn-outline {
-  border-color: var(--line);
-  background: var(--card);
-}
-
-.btn-outline:hover {
-  border-color: var(--orange);
-  color: var(--orange);
-  transform: translateY(-3px);
-}
-
-/* LOADER */
-
-.loader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: grid;
-  place-items: center;
-  background: #111;
-  color: white;
-  transition: opacity .5s, visibility .5s;
-}
-
-.loader.done {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.loader-content {
-  text-align: center;
-  width: min(300px, 80%);
-}
-
-.loader-logo {
-  font-size: 38px;
-  font-weight: 800;
-  letter-spacing: -2px;
-}
-
-.loader-logo span {
-  color: var(--orange);
-}
-
-.loader-caption {
-  color: #888;
-  font: 10px var(--mono);
-  margin-top: 10px;
-  letter-spacing: 2px;
-}
-
-.loader-track {
-  width: 100%;
-  height: 3px;
-  background: #333;
-  margin-top: 30px;
-  overflow: hidden;
-}
-
-.loader-bar {
-  height: 100%;
-  width: 0;
-  background: var(--orange);
-  animation: loading 1.15s ease forwards;
-}
-
-@keyframes loading {
-  to { width: 100%; }
-}
-
-/* CUSTOM CURSOR */
-
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  left: 0;
+header {
+  position: sticky;
   top: 0;
-  z-index: 9998;
-  pointer-events: none;
-  border-radius: 50%;
-  transform: translate(-50%,-50%);
-  opacity: 0;
-}
-
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--orange);
-}
-
-.cursor-ring {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--orange);
-  transition: width .2s, height .2s, opacity .2s;
-}
-
-body.cursor-ready .cursor-dot,
-body.cursor-ready .cursor-ring {
-  opacity: 1;
-}
-
-.cursor-ring.active {
-  width: 48px;
-  height: 48px;
-  background: rgba(242,140,40,.08);
-}
-
-/* NAV */
-
-.navbar {
-  height: 78px;
-  position: fixed;
-  inset: 0 0 auto;
   z-index: 100;
-  background: var(--nav);
+  background: rgba(5,5,5,.88);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
 }
 
-.nav-inner {
-  height: 100%;
+nav {
+  height: 75px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-  font-size: 25px;
-  font-weight: 800;
-  letter-spacing: -1.5px;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 4px;
 }
 
-.logo span,
-.footer-brand span {
-  color: var(--orange);
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+.logo span {
+  border: 1px solid white;
+  padding: 5px 8px;
+  margin-right: 10px;
 }
 
 .nav-links {
   display: flex;
-  align-items: center;
   gap: 30px;
+  list-style: none;
 }
 
 .nav-links a {
+  color: var(--gray);
   font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  transition: color .2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: .3s;
 }
 
 .nav-links a:hover {
-  color: var(--orange);
-}
-
-.nav-links .nav-cta {
-  background: var(--text);
-  color: var(--bg);
-  padding: 10px 17px;
-  border-radius: 5px;
-}
-
-.nav-links .nav-cta:hover {
-  background: var(--orange);
   color: white;
-}
-
-.icon-button {
-  width: 37px;
-  height: 37px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--card);
-  color: var(--text);
-  transition: .2s;
-}
-
-.icon-button:hover {
-  border-color: var(--orange);
-  color: var(--orange);
-}
-
-.nav-tools {
-  display: flex;
-  gap: 8px;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: 0;
-  font-size: 24px;
-  color: var(--text);
 }
 
 /* HERO */
 
 .hero {
-  min-height: 760px;
-  padding: 165px 0 100px;
+  min-height: 680px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid var(--border);
   position: relative;
   overflow: hidden;
 }
@@ -402,970 +105,254 @@ body.cursor-ready .cursor-ring {
 .hero::before {
   content: "";
   position: absolute;
-  width: 620px;
-  height: 620px;
-  right: -180px;
-  top: 40px;
+  width: 600px;
+  height: 600px;
+  right: -250px;
+  border: 1px solid #242424;
   border-radius: 50%;
-  background: radial-gradient(circle,rgba(242,140,40,.11),transparent 70%);
-  pointer-events: none;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  align-items: center;
-  gap: 65px;
-  position: relative;
+  box-shadow:
+    0 0 0 70px #090909,
+    0 0 0 71px #202020,
+    0 0 0 140px #080808,
+    0 0 0 141px #202020;
 }
 
 .hero-content {
-  animation: enter .8s ease both;
+  position: relative;
+  z-index: 2;
+  padding: 100px 0;
 }
 
-.hero-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  border: 1px solid var(--line);
-  padding: 8px 13px;
-  border-radius: 5px;
-  color: var(--muted);
-  font: 10px var(--mono);
-  margin-bottom: 28px;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 4px rgba(57,173,118,.12);
-}
-
-.hero h1 {
-  font-size: clamp(48px,6vw,78px);
-  font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -4px;
-}
-
-.hero h1 span {
-  color: var(--orange);
-}
-
-.hero-description {
-  max-width: 500px;
-  margin-top: 25px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 2;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-.hero-meta {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin-top: 48px;
-}
-
-.meta-item strong {
-  display: block;
-  font-size: 23px;
-  letter-spacing: -1px;
-}
-
-.meta-item span {
-  color: var(--muted);
-  font: 10px var(--mono);
+.eyebrow {
+  color: var(--gray);
+  font-size: 11px;
+  letter-spacing: 4px;
   text-transform: uppercase;
 }
 
-/* TERMINAL */
-
-.terminal {
-  background: var(--terminal);
-  color: #eee;
-  border-radius: 11px;
-  overflow: hidden;
-  border: 1px solid #303030;
-  box-shadow: 0 25px 70px rgba(0,0,0,.15);
-  animation: enter .9s .15s ease both;
-  transition: transform .3s, box-shadow .3s;
+h1 {
+  font-size: clamp(55px, 9vw, 110px);
+  line-height: .98;
+  letter-spacing: -7px;
+  margin: 30px 0;
 }
 
-.terminal:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 30px 80px rgba(0,0,0,.2);
+h1 span {
+  color: #777;
 }
 
-.terminal-header {
-  height: 45px;
-  background: var(--terminal-head);
+.hero p {
+  color: var(--gray);
+  max-width: 530px;
+  font-size: 17px;
+}
+
+.buttons {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 15px;
-  border-bottom: 1px solid #303030;
+  gap: 12px;
+  margin-top: 35px;
+  flex-wrap: wrap;
 }
 
-.terminal-dots {
-  display: flex;
-  gap: 6px;
+.btn {
+  padding: 13px 20px;
+  border: 1px solid white;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: .3s;
 }
 
-.terminal-dots i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #555;
+.btn.primary {
+  background: white;
+  color: black;
 }
 
-.terminal-dots i:first-child { background: #f16b63; }
-.terminal-dots i:nth-child(2) { background: #e7b94d; }
-.terminal-dots i:nth-child(3) { background: #55bd79; }
-
-.terminal-title {
-  font: 10px var(--mono);
-  color: #888;
+.btn:hover {
+  background: white;
+  color: black;
+  transform: translateY(-3px);
 }
 
-.terminal-body {
-  padding: 22px;
-  height: 355px;
-  overflow-y: auto;
-  font: 11px/1.9 var(--mono);
-  scrollbar-width: thin;
-  scrollbar-color: #444 transparent;
-  cursor: text;
+/* SECTIONS */
+
+section.content-section {
+  padding: 110px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.terminal-welcome {
-  color: #aaa;
-  white-space: pre-wrap;
-  margin-bottom: 15px;
+.section-label {
+  color: #777;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.terminal-line {
-  margin-bottom: 7px;
-  overflow-wrap: anywhere;
-}
-
-.terminal-prompt {
-  color: var(--orange);
-}
-
-.terminal-output {
-  color: #aaa;
-  white-space: pre-wrap;
-  margin-bottom: 12px;
-  overflow-wrap: anywhere;
-}
-
-.terminal-input-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.terminal-input {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  outline: none;
-  color: white;
-  background: transparent;
-  font: inherit;
-  caret-color: var(--orange);
-}
-
-.terminal-input::placeholder {
-  color: #555;
-}
-
-.terminal-hint {
-  color: #666;
-  font-size: 9px;
-  margin-top: 14px;
-}
-
-/* ABOUT */
-
-.about {
-  background: var(--surface);
+h2 {
+  font-size: clamp(35px, 5vw, 58px);
+  letter-spacing: -3px;
+  margin: 12px 0 45px;
 }
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 70px;
 }
 
 .about-text {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 2;
-  margin-top: 20px;
-}
-
-.about-note {
-  margin-top: 25px;
-  border-left: 3px solid var(--orange);
-  padding: 14px 18px;
-  background: var(--card);
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.about-note strong {
-  color: var(--text);
-}
-
-.about-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 13px;
-}
-
-.about-card {
-  padding: 24px 20px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  transition: .25s;
-}
-
-.about-card:hover {
-  border-color: var(--orange);
-  transform: translateY(-4px);
-}
-
-.about-card span {
-  font: 10px var(--mono);
-  color: var(--orange);
-}
-
-.about-card h3 {
-  font-size: 14px;
-  margin-top: 16px;
-}
-
-.about-card p {
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 7px;
-}
-
-/* GITHUB */
-
-.github-section {
-  border-bottom: 1px solid var(--line);
-}
-
-.github-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 28px;
-  margin-top: 35px;
-}
-
-.github-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.github-user {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.github-avatar {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: var(--surface-2);
-  object-fit: cover;
-}
-
-.github-user h3 {
-  font-size: 15px;
-}
-
-.github-user p {
-  color: var(--muted);
-  font: 10px var(--mono);
-}
-
-.github-stats {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 13px;
-  margin-top: 28px;
-}
-
-.github-stat {
-  padding: 17px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-}
-
-.github-stat strong {
-  display: block;
   font-size: 25px;
+  line-height: 1.6;
+  color: #bbb;
 }
 
-.github-stat span {
-  font: 10px var(--mono);
-  color: var(--muted);
+.about-text strong {
+  color: white;
 }
 
-.github-status {
-  font: 10px var(--mono);
-  color: var(--muted);
-  margin-top: 17px;
+.facts {
+  border-top: 1px solid var(--border);
 }
 
-.github-repos {
+.fact {
+  padding: 17px 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 17px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
 }
 
-.github-repos a {
-  font: 10px var(--mono);
-  color: var(--orange);
-  border: 1px solid var(--line);
-  padding: 7px 10px;
-  border-radius: 5px;
+.fact span:first-child {
+  color: #777;
 }
 
 /* PROJECTS */
 
-.projects-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.project-count {
-  color: var(--muted);
-  font: 10px var(--mono);
-}
-
-.project-filters {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-
-.filter-btn {
-  padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  background: var(--card);
-  color: var(--muted);
-  font: 10px var(--mono);
-  transition: .2s;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--bg);
-}
-
-.projects-grid {
+.projects {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 18px;
-}
-
-.project-card {
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  overflow: hidden;
-  background: var(--card);
-  transition: .3s;
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow);
-  border-color: rgba(242,140,40,.5);
-}
-
-.project-card.hidden {
-  display: none;
-}
-
-.project-cover {
-  height: 175px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: #171717;
-}
-
-.project-cover::before,
-.project-cover::after {
-  content: "";
-  position: absolute;
-  border: 1px solid rgba(255,255,255,.1);
-  width: 230px;
-  height: 230px;
-  transform: rotate(35deg);
-  transition: transform .5s;
-}
-
-.project-cover::after {
-  width: 150px;
-  height: 150px;
-  transform: rotate(55deg);
-}
-
-.project-card:hover .project-cover::before {
-  transform: rotate(50deg) scale(1.1);
-}
-
-.cover-security { background: linear-gradient(135deg,#171717,#30231a); }
-.cover-imperial { background: linear-gradient(135deg,#101a17,#1a3428); }
-.cover-academy { background: linear-gradient(135deg,#191722,#30283d); }
-.cover-hub { background: linear-gradient(135deg,#171717,#292929); }
-.cover-delta { background: linear-gradient(135deg,#101b2a,#1c3047); }
-.cover-swat { background: linear-gradient(135deg,#191c19,#303b2d); }
-
-.cover-title {
-  position: relative;
-  z-index: 1;
-  color: white;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.cover-title span {
-  color: var(--orange);
-}
-
-.cover-imperial .cover-title span { color: #4bc78a; }
-.cover-academy .cover-title span { color: #b69be8; }
-.cover-delta .cover-title span { color: #69a9e8; }
-
-.project-content {
-  padding: 21px;
-}
-
-.project-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.project-top h3 {
-  font-size: 14px;
-}
-
-.project-status {
-  font: 9px var(--mono);
-  color: #32966a;
-  background: rgba(57,173,118,.12);
-  padding: 5px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-
-.project-status.development {
-  color: #b47a30;
-  background: rgba(242,140,40,.12);
-}
-
-.project-content p {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.9;
-  margin-top: 12px;
-  min-height: 43px;
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 15px;
-}
-
-.project-tags span {
-  font: 9px var(--mono);
-  padding: 5px 8px;
-  background: var(--surface);
-  color: var(--muted);
-  border-radius: 4px;
-}
-
-.project-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 18px;
-}
-
-.project-link {
-  font-size: 11px;
-  font-weight: 800;
-  transition: .2s;
-}
-
-.project-link:hover {
-  color: var(--orange);
-}
-
-.details-btn {
-  border: none;
-  background: none;
-  color: var(--orange);
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.project-link.disabled {
-  color: var(--muted);
-  cursor: default;
-}
-
-/* PROJECT MODAL */
-
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(0,0,0,.7);
-  backdrop-filter: blur(8px);
-}
-
-.modal.open {
-  display: flex;
-}
-
-.modal-card {
-  width: min(550px,100%);
-  max-height: 85vh;
-  overflow-y: auto;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  padding: 28px;
-  animation: modalIn .25s ease;
-}
-
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(12px) scale(.98); }
-  to { opacity: 1; transform: none; }
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
 }
 
-.modal-header h3 {
-  font-size: 20px;
-}
-
-.modal-close {
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  background: var(--surface);
-  color: var(--text);
-  font-size: 18px;
-}
-
-.modal-description {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 2;
-  margin: 20px 0;
-}
-
-.modal-info {
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 15px;
-  font: 11px/2 var(--mono);
-  color: var(--muted);
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.modal-footer {
+.project {
+  background: linear-gradient(145deg, #141414, #090909);
+  border: 1px solid var(--border);
+  padding: 30px;
+  min-height: 220px;
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: .3s;
 }
 
-/* TOOLBOX */
-
-.toolbox {
-  background: var(--surface);
+.project:hover {
+  transform: translateY(-5px);
+  border-color: #888;
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 13px;
-  margin-top: 40px;
+.project small {
+  color: #777;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.skill-card {
-  padding: 20px;
-  border: 1px solid var(--line);
-  background: var(--card);
-  border-radius: 7px;
-  transition: .25s;
+.project h3 {
+  font-size: 25px;
+  margin-bottom: 8px;
 }
 
-.skill-card:hover {
-  border-color: var(--orange);
-  transform: translateY(-4px);
-}
-
-.skill-card span {
-  font: 10px var(--mono);
-  color: var(--orange);
-}
-
-.skill-card h3 {
+.project p {
+  color: #999;
   font-size: 13px;
-  margin-top: 9px;
 }
 
-.skill-card p {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 5px;
+/* SKILLS */
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* JOURNEY */
+.skill {
+  border: 1px solid #333;
+  padding: 10px 15px;
+  color: #bbb;
+  font-size: 13px;
+  transition: .3s;
+}
 
-.journey-grid {
+.skill:hover {
+  background: white;
+  color: black;
+}
+
+/* PRINCIPLES */
+
+.principles {
   display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 80px;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
 }
 
-.journey-list {
-  border-left: 1px solid var(--line);
-  padding-left: 28px;
+.principle {
+  padding: 25px;
+  border-right: 1px solid var(--border);
 }
 
-.journey-item {
-  position: relative;
-  padding-bottom: 32px;
+.principle h3 {
+  margin: 20px 0 10px;
 }
 
-.journey-item:last-child {
-  padding-bottom: 0;
-}
-
-.journey-item::before {
-  content: "";
-  position: absolute;
-  left: -33px;
-  top: 8px;
-  width: 9px;
-  height: 9px;
-  background: var(--orange);
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px var(--orange-soft);
-}
-
-.journey-item .year {
-  color: var(--orange);
-  font: 10px var(--mono);
-}
-
-.journey-item h3 {
-  font-size: 15px;
-  margin-top: 6px;
-}
-
-.journey-item p {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 6px;
+.principle p {
+  color: var(--gray);
+  font-size: 13px;
 }
 
 /* CONTACT */
 
 .contact {
-  background: #151515;
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-
-.contact::after {
-  content: "PKDEV";
-  position: absolute;
-  right: -25px;
-  bottom: -100px;
-  font-size: clamp(130px,23vw,290px);
-  font-weight: 800;
-  color: rgba(255,255,255,.025);
-  letter-spacing: -15px;
-  pointer-events: none;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 75px;
-  position: relative;
-  z-index: 1;
-}
-
-.contact .section-description {
-  color: #999;
-}
-
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.contact-link {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 17px;
-  border: 1px solid #333;
-  border-radius: 6px;
-  transition: .2s;
+  gap: 40px;
 }
 
-.contact-link:hover {
-  border-color: var(--orange);
-  transform: translateX(4px);
+.contact-links {
+  min-width: 250px;
 }
 
-.contact-link span:first-child {
-  font-size: 12px;
-  font-weight: 700;
+.contact-links a {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #333;
+  color: #aaa;
+  font-size: 13px;
+  transition: .3s;
 }
 
-.contact-link span:last-child {
-  font: 10px var(--mono);
-  color: var(--orange);
-}
-
-.contact-form {
-  background: #202020;
-  border: 1px solid #333;
-  border-radius: 9px;
-  padding: 26px;
-}
-
-.form-title {
-  font-size: 16px;
-  margin-bottom: 22px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  font: 10px var(--mono);
-  color: #999;
-  margin-bottom: 8px;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  background: #171717;
-  border: 1px solid #383838;
-  border-radius: 5px;
-  padding: 12px;
+.contact-links a:hover {
   color: white;
-  outline: none;
-  font-size: 12px;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--orange);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 110px;
-}
-
-.contact-form .btn {
-  width: 100%;
-  border: none;
-}
-
-.form-note {
-  font-size: 10px;
-  color: #888;
-  margin-top: 12px;
-  text-align: center;
 }
 
 /* FOOTER */
 
 footer {
-  background: #101010;
-  color: #777;
-  padding: 25px 0;
-  border-top: 1px solid #282828;
-}
-
-.footer-inner {
+  padding: 30px 0;
+  color: #666;
+  font-size: 11px;
+  letter-spacing: 1px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
 }
 
-.footer-brand {
-  font-size: 19px;
-  font-weight: 800;
-  color: white;
-}
-
-.footer-copy,
-.footer-top {
-  font: 10px var(--mono);
-}
-
-.footer-top {
-  color: var(--orange);
-}
-
-/* COMMAND PALETTE */
-
-.palette-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(0,0,0,.65);
-  backdrop-filter: blur(7px);
-  display: none;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 15vh 20px 20px;
-}
-
-.palette-overlay.open {
-  display: flex;
-}
-
-.palette {
-  width: min(560px,100%);
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 25px 90px rgba(0,0,0,.3);
-  animation: modalIn .2s ease;
-}
-
-.palette-search {
-  width: 100%;
-  padding: 20px;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  outline: none;
-  background: transparent;
-  color: var(--text);
-  font-size: 14px;
-}
-
-.palette-list {
-  padding: 8px;
-  max-height: 330px;
-  overflow-y: auto;
-}
-
-.palette-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  color: var(--text);
-  font-size: 12px;
-}
-
-.palette-item:hover,
-.palette-item.selected {
-  background: var(--surface-2);
-}
-
-.palette-item small {
-  font: 10px var(--mono);
-  color: var(--muted);
-}
-
-.palette-footer {
-  padding: 12px 16px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font: 10px var(--mono);
-}
-
-/* SCROLL AND REVEAL */
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  width: 0;
-  z-index: 200;
-  background: var(--orange);
-}
+/* ANIMATIONS */
 
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .7s ease, transform .7s ease;
+  transform: translateY(25px);
+  transition: .8s ease;
 }
 
 .reveal.visible {
@@ -1373,189 +360,52 @@ footer {
   transform: translateY(0);
 }
 
-@keyframes enter {
-  from { opacity: 0; transform: translateY(22px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 /* RESPONSIVE */
 
-@media (max-width: 950px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 45px;
-  }
-
-  .terminal {
-    max-width: 650px;
-  }
-
-  .projects-grid {
-    grid-template-columns: repeat(2,1fr);
-  }
-
-  .about-grid,
-  .journey-grid,
-  .contact-grid {
-    gap: 40px;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2,1fr);
-  }
-}
-
-@media (max-width: 700px) {
-  .container {
-    width: min(100% - 34px,var(--container));
-  }
-
-  .navbar {
-    height: 68px;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-right {
+@media(max-width: 750px) {
+  .nav-links {
     gap: 12px;
   }
 
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 68px;
-    left: 0;
-    right: 0;
-    padding: 18px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
-
-  .nav-links.open {
-    display: flex;
-  }
-
   .nav-links a {
-    padding: 12px 5px;
-  }
-
-  .nav-links .nav-cta {
-    text-align: center;
-    margin-top: 8px;
-  }
-
-  .hero {
-    min-height: auto;
-    padding: 125px 0 75px;
-  }
-
-  .hero h1 {
-    font-size: clamp(43px,12vw,60px);
-    letter-spacing: -3px;
-  }
-
-  .hero-meta {
-    gap: 22px;
-    margin-top: 38px;
-  }
-
-  .section {
-    padding: 78px 0;
-  }
-
-  .about-grid,
-  .journey-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .projects-header {
-    align-items: start;
-    flex-direction: column;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2,1fr);
-  }
-
-  .terminal-body {
-    height: 330px;
-    padding: 17px;
     font-size: 10px;
   }
 
-  .github-card {
-    padding: 18px;
+  h1 {
+    letter-spacing: -4px;
   }
 
-  .github-stats {
-    gap: 8px;
-  }
-
-  .github-stat {
-    padding: 12px 9px;
-  }
-
-  .github-stat strong {
-    font-size: 20px;
-  }
-
-  .contact-form {
-    padding: 20px;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .cursor-dot,
-  .cursor-ring {
-    display: none;
-  }
-}
-
-@media (max-width: 380px) {
-  .about-cards,
-  .skills-grid {
+  .about-grid,
+  .projects,
+  .principles {
     grid-template-columns: 1fr;
   }
 
-  .hero-actions .btn {
+  .contact {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-links {
     width: 100%;
   }
 
-  .github-stats {
-    grid-template-columns: 1fr;
+  .principle {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
-@media (hover: none), (pointer: coarse) {
-  .cursor-dot,
-  .cursor-ring {
-    display: none !important;
+@media(prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition: none !important;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-
   .reveal {
     opacity: 1;
     transform: none;
@@ -1566,390 +416,158 @@ footer {
 
 <body>
 
-<div class="scroll-progress" id="scrollProgress"></div>
+<header>
+  <nav class="container">
+    <a href="#home" class="logo">
+      <span>PK</span>PKDEV
+    </a>
 
-<!-- LOADER -->
-<div class="loader" id="loader">
-  <div class="loader-content">
-    <div class="loader-logo">PKDEV<span>.</span></div>
-    <div class="loader-caption">BUILT BY RESURECT</div>
-    <div class="loader-track"><div class="loader-bar"></div></div>
-  </div>
-</div>
-
-<!-- CUSTOM CURSOR -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- NAVIGATION -->
-<header class="navbar">
-  <div class="container nav-inner">
-    <a href="#home" class="logo">PKDEV<span>.</span></a>
-
-    <div class="nav-right">
-      <nav class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#toolbox">Toolbox</a>
-        <a href="#journey">Journey</a>
-        <a href="#contact" class="nav-cta">Let's Talk ↗</a>
-      </nav>
-
-      <div class="nav-tools">
-        <button class="icon-button" id="paletteButton" aria-label="Open command palette" title="Command Palette (Ctrl + K)">⌕</button>
-        <button class="icon-button" id="themeButton" aria-label="Toggle theme" title="Toggle theme">☾</button>
-      </div>
-
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-    </div>
-  </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Stack</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
 <main>
 
 <!-- HERO -->
+
 <section class="hero" id="home">
-  <div class="container hero-grid">
+  <div class="container hero-content reveal">
 
-    <div class="hero-content">
-      <div class="hero-status">
-        <span class="status-dot"></span>
-        INDEPENDENT DEVELOPMENT BRAND
-      </div>
-
-      <h1>Ideas into<br>digital <span>reality.</span></h1>
-
-      <p class="hero-description">
-        PKDEV is an independent development brand built by Resurect.
-        Focused on creating software, Minecraft experiences and
-        digital solutions with purpose.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">Explore Projects ↗</a>
-        <a href="#about" class="btn btn-outline">Discover PKDEV</a>
-      </div>
-
-      <div class="hero-meta">
-        <div class="meta-item">
-          <strong>06</strong>
-          <span>Projects</span>
-        </div>
-        <div class="meta-item">
-          <strong>03</strong>
-          <span>Focus Areas</span>
-        </div>
-        <div class="meta-item">
-          <strong>01</strong>
-          <span>Creator</span>
-        </div>
-      </div>
+    <div class="eyebrow">
+      Independent Digital Studio
     </div>
 
-    <!-- TERMINAL -->
-    <div class="terminal" id="terminal">
-      <div class="terminal-header">
-        <div class="terminal-dots"><i></i><i></i><i></i></div>
-        <div class="terminal-title">pkdev@resurect: ~</div>
-        <div class="terminal-title">WEB TERMINAL</div>
-      </div>
+    <h1>
+      Ideas into<br>
+      <span>digital reality.</span>
+    </h1>
 
-      <div class="terminal-body" id="terminalBody">
-        <div class="terminal-welcome">PKDEV Interactive Console
-Type "help" to see available commands.
+    <p>
+      PKDEV is an independent development brand
+      focused on software, web technologies,
+      digital products and creative experiments.
+    </p>
 
-Welcome to PKDEV.
-Built by Resurect.</div>
+    <div class="buttons">
+      <a href="#projects" class="btn primary">
+        Explore Projects ↘
+      </a>
 
-        <div id="terminalOutput"></div>
-
-        <div class="terminal-input-line">
-          <span class="terminal-prompt">pkdev@resurect:~$</span>
-          <input class="terminal-input" id="terminalInput"
-            type="text" placeholder="type a command..."
-            autocomplete="off" spellcheck="false"
-            aria-label="Terminal command input">
-        </div>
-
-        <div class="terminal-hint">ENTER to execute · ↑↓ history · TAB autocomplete</div>
-      </div>
+      <a href="https://github.com/resurect63"
+         target="_blank"
+         class="btn">
+        GitHub ↗
+      </a>
     </div>
 
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="section about" id="about">
-  <div class="container about-grid">
 
-    <div class="reveal">
-      <div class="section-label">01 / ABOUT</div>
-      <h2 class="section-heading">More than just<br><span class="orange">development.</span></h2>
+<section class="content-section" id="about">
+  <div class="container">
 
-      <p class="about-text">
-        PKDEV is an independent development brand focused on turning
-        ideas into practical digital products. From software
-        applications to Minecraft projects, every project is an
-        opportunity to build something meaningful.
-      </p>
+    <div class="section-label">01 / About</div>
+    <h2>Built with intent.</h2>
+
+    <div class="about-grid reveal">
 
       <p class="about-text">
-        Behind PKDEV is Resurect — an independent creator interested
-        in software engineering, development and building digital
+        I'm <strong>Resurect</strong>, the creator
+        behind PKDEV. I work across software
+        development, web technologies and digital
+        environments — turning ideas into practical
         experiences.
       </p>
 
-      <div class="about-note">
-        <strong>Our approach:</strong>
-        Build with purpose. Improve with every iteration.
-      </div>
-    </div>
+      <div class="facts">
 
-    <div class="about-cards reveal">
-      <div class="about-card">
-        <span>01 /</span>
-        <h3>Software</h3>
-        <p>Tools and applications designed to solve real problems.</p>
-      </div>
-      <div class="about-card">
-        <span>02 /</span>
-        <h3>Minecraft</h3>
-        <p>Launchers, server systems and custom experiences.</p>
-      </div>
-      <div class="about-card">
-        <span>03 /</span>
-        <h3>Web</h3>
-        <p>Modern websites and digital interfaces.</p>
-      </div>
-      <div class="about-card">
-        <span>04 /</span>
-        <h3>Innovation</h3>
-        <p>Experimenting with ideas and exploring new possibilities.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- GITHUB LIVE DATA -->
-<section class="section github-section" id="github">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">02 / OPEN SOURCE</div>
-      <h2 class="section-heading">GitHub <span class="orange">activity.</span></h2>
-      <p class="section-description">
-        Public profile information retrieved directly from GitHub.
-      </p>
-    </div>
-
-    <div class="github-card reveal">
-      <div class="github-top">
-        <div class="github-user">
-          <img class="github-avatar" id="githubAvatar"
-               src="https://github.com/resurect63.png"
-               alt="Resurect GitHub avatar">
-          <div>
-            <h3 id="githubName">Resurect</h3>
-            <p>@resurect63</p>
-          </div>
+        <div class="fact">
+          <span>Brand</span>
+          <span>PKDEV</span>
         </div>
 
-        <a href="https://github.com/resurect63"
-           target="_blank" rel="noopener noreferrer"
-           class="btn btn-outline">View GitHub ↗</a>
-      </div>
-
-      <div class="github-stats">
-        <div class="github-stat">
-          <strong id="githubRepos">—</strong>
-          <span>PUBLIC REPOSITORIES</span>
+        <div class="fact">
+          <span>Creator</span>
+          <span>Resurect</span>
         </div>
-        <div class="github-stat">
-          <strong id="githubFollowers">—</strong>
-          <span>FOLLOWERS</span>
-        </div>
-        <div class="github-stat">
-          <strong id="githubFollowing">—</strong>
-          <span>FOLLOWING</span>
-        </div>
-      </div>
 
-      <div class="github-status" id="githubStatus" aria-live="polite">
-        Connecting to GitHub API...
-      </div>
+        <div class="fact">
+          <span>Focus</span>
+          <span>Software & Digital Products</span>
+        </div>
 
-      <div class="github-repos" id="githubRepoList"></div>
+        <div class="fact">
+          <span>GitHub</span>
+          <span>@resurect63</span>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="section" id="projects">
+
+<section class="content-section" id="projects">
   <div class="container">
 
-    <div class="projects-header reveal">
-      <div>
-        <div class="section-label">03 / SELECTED WORK</div>
-        <h2 class="section-heading">Projects & <span class="orange">experiments.</span></h2>
-        <p class="section-description">
-          A selection of projects built under the PKDEV identity.
-          Explore available projects or discover what's being developed.
-        </p>
-      </div>
-      <span class="project-count" id="projectCount">06 PROJECTS</span>
-    </div>
+    <div class="section-label">02 / Selected Work</div>
+    <h2>Things in progress.</h2>
 
-    <div class="project-filters reveal" id="projectFilters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="software">Software</button>
-      <button class="filter-btn" data-filter="minecraft">Minecraft</button>
-      <button class="filter-btn" data-filter="web">Web</button>
-      <button class="filter-btn" data-filter="development">In Development</button>
-    </div>
+    <div class="projects">
 
-    <div class="projects-grid" id="projectsGrid">
-
-      <article class="project-card reveal"
-        data-category="software web"
-        data-name="PKDEV.Security"
-        data-description="A security-focused project built under the PKDEV identity."
-        data-status="Available"
-        data-tech="Security, Web, Development"
-        data-url="https://resurect63.github.io/Pkdev.Security-/">
-        <div class="project-cover cover-security">
-          <div class="cover-title">PKDEV<span>.</span>Security</div>
-        </div>
-        <div class="project-content">
-          <div class="project-top">
-            <h3>PKDEV.Security</h3>
-            <span class="project-status">AVAILABLE</span>
-          </div>
-          <p>A security-focused project built under the PKDEV identity.</p>
-          <div class="project-tags"><span>Security</span><span>Web</span><span>Development</span></div>
-          <div class="project-actions">
-            <a class="project-link" href="https://resurect63.github.io/Pkdev.Security-/" target="_blank" rel="noopener noreferrer">Explore ↗</a>
-            <button class="details-btn">Details +</button>
-          </div>
+      <article class="project reveal">
+        <small>01 / Security</small>
+        <div>
+          <h3>PKDEV.Security</h3>
+          <p>Security-related tools and development experiments.</p>
         </div>
       </article>
 
-      <article class="project-card reveal"
-        data-category="software minecraft web"
-        data-name="Imperial Launcher"
-        data-description="A Minecraft Java launcher concept focused on a modern experience."
-        data-status="Available"
-        data-tech="Minecraft, Launcher, Software"
-        data-url="https://resurect63.github.io/Imperial-Launcher-Website-/">
-        <div class="project-cover cover-imperial">
-          <div class="cover-title">IMPERIAL<span>.</span></div>
-        </div>
-        <div class="project-content">
-          <div class="project-top">
-            <h3>Imperial Launcher</h3>
-            <span class="project-status">AVAILABLE</span>
-          </div>
-          <p>A Minecraft Java launcher concept focused on a modern experience.</p>
-          <div class="project-tags"><span>Minecraft</span><span>Launcher</span><span>Software</span></div>
-          <div class="project-actions">
-            <a class="project-link" href="https://resurect63.github.io/Imperial-Launcher-Website-/" target="_blank" rel="noopener noreferrer">Explore ↗</a>
-            <button class="details-btn">Details +</button>
-          </div>
+      <article class="project reveal">
+        <small>02 / Launcher</small>
+        <div>
+          <h3>Imperial Launcher</h3>
+          <p>A Minecraft Java launcher project.</p>
         </div>
       </article>
 
-      <article class="project-card reveal"
-        data-category="minecraft web"
-        data-name="Moderator Academy"
-        data-description="An educational project focused on Minecraft moderation and staff training."
-        data-status="Available"
-        data-tech="Education, Minecraft, Community"
-        data-url="https://resurect63.github.io/moderator-academy/">
-        <div class="project-cover cover-academy">
-          <div class="cover-title">MODERATOR<span>.</span>ACADEMY</div>
-        </div>
-        <div class="project-content">
-          <div class="project-top">
-            <h3>Moderator Academy</h3>
-            <span class="project-status">AVAILABLE</span>
-          </div>
-          <p>An educational project focused on Minecraft moderation and staff training.</p>
-          <div class="project-tags"><span>Education</span><span>Minecraft</span><span>Community</span></div>
-          <div class="project-actions">
-            <a class="project-link" href="https://resurect63.github.io/moderator-academy/" target="_blank" rel="noopener noreferrer">Explore ↗</a>
-            <button class="details-btn">Details +</button>
-          </div>
+      <article class="project reveal">
+        <small>03 / Learning</small>
+        <div>
+          <h3>Moderator Academy</h3>
+          <p>A learning project for moderation and community management.</p>
         </div>
       </article>
 
-      <article class="project-card reveal"
-        data-category="software development"
-        data-name="PKDEV.Hub"
-        data-description="A desktop workspace concept bringing useful tools into one place."
-        data-status="In Development"
-        data-tech="Electron, React, Desktop"
-        data-url="">
-        <div class="project-cover cover-hub">
-          <div class="cover-title">PKDEV<span>.</span>HUB</div>
-        </div>
-        <div class="project-content">
-          <div class="project-top">
-            <h3>PKDEV.Hub</h3>
-            <span class="project-status development">IN DEVELOPMENT</span>
-          </div>
-          <p>A desktop workspace concept bringing useful tools into one place.</p>
-          <div class="project-tags"><span>Electron</span><span>React</span><span>Desktop</span></div>
-          <div class="project-actions">
-            <span class="project-link disabled">Currently Building</span>
-            <button class="details-btn">Details +</button>
-          </div>
+      <article class="project reveal">
+        <small>04 / Platform</small>
+        <div>
+          <h3>PKDEV.Hub</h3>
+          <p>A central hub concept for digital tools and projects.</p>
         </div>
       </article>
 
-      <article class="project-card reveal"
-        data-category="minecraft development"
-        data-name="Project Delta"
-        data-description="A Minecraft game mode inspired by tactical extraction gameplay."
-        data-status="In Development"
-        data-tech="Paper, Minecraft, Game Design"
-        data-url="">
-        <div class="project-cover cover-delta">
-          <div class="cover-title">PROJECT<span>.</span>DELTA</div>
-        </div>
-        <div class="project-content">
-          <div class="project-top">
-            <h3>Project Delta</h3>
-            <span class="project-status development">IN DEVELOPMENT</span>
-          </div>
-          <p>A Minecraft game mode inspired by tactical extraction gameplay.</p>
-          <div class="project-tags"><span>Paper</span><span>Minecraft</span><span>Game Design</span></div>
-          <div class="project-actions">
-            <span class="project-link disabled">Currently Building</span>
-            <button class="details-btn">Details +</button>
-          </div>
+      <article class="project reveal">
+        <small>05 / Experiment</small>
+        <div>
+          <h3>Project Delta</h3>
+          <p>An experimental project in the Minecraft ecosystem.</p>
         </div>
       </article>
 
-      <article class="project-card reveal"
-        data-category="minecraft development"
-        data-name="SWAT Force"
-        data-description="A custom Minecraft game mode built around mission-based gameplay."
-        data-status="In Development"
-        data-tech="Minecraft, Game Mode, Development"
-        data-url="">
-        <div class="project-cover cover-swat">
-          <div class="cover-title">SWAT<span>.</span>FORCE</div>
-        </div>
-        <div class="project-content">
-          <div class="project-top">
-            <h3>SWAT Force</h3>
-            <span class="project-status development">IN DEVELOPMENT</span>
-          </div>
-          <p>A custom Minecraft game mode built around mission-based gameplay.</p>
-          <div class="project-tags"><span>Minecraft</span><span>Game Mode</span><span>Development</span></div>
-          <div class="project-actions">
-            <span class="project-link disabled">Currently Building</span>
-            <button class="details-btn">Details +</button>
-          </div>
+      <article class="project reveal">
+        <small>06 / Community</small>
+        <div>
+          <h3>SWAT Force</h3>
+          <p>A community and server-related project.</p>
         </div>
       </article>
 
@@ -1957,810 +575,121 @@ Built by Resurect.</div>
   </div>
 </section>
 
-<!-- TOOLBOX -->
-<section class="section toolbox" id="toolbox">
+<!-- SKILLS -->
+
+<section class="content-section" id="skills">
   <div class="container">
-    <div class="reveal">
-      <div class="section-label">04 / TOOLBOX</div>
-      <h2 class="section-heading">Tools of the <span class="orange">trade.</span></h2>
-      <p class="section-description">Technologies and tools used across different development projects.</p>
+
+    <div class="section-label">03 / Toolbox</div>
+    <h2>Tools of the trade.</h2>
+
+    <div class="skills reveal">
+      <span class="skill">Java</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">TypeScript</span>
+      <span class="skill">PHP</span>
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">React</span>
+      <span class="skill">Node.js</span>
+      <span class="skill">MySQL</span>
+      <span class="skill">MongoDB</span>
+      <span class="skill">Paper</span>
+      <span class="skill">Spigot</span>
+      <span class="skill">Linux</span>
+      <span class="skill">Docker</span>
+      <span class="skill">Git</span>
+      <span class="skill">GitHub</span>
     </div>
 
-    <div class="skills-grid">
-      <div class="skill-card reveal"><span>01 / LANGUAGES</span><h3>Java & JavaScript</h3><p>Application and web development.</p></div>
-      <div class="skill-card reveal"><span>02 / WEB</span><h3>HTML & CSS</h3><p>Responsive interfaces and websites.</p></div>
-      <div class="skill-card reveal"><span>03 / FRAMEWORKS</span><h3>React & Node.js</h3><p>Modern application development.</p></div>
-      <div class="skill-card reveal"><span>04 / DATABASES</span><h3>MySQL & MongoDB</h3><p>Data storage and management.</p></div>
-      <div class="skill-card reveal"><span>05 / MINECRAFT</span><h3>Paper & Spigot</h3><p>Server development and customization.</p></div>
-      <div class="skill-card reveal"><span>06 / ENVIRONMENT</span><h3>Linux & Docker</h3><p>Development environments and deployment.</p></div>
-      <div class="skill-card reveal"><span>07 / VERSION CONTROL</span><h3>Git & GitHub</h3><p>Source control and collaboration.</p></div>
-      <div class="skill-card reveal"><span>08 / OTHER</span><h3>TypeScript & PHP</h3><p>Additional tools for building applications.</p></div>
-    </div>
   </div>
 </section>
 
-<!-- JOURNEY -->
-<section class="section" id="journey">
-  <div class="container journey-grid">
-    <div class="reveal">
-      <div class="section-label">05 / THE JOURNEY</div>
-      <h2 class="section-heading">Always<br><span class="orange">building forward.</span></h2>
-      <p class="section-description">
-        Development is an ongoing process. Every project brings new
-        challenges, lessons and opportunities to improve.
-      </p>
-    </div>
+<!-- PRINCIPLES -->
 
-    <div class="journey-list reveal">
-      <div class="journey-item">
-        <span class="year">THE BEGINNING</span>
-        <h3>Exploring Development</h3>
-        <p>Started learning programming and exploring software and Minecraft development.</p>
+<section class="content-section">
+  <div class="container">
+
+    <div class="section-label">04 / Principles</div>
+    <h2>Less noise. More meaning.</h2>
+
+    <div class="principles reveal">
+
+      <div class="principle">
+        <small>01</small>
+        <h3>Useful by design</h3>
+        <p>Build things that solve problems and make tasks easier.</p>
       </div>
-      <div class="journey-item">
-        <span class="year">GROWTH</span>
-        <h3>Building Real Projects</h3>
-        <p>Moved from experiments to building practical projects and digital experiences.</p>
+
+      <div class="principle">
+        <small>02</small>
+        <h3>Keep exploring</h3>
+        <p>Learn through experiments and continuous improvement.</p>
       </div>
-      <div class="journey-item">
-        <span class="year">TODAY</span>
-        <h3>Developing PKDEV</h3>
-        <p>Bringing projects together under one independent development brand.</p>
+
+      <div class="principle">
+        <small>03</small>
+        <h3>Make it clear</h3>
+        <p>Simple interfaces and reliable foundations matter.</p>
       </div>
-      <div class="journey-item">
-        <span class="year">WHAT'S NEXT</span>
-        <h3>More Ideas. More Possibilities.</h3>
-        <p>Continuing to learn, experiment and create better products.</p>
-      </div>
+
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section class="section contact" id="contact">
-  <div class="container contact-grid">
-    <div class="reveal">
-      <div class="section-label">06 / GET IN TOUCH</div>
-      <h2 class="section-heading">Have an idea?<br><span class="orange">Let's build it.</span></h2>
-      <p class="section-description">
-        Interested in a project, collaboration or just want to connect?
-        Feel free to reach out.
-      </p>
 
-      <div class="contact-links">
-        <a class="contact-link" href="https://github.com/resurect63" target="_blank" rel="noopener noreferrer">
-          <span>GitHub</span><span>@Resurect63 ↗</span>
-        </a>
-        <a class="contact-link" href="https://t.me/Resurect63" target="_blank" rel="noopener noreferrer">
-          <span>Telegram</span><span>@Resurect63 ↗</span>
-        </a>
-        <a class="contact-link" href="https://discord.com/" target="_blank" rel="noopener noreferrer">
-          <span>Discord</span><span>.Resurect. ↗</span>
-        </a>
-      </div>
+<section class="content-section" id="contact">
+  <div class="container contact reveal">
+
+    <div>
+      <div class="section-label">05 / Contact</div>
+      <h2>Have an idea?<br>Let's make it real.</h2>
     </div>
 
-    <form class="contact-form reveal" id="contactForm">
-      <h3 class="form-title">Prepare a message</h3>
+    <div class="contact-links">
 
-      <div class="form-group">
-        <label for="name">YOUR NAME</label>
-        <input id="name" type="text" placeholder="Enter your name" maxlength="80" required>
-      </div>
+      <a href="mailto:itznightitznight16@gmail.com">
+        <span>Email</span>
+        <span>↗</span>
+      </a>
 
-      <div class="form-group">
-        <label for="email">YOUR EMAIL</label>
-        <input id="email" type="email" placeholder="you@example.com" maxlength="120" required>
-      </div>
+      <a href="https://github.com/resurect63" target="_blank">
+        <span>GitHub · @resurect63</span>
+        <span>↗</span>
+      </a>
 
-      <div class="form-group">
-        <label for="message">MESSAGE</label>
-        <textarea id="message" placeholder="Tell me about your idea..." maxlength="2000" required></textarea>
-      </div>
+      <a href="https://discord.com/" target="_blank">
+        <span>Discord · resurect.</span>
+        <span>↗</span>
+      </a>
 
-      <button type="submit" class="btn btn-primary">Copy Message ↗</button>
-      <p class="form-note" id="formNote" aria-live="polite">
-        Your message will be copied so you can send it through Telegram.
-      </p>
-    </form>
+    </div>
   </div>
 </section>
 
 </main>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container footer-inner">
-    <a href="#home" class="footer-brand">PKDEV<span>.</span></a>
-    <p class="footer-copy">© 2026 PKDEV. All rights reserved. Built by Resurect.</p>
-    <a href="#home" class="footer-top">BACK TO TOP ↑</a>
-  </div>
+<footer class="container">
+  <span>© <span id="year"></span> PKDEV</span>
+  <span>Ideas into digital reality. — Created by Resurect</span>
 </footer>
 
-<!-- PROJECT DETAILS MODAL -->
-<div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 id="modalTitle">Project</h3>
-      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-    </div>
-    <p class="modal-description" id="modalDescription"></p>
-    <div class="modal-info" id="modalInfo"></div>
-    <div class="modal-footer" id="modalFooter"></div>
-  </div>
-</div>
-
-<!-- COMMAND PALETTE -->
-<div class="palette-overlay" id="paletteOverlay">
-  <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette">
-    <input class="palette-search" id="paletteSearch"
-      type="text" placeholder="Search commands or navigate..."
-      autocomplete="off">
-
-    <div class="palette-list" id="paletteList"></div>
-
-    <div class="palette-footer">ESC TO CLOSE · ENTER TO SELECT · CTRL + K TO OPEN</div>
-  </div>
-</div>
-
 <script>
-/* UTILITIES */
+document.getElementById("year").textContent =
+  new Date().getFullYear();
 
-const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-
-
-/* LOADER */
-
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    $("#loader").classList.add("done");
-  }, 1250);
-});
-
-
-/* THEME SWITCHER */
-
-const themeButton = $("#themeButton");
-const root = document.documentElement;
-
-function setTheme(theme) {
-  root.dataset.theme = theme;
-
-  try {
-    localStorage.setItem("pkdev-theme", theme);
-  } catch {}
-
-  themeButton.textContent = theme === "dark" ? "☀" : "☾";
-  themeButton.setAttribute(
-    "aria-label",
-    theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
-  );
-}
-
-let savedTheme = "light";
-
-try {
-  savedTheme = localStorage.getItem("pkdev-theme") || "light";
-} catch {}
-
-setTheme(savedTheme === "dark" ? "dark" : "light");
-
-themeButton.addEventListener("click", () => {
-  setTheme(root.dataset.theme === "dark" ? "light" : "dark");
-});
-
-
-/* MOBILE NAV */
-
-const menuToggle = $("#menuToggle");
-const navLinks = $("#navLinks");
-
-menuToggle.addEventListener("click", () => {
-  const opened = navLinks.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(opened));
-  menuToggle.textContent = opened ? "×" : "☰";
-});
-
-$$(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.textContent = "☰";
-  });
-});
-
-
-/* SCROLL PROGRESS */
-
-window.addEventListener("scroll", () => {
-  const maxScroll = document.documentElement.scrollHeight - innerHeight;
-  const progress = maxScroll > 0 ? scrollY / maxScroll * 100 : 0;
-  $("#scrollProgress").style.width = progress + "%";
-}, { passive: true });
-
-
-/* REVEAL ANIMATIONS */
-
-const revealObserver = new IntersectionObserver(entries => {
+const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add("visible");
-      revealObserver.unobserve(entry.target);
+      observer.unobserve(entry.target);
     }
   });
-}, { threshold: .12 });
+}, { threshold: 0.12 });
 
-$$(".reveal").forEach(element => revealObserver.observe(element));
-
-
-/* CUSTOM CURSOR */
-
-const cursorDot = $("#cursorDot");
-const cursorRing = $("#cursorRing");
-
-if (matchMedia("(hover: hover) and (pointer: fine)").matches &&
-    !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let ringX = 0;
-  let ringY = 0;
-
-  document.addEventListener("mousemove", event => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-
-    cursorDot.style.left = mouseX + "px";
-    cursorDot.style.top = mouseY + "px";
-
-    document.body.classList.add("cursor-ready");
-  });
-
-  function animateCursor() {
-    ringX += (mouseX - ringX) * .17;
-    ringY += (mouseY - ringY) * .17;
-
-    cursorRing.style.left = ringX + "px";
-    cursorRing.style.top = ringY + "px";
-
-    requestAnimationFrame(animateCursor);
-  }
-
-  animateCursor();
-
-  document.addEventListener("mouseover", event => {
-    if (event.target.closest("a, button, input, textarea")) {
-      cursorRing.classList.add("active");
-    } else {
-      cursorRing.classList.remove("active");
-    }
-  });
-}
-
-
-/* PROJECT FILTERS */
-
-const filterButtons = $$(".filter-btn");
-const projectCards = $$(".project-card");
-const projectCount = $("#projectCount");
-
-function filterProjects(filter) {
-  let visible = 0;
-
-  projectCards.forEach(card => {
-    const categories = card.dataset.category.split(" ");
-    const matches = filter === "all" || categories.includes(filter);
-
-    card.classList.toggle("hidden", !matches);
-
-    if (matches) visible++;
-  });
-
-  projectCount.textContent = String(visible).padStart(2, "0") + " PROJECTS";
-  filterButtons.forEach(button => {
-    button.classList.toggle("active", button.dataset.filter === filter);
-  });
-}
-
-filterButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    filterProjects(button.dataset.filter);
-  });
-});
-
-
-/* PROJECT DETAILS */
-
-const projectModal = $("#projectModal");
-const modalTitle = $("#modalTitle");
-const modalDescription = $("#modalDescription");
-const modalInfo = $("#modalInfo");
-const modalFooter = $("#modalFooter");
-
-function closeProjectModal() {
-  projectModal.classList.remove("open");
-}
-
-$$(".details-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const card = button.closest(".project-card");
-    const name = card.dataset.name;
-    const description = card.dataset.description;
-    const status = card.dataset.status;
-    const tech = card.dataset.tech;
-    const url = card.dataset.url;
-
-    modalTitle.textContent = name;
-    modalDescription.textContent = description;
-    modalInfo.textContent =
-      "PROJECT: " + name +
-      "\nSTATUS: " + status +
-      "\nTECHNOLOGIES: " + tech +
-      "\n\nBuilt under the PKDEV identity.";
-
-    modalFooter.replaceChildren();
-
-    if (url) {
-      const link = document.createElement("a");
-      link.className = "btn btn-primary";
-      link.href = url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Visit Project ↗";
-      modalFooter.appendChild(link);
-    }
-
-    const closeButton = document.createElement("button");
-    closeButton.className = "btn btn-outline";
-    closeButton.textContent = "Close";
-    closeButton.addEventListener("click", closeProjectModal);
-    modalFooter.appendChild(closeButton);
-
-    projectModal.classList.add("open");
-  });
-});
-
-$("#modalClose").addEventListener("click", closeProjectModal);
-
-projectModal.addEventListener("click", event => {
-  if (event.target === projectModal) closeProjectModal();
-});
-
-
-/* GITHUB LIVE API */
-
-async function loadGithub() {
-  const status = $("#githubStatus");
-
-  try {
-    const response = await fetch(
-      "https://api.github.com/users/resurect63",
-      { headers: { "Accept": "application/vnd.github+json" } }
-    );
-
-    if (!response.ok) {
-      throw new Error("GitHub API returned " + response.status);
-    }
-
-    const user = await response.json();
-
-    $("#githubName").textContent = user.name || user.login;
-    $("#githubAvatar").src = user.avatar_url;
-    $("#githubRepos").textContent = user.public_repos;
-    $("#githubFollowers").textContent = user.followers;
-    $("#githubFollowing").textContent = user.following;
-
-    status.textContent =
-      "Profile data loaded from GitHub API.";
-
-    loadGithubRepos();
-
-  } catch (error) {
-    status.textContent =
-      "Live GitHub statistics are currently unavailable. Visit the profile directly.";
-
-    $("#githubRepos").textContent = "—";
-    $("#githubFollowers").textContent = "—";
-    $("#githubFollowing").textContent = "—";
-  }
-}
-
-async function loadGithubRepos() {
-  const list = $("#githubRepoList");
-
-  try {
-    const response = await fetch(
-      "https://api.github.com/users/resurect63/repos?sort=updated&per_page=4",
-      { headers: { "Accept": "application/vnd.github+json" } }
-    );
-
-    if (!response.ok) throw new Error("Repository request failed");
-
-    const repos = await response.json();
-
-    list.replaceChildren();
-
-    repos.forEach(repo => {
-      const link = document.createElement("a");
-      link.href = repo.html_url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = repo.name;
-      list.appendChild(link);
-    });
-
-  } catch {
-    list.textContent = "";
-  }
-}
-
-loadGithub();
-
-
-/* TERMINAL */
-
-const terminal = $("#terminal");
-const terminalBody = $("#terminalBody");
-const terminalInput = $("#terminalInput");
-const terminalOutput = $("#terminalOutput");
-
-let commandHistory = [];
-let historyIndex = 0;
-
-const commands = {
-  help: () => `Available commands:
-
-  help       Show available commands
-  whoami     About the creator
-  about      About PKDEV
-  projects   View projects
-  skills     Development toolbox
-  github     Open GitHub
-  socials    Social links
-  contact    Contact information
-  theme      Toggle website theme
-  version    Console version
-  date       Current date
-  clear      Clear terminal
-  banner     Display PKDEV banner`,
-
-  whoami: () => `Name: Resurect
-Role: Independent Developer
-Brand: PKDEV
-Focus: Software & Minecraft
-Status: Building what's next.`,
-
-  about: () => `PKDEV is an independent development brand.
-Built by Resurect.
-
-Focus:
-- Software Development
-- Minecraft Projects
-- Web Development
-- Digital Experiences`,
-
-  projects: () => `PKDEV Projects:
-
-[01] PKDEV.Security
-https://resurect63.github.io/Pkdev.Security-/
-
-[02] Imperial Launcher
-https://resurect63.github.io/Imperial-Launcher-Website-/
-
-[03] Moderator Academy
-https://resurect63.github.io/moderator-academy/
-
-[04] PKDEV.Hub — In Development
-[05] Project Delta — In Development
-[06] SWAT Force — In Development`,
-
-  skills: () => `Languages:
-Java, JavaScript, TypeScript, PHP, C
-
-Frontend:
-HTML, CSS, React, Next.js, Tailwind
-
-Backend:
-Node.js, MySQL, MongoDB
-
-Tools:
-Git, Docker, Linux
-
-Minecraft:
-Paper, Spigot, Velocity, BungeeCord`,
-
-  github: () => {
-    window.open("https://github.com/resurect63", "_blank", "noopener,noreferrer");
-    return "Opening GitHub profile...";
-  },
-
-  socials: () => `GitHub:   github.com/resurect63
-Telegram: t.me/Resurect63
-Discord:  .Resurect.`,
-
-  contact: () => `For collaborations and inquiries:
-
-Telegram: https://t.me/Resurect63
-GitHub: https://github.com/resurect63`,
-
-  theme: () => {
-    setTheme(root.dataset.theme === "dark" ? "light" : "dark");
-    return "Theme changed to " + root.dataset.theme + ".";
-  },
-
-  version: () => `PKDEV Web Terminal
-Version: 2.0.0
-Environment: Browser
-Creator: Resurect`,
-
-  date: () => new Date().toString(),
-
-  banner: () => ` ____  _  _______  _______ ____
-|  _ \\| |/ /  __ \\|  _____|  _ \\
-| |_) | ' /| |  | | |  __ | | | |
-|  __/|  < | |  | | | |_ || | | |
-|_|   |_|\\_\\_____/|______|____/
-
-       BUILT BY RESURECT`
-};
-
-function printTerminal(command, output) {
-  const line = document.createElement("div");
-  line.className = "terminal-line";
-
-  const prompt = document.createElement("span");
-  prompt.className = "terminal-prompt";
-  prompt.textContent = "pkdev@resurect:~$ ";
-
-  const text = document.createElement("span");
-  text.textContent = command;
-
-  line.append(prompt, text);
-  terminalOutput.appendChild(line);
-
-  if (output !== null && output !== undefined && output !== "") {
-    const result = document.createElement("div");
-    result.className = "terminal-output";
-    result.textContent = output;
-    terminalOutput.appendChild(result);
-  }
-
-  terminalBody.scrollTop = terminalBody.scrollHeight;
-}
-
-function executeCommand(raw) {
-  const command = raw.trim().toLowerCase();
-
-  if (!command) return;
-
-  commandHistory.push(raw);
-  historyIndex = commandHistory.length;
-
-  if (command === "clear") {
-    terminalOutput.replaceChildren();
-    return;
-  }
-
-  if (Object.prototype.hasOwnProperty.call(commands, command)) {
-    printTerminal(raw, commands[command]());
-  } else {
-    printTerminal(
-      raw,
-      `Command not found: ${command}\nType "help" to see available commands.`
-    );
-  }
-}
-
-terminalInput.addEventListener("keydown", event => {
-  if (event.key === "Enter") {
-    const value = terminalInput.value;
-    terminalInput.value = "";
-    executeCommand(value);
-  }
-
-  if (event.key === "ArrowUp") {
-    event.preventDefault();
-
-    if (historyIndex > 0) {
-      historyIndex--;
-      terminalInput.value = commandHistory[historyIndex];
-    }
-  }
-
-  if (event.key === "ArrowDown") {
-    event.preventDefault();
-
-    if (historyIndex < commandHistory.length - 1) {
-      historyIndex++;
-      terminalInput.value = commandHistory[historyIndex];
-    } else {
-      historyIndex = commandHistory.length;
-      terminalInput.value = "";
-    }
-  }
-
-  if (event.key === "Tab") {
-    event.preventDefault();
-
-    const current = terminalInput.value.trim().toLowerCase();
-    const match = Object.keys(commands).find(key => key.startsWith(current));
-
-    if (match) terminalInput.value = match;
-  }
-});
-
-terminal.addEventListener("click", () => terminalInput.focus());
-
-
-/* COMMAND PALETTE */
-
-const paletteOverlay = $("#paletteOverlay");
-const paletteSearch = $("#paletteSearch");
-const paletteList = $("#paletteList");
-
-const paletteActions = [
-  { name: "Go to Home", hint: "Navigation", action: () => location.hash = "home" },
-  { name: "Go to About", hint: "Navigation", action: () => location.hash = "about" },
-  { name: "Go to Projects", hint: "Navigation", action: () => location.hash = "projects" },
-  { name: "Go to Toolbox", hint: "Navigation", action: () => location.hash = "toolbox" },
-  { name: "Go to Journey", hint: "Navigation", action: () => location.hash = "journey" },
-  { name: "Go to Contact", hint: "Navigation", action: () => location.hash = "contact" },
-  { name: "Open GitHub", hint: "External", action: () => window.open("https://github.com/resurect63", "_blank", "noopener,noreferrer") },
-  { name: "Open Telegram", hint: "External", action: () => window.open("https://t.me/Resurect63", "_blank", "noopener,noreferrer") },
-  { name: "Toggle Theme", hint: "Appearance", action: () => setTheme(root.dataset.theme === "dark" ? "light" : "dark") },
-  { name: "Focus Terminal", hint: "Terminal", action: () => { location.hash = "home"; setTimeout(() => terminalInput.focus(), 150); } },
-  { name: "Show All Projects", hint: "Projects", action: () => { filterProjects("all"); location.hash = "projects"; } }
-];
-
-let selectedPaletteIndex = 0;
-let visiblePaletteActions = [...paletteActions];
-
-function openPalette() {
-  paletteOverlay.classList.add("open");
-  paletteSearch.value = "";
-  renderPalette("");
-  setTimeout(() => paletteSearch.focus(), 30);
-}
-
-function closePalette() {
-  paletteOverlay.classList.remove("open");
-}
-
-function renderPalette(query) {
-  const normalized = query.trim().toLowerCase();
-
-  visiblePaletteActions = paletteActions.filter(item =>
-    item.name.toLowerCase().includes(normalized) ||
-    item.hint.toLowerCase().includes(normalized)
-  );
-
-  selectedPaletteIndex = 0;
-  paletteList.replaceChildren();
-
-  visiblePaletteActions.forEach((item, index) => {
-    const row = document.createElement("div");
-    row.className = "palette-item" + (index === 0 ? " selected" : "");
-    row.setAttribute("role", "option");
-
-    const title = document.createElement("span");
-    title.textContent = item.name;
-
-    const hint = document.createElement("small");
-    hint.textContent = item.hint;
-
-    row.append(title, hint);
-
-    row.addEventListener("click", () => runPaletteAction(index));
-    paletteList.appendChild(row);
-  });
-
-  if (!visiblePaletteActions.length) {
-    const empty = document.createElement("div");
-    empty.className = "palette-item";
-    empty.textContent = "No matching commands found.";
-    paletteList.appendChild(empty);
-  }
-}
-
-function updatePaletteSelection() {
-  $$(".palette-item", paletteList).forEach((item, index) => {
-    item.classList.toggle("selected", index === selectedPaletteIndex);
-  });
-}
-
-function runPaletteAction(index) {
-  const action = visiblePaletteActions[index];
-  if (!action) return;
-
-  closePalette();
-  action.action();
-}
-
-paletteSearch.addEventListener("input", () => {
-  renderPalette(paletteSearch.value);
-});
-
-paletteSearch.addEventListener("keydown", event => {
-  if (event.key === "ArrowDown") {
-    event.preventDefault();
-    selectedPaletteIndex = Math.min(
-      selectedPaletteIndex + 1,
-      visiblePaletteActions.length - 1
-    );
-    updatePaletteSelection();
-  }
-
-  if (event.key === "ArrowUp") {
-    event.preventDefault();
-    selectedPaletteIndex = Math.max(selectedPaletteIndex - 1, 0);
-    updatePaletteSelection();
-  }
-
-  if (event.key === "Enter") {
-    runPaletteAction(selectedPaletteIndex);
-  }
-
-  if (event.key === "Escape") {
-    closePalette();
-  }
-});
-
-$("#paletteButton").addEventListener("click", openPalette);
-
-paletteOverlay.addEventListener("click", event => {
-  if (event.target === paletteOverlay) closePalette();
-});
-
-document.addEventListener("keydown", event => {
-  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-    event.preventDefault();
-    openPalette();
-  }
-
-  if (event.key === "Escape") {
-    closePalette();
-    closeProjectModal();
-  }
-});
-
-
-/* CONTACT FORM */
-
-$("#contactForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const name = $("#name").value.trim();
-  const email = $("#email").value.trim();
-  const message = $("#message").value.trim();
-  const note = $("#formNote");
-
-  if (!name || !email || !message) return;
-
-  const content = [
-    "PKDEV - New Contact Message",
-    "---------------------------",
-    "Name: " + name,
-    "Email: " + email,
-    "",
-    "Message:",
-    message
-  ].join("\n");
-
-  try {
-    await navigator.clipboard.writeText(content);
-
-    note.textContent = "Message copied. Opening Telegram...";
-    window.open(
-      "https://t.me/Resurect63",
-      "_blank",
-      "noopener,noreferrer"
-    );
-
-  } catch {
-    note.textContent =
-      "Clipboard unavailable. Please copy your message manually.";
-  }
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
 });
 </script>
 
