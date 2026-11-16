@@ -4,566 +4,764 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050609">
-<title>PKDEV — Odyssey | Resurect</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#05080d">
+<meta name="description" content="THE PKDEV — Independent Development by Resurect">
+<title>THE PKDEV — Resurect</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 :root {
-  --bg:#050609;
-  --panel:#0b0e13;
-  --panel2:#10151d;
-  --white:#f1f4f8;
-  --gray:#a1a9b5;
-  --muted:#687382;
-  --border:rgba(180,200,225,.13);
-  --ice:#a9d9ff;
-  --blue:#4b9bd8;
+  --bg:#05080d;
+  --panel:#0b111a;
+  --panel2:#101a26;
+  --white:#edf4fb;
+  --gray:#a1b0c0;
+  --muted:#637487;
+  --border:rgba(170,205,240,.14);
+  --ice:#b9e0ff;
+  --blue:#72b9ed;
   --mono:'JetBrains Mono',monospace;
   --font:'Inter',sans-serif;
 }
 
-* {box-sizing:border-box;margin:0;padding:0}
-html {scroll-behavior:smooth}
-body {
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
   background:var(--bg);
   color:var(--white);
   font-family:var(--font);
   overflow-x:hidden;
 }
-a {color:inherit;text-decoration:none}
-button {font:inherit}
-::selection {background:#8dcaff;color:#050609}
+body.loading{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+::selection{background:#a9d9ff;color:#06101a}
 
-#stormCanvas {
+/* WORLD BACKGROUND */
+
+#world{
   position:fixed;
   inset:0;
   width:100%;
   height:100%;
-  z-index:-3;
+  z-index:-5;
   pointer-events:none;
 }
-.atmosphere {
+.sky{
   position:fixed;
   inset:0;
-  z-index:-2;
+  z-index:-4;
   pointer-events:none;
   background:
-    radial-gradient(ellipse at 50% 20%,rgba(65,111,157,.12),transparent 48%),
-    linear-gradient(180deg,rgba(3,5,9,.12),#050609 95%);
+    radial-gradient(ellipse at 50% 18%,rgba(69,119,167,.14),transparent 55%),
+    linear-gradient(180deg,rgba(4,8,13,.1),rgba(4,8,13,.6) 70%,#05080d);
 }
-.grain {
+.vignette{
   position:fixed;
   inset:0;
-  z-index:20;
+  z-index:15;
   pointer-events:none;
+  background:radial-gradient(ellipse,transparent 35%,rgba(0,0,0,.48) 100%);
+}
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:16;
   opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+.flash-screen{
+  position:fixed;
+  inset:0;
+  z-index:14;
+  background:#d9efff;
+  opacity:0;
+  pointer-events:none;
+}
+.flash-screen.active{animation:screenFlash .55s ease-out}
+@keyframes screenFlash{
+  0%{opacity:0}
+  8%{opacity:.35}
+  18%{opacity:.02}
+  28%{opacity:.18}
+  100%{opacity:0}
 }
 
 /* LOADING */
-#loader {
+
+#loader{
   position:fixed;
   inset:0;
   z-index:1000;
-  background:#020307;
   display:flex;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
+  background:#03060a;
   overflow:hidden;
-  transition:opacity 1s ease,visibility 1s ease;
+  transition:opacity .9s ease,visibility .9s ease;
 }
-#loader.hide {
+#loader.hide{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
 }
-.loader-glow {
+.loader-glow{
   position:absolute;
-  width:550px;
-  height:550px;
+  width:600px;
+  height:600px;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(92,159,220,.12),transparent 68%);
-  animation:glowPulse 3s infinite alternate;
+  background:radial-gradient(circle,rgba(71,133,185,.14),transparent 68%);
+  animation:glow 4s ease-in-out infinite alternate;
 }
-@keyframes glowPulse {
-  from {transform:scale(.8);opacity:.4}
-  to {transform:scale(1.3);opacity:1}
+@keyframes glow{
+  from{transform:scale(.8);opacity:.4}
+  to{transform:scale(1.3);opacity:1}
 }
-.loader-content {
+.loader-content{
   position:relative;
   z-index:2;
-  text-align:center;
-  width:min(440px,85%);
+  width:min(560px,85%);
 }
-.loader-symbol {
-  width:90px;
-  height:90px;
-  margin:0 auto 28px;
-  border:1px solid rgba(174,215,255,.45);
-  display:grid;
-  place-items:center;
-  transform:rotate(45deg);
-  box-shadow:0 0 45px rgba(94,164,225,.12),inset 0 0 25px rgba(94,164,225,.08);
-}
-.loader-symbol span {
-  transform:rotate(-45deg);
-  font-size:31px;
-  font-weight:900;
-  letter-spacing:-4px;
-}
-.loader-title {
-  font-size:clamp(38px,8vw,60px);
-  font-weight:900;
-  letter-spacing:9px;
-  text-shadow:0 0 30px rgba(145,205,255,.35);
-}
-.loader-sub {
-  color:#91a9c1;
+.loader-kicker{
+  color:#91b5d7;
   font:10px var(--mono);
   letter-spacing:5px;
-  margin-top:12px;
+  margin-bottom:25px;
 }
-.loader-line {
-  width:100%;
+.loader-title{
+  font-size:clamp(45px,10vw,85px);
+  font-weight:900;
+  letter-spacing:-5px;
+  line-height:.95;
+}
+.loader-title span{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(205,232,255,.72);
+}
+.loader-sub{
+  margin-top:17px;
+  color:#9dbddc;
+  font:11px var(--mono);
+  letter-spacing:4px;
+}
+.loader-description{
+  max-width:390px;
+  margin-top:29px;
+  color:#74889e;
+  font-size:12px;
+  line-height:2;
+}
+.loader-track{
   height:2px;
-  background:#17212c;
-  margin-top:43px;
+  background:#1b2938;
+  margin-top:42px;
   overflow:hidden;
 }
-.loader-progress {
-  height:100%;
+#loaderProgress{
   width:0;
-  background:linear-gradient(90deg,#537da7,#d8efff);
-  box-shadow:0 0 15px #8fcaff;
-  transition:width .15s linear;
+  height:100%;
+  background:linear-gradient(90deg,#568dbd,#e0f2ff);
+  box-shadow:0 0 20px #9bd1ff;
 }
-.loader-status {
+.loader-meta{
   display:flex;
   justify-content:space-between;
-  margin-top:12px;
-  color:#71849a;
+  margin-top:13px;
+  color:#8297ad;
   font:10px var(--mono);
   letter-spacing:1px;
 }
-.loader-flash {
-  position:absolute;
-  inset:0;
-  z-index:3;
-  background:white;
-  opacity:0;
-  pointer-events:none;
-}
-.loader-flash.active {animation:flash .7s ease-out}
-@keyframes flash {
-  0% {opacity:0}
-  8% {opacity:.8}
-  20% {opacity:.04}
-  30% {opacity:.45}
-  100% {opacity:0}
-}
-.loader-enter {
-  color:#9dbbd8;
+.loader-quote{
+  margin-top:39px;
+  color:#6e8296;
   font:10px var(--mono);
-  letter-spacing:3px;
-  margin-top:25px;
-  opacity:.7;
+  letter-spacing:2px;
+}
+.loader-footer{
+  position:absolute;
+  bottom:28px;
+  left:7%;
+  right:7%;
+  display:flex;
+  justify-content:space-between;
+  color:#4e6277;
+  font:9px var(--mono);
+  letter-spacing:2px;
 }
 
 /* HEADER */
-header {
+
+header{
   position:fixed;
   top:0;
   left:0;
   right:0;
-  height:78px;
+  height:76px;
+  padding:0 7%;
   z-index:100;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:0 7%;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  background:rgba(5,7,11,.72);
-  backdrop-filter:blur(18px);
+  align-items:center;
+  border-bottom:1px solid var(--border);
+  background:rgba(5,9,14,.78);
+  backdrop-filter:blur(20px);
 }
-.brand {
-  font-size:22px;
+.brand{
+  font-size:21px;
   font-weight:900;
-  letter-spacing:3px;
+  letter-spacing:2px;
 }
-.brand span {color:#91c9f4}
-nav {display:flex;gap:30px}
-nav a {
-  font-size:11px;
-  color:#9ca9b8;
+.brand span{color:#a6d7ff}
+.brand small{
+  display:block;
+  font:8px var(--mono);
+  color:#73869a;
+  letter-spacing:3px;
+  margin-top:3px;
+}
+nav{display:flex;gap:25px}
+nav a{
+  font:10px var(--mono);
+  color:#9aabba;
   letter-spacing:1px;
   transition:.3s;
 }
-nav a:hover {color:#d5edff}
-.header-right {display:flex;align-items:center;gap:15px}
-.sound-btn {
+nav a:hover{color:#d8edff}
+.header-right{display:flex;align-items:center;gap:12px}
+.sound-button,.menu-button{
   border:1px solid var(--border);
-  background:rgba(255,255,255,.04);
-  color:#c6d8e8;
-  padding:9px 12px;
-  cursor:pointer;
-  font:10px var(--mono);
+  background:rgba(255,255,255,.035);
+  color:#c6dcec;
+  padding:10px 12px;
+  font:9px var(--mono);
   letter-spacing:1px;
 }
-.sound-btn:hover {border-color:#8fcaff}
+.sound-button:hover,.menu-button:hover{
+  border-color:#9bd2ff;
+}
+.menu-button{display:none}
 
-/* HERO */
-main {position:relative;z-index:2}
-.hero {
+/* MAIN */
+
+main{position:relative;z-index:2}
+.hero{
   min-height:100vh;
+  padding:150px 10% 110px;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:150px 10% 110px;
   position:relative;
   overflow:hidden;
 }
-.hero::before {
+.hero::before{
   content:"";
   position:absolute;
-  width:600px;
-  height:600px;
-  right:-180px;
-  top:5%;
+  width:650px;
+  height:650px;
+  right:-200px;
+  top:0;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(66,126,184,.12),transparent 70%);
-  pointer-events:none;
+  background:radial-gradient(circle,rgba(67,124,177,.13),transparent 70%);
 }
-.eyebrow {
-  color:#8cb9dc;
-  font:11px var(--mono);
+.eyebrow{
+  color:#8dbbe0;
+  font:10px var(--mono);
   letter-spacing:4px;
-  margin-bottom:28px;
+  margin-bottom:27px;
 }
-.hero h1 {
+.hero h1{
   font-size:clamp(65px,12vw,145px);
-  line-height:.9;
-  letter-spacing:-8px;
+  line-height:.88;
   font-weight:900;
-  max-width:1000px;
+  letter-spacing:-8px;
 }
-.hero h1 span {
+.hero h1 span{
   color:transparent;
-  -webkit-text-stroke:1px rgba(210,231,250,.65);
+  -webkit-text-stroke:1px rgba(205,231,252,.65);
 }
-.hero-description {
-  color:#9ba9b8;
-  font-size:14px;
-  line-height:2;
+.hero-description{
   max-width:510px;
-  margin-top:32px;
+  margin-top:30px;
+  color:#9baabb;
+  font-size:13px;
+  line-height:2.1;
 }
-.hero-actions {
+.hero-actions{
   display:flex;
-  gap:14px;
-  margin-top:36px;
+  gap:13px;
   flex-wrap:wrap;
+  margin-top:35px;
 }
-.btn {
-  padding:14px 22px;
-  border:1px solid rgba(170,210,245,.4);
-  background:rgba(119,177,225,.1);
-  color:#d9edff;
-  font-size:11px;
+.button{
+  padding:14px 21px;
+  border:1px solid rgba(166,210,250,.4);
+  background:rgba(103,165,218,.1);
+  color:#d7edff;
+  font:10px var(--mono);
   letter-spacing:1px;
   transition:.3s;
 }
-.btn:hover {
-  background:rgba(119,177,225,.22);
-  box-shadow:0 0 25px rgba(119,177,225,.13);
+.button:hover{
   transform:translateY(-3px);
+  background:rgba(103,165,218,.2);
+  box-shadow:0 0 25px rgba(103,165,218,.12);
 }
-.btn.secondary {
+.button.secondary{
   border-color:var(--border);
   background:rgba(255,255,255,.025);
-  color:#9ca9b8;
-}
-.hero-bottom {
-  position:absolute;
-  bottom:35px;
-  left:10%;
-  right:10%;
-  display:flex;
-  justify-content:space-between;
-  color:#637487;
-  font:10px var(--mono);
-  letter-spacing:2px;
+  color:#a0b0c0;
 }
 
-/* BATTLEFIELD SILHOUETTE */
-.battlefield {
+/* CASTLE */
+
+.battlefield{
   position:absolute;
   right:0;
   bottom:0;
-  width:55%;
+  width:58%;
   height:44%;
+  opacity:.55;
   pointer-events:none;
-  opacity:.48;
   overflow:hidden;
 }
-.castle {
+.castle{
   position:absolute;
-  bottom:-2px;
-  right:12%;
-  width:65%;
-  height:75%;
-  background:linear-gradient(180deg,#101923,#06080c);
-  clip-path:polygon(0 100%,0 35%,10% 35%,10% 18%,16% 18%,16% 35%,26% 35%,26% 0,34% 0,34% 35%,46% 35%,46% 15%,52% 15%,52% 35%,66% 35%,66% 7%,73% 7%,73% 35%,84% 35%,84% 20%,91% 20%,91% 35%,100% 35%,100% 100%);
+  bottom:0;
+  right:9%;
+  width:78%;
+  height:83%;
+  background:linear-gradient(180deg,#15202c,#070a10);
+  clip-path:polygon(
+    0 100%,0 40%,9% 40%,9% 23%,16% 23%,16% 40%,
+    25% 40%,25% 10%,32% 10%,32% 40%,43% 40%,
+    43% 0,50% 0,50% 40%,62% 40%,62% 17%,
+    70% 17%,70% 40%,80% 40%,80% 24%,88% 24%,
+    88% 40%,100% 40%,100% 100%
+  );
 }
-.castle::after {
+.castle::after{
   content:"";
   position:absolute;
-  inset:12% 0 0;
-  background:repeating-linear-gradient(90deg,transparent 0 12%,rgba(160,190,220,.05) 12.2% 12.5%);
+  inset:10% 0 0;
+  background:repeating-linear-gradient(
+    90deg,transparent 0 12%,
+    rgba(180,215,245,.05) 12.2% 12.6%
+  );
 }
-.battle-ground {
+.ground{
   position:absolute;
   bottom:0;
   width:100%;
-  height:25%;
-  background:linear-gradient(0deg,#030508,transparent);
+  height:30%;
+  background:linear-gradient(0deg,#05080d,transparent);
 }
 
-/* SECTIONS */
-.section {
-  padding:110px 10%;
-  position:relative;
+/* SECTION BASE */
+
+.section{padding:105px 10%;position:relative}
+.section-line{
+  height:1px;
+  width:100%;
+  background:linear-gradient(90deg,rgba(160,204,244,.4),transparent);
+  margin-bottom:48px;
 }
-.section-label {
-  color:#8bb8dc;
+.section-label{
+  color:#91bde0;
   font:10px var(--mono);
   letter-spacing:4px;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
-.section h2 {
-  font-size:clamp(34px,6vw,62px);
-  font-weight:800;
+.section h2{
+  font-size:clamp(35px,6vw,62px);
   letter-spacing:-2px;
-  margin-bottom:25px;
+  line-height:1.1;
+  margin-bottom:22px;
 }
-.section-intro {
-  color:#98a5b3;
-  max-width:650px;
-  font-size:14px;
-  line-height:2;
-}
-.section-line {
-  width:100%;
-  height:1px;
-  background:linear-gradient(90deg,rgba(150,195,235,.35),transparent);
-  margin-bottom:50px;
-}
-
-/* ABOUT */
-.about-grid {
-  display:grid;
-  grid-template-columns:1.3fr .7fr;
-  gap:55px;
-  align-items:center;
-}
-.about-panel {
-  padding:30px;
-  background:linear-gradient(145deg,rgba(19,29,41,.8),rgba(7,10,15,.85));
-  border:1px solid var(--border);
-}
-.about-panel p {
-  color:#9eacba;
+.intro{
+  color:#97a8b9;
   font-size:13px;
-  line-height:2.2;
+  line-height:2.1;
+  max-width:640px;
 }
-.about-stats {
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* COMMAND CENTER */
+
+.command-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(4,1fr);
   gap:12px;
+  margin-top:35px;
 }
-.stat {
+.command-card{
   padding:22px;
+  min-height:130px;
   border:1px solid var(--border);
-  background:rgba(255,255,255,.025);
+  background:linear-gradient(145deg,rgba(18,30,44,.85),rgba(7,11,17,.85));
+  transition:.3s;
 }
-.stat strong {
-  display:block;
-  font-size:25px;
-  margin-bottom:8px;
+.command-card:hover{
+  border-color:rgba(153,204,247,.42);
+  transform:translateY(-4px);
 }
-.stat span {
-  color:#718194;
+.command-label{
+  color:#728aa1;
   font:9px var(--mono);
   letter-spacing:1px;
 }
+.command-value{
+  margin-top:20px;
+  font-size:19px;
+  font-weight:800;
+}
+.command-status{
+  color:#9acbfa;
+  font:9px var(--mono);
+  margin-top:10px;
+}
 
-/* SKILLS */
-.skill-groups {
+/* ABOUT */
+
+.about-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
+  grid-template-columns:1.2fr .8fr;
+  gap:35px;
+  align-items:center;
 }
-.skill-group {
+.about-panel{
+  padding:30px;
+  background:linear-gradient(145deg,rgba(18,29,42,.85),rgba(7,11,17,.9));
   border:1px solid var(--border);
-  background:linear-gradient(140deg,rgba(17,24,34,.8),rgba(7,10,15,.7));
-  padding:25px;
-  transition:.3s;
 }
-.skill-group:hover {
-  border-color:rgba(142,197,240,.4);
-  transform:translateY(-4px);
-}
-.skill-group h3 {
-  color:#c9d9e8;
+.about-panel p{
+  color:#9baabb;
   font-size:13px;
-  margin-bottom:20px;
+  line-height:2.2;
 }
-.skills {
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
+.about-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:20px;
 }
-.skill {
-  font:10px var(--mono);
-  color:#9eafc0;
-  border:1px solid rgba(180,205,230,.12);
-  padding:9px 11px;
+.stat{
+  padding:20px;
+  border:1px solid var(--border);
   background:rgba(255,255,255,.025);
 }
+.stat strong{font-size:21px;display:block}
+.stat span{
+  color:#74889d;
+  font:9px var(--mono);
+  display:block;
+  margin-top:9px;
+}
 
-/* PROJECTS */
-.project-grid {
+/* SKILLS */
+
+.skill-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:17px;
+  gap:15px;
+  margin-top:35px;
 }
-.project {
-  min-height:210px;
+.skill-group{
+  padding:25px;
   border:1px solid var(--border);
-  padding:28px;
-  background:
-    linear-gradient(145deg,rgba(18,27,38,.85),rgba(5,8,13,.9));
+  background:linear-gradient(145deg,rgba(17,28,41,.8),rgba(7,11,17,.8));
+  transition:.3s;
+}
+.skill-group:hover{
+  transform:translateY(-4px);
+  border-color:rgba(147,199,243,.4);
+}
+.skill-group h3{
+  font-size:13px;
+  margin-bottom:19px;
+  color:#d0e2f3;
+}
+.skills{display:flex;flex-wrap:wrap;gap:8px}
+.skill{
+  padding:9px 11px;
+  color:#a9bacb;
+  border:1px solid rgba(175,208,240,.13);
+  background:rgba(255,255,255,.025);
+  font:10px var(--mono);
+}
+
+/* PROJECT FILTER */
+
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:30px 0 22px;
+}
+.filter{
+  padding:9px 14px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:#91a5b9;
+  font:9px var(--mono);
+}
+.filter.active,.filter:hover{
+  color:#e4f3ff;
+  border-color:#8fc8f4;
+  background:rgba(119,177,225,.1);
+}
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.project{
+  min-height:205px;
+  padding:26px;
   position:relative;
   overflow:hidden;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,rgba(18,29,42,.85),rgba(6,10,16,.9));
   transition:.35s;
 }
-.project::after {
+.project::after{
   content:"";
   position:absolute;
-  width:160px;
-  height:160px;
-  right:-80px;
+  right:-65px;
   bottom:-90px;
+  width:180px;
+  height:180px;
   border-radius:50%;
-  background:rgba(100,165,220,.12);
-  filter:blur(35px);
+  background:rgba(93,160,220,.12);
+  filter:blur(40px);
 }
-.project:hover {
+.project:hover{
   transform:translateY(-5px);
-  border-color:rgba(153,202,245,.45);
+  border-color:rgba(150,203,249,.42);
 }
-.project-tag {
-  color:#8ebde4;
+.project-tag{
+  color:#8dbce1;
   font:9px var(--mono);
   letter-spacing:2px;
 }
-.project h3 {
-  font-size:23px;
-  margin:20px 0 12px;
-}
-.project p {
-  color:#8998a8;
+.project h3{font-size:22px;margin:19px 0 12px}
+.project p{
+  color:#92a2b2;
   font-size:12px;
   line-height:1.9;
-  max-width:390px;
+  max-width:440px;
 }
-.project-status {
+.project-status{
   display:inline-block;
   margin-top:20px;
-  color:#8db6d7;
+  color:#a2c9e9;
+  font:9px var(--mono);
+}
+.project[hidden]{display:none}
+
+/* RELEASES */
+
+.release-list{margin-top:35px}
+.release{
+  display:grid;
+  grid-template-columns:120px 1fr auto;
+  gap:20px;
+  align-items:center;
+  padding:22px 0;
+  border-bottom:1px solid var(--border);
+}
+.release-version{color:#9acbf1;font:11px var(--mono)}
+.release h3{font-size:15px}
+.release p{color:#8496a8;font-size:11px;margin-top:7px;line-height:1.8}
+.release-state{color:#9fcaf0;font:9px var(--mono)}
+
+/* ARCHIVES */
+
+.archive-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:30px;
+}
+.archive{
+  padding:23px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.025);
+}
+.archive small{
+  color:#8dbce1;
+  font:9px var(--mono);
+  letter-spacing:1px;
+}
+.archive h3{font-size:15px;margin-top:14px}
+.archive p{
+  color:#8d9eae;
+  font-size:11px;
+  line-height:1.8;
+  margin-top:9px;
+}
+
+/* TERMINAL */
+
+.terminal{
+  border:1px solid rgba(150,200,245,.2);
+  background:#060a10;
+  margin-top:30px;
+  box-shadow:0 20px 70px rgba(0,0,0,.25);
+}
+.terminal-head{
+  padding:13px 17px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  color:#8ea6bc;
+  font:9px var(--mono);
+}
+.terminal-body{
+  padding:20px;
+  min-height:185px;
+  color:#a9c9e5;
+  font:11px/2 var(--mono);
+}
+.terminal-line{color:#9fc9ec}
+.terminal-input-row{
+  display:flex;
+  gap:10px;
+  padding:0 20px 20px;
+}
+.terminal-input{
+  flex:1;
+  min-width:0;
+  padding:11px;
+  background:#0b131e;
+  border:1px solid var(--border);
+  outline:none;
+  color:#e1f2ff;
+  font:11px var(--mono);
+}
+.terminal-input:focus{border-color:#8dc7f2}
+.terminal-run{
+  padding:10px 14px;
+  background:#14263a;
+  color:#d9edff;
+  border:1px solid rgba(150,200,245,.3);
   font:9px var(--mono);
 }
 
 /* CONTACT */
-.contact-box {
-  padding:55px 35px;
+
+.contact-box{
+  padding:55px 30px;
   text-align:center;
   border:1px solid var(--border);
-  background:radial-gradient(ellipse at 50% 0,rgba(73,127,179,.15),transparent 70%),#080c12;
+  background:
+    radial-gradient(ellipse at 50% 0,rgba(77,139,194,.15),transparent 70%),
+    #080d14;
 }
-.contact-box h2 {margin-bottom:15px}
-.contact-box p {
-  color:#8d9bab;
+.contact-box p{
+  color:#8fa1b3;
   font-size:13px;
-  margin-bottom:28px;
+  margin:15px 0 27px;
 }
-.socials {
+.socials{
   display:flex;
   justify-content:center;
-  gap:12px;
   flex-wrap:wrap;
+  gap:10px;
 }
-.socials a {
-  padding:12px 18px;
+.socials a{
+  padding:12px 17px;
   border:1px solid var(--border);
-  color:#b5c6d7;
-  font:10px var(--mono);
+  color:#b5c9dc;
+  font:9px var(--mono);
   transition:.3s;
 }
-.socials a:hover {
-  border-color:#9bcdf5;
+.socials a:hover{
+  border-color:#9bcdf4;
   color:white;
 }
 
 /* FOOTER */
-footer {
-  padding:30px 10%;
+
+footer{
+  padding:28px 10%;
+  border-top:1px solid var(--border);
   display:flex;
   justify-content:space-between;
-  border-top:1px solid var(--border);
-  color:#69798a;
-  font:10px var(--mono);
+  color:#718397;
+  font:9px var(--mono);
   letter-spacing:1px;
 }
 
-/* REVEAL */
-.reveal {
-  opacity:0;
-  transform:translateY(25px);
-  transition:opacity .8s ease,transform .8s ease;
-}
-.reveal.visible {
-  opacity:1;
-  transform:translateY(0);
-}
+/* BACK TO TOP */
 
-@media(max-width:800px) {
-  header {padding:0 5%;height:68px}
-  nav {gap:13px}
-  nav a {font-size:9px}
-  .header-right {gap:5px}
-  .sound-btn {font-size:8px;padding:8px}
-  .hero {padding:140px 7% 120px}
-  .hero h1 {letter-spacing:-4px}
-  .hero-bottom {left:7%;right:7%;font-size:8px}
-  .section {padding:80px 7%}
-  .about-grid {grid-template-columns:1fr}
-  .battlefield {width:90%;opacity:.3}
+.top-button{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:90;
+  width:42px;
+  height:42px;
+  background:#101d2b;
+  border:1px solid var(--border);
+  color:#c6e3fc;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
 }
-@media(max-width:560px) {
-  nav {display:none}
-  .hero h1 {font-size:65px}
-  .skill-groups,.project-grid {grid-template-columns:1fr}
-  .section h2 {font-size:38px}
-  .about-stats {grid-template-columns:1fr 1fr}
-  footer {flex-direction:column;gap:12px}
-  .loader-title {letter-spacing:5px}
+.top-button.show{opacity:1;pointer-events:auto}
+.top-button:hover{border-color:#9ed3ff}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+  header{padding:0 5%}
+  nav{gap:13px}
+  nav a{font-size:8px}
+  .command-grid{grid-template-columns:repeat(2,1fr)}
+  .archive-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
+@media(max-width:720px){
+  header{height:68px}
+  nav{
+    display:none;
+    position:absolute;
+    top:68px;
+    left:0;
+    right:0;
+    padding:22px 7%;
+    flex-direction:column;
+    background:#080e16;
+    border-bottom:1px solid var(--border);
+  }
+  nav.open{display:flex}
+  nav a{font-size:11px;padding:7px}
+  .menu-button{display:block}
+  .hero{padding:140px 7% 120px}
+  .hero h1{letter-spacing:-4px}
+  .section{padding:80px 7%}
+  .about-grid{grid-template-columns:1fr}
+  .battlefield{width:90%;opacity:.3}
+  footer{padding:25px 7%;gap:12px;flex-wrap:wrap}
+}
+@media(max-width:520px){
+  .hero h1{font-size:65px}
+  .skill-grid,.project-grid{grid-template-columns:1fr}
+  .archive-grid{grid-template-columns:1fr}
+  .section h2{font-size:37px}
+  .release{grid-template-columns:75px 1fr;gap:10px}
+  .release-state{grid-column:2}
+  .loader-title{letter-spacing:-3px}
+  .loader-footer{font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
     animation-duration:.01ms!important;
     transition-duration:.01ms!important;
     scroll-behavior:auto!important;
@@ -572,113 +770,178 @@ footer {
 </style>
 </head>
 
-<body>
+<body class="loading">
 
-<canvas id="stormCanvas"></canvas>
-<div class="atmosphere"></div>
-<div class="grain"></div>
+<canvas id="world"></canvas>
+<div class="sky"></div>
+<div class="flash-screen" id="flashScreen"></div>
+<div class="noise"></div>
+<div class="vignette"></div>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
+
 <div id="loader">
   <div class="loader-glow"></div>
-  <div class="loader-flash" id="loaderFlash"></div>
 
   <div class="loader-content">
-    <div class="loader-symbol"><span>PK</span></div>
-    <div class="loader-title">PKDEV</div>
-    <div class="loader-sub">THE LAST EMPIRE</div>
+    <div class="loader-kicker">WELCOME TO THE WORLD OF</div>
+    <div class="loader-title">THE <span>PKDEV</span></div>
+    <div class="loader-sub">A DIGITAL EMPIRE</div>
 
-    <div class="loader-line">
-      <div class="loader-progress" id="loaderProgress"></div>
+    <p class="loader-description">
+      Preparing the environment. The storm is approaching.
+      A new chapter is about to begin.
+    </p>
+
+    <div class="loader-track">
+      <div id="loaderProgress"></div>
     </div>
 
-    <div class="loader-status">
-      <span id="loaderStatus">AWAKENING THE STORM</span>
+    <div class="loader-meta">
+      <span id="loaderStatus">INITIALIZING ENVIRONMENT</span>
       <span id="loaderPercent">0%</span>
     </div>
-    <div class="loader-enter">PREPARING YOUR EXPERIENCE</div>
+
+    <div class="loader-quote" id="loaderQuote">
+      THROUGH THE STORM, WE BUILD.
+    </div>
+  </div>
+
+  <div class="loader-footer">
+    <span>PKDEV SYSTEMS</span>
+    <span>CREATED BY RESURECT</span>
   </div>
 </div>
 
-<header>
-  <a href="#home" class="brand">PK<span>DEV</span></a>
+<!-- HEADER -->
 
-  <nav>
+<header>
+  <a class="brand" href="#home">
+    THE <span>PKDEV</span>
+    <small>INDEPENDENT DEVELOPMENT</small>
+  </a>
+
+  <nav id="navigation">
+    <a href="#home">HOME</a>
+    <a href="#command">COMMAND</a>
     <a href="#about">ABOUT</a>
-    <a href="#skills">ARSENAL</a>
+    <a href="#skills">SKILLS</a>
     <a href="#projects">PROJECTS</a>
+    <a href="#releases">RELEASES</a>
     <a href="#contact">CONTACT</a>
   </nav>
 
   <div class="header-right">
-    <button class="sound-btn" id="soundButton">SOUND: OFF</button>
+    <button class="sound-button" id="soundButton" aria-pressed="false">
+      SOUND: OFF
+    </button>
+    <button class="menu-button" id="menuButton">MENU</button>
   </div>
 </header>
 
 <main>
 
+<!-- HERO -->
+
 <section class="hero" id="home">
   <div class="eyebrow">INDEPENDENT DEVELOPER / DIGITAL CREATOR</div>
 
   <h1>
-    BUILD<br>
-    <span>YOUR</span><br>
-    EMPIRE.
+    THE<br>
+    <span>PKDEV</span>
   </h1>
 
   <p class="hero-description">
-    I build digital experiences, software and systems.
-    Every project is a new journey. Every line of code
-    is another step toward something greater.
+    An independent development identity focused on
+    software, digital experiences and creative systems.
+    Built with code. Driven by imagination.
   </p>
 
   <div class="hero-actions">
-    <a href="#projects" class="btn">EXPLORE PROJECTS ↗</a>
-    <a href="#about" class="btn secondary">DISCOVER RESURECT</a>
+    <a class="button" href="#projects">EXPLORE PROJECTS ↗</a>
+    <a class="button secondary" href="#about">DISCOVER THE CREATOR</a>
   </div>
 
   <div class="battlefield">
     <div class="castle"></div>
-    <div class="battle-ground"></div>
-  </div>
-
-  <div class="hero-bottom">
-    <span>PKDEV / ODYSSEY</span>
-    <span>THE JOURNEY BEGINS</span>
-    <span>SCROLL TO EXPLORE ↓</span>
+    <div class="ground"></div>
   </div>
 </section>
 
+<!-- COMMAND CENTER -->
+
+<section class="section" id="command">
+  <div class="section-line"></div>
+
+  <div class="reveal">
+    <div class="section-label">01 / COMMAND CENTER</div>
+    <h2>System overview.</h2>
+    <p class="intro">
+      A central overview of the PKDEV development environment
+      and its current project landscape.
+    </p>
+  </div>
+
+  <div class="command-grid">
+    <div class="command-card reveal">
+      <div class="command-label">DEVELOPMENT BRAND</div>
+      <div class="command-value">THE PKDEV</div>
+      <div class="command-status">● ACTIVE IDENTITY</div>
+    </div>
+
+    <div class="command-card reveal">
+      <div class="command-label">PROJECT COLLECTION</div>
+      <div class="command-value">06 PROJECTS</div>
+      <div class="command-status">● TRACKING</div>
+    </div>
+
+    <div class="command-card reveal">
+      <div class="command-label">MAIN CREATOR</div>
+      <div class="command-value">RESURECT</div>
+      <div class="command-status">● INDEPENDENT</div>
+    </div>
+
+    <div class="command-card reveal">
+      <div class="command-label">DEVELOPMENT STATUS</div>
+      <div class="command-value">BUILDING</div>
+      <div class="command-status">● CONTINUOUS WORK</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
 <section class="section" id="about">
   <div class="section-line"></div>
+
   <div class="about-grid">
     <div class="reveal">
-      <div class="section-label">01 / THE CREATOR</div>
+      <div class="section-label">02 / THE CREATOR</div>
       <h2>Beyond<br>the ordinary.</h2>
-      <p class="section-intro">
+
+      <p class="intro">
         I'm Resurect, an independent developer focused on
-        building software, digital platforms and Minecraft
-        development projects. I believe in creating things
-        that are functional, meaningful and built to last.
+        software development, web technologies, desktop
+        applications and Minecraft systems.
       </p>
     </div>
 
     <div class="about-panel reveal">
       <p>
-        PKDEV is my development identity — a place for
-        experiments, ideas and projects. From desktop
-        applications to web experiences and game systems,
-        the journey is always moving forward.
+        THE PKDEV is my personal development identity.
+        It represents a collection of ideas, experiments,
+        software and projects built around technology.
       </p>
       <br>
       <p>
-        Created with curiosity. Built with code.
-        Driven by imagination.
+        From web platforms to desktop applications and
+        Minecraft development, every project is an opportunity
+        to learn, create and improve.
       </p>
     </div>
   </div>
 
-  <div class="about-stats reveal" style="margin-top:25px">
+  <div class="about-stats reveal">
     <div class="stat">
       <strong>PKDEV</strong>
       <span>DEVELOPMENT BRAND</span>
@@ -690,18 +953,21 @@ footer {
   </div>
 </section>
 
+<!-- SKILLS -->
+
 <section class="section" id="skills">
   <div class="section-line"></div>
+
   <div class="reveal">
-    <div class="section-label">02 / THE ARSENAL</div>
+    <div class="section-label">03 / THE ARSENAL</div>
     <h2>Tools of creation.</h2>
-    <p class="section-intro">
-      Technologies and tools used to turn ideas into
-      working digital products.
+    <p class="intro">
+      Languages, frameworks and technologies used
+      throughout development projects.
     </p>
   </div>
 
-  <div class="skill-groups" style="margin-top:35px">
+  <div class="skill-grid">
     <div class="skill-group reveal">
       <h3>Programming & Web Languages</h3>
       <div class="skills">
@@ -756,80 +1022,221 @@ footer {
   </div>
 </section>
 
+<!-- PROJECTS -->
+
 <section class="section" id="projects">
   <div class="section-line"></div>
+
   <div class="reveal">
-    <div class="section-label">03 / THE BATTLEGROUND</div>
+    <div class="section-label">04 / THE BATTLEGROUND</div>
     <h2>Projects & creations.</h2>
-    <p class="section-intro">
-      A collection of development projects, concepts
-      and systems currently being built.
+    <p class="intro">
+      Explore the projects, software concepts and systems
+      developed under the PKDEV identity.
     </p>
   </div>
 
-  <div class="project-grid" style="margin-top:35px">
+  <div class="filters reveal">
+    <button class="filter active" data-filter="all">ALL PROJECTS</button>
+    <button class="filter" data-filter="windows">WINDOWS</button>
+    <button class="filter" data-filter="web">WEB</button>
+    <button class="filter" data-filter="minecraft">MINECRAFT</button>
+  </div>
 
-    <article class="project reveal">
-      <div class="project-tag">DESKTOP / GAMING</div>
+  <div class="project-grid">
+
+    <article class="project reveal" data-category="windows">
+      <div class="project-tag">WINDOWS / DESKTOP</div>
       <h3>Imperial Launcher</h3>
-      <p>A Minecraft Java launcher concept with version management,
-        mod support and a custom desktop experience.</p>
+      <p>
+        A Minecraft Java launcher concept with version
+        management, mod support and a custom desktop interface.
+      </p>
       <span class="project-status">● IN DEVELOPMENT</span>
     </article>
 
-    <article class="project reveal">
-      <div class="project-tag">SECURITY / SOFTWARE</div>
+    <article class="project reveal" data-category="windows">
+      <div class="project-tag">WINDOWS / SOFTWARE</div>
+      <h3>PKDEV.Hub</h3>
+      <p>
+        A desktop workspace concept designed to organize
+        tools and development workflows.
+      </p>
+      <span class="project-status">● IN DEVELOPMENT</span>
+    </article>
+
+    <article class="project reveal" data-category="web">
+      <div class="project-tag">WEB / SECURITY</div>
       <h3>PKDEV.Security</h3>
-      <p>A security-focused development project and
-        collection of software experiments.</p>
+      <p>
+        A security-focused development project and
+        collection of software experiments.
+      </p>
       <span class="project-status">● AVAILABLE</span>
     </article>
 
-    <article class="project reveal">
+    <article class="project reveal" data-category="minecraft">
       <div class="project-tag">MINECRAFT / PLUGIN</div>
       <h3>PkdevStore</h3>
-      <p>A customizable server store plugin with economy
-        integration and rank delivery concepts.</p>
+      <p>
+        A customizable server store plugin with economy
+        integration and rank delivery concepts.
+      </p>
       <span class="project-status">● IN DEVELOPMENT</span>
     </article>
 
-    <article class="project reveal">
+    <article class="project reveal" data-category="minecraft">
       <div class="project-tag">MINECRAFT / GAME MODE</div>
       <h3>Project Delta</h3>
-      <p>An extraction-inspired Minecraft game mode
-        featuring exploration, loot and survival systems.</p>
+      <p>
+        An extraction-inspired Minecraft game mode featuring
+        exploration, loot and survival systems.
+      </p>
       <span class="project-status">● IN DEVELOPMENT</span>
     </article>
 
-    <article class="project reveal">
-      <div class="project-tag">COMMUNITY / EDUCATION</div>
+    <article class="project reveal" data-category="web">
+      <div class="project-tag">WEB / EDUCATION</div>
       <h3>Moderator Academy</h3>
-      <p>A structured educational concept for Minecraft
-        moderation, staff knowledge and training.</p>
+      <p>
+        A structured educational concept for Minecraft
+        moderation, staff knowledge and training.
+      </p>
       <span class="project-status">● AVAILABLE</span>
-    </article>
-
-    <article class="project reveal">
-      <div class="project-tag">DESKTOP / WORKSPACE</div>
-      <h3>PKDEV.Hub</h3>
-      <p>A desktop workspace concept designed to organize
-        tools and development workflows.</p>
-      <span class="project-status">● IN DEVELOPMENT</span>
     </article>
 
   </div>
 </section>
 
+<!-- RELEASES -->
+
+<section class="section" id="releases">
+  <div class="section-line"></div>
+
+  <div class="reveal">
+    <div class="section-label">05 / RELEASE ARCHIVE</div>
+    <h2>Releases & updates.</h2>
+    <p class="intro">
+      Version history and development milestones.
+      Release details can be connected to project repositories.
+    </p>
+  </div>
+
+  <div class="release-list reveal">
+    <div class="release">
+      <div class="release-version">2.9</div>
+      <div>
+        <h3>Imperial Launcher</h3>
+        <p>Planned launcher update and interface improvements.</p>
+      </div>
+      <div class="release-state">PLANNED</div>
+    </div>
+
+    <div class="release">
+      <div class="release-version">1.2.0</div>
+      <div>
+        <h3>PkdevStore</h3>
+        <p>Store configuration and feature development.</p>
+      </div>
+      <div class="release-state">IN DEVELOPMENT</div>
+    </div>
+
+    <div class="release">
+      <div class="release-version">LATEST</div>
+      <div>
+        <h3>PKDEV Website</h3>
+        <p>New visual identity and digital experience.</p>
+      </div>
+      <div class="release-state">CURRENT</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVES -->
+
+<section class="section" id="archives">
+  <div class="section-line"></div>
+
+  <div class="reveal">
+    <div class="section-label">06 / THE ARCHIVES</div>
+    <h2>Development journey.</h2>
+    <p class="intro">
+      A collection of development areas and experience.
+    </p>
+  </div>
+
+  <div class="archive-grid">
+    <div class="archive reveal">
+      <small>01 / SOFTWARE</small>
+      <h3>Desktop Development</h3>
+      <p>Building desktop applications and custom tools.</p>
+    </div>
+
+    <div class="archive reveal">
+      <small>02 / WEB</small>
+      <h3>Web Experiences</h3>
+      <p>Creating interfaces, websites and digital platforms.</p>
+    </div>
+
+    <div class="archive reveal">
+      <small>03 / GAMING</small>
+      <h3>Minecraft Systems</h3>
+      <p>Plugins, server systems and custom game modes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL -->
+
+<section class="section" id="console">
+  <div class="section-line"></div>
+
+  <div class="reveal">
+    <div class="section-label">07 / SYSTEM TERMINAL</div>
+    <h2>Command interface.</h2>
+    <p class="intro">
+      Explore the PKDEV interface through a small interactive terminal.
+    </p>
+  </div>
+
+  <div class="terminal reveal">
+    <div class="terminal-head">
+      <span>PKDEV TERMINAL</span>
+      <span>LOCAL INTERFACE</span>
+    </div>
+
+    <div class="terminal-body" id="terminalOutput">
+      <div>THE PKDEV SYSTEM [Version 1.0]</div>
+      <div>Type <span class="terminal-line">help</span> to view available commands.</div>
+      <div>------------------------------------</div>
+    </div>
+
+    <div class="terminal-input-row">
+      <input
+        id="terminalInput"
+        class="terminal-input"
+        type="text"
+        placeholder="Enter a command..."
+        autocomplete="off"
+      >
+      <button id="terminalRun" class="terminal-run">EXECUTE</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
 <section class="section" id="contact">
   <div class="section-line"></div>
+
   <div class="contact-box reveal">
-    <div class="section-label">04 / THE ALLIANCE</div>
+    <div class="section-label">08 / CONNECTION</div>
     <h2>Let's build something.</h2>
-    <p>Have an idea, a project or a reason to connect?</p>
+    <p>Ideas become projects. Projects become experiences.</p>
 
     <div class="socials">
-      <a href="https://github.com/resurect63" target="_blank">GITHUB ↗</a>
-      <a href="https://t.me/Resurect63" target="_blank">TELEGRAM ↗</a>
+      <a href="https://github.com/resurect63" target="_blank" rel="noopener">GITHUB ↗</a>
+      <a href="https://t.me/Resurect63" target="_blank" rel="noopener">TELEGRAM ↗</a>
       <a href="#" id="discordCopy">DISCORD: .RESURECT.</a>
     </div>
   </div>
@@ -838,393 +1245,763 @@ footer {
 </main>
 
 <footer>
-  <span>PKDEV — ODYSSEY</span>
+  <span>THE PKDEV</span>
   <span>Created by Resurect</span>
   <span>© 2026</span>
 </footer>
 
-<script>
-/* ==============================
-   STORM ENGINE
-================================ */
+<button class="top-button" id="topButton" aria-label="Back to top">↑</button>
 
-const canvas = document.getElementById("stormCanvas");
+<script>
+/* =================================
+   1. STORM CANVAS
+================================= */
+
+const canvas = document.getElementById("world");
 const ctx = canvas.getContext("2d");
 
-let W = 0, H = 0;
-let lightning = [];
-let particles = [];
-let clouds = [];
-let flash = 0;
-let lastStrike = 0;
-let stormRunning = true;
+let W = 0;
+let H = 0;
+let dpr = 1;
 
-function resize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+let clouds = [];
+let rain = [];
+let particles = [];
+let bolts = [];
+let flash = 0;
+let stormFrame = 0;
+
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+function resizeWorld() {
+  dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   W = window.innerWidth;
   H = window.innerHeight;
+
   canvas.width = W * dpr;
   canvas.height = H * dpr;
   canvas.style.width = W + "px";
   canvas.style.height = H + "px";
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-}
-window.addEventListener("resize",resize);
-resize();
 
-/* Cloud layers */
-for(let i=0;i<18;i++) {
-  clouds.push({
-    x:Math.random()*W,
-    y:Math.random()*H*.7,
-    size:100+Math.random()*240,
-    speed:.08+Math.random()*.2,
-    alpha:.025+Math.random()*.045
-  });
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  createWorldElements();
 }
 
-/* Floating dust and ash */
-function createParticles() {
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function createWorldElements() {
+  clouds = [];
+  rain = [];
   particles = [];
-  const count = Math.min(85,Math.floor(W/13));
-  for(let i=0;i<count;i++) {
+
+  const cloudCount = Math.min(22, Math.floor(W / 55));
+  const rainCount = Math.min(180, Math.floor(W / 7));
+  const dustCount = Math.min(80, Math.floor(W / 15));
+
+  for (let i = 0; i < cloudCount; i++) {
+    clouds.push({
+      x: random(-W, W),
+      y: random(0, H * .65),
+      size: random(100, 280),
+      speed: random(.08, .25),
+      alpha: random(.025, .07)
+    });
+  }
+
+  for (let i = 0; i < rainCount; i++) {
+    rain.push({
+      x: random(0, W),
+      y: random(0, H),
+      speed: random(5, 12),
+      length: random(8, 20),
+      opacity: random(.08, .28)
+    });
+  }
+
+  for (let i = 0; i < dustCount; i++) {
     particles.push({
-      x:Math.random()*W,
-      y:Math.random()*H,
-      r:Math.random()*1.6+.3,
-      speed:.15+Math.random()*.45,
-      drift:(Math.random()-.5)*.35,
-      alpha:.1+Math.random()*.35
+      x: random(0, W),
+      y: random(0, H),
+      speed: random(.15, .6),
+      drift: random(-.3, .3),
+      radius: random(.4, 1.6),
+      alpha: random(.1, .4)
     });
   }
 }
-createParticles();
-window.addEventListener("resize",createParticles);
 
-/* Lightning bolt generation */
-function createBolt(x,y,endX,endY,depth=0) {
-  const points = [{x,y}];
-  let currentX=x;
-  let currentY=y;
+window.addEventListener("resize", resizeWorld);
+resizeWorld();
 
-  while(currentY<endY && points.length<45) {
-    currentX += (Math.random()-.5)*65;
-    currentY += 12+Math.random()*27;
-    points.push({x:currentX,y:currentY});
+/* Clouds */
+
+function drawClouds() {
+  for (const c of clouds) {
+    c.x += reducedMotion ? 0 : c.speed;
+
+    if (c.x - c.size > W) c.x = -c.size;
+
+    const gradient = ctx.createRadialGradient(
+      c.x, c.y, 0,
+      c.x, c.y, c.size
+    );
+
+    gradient.addColorStop(
+      0,
+      `rgba(105,140,175,${c.alpha})`
+    );
+    gradient.addColorStop(1, "rgba(8,14,22,0)");
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+/* Rain */
+
+function drawRain() {
+  if (reducedMotion) return;
+
+  ctx.lineWidth = .8;
+
+  for (const r of rain) {
+    r.x -= .8;
+    r.y += r.speed;
+
+    if (r.y > H) {
+      r.y = -20;
+      r.x = random(0, W);
+    }
+
+    ctx.strokeStyle = `rgba(170,205,235,${r.opacity})`;
+    ctx.beginPath();
+    ctx.moveTo(r.x, r.y);
+    ctx.lineTo(r.x - 3, r.y + r.length);
+    ctx.stroke();
+  }
+}
+
+/* Dust */
+
+function drawDust() {
+  for (const p of particles) {
+    if (!reducedMotion) {
+      p.x += p.drift;
+      p.y -= p.speed;
+    }
+
+    if (p.y < -5) {
+      p.y = H + 5;
+      p.x = random(0, W);
+    }
+
+    ctx.fillStyle = `rgba(190,215,240,${p.alpha})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+/* Lightning */
+
+function createBolt(x, y, depth = 0) {
+  const points = [{ x, y }];
+  let px = x;
+  let py = y;
+
+  const end = H * random(.42, .85);
+
+  while (py < end && points.length < 50) {
+    px += random(-42, 42);
+    py += random(12, 28);
+    points.push({ x: px, y: py });
   }
 
-  lightning.push({
+  bolts.push({
     points,
-    life:1,
-    width:depth===0?2.2:1,
-    branches:depth<2 && Math.random()>.35,
+    life: 1,
+    width: depth === 0 ? 2.3 : .9,
     depth
   });
 
-  if(depth<2 && Math.random()>.35) {
-    const point=points[Math.floor(points.length*.45)];
-    createBolt(point.x,point.y,point.x+(Math.random()-.5)*130,endY*.75,depth+1);
+  if (depth < 2 && Math.random() > .35) {
+    const point = points[
+      Math.floor(points.length * random(.3, .7))
+    ];
+
+    createBolt(
+      point.x,
+      point.y,
+      depth + 1
+    );
   }
 }
 
-function strike() {
-  const x=Math.random()*W;
-  createBolt(x,-20,x+(Math.random()-.5)*160,H*.7);
-  flash=1;
+function strikeLightning() {
+  createBolt(random(W * .15, W * .85), -10);
+  flash = 1;
   playThunder();
 }
 
-function drawClouds() {
-  clouds.forEach(c=>{
-    c.x += c.speed;
-    if(c.x-c.size>W) c.x=-c.size;
+function drawBolts() {
+  for (let i = bolts.length - 1; i >= 0; i--) {
+    const bolt = bolts[i];
 
-    const gradient=ctx.createRadialGradient(
-      c.x,c.y,0,c.x,c.y,c.size
-    );
-    gradient.addColorStop(0,`rgba(100,130,160,${c.alpha})`);
-    gradient.addColorStop(1,"rgba(10,15,22,0)");
-
-    ctx.fillStyle=gradient;
-    ctx.beginPath();
-    ctx.arc(c.x,c.y,c.size,0,Math.PI*2);
-    ctx.fill();
-  });
-}
-
-function drawParticles() {
-  particles.forEach(p=>{
-    p.x+=p.drift;
-    p.y-=p.speed;
-
-    if(p.y<0) {
-      p.y=H;
-      p.x=Math.random()*W;
-    }
-    if(p.x<0)p.x=W;
-    if(p.x>W)p.x=0;
-
-    ctx.fillStyle=`rgba(180,210,235,${p.alpha})`;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-  });
-}
-
-function drawLightning() {
-  lightning.forEach((bolt,index)=>{
     ctx.save();
-    ctx.globalAlpha=bolt.life;
-    ctx.strokeStyle="#d9efff";
-    ctx.shadowColor="#82c5ff";
-    ctx.shadowBlur=bolt.depth===0?22:10;
-    ctx.lineWidth=bolt.width;
-    ctx.lineCap="round";
+    ctx.globalAlpha = bolt.life;
+    ctx.strokeStyle = "#e1f2ff";
+    ctx.shadowColor = "#8ecbff";
+    ctx.shadowBlur = bolt.depth === 0 ? 25 : 10;
+    ctx.lineWidth = bolt.width;
+    ctx.lineCap = "round";
+
     ctx.beginPath();
-    bolt.points.forEach((p,i)=>{
-      if(i===0)ctx.moveTo(p.x,p.y);
-      else ctx.lineTo(p.x,p.y);
+
+    bolt.points.forEach((point, index) => {
+      if (index === 0) {
+        ctx.moveTo(point.x, point.y);
+      } else {
+        ctx.lineTo(point.x, point.y);
+      }
     });
+
     ctx.stroke();
     ctx.restore();
 
-    bolt.life-=.075;
-    if(bolt.life<=0)lightning.splice(index,1);
-  });
+    bolt.life -= .09;
+
+    if (bolt.life <= 0) {
+      bolts.splice(i, 1);
+    }
+  }
 }
 
-function drawStorm() {
-  if(!stormRunning)return;
-  ctx.clearRect(0,0,W,H);
+/* Full screen light */
+
+function drawFlash() {
+  if (flash <= .01) return;
+
+  ctx.fillStyle = `rgba(195,225,255,${flash * .075})`;
+  ctx.fillRect(0, 0, W, H);
+
+  flash *= .76;
+}
+
+/* Main animation */
+
+function animateWorld() {
+  stormFrame++;
+
+  ctx.clearRect(0, 0, W, H);
 
   drawClouds();
-  drawParticles();
-  drawLightning();
+  drawRain();
+  drawDust();
+  drawBolts();
+  drawFlash();
 
-  if(flash>0) {
-    ctx.fillStyle=`rgba(200,225,255,${flash*.1})`;
-    ctx.fillRect(0,0,W,H);
-    flash*=.78;
-    if(flash<.02)flash=0;
-  }
-
-  requestAnimationFrame(drawStorm);
+  requestAnimationFrame(animateWorld);
 }
-drawStorm();
 
-/* Random lightning timing */
-function randomStrike() {
-  const delay=5000+Math.random()*9000;
-  setTimeout(()=>{
-    strike();
-    randomStrike();
-  },delay);
+animateWorld();
+
+/* Random storm */
+
+function scheduleLightning() {
+  const delay = random(5500, 12000);
+
+  setTimeout(() => {
+    if (!reducedMotion) {
+      strikeLightning();
+    }
+
+    scheduleLightning();
+  }, delay);
 }
-randomStrike();
 
-/* ==============================
-   SYNTHETIC THUNDER AUDIO
-   No external audio files
-================================ */
+if (!reducedMotion) {
+  scheduleLightning();
+}
 
-let audioContext=null;
-let soundEnabled=false;
+/* =================================
+   2. CINEMATIC AUDIO ENGINE
+================================= */
+
+let audioContext = null;
+let masterGain = null;
+let soundEnabled = false;
+let windSource = null;
+let windGain = null;
 
 function initAudio() {
-  if(!audioContext) {
-    const AudioCtx=window.AudioContext||window.webkitAudioContext;
-    if(!AudioCtx)return;
-    audioContext=new AudioCtx();
+  if (!audioContext) {
+    const AudioCtx =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioCtx) return false;
+
+    audioContext = new AudioCtx();
+
+    masterGain = audioContext.createGain();
+    masterGain.gain.value = .55;
+    masterGain.connect(audioContext.destination);
   }
-  if(audioContext.state==="suspended")audioContext.resume();
+
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+
+  return true;
 }
+
+/* Noise generator */
+
+function makeNoise(duration, frequency, volume, delay = 0) {
+  if (!audioContext || !masterGain) return;
+
+  const rate = audioContext.sampleRate;
+  const length = Math.floor(rate * duration);
+
+  const buffer = audioContext.createBuffer(1, length, rate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < length; i++) {
+    data[i] = Math.random() * 2 - 1;
+  }
+
+  const source = audioContext.createBufferSource();
+  source.buffer = buffer;
+
+  const filter = audioContext.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.value = frequency;
+
+  const gain = audioContext.createGain();
+  const start = audioContext.currentTime + delay;
+
+  gain.gain.setValueAtTime(.0001, start);
+  gain.gain.exponentialRampToValueAtTime(
+    volume,
+    start + .025
+  );
+  gain.gain.exponentialRampToValueAtTime(
+    .0001,
+    start + duration
+  );
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(masterGain);
+
+  source.start(start);
+  source.stop(start + duration + .05);
+}
+
+/* Deep rumble */
+
+function makeRumble(delay, volume, duration) {
+  if (!audioContext || !masterGain) return;
+
+  const start = audioContext.currentTime + delay;
+
+  const oscillator = audioContext.createOscillator();
+  const filter = audioContext.createBiquadFilter();
+  const gain = audioContext.createGain();
+
+  oscillator.type = "triangle";
+  oscillator.frequency.setValueAtTime(65, start);
+  oscillator.frequency.exponentialRampToValueAtTime(
+    28,
+    start + duration
+  );
+
+  filter.type = "lowpass";
+  filter.frequency.value = 115;
+
+  gain.gain.setValueAtTime(.0001, start);
+  gain.gain.exponentialRampToValueAtTime(
+    volume,
+    start + .12
+  );
+  gain.gain.exponentialRampToValueAtTime(
+    .0001,
+    start + duration
+  );
+
+  oscillator.connect(filter);
+  filter.connect(gain);
+  gain.connect(masterGain);
+
+  oscillator.start(start);
+  oscillator.stop(start + duration + .1);
+}
+
+/* Thunder sound */
 
 function playThunder() {
-  if(!soundEnabled || !audioContext)return;
+  if (!soundEnabled || !audioContext) return;
 
-  const duration=2.4;
-  const sampleRate=audioContext.sampleRate;
-  const buffer=audioContext.createBuffer(
-    1,sampleRate*duration,sampleRate
-  );
-  const data=buffer.getChannelData(0);
+  // Sharp initial crack
+  makeNoise(.28, 2400, .19);
 
-  for(let i=0;i<data.length;i++) {
-    const t=i/sampleRate;
-    const envelope=Math.exp(-t*1.8);
-    data[i]=(Math.random()*2-1)*envelope;
-  }
+  // Main thunder impact
+  makeNoise(1.8, 430, .15, .07);
 
-  const source=audioContext.createBufferSource();
-  source.buffer=buffer;
+  // Long low-frequency thunder
+  makeRumble(.05, .21, 3.8);
+  makeRumble(.65, .1, 3.2);
 
-  const filter=audioContext.createBiquadFilter();
-  filter.type="lowpass";
-  filter.frequency.value=170;
-
-  const gain=audioContext.createGain();
-  gain.gain.setValueAtTime(.0001,audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(.20,audioContext.currentTime+.04);
-  gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+duration);
-
-  source.connect(filter);
-  filter.connect(gain);
-  gain.connect(audioContext.destination);
-  source.start();
+  // Distant echoes
+  makeNoise(2.8, 180, .045, .9);
+  makeRumble(1.25, .065, 3.4);
 }
 
-function playWind() {
-  if(!soundEnabled || !audioContext)return;
+/* Wind ambience */
 
-  const buffer=audioContext.createBuffer(
-    1,audioContext.sampleRate*3,audioContext.sampleRate
+function startWind() {
+  if (!audioContext || !soundEnabled || windSource) return;
+
+  const rate = audioContext.sampleRate;
+  const buffer = audioContext.createBuffer(
+    1,
+    rate * 4,
+    rate
   );
-  const data=buffer.getChannelData(0);
 
-  for(let i=0;i<data.length;i++) {
-    data[i]=(Math.random()*2-1)*.15;
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < data.length; i++) {
+    data[i] = Math.random() * 2 - 1;
   }
 
-  const source=audioContext.createBufferSource();
-  source.buffer=buffer;
-  source.loop=true;
+  windSource = audioContext.createBufferSource();
+  windSource.buffer = buffer;
+  windSource.loop = true;
 
-  const filter=audioContext.createBiquadFilter();
-  filter.type="lowpass";
-  filter.frequency.value=180;
+  const filter = audioContext.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.value = 190;
 
-  const gain=audioContext.createGain();
-  gain.gain.value=.025;
+  windGain = audioContext.createGain();
+  windGain.gain.value = .0001;
 
-  source.connect(filter);
-  filter.connect(gain);
-  gain.connect(audioContext.destination);
-  source.start();
+  windSource.connect(filter);
+  filter.connect(windGain);
+  windGain.connect(masterGain);
 
-  window.windSource=source;
+  windSource.start();
+
+  windGain.gain.setTargetAtTime(
+    .035,
+    audioContext.currentTime,
+    .8
+  );
 }
 
-const soundButton=document.getElementById("soundButton");
+function stopWind() {
+  if (!windSource) return;
 
-soundButton.addEventListener("click",()=>{
-  initAudio();
-  soundEnabled=!soundEnabled;
+  const oldSource = windSource;
+  windSource = null;
 
-  soundButton.textContent=soundEnabled?"SOUND: ON":"SOUND: OFF";
-
-  if(soundEnabled) {
-    playWind();
-  } else if(window.windSource) {
-    window.windSource.stop();
-    window.windSource=null;
+  if (windGain && audioContext) {
+    windGain.gain.setTargetAtTime(
+      .0001,
+      audioContext.currentTime,
+      .15
+    );
   }
-});
 
-/* ==============================
-   EPIC LOADING SEQUENCE
-================================ */
+  setTimeout(() => {
+    try {
+      oldSource.stop();
+    } catch (error) {}
+  }, 700);
+}
 
-const loader=document.getElementById("loader");
-const progress=document.getElementById("loaderProgress");
-const percent=document.getElementById("loaderPercent");
-const statusText=document.getElementById("loaderStatus");
-const loaderFlash=document.getElementById("loaderFlash");
+/* Sound toggle */
 
-const loadingMessages=[
-  "AWAKENING THE STORM",
-  "SUMMONING THE ELEMENTS",
-  "PREPARING THE BATTLEFIELD",
-  "INITIALIZING PKDEV",
-  "ENTERING THE ODYSSEY"
-];
+const soundButton = document.getElementById("soundButton");
 
-let loading=0;
-let finished=false;
-
-function loadingTick() {
-  if(finished)return;
-
-  loading+=Math.random()*4+1;
-  if(loading>100)loading=100;
-
-  progress.style.width=loading+"%";
-  percent.textContent=Math.floor(loading)+"%";
-
-  const messageIndex=Math.min(
-    loadingMessages.length-1,
-    Math.floor(loading/21)
-  );
-  statusText.textContent=loadingMessages[messageIndex];
-
-  if(loading===100) {
-    setTimeout(()=>{
-      loader.classList.add("hide");
-      finished=true;
-      document.body.style.overflow="auto";
-    },650);
+soundButton.addEventListener("click", () => {
+  if (!initAudio()) {
+    soundButton.textContent = "AUDIO UNAVAILABLE";
     return;
   }
 
-  setTimeout(loadingTick,80);
-}
+  soundEnabled = !soundEnabled;
 
-document.body.style.overflow="hidden";
-
-/* Lightning moments during loading */
-setTimeout(()=>{
-  loaderFlash.classList.add("active");
-  strike();
-},850);
-
-setTimeout(()=>{
-  loaderFlash.classList.remove("active");
-  void loaderFlash.offsetWidth;
-  loaderFlash.classList.add("active");
-  strike();
-},2600);
-
-setTimeout(loadingTick,300);
-
-/* ==============================
-   SCROLL REVEAL
-================================ */
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-},{threshold:.12});
-
-document.querySelectorAll(".reveal").forEach(el=>{
-  observer.observe(el);
-});
-
-/* ==============================
-   DISCORD COPY
-================================ */
-
-document.getElementById("discordCopy").addEventListener("click",async e=>{
-  e.preventDefault();
-  const link=e.currentTarget;
-
-  try {
-    await navigator.clipboard.writeText(".Resurect.");
-    link.textContent="COPIED: .RESURECT.";
-    setTimeout(()=>{
-      link.textContent="DISCORD: .RESURECT.";
-    },2000);
-  } catch {
-    link.textContent="USERNAME: .RESURECT.";
+  if (soundEnabled) {
+    startWind();
+    soundButton.textContent = "SOUND: ON";
+    soundButton.setAttribute("aria-pressed", "true");
+    makeRumble(0, .06, .8);
+  } else {
+    stopWind();
+    soundButton.textContent = "SOUND: OFF";
+    soundButton.setAttribute("aria-pressed", "false");
   }
 });
 
-/* Respect reduced motion preference */
-if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  clouds.forEach(c=>c.speed=0);
+/* =================================
+   3. LOADING SEQUENCE
+================================= */
+
+const loader = document.getElementById("loader");
+const loaderProgress = document.getElementById("loaderProgress");
+const loaderPercent = document.getElementById("loaderPercent");
+const loaderStatus = document.getElementById("loaderStatus");
+const loaderQuote = document.getElementById("loaderQuote");
+const flashScreen = document.getElementById("flashScreen");
+
+const messages = [
+  "INITIALIZING ENVIRONMENT",
+  "PREPARING THE WORLD",
+  "ESTABLISHING SYSTEMS",
+  "LOADING PROJECTS",
+  "WELCOME TO THE PKDEV"
+];
+
+const quotes = [
+  "THROUGH THE STORM, WE BUILD.",
+  "EVERY EMPIRE BEGINS WITH AN IDEA.",
+  "BUILT WITH CODE. DRIVEN BY VISION.",
+  "THE JOURNEY NEVER ENDS."
+];
+
+let progressValue = 0;
+let loadingFinished = false;
+
+function loadingTick() {
+  if (loadingFinished) return;
+
+  progressValue = Math.min(
+    100,
+    progressValue + Math.random() * 3.5 + 1.2
+  );
+
+  loaderProgress.style.width = progressValue + "%";
+  loaderPercent.textContent = Math.floor(progressValue) + "%";
+
+  const index = Math.min(
+    messages.length - 1,
+    Math.floor(progressValue / 21)
+  );
+
+  loaderStatus.textContent = messages[index];
+
+  if (progressValue >= 100) {
+    loadingFinished = true;
+
+    setTimeout(() => {
+      loader.classList.add("hide");
+      document.body.classList.remove("loading");
+    }, 650);
+
+    return;
+  }
+
+  setTimeout(loadingTick, 85);
 }
+
+loaderQuote.textContent =
+  quotes[Math.floor(Math.random() * quotes.length)];
+
+setTimeout(() => {
+  flashScreen.classList.add("active");
+  strikeLightning();
+}, 850);
+
+setTimeout(() => {
+  flashScreen.classList.remove("active");
+  void flashScreen.offsetWidth;
+  flashScreen.classList.add("active");
+  strikeLightning();
+}, 2600);
+
+setTimeout(loadingTick, 250);
+
+/* =================================
+   4. SCROLL REVEAL
+================================= */
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: .12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+  revealObserver.observe(element);
+});
+
+/* =================================
+   5. PROJECT FILTERS
+================================= */
+
+const filters = document.querySelectorAll(".filter");
+const projects = document.querySelectorAll(".project");
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    filters.forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+
+    const category = button.dataset.filter;
+
+    projects.forEach(project => {
+      const matches =
+        category === "all" ||
+        project.dataset.category === category;
+
+      project.hidden = !matches;
+    });
+  });
+});
+
+/* =================================
+   6. MOBILE NAVIGATION
+================================= */
+
+const menuButton = document.getElementById("menuButton");
+const navigation = document.getElementById("navigation");
+
+menuButton.addEventListener("click", () => {
+  navigation.classList.toggle("open");
+  menuButton.textContent =
+    navigation.classList.contains("open") ? "CLOSE" : "MENU";
+});
+
+navigation.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navigation.classList.remove("open");
+    menuButton.textContent = "MENU";
+  });
+});
+
+/* =================================
+   7. TERMINAL
+================================= */
+
+const terminalInput = document.getElementById("terminalInput");
+const terminalOutput = document.getElementById("terminalOutput");
+const terminalRun = document.getElementById("terminalRun");
+
+function terminalPrint(text, className = "") {
+  const line = document.createElement("div");
+  line.textContent = text;
+  if (className) line.className = className;
+  terminalOutput.appendChild(line);
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+function executeCommand() {
+  const command = terminalInput.value.trim().toLowerCase();
+
+  if (!command) return;
+
+  terminalPrint("> " + command, "terminal-line");
+
+  const commands = {
+    help: [
+      "AVAILABLE COMMANDS:",
+      "help       - Show commands",
+      "about      - About THE PKDEV",
+      "creator    - Creator information",
+      "skills     - Technology overview",
+      "projects   - Project overview",
+      "status     - System status",
+      "clear      - Clear terminal"
+    ],
+    about: ["THE PKDEV — Independent Development Identity."],
+    creator: ["Creator: Resurect"],
+    skills: [
+      "Java, JavaScript, TypeScript, PHP, HTML, CSS, C",
+      "React, Next.js, Node.js, Tailwind CSS",
+      "MySQL, MongoDB, Git, Docker, Linux",
+      "Paper, Spigot, Velocity, BungeeCord"
+    ],
+    projects: [
+      "Imperial Launcher",
+      "PKDEV.Security",
+      "PkdevStore",
+      "Project Delta",
+      "Moderator Academy",
+      "PKDEV.Hub"
+    ],
+    status: [
+      "SYSTEM: ONLINE",
+      "IDENTITY: THE PKDEV",
+      "CREATOR: RESURECT",
+      "ENVIRONMENT: RUNNING"
+    ]
+  };
+
+  if (command === "clear") {
+    terminalOutput.innerHTML = "";
+    terminalInput.value = "";
+    return;
+  }
+
+  if (commands[command]) {
+    commands[command].forEach(line => terminalPrint(line));
+  } else {
+    terminalPrint("Unknown command. Type 'help' to see commands.");
+  }
+
+  terminalInput.value = "";
+}
+
+terminalRun.addEventListener("click", executeCommand);
+
+terminalInput.addEventListener("keydown", event => {
+  if (event.key === "Enter") executeCommand();
+});
+
+/* =================================
+   8. DISCORD COPY
+================================= */
+
+document.getElementById("discordCopy").addEventListener("click", async event => {
+  event.preventDefault();
+
+  const link = event.currentTarget;
+
+  try {
+    await navigator.clipboard.writeText(".Resurect.");
+    link.textContent = "COPIED: .RESURECT.";
+
+    setTimeout(() => {
+      link.textContent = "DISCORD: .RESURECT.";
+    }, 2000);
+  } catch (error) {
+    link.textContent = "USERNAME: .RESURECT.";
+  }
+});
+
+/* =================================
+   9. BACK TO TOP
+================================= */
+
+const topButton = document.getElementById("topButton");
+
+window.addEventListener("scroll", () => {
+  topButton.classList.toggle("show", window.scrollY > 500);
+});
+
+topButton.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 </script>
 
 </body>
