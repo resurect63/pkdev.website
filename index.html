@@ -2,1039 +2,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-<title>PKDEV — Resurect</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap');
-
-:root {
-  --bg: #080808;
-  --panel: #101010;
-  --text: #f4f4f4;
-  --muted: #858585;
-  --border: #242424;
-  --soft: #c5c5c5;
-  --mono: 'DM Mono', monospace;
-  --font: 'Inter', sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font);
-  overflow-x: hidden;
-  line-height: 1.7;
-}
-
-/* Background light trails */
-
-.background {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  overflow: hidden;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 50% 0%, #171717 0%, transparent 55%),
-    #080808;
-}
-
-.trails {
-  position: absolute;
-  inset: -100%;
-  width: 300%;
-  height: 300%;
-  opacity: .18;
-  background: repeating-linear-gradient(
-    115deg,
-    transparent 0px,
-    transparent 180px,
-    rgba(255,255,255,.0) 181px,
-    rgba(255,255,255,.28) 182px,
-    rgba(255,255,255,.0) 184px,
-    transparent 300px
-  );
-  animation: moveTrails 35s linear infinite;
-}
-
-.trails.second {
-  opacity: .09;
-  transform: rotate(180deg);
-  animation: moveTrailsTwo 48s linear infinite;
-}
-
-.trails.third {
-  opacity: .06;
-  background: repeating-linear-gradient(
-    105deg,
-    transparent 0px,
-    transparent 260px,
-    rgba(255,255,255,.4) 261px,
-    transparent 263px,
-    transparent 420px
-  );
-  animation: moveTrails 60s linear infinite;
-}
-
-@keyframes moveTrails {
-  from { transform: translate3d(-3%, -2%, 0); }
-  to { transform: translate3d(3%, 2%, 0); }
-}
-
-@keyframes moveTrailsTwo {
-  from { transform: translate3d(3%, 2%, 0) rotate(180deg); }
-  to { transform: translate3d(-3%, -2%, 0) rotate(180deg); }
-}
-
-.background::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 20%, #080808 100%);
-}
-
-/* Layout */
-
-.container {
-  width: min(100% - 48px, 1040px);
-  margin: auto;
-}
-
-header {
-  height: 82px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-
-.logo {
-  color: #fff;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -1.8px;
-  text-decoration: none;
-  position: relative;
-}
-
-.logo span {
-  color: #777;
-  font-weight: 400;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-nav button {
-  border: none;
-  background: transparent;
-  color: #858585;
-  font-family: var(--font);
-  font-size: 13px;
-  cursor: pointer;
-  transition: .2s;
-}
-
-nav button:hover,
-nav button.active {
-  color: white;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: 1px solid var(--border);
-  color: white;
-  border-radius: 6px;
-  padding: 7px 11px;
-  cursor: pointer;
-}
-
-/* Pages */
-
-main {
-  min-height: calc(100vh - 150px);
-}
-
-.page {
-  display: none;
-  padding: 90px 0 100px;
-  animation: pageIn .35s ease;
-}
-
-.page.active {
-  display: block;
-}
-
-@keyframes pageIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.eyebrow {
-  color: #888;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 1px;
-  margin-bottom: 22px;
-}
-
-.hero-title {
-  font-size: clamp(42px, 8vw, 76px);
-  line-height: 1.08;
-  letter-spacing: -4px;
-  font-weight: 700;
-  max-width: 780px;
-}
-
-.hero-title .dim {
-  color: #777;
-}
-
-.hero-description {
-  color: #999;
-  font-size: 15px;
-  max-width: 540px;
-  margin-top: 25px;
-  line-height: 2;
-}
-
-.hero-links {
-  display: flex;
-  gap: 22px;
-  margin-top: 32px;
-  flex-wrap: wrap;
-}
-
-.text-link {
-  color: white;
-  font-size: 13px;
-  text-decoration: none;
-  border-bottom: 1px solid #555;
-  padding-bottom: 4px;
-  transition: .2s;
-}
-
-.text-link:hover {
-  border-color: white;
-  color: #aaa;
-}
-
-.section-heading {
-  font-size: 34px;
-  letter-spacing: -1.5px;
-  margin-bottom: 10px;
-}
-
-.section-description {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 38px;
-}
-
-/* Home details */
-
-.home-bottom {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  margin-top: 95px;
-  padding-top: 28px;
-  border-top: 1px solid var(--border);
-}
-
-.small-heading {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: #777;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 18px;
-}
-
-.home-bottom p {
-  color: #aaa;
-  font-size: 13px;
-  line-height: 2;
-}
-
-/* Projects */
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-bottom: 28px;
-}
-
-.filter-btn {
-  background: transparent;
-  color: #888;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 7px 13px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  color: #fff;
-  border-color: #777;
-  background: #171717;
-}
-
-.project-list {
-  border-top: 1px solid var(--border);
-}
-
-.project {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 20px 2px;
-  border-bottom: 1px solid var(--border);
-  transition: .2s;
-}
-
-.project:hover {
-  padding-left: 9px;
-  background: rgba(255,255,255,.015);
-}
-
-.project-info {
-  min-width: 0;
-}
-
-.project-name {
-  font-size: 15px;
-  font-weight: 600;
-  color: #eee;
-}
-
-.project-desc {
-  color: #777;
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-.project-meta {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex-shrink: 0;
-}
-
-.project-category {
-  color: #777;
-  font-family: var(--mono);
-  font-size: 10px;
-}
-
-.status {
-  color: #bcbcbc;
-  font-family: var(--mono);
-  font-size: 10px;
-  border: 1px solid #343434;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-/* Plugin list */
-
-.plugin-intro {
-  padding: 22px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  margin-bottom: 35px;
-  background: rgba(255,255,255,.015);
-}
-
-.plugin-intro p {
-  color: #999;
-  font-size: 13px;
-  line-height: 2;
-}
-
-.plugin-group {
-  margin-bottom: 36px;
-}
-
-.plugin-group h3 {
-  color: #888;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding-bottom: 13px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 5px;
-}
-
-.more-plugins {
-  color: #aaa;
-  font-family: var(--mono);
-  font-size: 12px;
-  padding: 20px 0;
-}
-
-/* Releases */
-
-.release-card {
-  padding: 25px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  background: rgba(255,255,255,.015);
-  margin-bottom: 15px;
-}
-
-.release-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-}
-
-.release-card h3 {
-  font-size: 18px;
-}
-
-.release-card p {
-  color: #888;
-  font-size: 13px;
-  margin-top: 12px;
-  line-height: 2;
-}
-
-.release-link {
-  display: inline-block;
-  color: white;
-  font-size: 12px;
-  text-decoration: none;
-  margin-top: 17px;
-  border-bottom: 1px solid #555;
-  padding-bottom: 3px;
-}
-
-/* About */
-
-.about-text {
-  color: #aaa;
-  max-width: 680px;
-  font-size: 14px;
-  line-height: 2.2;
-}
-
-.about-text p {
-  margin-bottom: 18px;
-}
-
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 35px;
-}
-
-.skill {
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  color: #bbb;
-  font-family: var(--mono);
-  font-size: 11px;
-  transition: .2s;
-}
-
-.skill:hover {
-  color: white;
-  border-color: #777;
-}
-
-/* Footer */
-
-footer {
-  min-height: 68px;
-  border-top: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #666;
-  font-size: 11px;
-}
-
-footer span:last-child {
-  font-family: var(--mono);
-}
-
-/* Responsive */
-
-@media (max-width: 650px) {
-  .container {
-    width: min(100% - 34px, 1040px);
-  }
-
-  header {
-    height: 72px;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  nav {
-    display: none;
-    position: absolute;
-    top: 72px;
-    left: 0;
-    right: 0;
-    padding: 20px 24px;
-    background: #0b0b0b;
-    border-bottom: 1px solid var(--border);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    z-index: 10;
-  }
-
-  nav.open {
-    display: flex;
-  }
-
-  nav button {
-    font-size: 14px;
-  }
-
-  .page {
-    padding: 65px 0 75px;
-  }
-
-  .hero-title {
-    letter-spacing: -2.5px;
-  }
-
-  .home-bottom {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    margin-top: 65px;
-  }
-
-  .project {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .project-meta {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .release-top {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  footer {
-    gap: 12px;
-    flex-wrap: wrap;
-    padding: 18px 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Resurect — Personal website. Technology, development and innovation.">
+  <title>Resurect</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #101010;
+      --text: #f4f4f4;
+      --muted: #858585;
+      --accent: #a8cce5;
+      --border: #202020;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1080px, 88%);
+      margin: auto;
+    }
+
+    /* Navigation */
+
+    header {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #999;
+      font-size: 13px;
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* Hero */
+
+    .hero {
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      padding: 100px 0;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -100px;
+      top: 100px;
+      background: radial-gradient(circle, rgba(168,204,229,.09), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: clamp(58px, 11vw, 112px);
+      line-height: 1;
+      letter-spacing: -7px;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      max-width: 510px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 38px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      padding: 12px 22px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 13px;
+      transition: .25s;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #080808;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    /* Sections */
+
+    section {
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 5vw, 44px);
+      letter-spacing: -2px;
+      margin-bottom: 25px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      max-width: 650px;
+      font-size: 15px;
+      line-height: 2;
+    }
+
+    /* Expertise */
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 35px;
+    }
+
+    .skill {
+      padding: 10px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: #bdbdbd;
+      font-size: 12px;
+      transition: .25s;
+    }
+
+    .skill:hover {
+      color: var(--accent);
+      border-color: #526b7c;
+    }
+
+    /* Contact */
+
+    .contact-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .socials {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .socials a {
+      color: var(--muted);
+      font-size: 13px;
+      transition: .25s;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer p {
+      color: #666;
+      font-size: 11px;
+    }
+
+    .footer-name {
+      color: #aaa;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 650px) {
+      header {
+        height: 70px;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: 580px;
+      }
+
+      .hero h1 {
+        letter-spacing: -4px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-links {
+        gap: 10px;
+      }
+
+      .nav-links a {
+        font-size: 10px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="background">
-  <div class="trails"></div>
-  <div class="trails second"></div>
-  <div class="trails third"></div>
-</div>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo">Resurect<span>.</span></a>
 
-<div class="container">
-
-<header>
-  <a class="logo" href="#" onclick="showPage('home'); return false;">PKDEV<span>.</span></a>
-
-  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
-
-  <nav id="navigation">
-    <button class="active" data-page="home" onclick="showPage('home')">Home</button>
-    <button data-page="projects" onclick="showPage('projects')">Projects</button>
-    <button data-page="plugins" onclick="showPage('plugins')">Minecraft Plugins</button>
-    <button data-page="releases" onclick="showPage('releases')">Releases</button>
-    <button data-page="about" onclick="showPage('about')">About</button>
-  </nav>
-</header>
-
-<main>
-
-<!-- HOME -->
-
-<section class="page active" id="home">
-
-  <div class="eyebrow">INDEPENDENT DEVELOPER / PKDEV</div>
-
-  <h1 class="hero-title">
-    Ideas into<br>
-    <span class="dim">digital reality.</span>
-  </h1>
-
-  <p class="hero-description">
-    Man Resurect hastam. Yek developer-e mostaghel ke be sakht-e
-    software, web applications, Minecraft systems va project haye
-    digital alaghe daram.
-    Hadafam tabdil-e ideha be product haye karbordi va ba keyfiyat ast.
-  </p>
-
-  <div class="hero-links">
-    <a class="text-link" href="https://github.com/resurect63" target="_blank">GitHub ↗</a>
-    <a class="text-link" href="https://t.me/Resurect63" target="_blank">Telegram ↗</a>
-    <a class="text-link" href="mailto:itznightitznight16@gmail.com">Email ↗</a>
-    <a class="text-link" href="#" onclick="showPage('projects'); return false;">View Projects →</a>
-  </div>
-
-  <div class="home-bottom">
-    <div>
-      <div class="small-heading">What I Do</div>
-      <p>
-        Software Development<br>
-        Web Development<br>
-        Minecraft Plugin Development<br>
-        System Design & Project Management
-      </p>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <div>
-      <div class="small-heading">Currently Working On</div>
-      <p>
-        Imperial Launcher<br>
-        PKDEV Security<br>
-        Minecraft Plugin Systems<br>
-        Independent Development Projects
-      </p>
-    </div>
-  </div>
+  <main>
 
-</section>
+    <div class="container">
+      <section class="hero" id="home">
+        <p class="eyebrow">Independent · Technology · Innovation</p>
 
+        <h1>Resurect<span>.</span></h1>
 
-<!-- PROJECTS -->
+        <p class="hero-description">
+          Exploring technology, building digital experiences,
+          and turning ideas into meaningful solutions.
+        </p>
 
-<section class="page" id="projects">
-
-  <div class="eyebrow">SELECTED WORK</div>
-  <h2 class="section-heading">Projects</h2>
-  <p class="section-description">
-    Project haye man dar category haye mokhtalef.
-  </p>
-
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="windows">Windows Software</button>
-    <button class="filter-btn" data-filter="web">Web Development</button>
-    <button class="filter-btn" data-filter="minecraft">Minecraft</button>
-    <button class="filter-btn" data-filter="other">Other</button>
-  </div>
-
-  <div class="project-list" id="projectList">
-
-    <div class="project" data-category="windows">
-      <div class="project-info">
-        <div class="project-name">Imperial Launcher</div>
-        <div class="project-desc">A modern Minecraft Java launcher for Windows.</div>
-      </div>
-      <div class="project-meta">
-        <span class="project-category">WINDOWS</span>
-        <span class="status">Released</span>
-      </div>
-    </div>
-
-    <div class="project" data-category="web">
-      <div class="project-info">
-        <div class="project-name">PKDEV.Security</div>
-        <div class="project-desc">Security-focused web platform and management tools.</div>
-      </div>
-      <div class="project-meta">
-        <span class="project-category">WEB</span>
-        <span class="status">Released</span>
-      </div>
-    </div>
-
-    <div class="project" data-category="web">
-      <div class="project-info">
-        <div class="project-name">PKDEV.Hub</div>
-        <div class="project-desc">A central platform for PKDEV projects and services.</div>
-      </div>
-      <div class="project-meta">
-        <span class="project-category">WEB</span>
-        <span class="status">Released</span>
-      </div>
-    </div>
-
-    <div class="project" data-category="other">
-      <div class="project-info">
-        <div class="project-name">Moderator Academy</div>
-        <div class="project-desc">Educational platform for Minecraft server moderation.</div>
-      </div>
-      <div class="project-meta">
-        <span class="project-category">COMMUNITY</span>
-        <span class="status">Released</span>
-      </div>
-    </div>
-
-    <div class="project" data-category="minecraft">
-      <div class="project-info">
-        <div class="project-name">Minecraft Plugin Collection</div>
-        <div class="project-desc">A collection of custom Minecraft server plugins and systems.</div>
-      </div>
-      <div class="project-meta">
-        <span class="project-category">MINECRAFT</span>
-        <span class="status">Released</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- MINECRAFT PLUGINS -->
-
-<section class="page" id="plugins">
-
-  <div class="eyebrow">MINECRAFT DEVELOPMENT</div>
-  <h2 class="section-heading">Minecraft Plugins</h2>
-  <p class="section-description">
-    Custom plugins, server tools va gameplay systems.
-  </p>
-
-  <div class="plugin-intro">
-    <p>
-      Plugin haye PKDEV baraye Minecraft Java server ha design shode-and.
-      Focus asli rooye performance, compatibility, customization va
-      experience-e behtar baraye players va staff ast.
-    </p>
-  </div>
-
-  <div class="plugin-group">
-    <h3>Store & Economy</h3>
-
-    <div class="project-list">
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">PkdevStore</div>
-          <div class="project-desc">Custom server store with Vault and LuckPerms integration.</div>
+        <div class="hero-actions">
+          <a href="#about" class="button primary">Discover More</a>
+          <a href="#contact" class="button">Get in Touch</a>
         </div>
-        <span class="status">Released</span>
-      </div>
+      </section>
+    </div>
 
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">PkdevBounty</div>
-          <div class="project-desc">Player bounty and reward management system.</div>
+    <section id="about">
+      <div class="container">
+        <p class="section-label">01 / About</p>
+        <h2 class="section-title">A little about me.</h2>
+
+        <p class="section-description">
+          I'm Resurect, a developer interested in software engineering,
+          web technologies, and digital products. I enjoy exploring
+          new ideas, learning through building, and creating solutions
+          with a focus on simplicity and quality.
+        </p>
+      </div>
+    </section>
+
+    <section id="expertise">
+      <div class="container">
+        <p class="section-label">02 / Expertise</p>
+        <h2 class="section-title">Technologies I work with.</h2>
+
+        <p class="section-description">
+          A collection of technologies and tools across software
+          development, web engineering, and infrastructure.
+        </p>
+
+        <div class="skills">
+          <span class="skill">Java</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">TypeScript</span>
+          <span class="skill">PHP</span>
+          <span class="skill">HTML</span>
+          <span class="skill">CSS</span>
+          <span class="skill">React</span>
+          <span class="skill">Next.js</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">MySQL</span>
+          <span class="skill">MongoDB</span>
+          <span class="skill">Docker</span>
+          <span class="skill">Linux</span>
+          <span class="skill">Git</span>
+          <span class="skill">Tailwind CSS</span>
+          <span class="skill">Paper</span>
+          <span class="skill">Spigot</span>
+          <span class="skill">Velocity</span>
         </div>
-        <span class="status">Released</span>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-content">
+          <div>
+            <p class="section-label">03 / Contact</p>
+            <h2 class="section-title">Let's connect.</h2>
+            <p class="section-description">
+              Have a question or want to get in touch?
+              Feel free to reach out.
+            </p>
+          </div>
+
+          <div class="socials">
+            <a href="https://github.com/resurect63" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://t.me/Resurect63" target="_blank" rel="noopener">Telegram ↗</a>
+            <a href="mailto:itznightitznight16@gmail.com">Email ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-name">RESURECT.</p>
+        <p>© <span id="year"></span> Resurect. All rights reserved.</p>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <div class="plugin-group">
-    <h3>Security & Protection</h3>
-
-    <div class="project-list">
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">PkdevAnti-Cheat</div>
-          <div class="project-desc">Custom anti-cheat and server protection system.</div>
-        </div>
-        <span class="status">Released</span>
-      </div>
-
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">PkdevNox</div>
-          <div class="project-desc">Custom server utility and protection plugin.</div>
-        </div>
-        <span class="status">Released</span>
-      </div>
-
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">NOCTGuard</div>
-          <div class="project-desc">Server security and management tools.</div>
-        </div>
-        <span class="status">Released</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="plugin-group">
-    <h3>Staff & Administration</h3>
-
-    <div class="project-list">
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">StaffNotifier</div>
-          <div class="project-desc">Staff activity notifications and server alerts.</div>
-        </div>
-        <span class="status">Released</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="plugin-group">
-    <h3>Custom Gameplay Systems</h3>
-
-    <div class="project-list">
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">Project Delta Systems</div>
-          <div class="project-desc">Custom gameplay systems for Project Delta.</div>
-        </div>
-        <span class="status">Released</span>
-      </div>
-
-      <div class="project">
-        <div class="project-info">
-          <div class="project-name">Feros Custom Plugins</div>
-          <div class="project-desc">Custom plugins and gameplay features for Feros.</div>
-        </div>
-        <span class="status">Released</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="more-plugins">+15 More Plugins</div>
-
-</section>
-
-
-<!-- RELEASES -->
-
-<section class="page" id="releases">
-
-  <div class="eyebrow">DOWNLOADS & VERSIONS</div>
-  <h2 class="section-heading">Releases</h2>
-  <p class="section-description">
-    Release information va project updates.
-  </p>
-
-  <div class="release-card">
-    <div class="release-top">
-      <h3>Imperial Launcher</h3>
-      <span class="status">Released</span>
-    </div>
-    <p>
-      Minecraft Java launcher with version management,
-      mod loader support va modern user interface.
-    </p>
-    <a class="release-link"
-       href="https://github.com/resurect63/Imperial-Launcher"
-       target="_blank">
-      Project Repository ↗
-    </a>
-  </div>
-
-  <div class="release-card">
-    <div class="release-top">
-      <h3>PKDEV Minecraft Plugins</h3>
-      <span class="status">Released</span>
-    </div>
-    <p>
-      Collection of custom plugins for Minecraft Java servers.
-      Baraye release details va updates, repository ra check konid.
-    </p>
-    <a class="release-link"
-       href="https://github.com/resurect63"
-       target="_blank">
-      GitHub Profile ↗
-    </a>
-  </div>
-
-  <div class="release-card">
-    <div class="release-top">
-      <h3>PKDEV Projects</h3>
-      <span class="status">Released</span>
-    </div>
-    <p>
-      Other software and web projects developed under PKDEV.
-    </p>
-    <a class="release-link"
-       href="https://github.com/resurect63"
-       target="_blank">
-      Explore Projects ↗
-    </a>
-  </div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section class="page" id="about">
-
-  <div class="eyebrow">ABOUT ME</div>
-  <h2 class="section-heading">Resurect.</h2>
-
-  <div class="about-text">
-    <p>
-      Man Resurect hastam, yek developer-e mostaghel ke dar zamineye
-      software development, web development va Minecraft plugin development
-      faoliyat mikonam.
-    </p>
-
-    <p>
-      Baraye man development faghat neveshtan code nist.
-      Har project yek ide ast ke ba design, planning va implementation
-      tabdil be yek product-e karbordi mishe.
-    </p>
-
-    <p>
-      Dar kenare coding, be system architecture, project management,
-      performance va sakht-e tools-e mokhtalef alaghe daram.
-    </p>
-  </div>
-
-  <div class="small-heading" style="margin-top:45px;">Technologies & Tools</div>
-
-  <div class="skills">
-    <span class="skill">Java</span>
-    <span class="skill">JavaScript</span>
-    <span class="skill">TypeScript</span>
-    <span class="skill">PHP</span>
-    <span class="skill">HTML</span>
-    <span class="skill">CSS</span>
-    <span class="skill">C</span>
-    <span class="skill">React</span>
-    <span class="skill">Next.js</span>
-    <span class="skill">Node.js</span>
-    <span class="skill">MySQL</span>
-    <span class="skill">MongoDB</span>
-    <span class="skill">Docker</span>
-    <span class="skill">Linux</span>
-    <span class="skill">Git</span>
-    <span class="skill">Tailwind</span>
-    <span class="skill">Paper</span>
-    <span class="skill">Spigot</span>
-    <span class="skill">Bukkit</span>
-    <span class="skill">Folia</span>
-    <span class="skill">Velocity</span>
-    <span class="skill">BungeeCord</span>
-  </div>
-
-  <div class="small-heading" style="margin-top:45px;">Find Me</div>
-
-  <div class="hero-links">
-    <a class="text-link" href="https://github.com/resurect63" target="_blank">GitHub ↗</a>
-    <a class="text-link" href="https://t.me/Resurect63" target="_blank">Telegram ↗</a>
-    <a class="text-link" href="mailto:itznightitznight16@gmail.com">Email ↗</a>
-  </div>
-
-</section>
-
-</main>
-
-<footer>
-  <span>© 2026 PKDEV. All rights reserved.</span>
-  <span>Created by Resurect</span>
-</footer>
-
-</div>
-
-<script>
-function showPage(pageName) {
-  document.querySelectorAll('.page').forEach(page => {
-    page.classList.remove('active');
-  });
-
-  const selectedPage = document.getElementById(pageName);
-
-  if (selectedPage) {
-    selectedPage.classList.add('active');
-  }
-
-  document.querySelectorAll('nav button').forEach(button => {
-    button.classList.toggle(
-      'active',
-      button.dataset.page === pageName
-    );
-  });
-
-  document.getElementById('navigation').classList.remove('open');
-
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-
-  history.replaceState(null, '', '#' + pageName);
-}
-
-function toggleMenu() {
-  document.getElementById('navigation').classList.toggle('open');
-}
-
-/* Project filters */
-
-document.querySelectorAll('.filter-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    const filter = button.dataset.filter;
-
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-
-    button.classList.add('active');
-
-    document.querySelectorAll('#projectList .project').forEach(project => {
-      const category = project.dataset.category;
-
-      project.style.display =
-        filter === 'all' || category === filter
-          ? 'flex'
-          : 'none';
-    });
-  });
-});
-
-/* Open page from URL hash */
-
-const initialPage = window.location.hash.replace('#', '');
-
-if (initialPage && document.getElementById(initialPage)) {
-  showPage(initialPage);
-}
-</script>
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 
 </body>
 </html>
