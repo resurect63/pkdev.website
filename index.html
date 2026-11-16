@@ -4,447 +4,665 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050505">
-<title>RESURECT — Ideas into Digital Reality</title>
+<meta name="theme-color" content="#070909">
+<title>PKDEV — Digital Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#050505;
-  --surface:rgba(18,18,18,.72);
-  --text:#f5f5f5;
-  --muted:#999;
-  --line:rgba(255,255,255,.12);
-  --accent:#fff;
-  --font:'Inter',sans-serif;
+:root{
+ --bg:#070909;--panel:#101515;--panel2:#131a19;
+ --text:#edf4f2;--muted:#899794;--line:#ffffff13;
+ --green:#62e6c1;--font:'Inter',sans-serif;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--bg);color:var(--text);
-  font-family:var(--font);min-height:100vh;
-  overflow-x:hidden;transition:background .35s,color .35s
+ background:var(--bg);color:var(--text);font-family:var(--font);
+ min-height:100vh;overflow-x:hidden;transition:.3s
 }
 body.light{
-  --bg:#f4f4f4;--surface:rgba(255,255,255,.78);
-  --text:#101010;--muted:#666;
-  --line:rgba(0,0,0,.15);--accent:#111;
+ --bg:#f3f7f5;--panel:#fff;--panel2:#e9f1ee;
+ --text:#101b18;--muted:#63736d;--line:#00000016;
 }
-body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl}
-button,a{font:inherit;color:inherit}
-a{text-decoration:none}
-button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+
+/* Background */
 .background{
-  position:fixed;inset:0;z-index:-3;
-  background:
-    linear-gradient(90deg,rgba(0,0,0,.84),rgba(0,0,0,.27) 52%,rgba(0,0,0,.42)),
-    linear-gradient(0deg,rgba(0,0,0,.72),transparent 65%),
-    url('resurect-background.jpg') center 55%/cover no-repeat;
-  transform:scale(1.025);
-  animation:backgroundMove 24s ease-in-out infinite alternate;
+ position:fixed;inset:0;z-index:-5;
+ background:
+ linear-gradient(90deg,rgba(4,8,8,.91),rgba(4,8,8,.75)),
+ url('resurect-background.jpg') center/cover no-repeat;
+ opacity:.42;
 }
-body.light .background{filter:invert(.88) grayscale(1);opacity:.22}
-@keyframes backgroundMove{to{transform:scale(1.08) translateY(-8px)}}
-.grid{
-  position:fixed;inset:0;z-index:-2;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-  background-size:80px 80px;
-  mask-image:linear-gradient(to bottom,black,transparent 95%);
+body.light .background{opacity:.09;filter:invert(1)}
+.grid-bg{
+ position:fixed;inset:0;z-index:-4;pointer-events:none;
+ background-image:
+ linear-gradient(#ffffff08 1px,transparent 1px),
+ linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+ background-size:65px 65px;
+ mask-image:linear-gradient(to bottom,#000,transparent 90%);
 }
-body.light .grid{
-  background-image:
-    linear-gradient(rgba(0,0,0,.045) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,0,0,.045) 1px,transparent 1px);
+body.light .grid-bg{
+ background-image:
+ linear-gradient(#00000008 1px,transparent 1px),
+ linear-gradient(90deg,#00000008 1px,transparent 1px)
 }
-.noise{
-  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.1;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+.neon{
+ position:fixed;width:380px;height:380px;border-radius:50%;
+ filter:blur(110px);opacity:.14;z-index:-3;pointer-events:none;
+ animation:neonMove 16s ease-in-out infinite alternate;
 }
+.neon.one{background:#00e6a5;top:5%;left:-170px}
+.neon.two{background:#168cff;right:-170px;top:35%;animation-delay:-5s}
+.neon.three{background:#a855f7;bottom:-190px;left:35%;animation-delay:-9s}
+@keyframes neonMove{
+ 0%{transform:translate(0,0) scale(.8)}
+ 50%{transform:translate(150px,90px) scale(1.25)}
+ 100%{transform:translate(-70px,-50px) scale(1)}
+}
+
+/* Header */
 header{
-  height:76px;position:fixed;top:0;left:0;right:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 4%;border-bottom:1px solid var(--line);
-  background:rgba(5,5,5,.68);backdrop-filter:blur(18px)
+ height:72px;position:fixed;top:0;left:0;right:0;z-index:100;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 5%;border-bottom:1px solid var(--line);
+ background:#070909b8;backdrop-filter:blur(20px)
 }
-body.light header{background:rgba(245,245,245,.78)}
-.brand{display:flex;align-items:center;gap:13px;font-weight:800;letter-spacing:2px}
-.brand svg{width:38px;height:38px}
-.brand span{font-size:15px}
-nav{display:flex;gap:27px;align-items:center}
+body.light header{background:#f3f7f5d9}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:2px}
+.pk-logo{
+ width:38px;height:38px;border:1px solid #62e6c166;
+ border-radius:11px;display:grid;place-items:center;position:relative;
+ background:linear-gradient(145deg,#62e6c126,#62e6c105);
+ box-shadow:0 0 20px #62e6c122,inset 0 0 15px #62e6c111;
+ overflow:hidden
+}
+.pk-logo span{font-size:15px;letter-spacing:-2px;color:var(--green);z-index:2}
+.pk-logo:after{
+ content:"";position:absolute;width:70px;height:2px;background:#fff8;
+ transform:rotate(-45deg);animation:logoScan 4s infinite
+}
+@keyframes logoScan{0%,35%{top:-20px;left:-40px}80%,100%{top:60px;left:50px}}
+.brand-name{font-size:14px}
+nav{display:flex;align-items:center;gap:23px}
 nav button,.header-actions button{
-  background:none;border:0;color:var(--muted);
-  font-size:13px;transition:.25s
+ border:0;background:none;color:var(--muted);font-size:12px;transition:.2s
 }
-nav button:hover,nav button.active{color:var(--text)}
-nav button.active{position:relative}
+nav button:hover,nav button.active{color:var(--green)}
 nav button.active:after{
-  content:"";position:absolute;bottom:-29px;left:0;right:0;
-  height:2px;background:var(--text)
+ content:"";display:block;width:100%;height:2px;background:var(--green);margin-top:8px
 }
-.header-actions{display:flex;align-items:center;gap:17px}
-.header-actions button{padding:8px}
-.header-actions button:hover{color:var(--text)}
-.mobile-menu{display:none!important}
-main{padding-top:76px}
-.page{display:none;min-height:calc(100vh - 76px);animation:pageIn .45s ease}
+.header-actions{display:flex;gap:16px;align-items:center}
+.header-actions button{padding:7px}
+.header-actions button:hover{color:var(--green)}
+#menuBtn{display:none}
+
+/* Pages */
+main{padding-top:72px}
+.page{display:none;min-height:calc(100vh - 72px);animation:appear .35s ease}
 .page.active{display:block}
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes appear{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 .hero{
-  min-height:calc(100vh - 76px);position:relative;
-  display:grid;grid-template-columns:1.1fr .9fr;
-  align-items:center;padding:65px 6% 120px;overflow:hidden
+ min-height:570px;display:grid;grid-template-columns:1.15fr .85fr;
+ align-items:center;padding:65px 7% 35px;position:relative
 }
-.hero-copy{position:relative;z-index:3;max-width:650px}
+.hero-copy{z-index:2}
 .eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  border:1px solid var(--line);border-radius:40px;
-  padding:9px 15px;font-size:12px;color:var(--muted);
-  background:var(--surface);margin-bottom:25px
+ display:inline-flex;align-items:center;gap:9px;padding:9px 13px;
+ border:1px solid var(--line);border-radius:30px;
+ color:var(--muted);font-size:10px;background:#111a18a8;margin-bottom:24px
 }
-.dot{width:8px;height:8px;background:#ddd;border-radius:50%;box-shadow:0 0 12px white}
-.hero h1{font-size:clamp(58px,8vw,112px);font-weight:900;letter-spacing:-5px;line-height:1}
-.hero h1 span{background:linear-gradient(110deg,#fff 25%,#777 55%,#fff 80%);background-clip:text;color:transparent}
-body.light .hero h1 span{background-image:linear-gradient(110deg,#111,#888,#111);background-clip:text}
-.tagline{font-size:clamp(22px,3vw,37px);margin:18px 0;color:var(--text);font-weight:400}
-.description{font-size:15px;line-height:1.9;color:var(--muted);max-width:520px}
-.buttons{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#62e6c1;box-shadow:0 0 12px #62e6c1}
+h1{font-size:clamp(65px,9vw,115px);font-weight:900;letter-spacing:-7px;line-height:.95}
+h1 span{
+ background:linear-gradient(110deg,#fff,#62e6c1 55%,#8aa7ff);
+ background-clip:text;color:transparent
+}
+body.light h1 span{background-image:linear-gradient(110deg,#111,#168c70 65%,#4464a9);background-clip:text}
+.hero-sub{font-size:clamp(19px,2.7vw,29px);margin:22px 0 15px;font-weight:500}
+.hero-description{max-width:520px;font-size:13px;line-height:2;color:var(--muted)}
+.hero-actions{display:flex;gap:12px;margin-top:27px;flex-wrap:wrap}
 .btn{
-  border:1px solid var(--line);border-radius:40px;padding:14px 23px;
-  font-size:13px;display:inline-flex;align-items:center;gap:12px;
-  transition:.25s;background:rgba(255,255,255,.04)
+ border:1px solid var(--line);padding:13px 19px;border-radius:9px;
+ font-size:11px;background:#ffffff08;transition:.25s
 }
-.btn.primary{background:#fff;color:#080808;border-color:#fff;font-weight:700}
-.btn:hover{transform:translateY(-3px);box-shadow:0 8px 30px #ffffff18}
-body.light .btn.primary{background:#111;color:#fff;border-color:#111}
-.socials{display:flex;gap:19px;margin-top:38px;color:var(--muted);font-size:13px}
-.socials a:hover{color:var(--text)}
-.hero-art{
-  position:relative;display:grid;place-items:center;
-  min-height:470px;perspective:900px
+.btn.primary{background:var(--green);color:#07110e;border-color:var(--green);font-weight:800}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px #62e6c122}
+.hero-socials{display:flex;gap:19px;margin-top:30px;color:var(--muted);font-size:11px}
+.hero-socials a:hover{color:var(--green)}
+.hero-visual{height:360px;display:grid;place-items:center;position:relative}
+.core{
+ width:205px;height:205px;border-radius:50%;display:grid;place-items:center;
+ border:1px solid #62e6c144;position:relative;
+ background:radial-gradient(circle,#62e6c122,transparent 68%);
+ box-shadow:0 0 75px #62e6c117,inset 0 0 50px #62e6c111;
+ animation:coreFloat 6s ease-in-out infinite
 }
-.logo-stage{
-  width:min(390px,75vw);aspect-ratio:1;position:relative;
-  display:grid;place-items:center;
-  animation:float 6s ease-in-out infinite;
-  filter:drop-shadow(0 0 24px #fff4)
+.core:before,.core:after{
+ content:"";position:absolute;border:1px solid #62e6c366;
+ border-radius:50%;inset:-28px;transform:rotateX(65deg);
+ animation:spin 12s linear infinite
 }
-@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-17px) rotate(2deg)}}
-.logo-stage:before{
-  content:"";position:absolute;width:65%;height:65%;border-radius:50%;
-  background:radial-gradient(circle,#ffffff28,transparent 68%);
-  filter:blur(20px)
-}
-.logo-symbol{width:56%;height:56%;position:relative;z-index:2;filter:drop-shadow(0 0 12px #fff9)}
-.orbit{
-  position:absolute;width:100%;height:38%;border:1px solid #ffffff85;
-  border-radius:50%;transform:rotate(-27deg);
-  animation:orbit 12s linear infinite
-}
-.orbit.two{width:112%;height:48%;transform:rotate(53deg);animation-direction:reverse;opacity:.45}
-.orbit.three{width:90%;height:30%;transform:rotate(75deg);opacity:.3;animation-duration:18s}
-@keyframes orbit{to{transform:rotate(333deg)}}
-.orbit:after{
-  content:"";position:absolute;width:7px;height:7px;background:#fff;
-  border-radius:50%;top:4%;left:18%;box-shadow:0 0 18px 5px #fff
-}
-.art-caption{
-  position:absolute;bottom:6%;right:0;color:var(--muted);
-  font-size:11px;letter-spacing:3px
-}
-.skills-section{
-  padding:0 6% 38px;position:relative;z-index:4
-}
-.section-kicker{font-size:12px;color:var(--muted);letter-spacing:2px;margin-bottom:18px}
-.skills-row{display:flex;gap:12px;flex-wrap:wrap}
+.core:after{inset:-55px;transform:rotateY(65deg);animation-direction:reverse;opacity:.4}
+.core strong{font-size:49px;letter-spacing:-6px;color:var(--green);text-shadow:0 0 30px #62e6c1}
+@keyframes coreFloat{50%{transform:translateY(-14px)}}
+@keyframes spin{to{transform:rotate(425deg)}}
+.visual-label{position:absolute;bottom:18px;right:0;color:var(--muted);font-size:9px;letter-spacing:3px}
+.content{max-width:1160px;margin:auto;padding:65px 6% 90px}
+.kicker{font-size:10px;color:var(--green);letter-spacing:3px;margin-bottom:15px}
+.heading{font-size:clamp(38px,6vw,64px);letter-spacing:-3px;font-weight:800}
+.intro{color:var(--muted);font-size:13px;line-height:1.9;max-width:650px;margin:13px 0 32px}
+
+/* Skills */
+.skills{padding:0 7% 40px}
+.skills-head{font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:14px}
+.skill-list{display:flex;gap:9px;flex-wrap:wrap}
 .skill{
-  min-width:83px;min-height:82px;padding:12px 13px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;border:1px solid var(--line);border-radius:14px;
-  background:rgba(12,12,12,.68);backdrop-filter:blur(10px);
-  transition:.3s
+ --glow:#fff;display:flex;align-items:center;gap:7px;
+ border:1px solid var(--line);border-radius:8px;padding:8px 10px;
+ background:#101515b8;font-size:10px;color:var(--muted);
+ transition:.25s;animation:skillRise 5s ease-in-out infinite;
+ animation-delay:var(--delay,0s)
 }
-body.light .skill{background:rgba(255,255,255,.78)}
-.skill:hover{transform:translateY(-7px);border-color:var(--glow);box-shadow:0 0 24px color-mix(in srgb,var(--glow) 30%,transparent)}
-.skill img{width:29px;height:29px;object-fit:contain;filter:drop-shadow(0 0 8px var(--glow))}
-.skill span{font-size:10px;color:var(--muted)}
-.bottom-line{
-  border-top:1px solid var(--line);padding:20px 6%;
-  display:flex;justify-content:space-between;align-items:center;
-  color:var(--muted);font-size:12px
+body.light .skill{background:#fff}
+.skill img{width:17px;height:17px;object-fit:contain;filter:drop-shadow(0 0 5px var(--glow))}
+.skill:hover{color:var(--text);border-color:var(--glow);box-shadow:0 0 17px color-mix(in srgb,var(--glow) 28%,transparent);transform:translateY(-5px)}
+@keyframes skillRise{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.home-bottom{
+ display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;
+ padding:17px 7%;border-top:1px solid var(--line);font-size:10px;color:var(--muted)
 }
-.availability{display:flex;align-items:center;gap:9px}
-.availability i{width:7px;height:7px;border-radius:50%;background:#ddd;box-shadow:0 0 10px #fff}
-.page-content{max-width:1150px;margin:auto;padding:90px 6% 100px}
-.page-heading{font-size:clamp(42px,7vw,76px);font-weight:800;letter-spacing:-3px;margin-bottom:15px}
-.page-intro{color:var(--muted);max-width:650px;line-height:1.9;margin-bottom:45px}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+
+/* Project filters and cards */
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:25px}
+.filter{
+ background:var(--panel);border:1px solid var(--line);
+ border-radius:7px;padding:9px 13px;font-size:10px;color:var(--muted)
+}
+.filter.active,.filter:hover{color:var(--green);border-color:#62e6c166;background:#62e6c10b}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .card{
-  padding:27px;border:1px solid var(--line);border-radius:17px;
-  background:var(--surface);backdrop-filter:blur(12px);transition:.3s
+ border:1px solid var(--line);border-radius:12px;padding:22px;
+ background:linear-gradient(145deg,#111a18dc,#0c1110dc);
+ backdrop-filter:blur(12px);transition:.25s;min-width:0
 }
-.card:hover{transform:translateY(-5px);border-color:#888}
-.card small{color:var(--muted);letter-spacing:2px;font-size:10px}
-.card h3{font-size:21px;margin:15px 0 10px}
-.card p{font-size:13px;line-height:1.8;color:var(--muted)}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
-.tags span{font-size:10px;border:1px solid var(--line);padding:6px 9px;border-radius:20px;color:var(--muted)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px}
-.about-block{padding:25px 0;border-top:1px solid var(--line)}
-.about-block h3{margin-bottom:14px}
-.about-block p,.about-block li{color:var(--muted);font-size:14px;line-height:2}
-.about-block ul{padding-inline-start:20px}
-.uses-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.use-item{padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-.use-item strong{display:block;margin-bottom:7px;font-size:14px}
-.use-item span{font-size:12px;color:var(--muted)}
-.empty-note{border:1px dashed var(--line);padding:45px;border-radius:16px;color:var(--muted);text-align:center}
-footer{padding:25px 6%;border-top:1px solid var(--line);color:var(--muted);font-size:11px;text-align:center}
+body.light .card{background:#ffffffd9}
+.card:hover{transform:translateY(-4px);border-color:#62e6c155;box-shadow:0 12px 35px #0003}
+.project-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.project-top small{font-size:9px;letter-spacing:1.5px;color:var(--muted)}
+.status{font-size:9px;border-radius:30px;padding:6px 9px}
+.development{color:#ffc36b;background:#ffc36b16;border:1px solid #ffc36b33}
+.released{color:#62e6c1;background:#62e6c116;border:1px solid #62e6c133}
+.planned{color:#a6b1ff;background:#a6b1ff16;border:1px solid #a6b1ff33}
+.card h3{font-size:19px;margin:19px 0 9px}
+.card p{font-size:11px;line-height:1.9;color:var(--muted)}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}
+.tags span{border:1px solid var(--line);border-radius:5px;padding:5px 8px;font-size:9px;color:var(--muted)}
+.project-link{display:inline-block;margin-top:17px;font-size:10px;color:var(--green)}
+.project-card[hidden]{display:none}
+
+/* Minecraft plugins */
+.plugin-card{position:relative;overflow:hidden}
+.plugin-card:after{
+ content:"";position:absolute;right:-45px;top:-55px;width:120px;height:120px;
+ background:#62e6c1;filter:blur(85px);opacity:.1;pointer-events:none
+}
+.plugin-symbol{
+ width:35px;height:35px;border-radius:9px;background:#62e6c118;
+ border:1px solid #62e6c133;color:var(--green);
+ display:grid;place-items:center;font-size:13px;font-weight:800;margin-bottom:13px
+}
+.more-card{display:grid;place-items:center;text-align:center;min-height:190px}
+.more-card strong{font-size:40px;color:var(--green)}
+.more-card p{margin-top:8px}
+
+/* Releases */
+.release-feature{
+ border:1px solid #62e6c133;border-radius:15px;padding:28px;
+ background:linear-gradient(130deg,#62e6c112,#101515);
+ margin-bottom:18px
+}
+.release-feature h3{font-size:26px;margin:13px 0}
+.release-feature p{font-size:12px;color:var(--muted);line-height:1.9;max-width:650px}
+.release-meta{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+.release-meta span{font-size:10px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+.empty{
+ padding:38px;border:1px dashed var(--line);border-radius:12px;
+ color:var(--muted);font-size:12px;text-align:center
+}
+
+/* About / uses */
+.uses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.use-card{padding:18px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.use-card strong{font-size:12px;display:block;margin-bottom:7px}
+.use-card span{font-size:10px;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.about-box{border-top:1px solid var(--line);padding:23px 0}
+.about-box h3{font-size:16px;margin-bottom:13px}
+.about-box p,.about-box li{font-size:12px;line-height:2;color:var(--muted)}
+.about-box ul{padding-left:18px}
+footer{
+ border-top:1px solid var(--line);padding:24px 6%;
+ display:flex;justify-content:center;align-items:center;gap:5px;
+ font-size:10px;color:var(--muted);letter-spacing:1px
+}
+footer strong{color:var(--green);font-weight:700}
+
+/* Responsive */
 @media(max-width:900px){
-  nav{gap:13px}nav button{font-size:11px}
-  .hero{grid-template-columns:1fr;padding-top:65px}
-  .hero-art{position:absolute;right:-100px;top:50px;opacity:.36;pointer-events:none}
-  .hero-copy{max-width:650px}
-  .skills-section{padding-top:20px}
+ nav{gap:12px}nav button{font-size:10px}
+ .hero{grid-template-columns:1fr .6fr;padding-left:6%;padding-right:6%}
+ .hero-visual{transform:scale(.8)}
 }
-@media(max-width:650px){
-  header{padding:0 5%;height:66px}
-  .brand span{font-size:12px}
-  .brand svg{width:31px}
-  nav{
-    display:none;position:absolute;top:66px;left:0;right:0;
-    padding:18px;background:var(--bg);border-bottom:1px solid var(--line);
-    flex-wrap:wrap;justify-content:center
-  }
-  nav.open{display:flex}
-  nav button.active:after{bottom:-7px}
-  .mobile-menu{display:block!important}
-  .header-actions{gap:7px}
-  .hero{min-height:750px;padding:65px 6% 55px}
-  .hero h1{font-size:58px;letter-spacing:-3px}
-  .hero-art{right:-140px;top:70px}
-  .description{font-size:13px}
-  .skills-row{display:grid;grid-template-columns:repeat(4,1fr)}
-  .skill{min-width:0}
-  .bottom-line{gap:12px;flex-wrap:wrap}
-  .cards,.about-grid{grid-template-columns:1fr}
-  .uses-list{grid-template-columns:repeat(2,1fr)}
-  .page-content{padding-top:65px}
+@media(max-width:680px){
+ header{height:65px;padding:0 5%}
+ main{padding-top:65px}
+ #menuBtn{display:block}
+ nav{
+  display:none;position:absolute;top:65px;left:0;right:0;
+  padding:18px;background:var(--bg);border-bottom:1px solid var(--line);
+  flex-wrap:wrap;justify-content:center
+ }
+ nav.open{display:flex}
+ nav button.active:after{margin-top:4px}
+ .brand-name{font-size:12px}
+ .hero{display:block;min-height:550px;padding:85px 7% 30px}
+ .hero-visual{position:absolute;right:-105px;top:75px;opacity:.3;transform:scale(.8)}
+ .hero-copy{position:relative}
+ h1{font-size:58px;letter-spacing:-4px}
+ .hero-description{max-width:440px}
+ .skills{padding-top:20px}
+ .skill-list{gap:6px}
+ .skill{padding:7px;font-size:9px}
+ .skill img{width:15px;height:15px}
+ .cards,.about-grid{grid-template-columns:1fr}
+ .uses-grid{grid-template-columns:repeat(2,1fr)}
+ .content{padding:55px 6% 70px}
+ .home-bottom{padding:16px 6%}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
+
 <body>
-<div class="background"></div><div class="grid"></div><div class="noise"></div>
+<div class="background"></div>
+<div class="grid-bg"></div>
+<div class="neon one"></div>
+<div class="neon two"></div>
+<div class="neon three"></div>
 
 <header>
-  <a class="brand" href="#home" aria-label="RESURECT Home">
-    <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
-      <path d="M12 13H66L89 37H45L77 68H54L27 43V88H12V13Z" fill="currentColor"/>
-      <path d="M39 43H72L88 59H57L39 43Z" fill="#888"/>
-    </svg>
-    <span>RESURECT</span>
-  </a>
+ <a class="brand" href="#home">
+  <div class="pk-logo"><span>PK</span></div>
+  <span class="brand-name">PKDEV</span>
+ </a>
 
-  <nav id="nav">
-    <button class="active" data-page="home" data-en="Home" data-fa="خانه">Home</button>
-    <button data-page="projects" data-en="Projects" data-fa="پروژه‌ها">Projects</button>
-    <button data-page="blog" data-en="Blog" data-fa="وبلاگ">Blog</button>
-    <button data-page="talks" data-en="Talks" data-fa="ارائه‌ها">Talks</button>
-    <button data-page="uses" data-en="Uses" data-fa="ابزارها">Uses</button>
-    <button data-page="photos" data-en="Photos" data-fa="تصاویر">Photos</button>
-    <button data-page="about" data-en="About" data-fa="درباره من">About</button>
-  </nav>
+ <nav id="nav">
+  <button class="active" data-page="home">Home</button>
+  <button data-page="projects">Projects</button>
+  <button data-page="minecraft">Minecraft Plugins</button>
+  <button data-page="releases">Releases</button>
+  <button data-page="blog">Blog</button>
+  <button data-page="uses">Uses</button>
+  <button data-page="about">About</button>
+ </nav>
 
-  <div class="header-actions">
-    <button id="langBtn" aria-label="Change language">EN / FA</button>
-    <button id="themeBtn" aria-label="Change theme">☼</button>
-    <button class="mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
-  </div>
+ <div class="header-actions">
+  <button id="themeBtn" aria-label="Toggle theme">☼</button>
+  <button id="menuBtn" aria-label="Open menu">☰</button>
+ </div>
 </header>
 
 <main>
+<!-- HOME -->
 <section class="page active" id="home">
-  <div class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow"><span class="dot"></span><span data-en="Independent Developer" data-fa="توسعه‌دهنده مستقل">Independent Developer</span></div>
-      <h1><span>RESURECT</span></h1>
-      <div class="tagline" data-en="Ideas into digital reality." data-fa="ایده‌ها به واقعیت دیجیتال.">Ideas into digital reality.</div>
-      <p class="description"
-         data-en="I'm Resurect, an independent developer and project creator. I build software, explore technologies, and turn ideas into meaningful digital experiences."
-         data-fa="من Resurect هستم؛ توسعه‌دهنده مستقل و سازنده پروژه‌های دیجیتال. نرم‌افزار می‌سازم، فناوری‌های جدید را بررسی می‌کنم و ایده‌ها را به تجربه‌های دیجیتال کاربردی تبدیل می‌کنم.">
-        I'm Resurect, an independent developer and project creator. I build software, explore technologies, and turn ideas into meaningful digital experiences.
-      </p>
-      <div class="buttons">
-        <button class="btn primary" data-goto="projects"><span data-en="Explore My Work" data-fa="مشاهده پروژه‌ها">Explore My Work</span> ↗</button>
-        <button class="btn" data-goto="about"><span data-en="About Me" data-fa="درباره من">About Me</span> ↓</button>
-      </div>
-      <div class="socials">
-        <a href="https://github.com/resurect63" target="_blank">GitHub ↗</a>
-        <a href="mailto:itznightitznight16@gmail.com">Email ↗</a>
-        <a href="https://t.me/Resurect63" target="_blank">Telegram ↗</a>
-      </div>
-    </div>
-
-    <div class="hero-art" aria-label="Animated Resurect logo">
-      <div class="logo-stage">
-        <div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div>
-        <svg class="logo-symbol" viewBox="0 0 300 300" fill="none">
-          <defs>
-            <linearGradient id="metal" x1="45" y1="20" x2="250" y2="280" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#fff"/><stop offset=".35" stop-color="#aaa"/>
-              <stop offset=".58" stop-color="#f8f8f8"/><stop offset="1" stop-color="#555"/>
-            </linearGradient>
-            <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-          <path d="M42 37H178C235 37 263 65 263 112C263 151 239 177 199 185L267 265H190L111 169V265H42V37Z" fill="url(#metal)" filter="url(#glow)"/>
-          <path d="M111 99H177C194 99 202 107 202 120C202 134 193 142 177 142H111V99Z" fill="#090909"/>
-          <path d="M111 169L190 265H111V169Z" fill="#888"/>
-          <path d="M42 37H178" stroke="white" stroke-width="3" opacity=".8"/>
-        </svg>
-      </div>
-    </div>
+ <div class="hero">
+  <div class="hero-copy">
+   <div class="eyebrow"><span class="live-dot"></span> Independent Developer & Project Creator</div>
+   <h1><span>PKDEV</span></h1>
+   <div class="hero-sub">Ideas into digital reality.</div>
+   <p class="hero-description">
+    Man Resurect hastam. Dar zamine Software Development, Web Development
+    va Project Management faaliat mikonam. Hadafam tabdil idea be
+    product haye digital va practical hast.
+   </p>
+   <div class="hero-actions">
+    <button class="btn primary" data-goto="projects">Explore Projects ↗</button>
+    <button class="btn" data-goto="about">About Me →</button>
+   </div>
+   <div class="hero-socials">
+    <a href="https://github.com/resurect63" target="_blank" rel="noreferrer">GitHub ↗</a>
+    <a href="https://t.me/Resurect63" target="_blank" rel="noreferrer">Telegram ↗</a>
+    <a href="mailto:itznightitznight16@gmail.com">Email ↗</a>
+   </div>
   </div>
-
-  <div class="skills-section">
-    <div class="section-kicker" data-en="⌘ &nbsp; TECHNOLOGIES I WORK WITH" data-fa="⌘ &nbsp; فناوری‌هایی که با آن‌ها کار می‌کنم">⌘ &nbsp; TECHNOLOGIES I WORK WITH</div>
-    <div class="skills-row">
-      <div class="skill" style="--glow:#f89820"><img src="https://skillicons.dev/icons?i=java" alt="Java"><span>Java</span></div>
-      <div class="skill" style="--glow:#f7df1e"><img src="https://skillicons.dev/icons?i=js" alt="JavaScript"><span>JavaScript</span></div>
-      <div class="skill" style="--glow:#3178c6"><img src="https://skillicons.dev/icons?i=ts" alt="TypeScript"><span>TypeScript</span></div>
-      <div class="skill" style="--glow:#777bb4"><img src="https://skillicons.dev/icons?i=php" alt="PHP"><span>PHP</span></div>
-      <div class="skill" style="--glow:#e34f26"><img src="https://skillicons.dev/icons?i=html" alt="HTML"><span>HTML5</span></div>
-      <div class="skill" style="--glow:#1572b6"><img src="https://skillicons.dev/icons?i=css" alt="CSS"><span>CSS3</span></div>
-      <div class="skill" style="--glow:#61dafb"><img src="https://skillicons.dev/icons?i=react" alt="React"><span>React</span></div>
-      <div class="skill" style="--glow:#ffffff"><img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js"><span>Next.js</span></div>
-      <div class="skill" style="--glow:#68a063"><img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js"><span>Node.js</span></div>
-      <div class="skill" style="--glow:#00758f"><img src="https://skillicons.dev/icons?i=mysql" alt="MySQL"><span>MySQL</span></div>
-      <div class="skill" style="--glow:#47a248"><img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB"><span>MongoDB</span></div>
-      <div class="skill" style="--glow:#2496ed"><img src="https://skillicons.dev/icons?i=docker" alt="Docker"><span>Docker</span></div>
-      <div class="skill" style="--glow:#fcc624"><img src="https://skillicons.dev/icons?i=linux" alt="Linux"><span>Linux</span></div>
-      <div class="skill" style="--glow:#f05032"><img src="https://skillicons.dev/icons?i=git" alt="Git"><span>Git</span></div>
-      <div class="skill" style="--glow:#ffffff"><img src="https://skillicons.dev/icons?i=c" alt="C"><span>C</span></div>
-    </div>
+  <div class="hero-visual">
+   <div class="core"><strong>PK</strong></div>
+   <div class="visual-label">ENGINEERING / DEVELOPMENT</div>
   </div>
+ </div>
 
-  <div class="bottom-line">
-    <div class="availability"><i></i><span data-en="Open to new opportunities." data-fa="آماده برای فرصت‌های جدید.">Open to new opportunities.</span></div>
-    <span data-en="Scroll to explore ↓" data-fa="برای مشاهده بیشتر اسکرول کنید ↓">Scroll to explore ↓</span>
+ <div class="skills">
+  <div class="skills-head">TECH STACK / TECHNOLOGIES I WORK WITH</div>
+  <div class="skill-list">
+   <div class="skill" style="--glow:#f89820;--delay:0s"><img src="https://skillicons.dev/icons?i=java" alt="">Java</div>
+   <div class="skill" style="--glow:#f7df1e;--delay:.2s"><img src="https://skillicons.dev/icons?i=js" alt="">JavaScript</div>
+   <div class="skill" style="--glow:#3178c6;--delay:.4s"><img src="https://skillicons.dev/icons?i=ts" alt="">TypeScript</div>
+   <div class="skill" style="--glow:#777bb4;--delay:.6s"><img src="https://skillicons.dev/icons?i=php" alt="">PHP</div>
+   <div class="skill" style="--glow:#e34f26;--delay:.8s"><img src="https://skillicons.dev/icons?i=html" alt="">HTML</div>
+   <div class="skill" style="--glow:#1572b6;--delay:1s"><img src="https://skillicons.dev/icons?i=css" alt="">CSS</div>
+   <div class="skill" style="--glow:#61dafb;--delay:1.2s"><img src="https://skillicons.dev/icons?i=react" alt="">React</div>
+   <div class="skill" style="--glow:#fff;--delay:1.4s"><img src="https://skillicons.dev/icons?i=nextjs" alt="">Next.js</div>
+   <div class="skill" style="--glow:#68a063;--delay:1.6s"><img src="https://skillicons.dev/icons?i=nodejs" alt="">Node.js</div>
+   <div class="skill" style="--glow:#00758f;--delay:1.8s"><img src="https://skillicons.dev/icons?i=mysql" alt="">MySQL</div>
+   <div class="skill" style="--glow:#47a248;--delay:2s"><img src="https://skillicons.dev/icons?i=mongodb" alt="">MongoDB</div>
+   <div class="skill" style="--glow:#2496ed;--delay:2.2s"><img src="https://skillicons.dev/icons?i=docker" alt="">Docker</div>
+   <div class="skill" style="--glow:#fcc624;--delay:2.4s"><img src="https://skillicons.dev/icons?i=linux" alt="">Linux</div>
+   <div class="skill" style="--glow:#f05032;--delay:2.6s"><img src="https://skillicons.dev/icons?i=git" alt="">Git</div>
+   <div class="skill" style="--glow:#ffffff;--delay:2.8s"><img src="https://skillicons.dev/icons?i=c" alt="">C</div>
+   <div class="skill" style="--glow:#007acc;--delay:3s"><img src="https://skillicons.dev/icons?i=vscode" alt="">VS Code</div>
   </div>
+ </div>
+
+ <div class="home-bottom">
+  <span>● Available for new projects</span>
+  <span>Software / Web / Systems / Plugins</span>
+  <span>Scroll to explore ↓</span>
+ </div>
 </section>
 
+<!-- PROJECTS -->
 <section class="page" id="projects">
-  <div class="page-content">
-    <div class="section-kicker">01 / SELECTED WORK</div>
-    <h2 class="page-heading" data-en="Projects." data-fa="پروژه‌ها.">Projects.</h2>
-    <p class="page-intro" data-en="A selection of ideas, experiments, and digital products I'm building." data-fa="مجموعه‌ای از ایده‌ها، آزمایش‌ها و محصولات دیجیتالی که روی آن‌ها کار می‌کنم.">A selection of ideas, experiments, and digital products I'm building.</p>
-    <div class="cards">
-      <article class="card"><small>01 / SOFTWARE</small><h3>Imperial Launcher</h3><p>A desktop launcher project focused on a modern interface and application management.</p><div class="tags"><span>JavaScript</span><span>Electron</span><span>Desktop</span></div></article>
-      <article class="card"><small>02 / SECURITY</small><h3>PKDEV.Security</h3><p>A security-focused digital project exploring tools, interfaces, and technical workflows.</p><div class="tags"><span>Web</span><span>Security</span></div></article>
-      <article class="card"><small>03 / PLATFORM</small><h3>Moderator Academy</h3><p>An educational platform for structured learning, documentation, and community knowledge.</p><div class="tags"><span>Education</span><span>Web</span></div></article>
-      <article class="card"><small>04 / SOFTWARE</small><h3>PKDEV.Hub</h3><p>A central concept for connecting digital projects and services.</p><div class="tags"><span>Platform</span><span>Development</span></div></article>
-    </div>
+ <div class="content">
+  <div class="kicker">01 / PROJECT ARCHIVE</div>
+  <h2 class="heading">Projects.</h2>
+  <p class="intro">Majmooe project ha va product haye digital man. Baraye didan har category az filter estefade kon.</p>
+
+  <div class="filters">
+   <button class="filter active" data-filter="all">All Projects</button>
+   <button class="filter" data-filter="windows">Windows Software</button>
+   <button class="filter" data-filter="web">Web Development</button>
+   <button class="filter" data-filter="other">Other Projects</button>
   </div>
+
+  <div class="cards" id="projectGrid">
+   <article class="card project-card" data-category="windows">
+    <div class="project-top"><small>WINDOWS / DESKTOP</small><span class="status development">In Development</span></div>
+    <h3>Imperial Launcher</h3>
+    <p>Launcher pishrafte Minecraft Java ba version management, mod support, offline profiles va modern UI.</p>
+    <div class="tags"><span>Electron</span><span>JavaScript</span><span>Desktop</span></div>
+    <a class="project-link" href="#releases" data-goto="releases">View Releases ↗</a>
+   </article>
+
+   <article class="card project-card" data-category="web">
+    <div class="project-top"><small>WEB / SECURITY</small><span class="status development">In Development</span></div>
+    <h3>PKDEV.Security</h3>
+    <p>Security dashboard concept baraye monitoring, server management va technical infrastructure.</p>
+    <div class="tags"><span>Web</span><span>Security</span><span>Dashboard</span></div>
+   </article>
+
+   <article class="card project-card" data-category="web">
+    <div class="project-top"><small>WEB / PLATFORM</small><span class="status development">In Development</span></div>
+    <h3>PKDEV.Hub</h3>
+    <p>Central platform concept baraye vasl kardan tools, projects va services dar yek environment.</p>
+    <div class="tags"><span>Web</span><span>Platform</span></div>
+   </article>
+
+   <article class="card project-card" data-category="other">
+    <div class="project-top"><small>EDUCATION / COMMUNITY</small><span class="status development">In Development</span></div>
+    <h3>Moderator Academy</h3>
+    <p>Learning environment baraye amoozesh, documentation va knowledge sharing dar community.</p>
+    <div class="tags"><span>Education</span><span>Community</span></div>
+   </article>
+  </div>
+ </div>
 </section>
 
+<!-- MINECRAFT PLUGINS -->
+<section class="page" id="minecraft">
+ <div class="content">
+  <div class="kicker">02 / MINECRAFT DEVELOPMENT</div>
+  <h2 class="heading">Minecraft Plugins.</h2>
+  <p class="intro">Plugin haye اختصاصی baraye server management, gameplay systems, security va custom game modes.</p>
+
+  <div class="filters">
+   <button class="filter active" data-filter="all">All Plugins</button>
+   <button class="filter" data-filter="development">In Development</button>
+   <button class="filter" data-filter="custom">Custom Gameplay</button>
+   <button class="filter" data-filter="management">Management</button>
+  </div>
+
+  <div class="cards" id="pluginGrid">
+   <article class="card plugin-card" data-category="development">
+    <div class="plugin-symbol">PS</div>
+    <div class="project-top"><small>STORE SYSTEM</small><span class="status development">In Development</span></div>
+    <h3>PkdevStore</h3>
+    <p>Store system ba GUI, Vault economy, rank delivery, discount codes va purchase history.</p>
+    <div class="tags"><span>Java</span><span>Paper</span><span>Vault</span><span>LuckPerms</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="development">
+    <div class="plugin-symbol">AC</div>
+    <div class="project-top"><small>SERVER SECURITY</small><span class="status development">In Development</span></div>
+    <h3>PkdevAnti-Cheat</h3>
+    <p>Anti-cheat project baraye server protection, detection systems va configurable checks.</p>
+    <div class="tags"><span>Java</span><span>Security</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="management">
+    <div class="plugin-symbol">SN</div>
+    <div class="project-top"><small>STAFF MANAGEMENT</small><span class="status development">In Development</span></div>
+    <h3>StaffNotifier</h3>
+    <p>Staff notification system baraye activity, staff alerts va server-side management.</p>
+    <div class="tags"><span>Java</span><span>Paper</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="management">
+    <div class="plugin-symbol">PB</div>
+    <div class="project-top"><small>BOUNTY SYSTEM</small><span class="status development">In Development</span></div>
+    <h3>PkdevBounty</h3>
+    <p>Bounty system ba economy integration, player targets va reward management.</p>
+    <div class="tags"><span>Java</span><span>Vault</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="management">
+    <div class="plugin-symbol">NX</div>
+    <div class="project-top"><small>SERVER TOOLS</small><span class="status development">In Development</span></div>
+    <h3>PkdevNox</h3>
+    <p>Custom server utility project baraye management va server-side functionality.</p>
+    <div class="tags"><span>Java</span><span>Server Tools</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="custom">
+    <div class="plugin-symbol">DG</div>
+    <div class="project-top"><small>CUSTOM GAMEPLAY</small><span class="status development">In Development</span></div>
+    <h3>Custom Game Plugins</h3>
+    <p>Plugin haye اختصاصی baraye game mode haye custom mesle Project Delta va Feros, ba gameplay systems va mechanics.</p>
+    <div class="tags"><span>Java</span><span>Paper</span><span>Custom Systems</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="management">
+    <div class="plugin-symbol">NG</div>
+    <div class="project-top"><small>GUARD SYSTEM</small><span class="status development">In Development</span></div>
+    <h3>NOCTGuard</h3>
+    <p>Guard utility concept baraye server administration va moderation workflows.</p>
+    <div class="tags"><span>Java</span><span>Administration</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="custom">
+    <div class="plugin-symbol">PD</div>
+    <div class="project-top"><small>GAME PROJECT</small><span class="status development">In Development</span></div>
+    <h3>Project Delta Systems</h3>
+    <p>Gameplay systems, loot mechanics, extraction flow va custom arena experience.</p>
+    <div class="tags"><span>Paper</span><span>Game Systems</span></div>
+   </article>
+
+   <article class="card plugin-card" data-category="custom">
+    <div class="plugin-symbol">+</div>
+    <div class="project-top"><small>MORE DEVELOPMENT</small><span class="status planned">More Projects</span></div>
+    <h3>Custom Plugin Collection</h3>
+    <p>Majmooe plugin haye digar baraye server management, gameplay, moderation, economy va custom systems.</p>
+    <div class="tags"><span>Java</span><span>Paper</span><span>Spigot</span><span>Folia</span></div>
+   </article>
+
+   <article class="card more-card">
+    <div>
+     <strong>+15</strong>
+     <p>More custom plugins and private development projects.</p>
+    </div>
+   </article>
+  </div>
+ </div>
+</section>
+
+<!-- RELEASES -->
+<section class="page" id="releases">
+ <div class="content">
+  <div class="kicker">03 / DOWNLOAD CENTER</div>
+  <h2 class="heading">Releases.</h2>
+  <p class="intro">Release haye rasmi, version history va update haye project ha dar in bakhsh namayesh dade mishan.</p>
+
+  <div class="release-feature">
+   <div class="project-top"><small>FEATURED SOFTWARE / WINDOWS</small><span class="status development">In Development</span></div>
+   <h3>Imperial Launcher</h3>
+   <p>Desktop launcher baraye Minecraft Java. Version management, mod loader support, offline profiles va modern user interface.</p>
+   <div class="release-meta">
+    <span>Platform: Windows</span>
+    <span>Type: Desktop Application</span>
+    <span>Latest development: 2.9</span>
+   </div>
+   <span class="project-link">Official release files will be published here.</span>
+  </div>
+
+  <div class="kicker">RELEASE HISTORY</div>
+  <div class="empty">Hanuz release file rasmi dar in section publish نشده. Ba amade shodan version ha, download link va changelog inja gharar migire.</div>
+ </div>
+</section>
+
+<!-- BLOG -->
 <section class="page" id="blog">
-  <div class="page-content">
-    <div class="section-kicker">02 / WRITING</div>
-    <h2 class="page-heading" data-en="Blog." data-fa="وبلاگ.">Blog.</h2>
-    <p class="page-intro" data-en="Notes, ideas, technical discoveries, and things I learn along the way." data-fa="یادداشت‌ها، ایده‌ها، کشفیات فنی و چیزهایی که در مسیر یاد می‌گیرم.">Notes, ideas, technical discoveries, and things I learn along the way.</p>
-    <div class="empty-note" data-en="New articles and technical notes will appear here." data-fa="مقاله‌ها و یادداشت‌های فنی جدید در این قسمت قرار می‌گیرند.">New articles and technical notes will appear here.</div>
-  </div>
+ <div class="content">
+  <div class="kicker">04 / NOTES & ARTICLES</div>
+  <h2 class="heading">Blog.</h2>
+  <p class="intro">Technical notes, development experiences, project updates va idea haye jadid.</p>
+  <div class="empty">New articles are coming soon.</div>
+ </div>
 </section>
 
-<section class="page" id="talks">
-  <div class="page-content">
-    <div class="section-kicker">03 / PRESENTATIONS</div>
-    <h2 class="page-heading" data-en="Talks." data-fa="ارائه‌ها.">Talks.</h2>
-    <p class="page-intro" data-en="Presentations, workshops, and topics worth sharing." data-fa="ارائه‌ها، کارگاه‌ها و موضوعاتی برای به‌اشتراک‌گذاری.">Presentations, workshops, and topics worth sharing.</p>
-    <div class="empty-note" data-en="Talks and presentations will be listed here when available." data-fa="ارائه‌ها پس از آماده‌شدن در این قسمت نمایش داده می‌شوند.">Talks and presentations will be listed here when available.</div>
-  </div>
-</section>
-
+<!-- USES -->
 <section class="page" id="uses">
-  <div class="page-content">
-    <div class="section-kicker">04 / WORKSPACE</div>
-    <h2 class="page-heading" data-en="Uses." data-fa="ابزارها.">Uses.</h2>
-    <p class="page-intro" data-en="Software, tools, and technologies I use in my development workflow." data-fa="نرم‌افزارها، ابزارها و فناوری‌هایی که در روند توسعه استفاده می‌کنم.">Software, tools, and technologies I use in my development workflow.</p>
-    <div class="uses-list">
-      <div class="use-item"><strong>IntelliJ IDEA</strong><span>Development environment</span></div>
-      <div class="use-item"><strong>Visual Studio Code</strong><span>Code editor</span></div>
-      <div class="use-item"><strong>Git & GitHub</strong><span>Version control</span></div>
-      <div class="use-item"><strong>Docker</strong><span>Container platform</span></div>
-      <div class="use-item"><strong>Linux</strong><span>Development environment</span></div>
-      <div class="use-item"><strong>Node.js</strong><span>JavaScript runtime</span></div>
-    </div>
+ <div class="content">
+  <div class="kicker">05 / WORKSPACE</div>
+  <h2 class="heading">Uses.</h2>
+  <p class="intro">Tools va software hayi ke dar workflow development estefade mikonam.</p>
+  <div class="uses-grid">
+   <div class="use-card"><strong>IntelliJ IDEA</strong><span>Java Development</span></div>
+   <div class="use-card"><strong>Visual Studio Code</strong><span>Web Development</span></div>
+   <div class="use-card"><strong>Git & GitHub</strong><span>Version Control</span></div>
+   <div class="use-card"><strong>Docker</strong><span>Containerization</span></div>
+   <div class="use-card"><strong>Linux</strong><span>System Environment</span></div>
+   <div class="use-card"><strong>Node.js</strong><span>JavaScript Runtime</span></div>
   </div>
+ </div>
 </section>
 
-<section class="page" id="photos">
-  <div class="page-content">
-    <div class="section-kicker">05 / VISUALS</div>
-    <h2 class="page-heading" data-en="Photos." data-fa="تصاویر.">Photos.</h2>
-    <p class="page-intro" data-en="A visual collection of my workspace, interests, and inspirations." data-fa="مجموعه‌ای تصویری از محیط کار، علایق و الهام‌های من.">A visual collection of my workspace, interests, and inspirations.</p>
-    <div class="empty-note" data-en="The gallery is being prepared." data-fa="گالری تصاویر در حال آماده‌سازی است.">The gallery is being prepared.</div>
-  </div>
-</section>
-
+<!-- ABOUT -->
 <section class="page" id="about">
-  <div class="page-content">
-    <div class="section-kicker">06 / THE PERSON BEHIND THE CODE</div>
-    <h2 class="page-heading" data-en="About me." data-fa="درباره من.">About me.</h2>
-    <p class="page-intro" data-en="I'm Resurect — an independent developer, project creator, and technology enthusiast." data-fa="من Resurect هستم؛ توسعه‌دهنده مستقل، سازنده پروژه و علاقه‌مند به فناوری.">I'm Resurect — an independent developer, project creator, and technology enthusiast.</p>
-    <div class="about-grid">
-      <div class="about-block"><h3 data-en="What I do" data-fa="حوزه فعالیت">What I do</h3><p data-en="I work across software development, web technologies, backend systems, and digital project creation. I enjoy learning, experimenting, and building useful things." data-fa="در زمینه توسعه نرم‌افزار، فناوری‌های وب، سیستم‌های بک‌اند و ساخت پروژه‌های دیجیتال فعالیت می‌کنم. از یادگیری، آزمایش و ساخت ابزارهای کاربردی لذت می‌برم.">I work across software development, web technologies, backend systems, and digital project creation. I enjoy learning, experimenting, and building useful things.</p></div>
-      <div class="about-block"><h3 data-en="Technical areas" data-fa="مهارت‌های فنی">Technical areas</h3><ul><li>Software Development</li><li>Frontend & Backend Development</li><li>Database Design & Integration</li><li>Project Planning & Management</li><li>Linux & Development Infrastructure</li></ul></div>
-    </div>
+ <div class="content">
+  <div class="kicker">06 / ABOUT THE DEVELOPER</div>
+  <h2 class="heading">About Me.</h2>
+  <p class="intro">Resurect — Independent Developer, Project Creator va Technology Enthusiast.</p>
+  <div class="about-grid">
+   <div class="about-box">
+    <h3>Who am I?</h3>
+    <p>Man Resurect hastam. Be sakhtan software, web applications va digital products alaghe daram. Dar project haye mokhtalef az idea ta design va development kar mikonam.</p>
+   </div>
+   <div class="about-box">
+    <h3>My Expertise</h3>
+    <ul>
+     <li>Software Development</li>
+     <li>Frontend & Backend Development</li>
+     <li>Database Design</li>
+     <li>Project Management</li>
+     <li>System Architecture</li>
+     <li>Server-side Development</li>
+    </ul>
+   </div>
   </div>
+  <div class="about-box">
+   <h3>Contact</h3>
+   <p>GitHub: github.com/resurect63</p>
+   <p>Email: itznightitznight16@gmail.com</p>
+   <p>Telegram: @Resurect63</p>
+  </div>
+ </div>
 </section>
 </main>
 
-<footer>© <span id="year"></span> RESURECT — IDEAS INTO DIGITAL REALITY.</footer>
+<footer>
+ <span>PKDEV</span>
+ <span> — </span>
+ <strong>Created by Resurect</strong>
+ <span> · </span>
+ <span id="year"></span>
+</footer>
 
 <script>
 const pages=[...document.querySelectorAll('.page')];
-const navButtons=[...document.querySelectorAll('nav button[data-page]')];
 const nav=document.getElementById('nav');
+const navButtons=[...document.querySelectorAll('nav [data-page]')];
 
 function showPage(name){
-  if(!document.getElementById(name)) name='home';
-  pages.forEach(p=>p.classList.toggle('active',p.id===name));
-  navButtons.forEach(b=>b.classList.toggle('active',b.dataset.page===name));
-  history.replaceState(null,'','#'+name);
-  nav.classList.remove('open');
-  window.scrollTo({top:0,behavior:'smooth'});
+ if(!document.getElementById(name))name='home';
+ pages.forEach(p=>p.classList.toggle('active',p.id===name));
+ navButtons.forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+ history.replaceState(null,'','#'+name);
+ nav.classList.remove('open');
+ window.scrollTo({top:0,behavior:'smooth'});
 }
 navButtons.forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
-document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.goto)));
-window.addEventListener('hashchange',()=>showPage(location.hash.slice(1)||'home'));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>{
+ showPage(b.dataset.goto);
+}));
+window.addEventListener('hashchange',()=>showPage(location.hash.slice(1)));
 showPage(location.hash.slice(1)||'home');
 
-let language='en';
-document.getElementById('langBtn').addEventListener('click',()=>{
-  language=language==='en'?'fa':'en';
-  document.documentElement.lang=language;
-  document.body.classList.toggle('fa',language==='fa');
-  document.body.dir=language==='fa'?'rtl':'ltr';
-  document.querySelectorAll('[data-en]').forEach(el=>{
-    el.innerHTML=el.dataset[language];
-  });
-  document.getElementById('langBtn').textContent=language==='en'?'EN / FA':'FA / EN';
+document.getElementById('menuBtn').addEventListener('click',()=>{
+ nav.classList.toggle('open');
 });
 
 document.getElementById('themeBtn').addEventListener('click',()=>{
-  document.body.classList.toggle('light');
-  document.getElementById('themeBtn').textContent=
-    document.body.classList.contains('light')?'☾':'☼';
+ document.body.classList.toggle('light');
+ document.getElementById('themeBtn').textContent=
+  document.body.classList.contains('light')?'☾':'☼';
 });
 
-document.getElementById('menuBtn').addEventListener('click',()=>{
-  nav.classList.toggle('open');
-});
+function setupFilters(containerId){
+ const container=document.getElementById(containerId);
+ if(!container)return;
+ const buttons=container.parentElement.querySelectorAll('.filter');
+ const cards=[...container.querySelectorAll('.project-card')];
+ buttons.forEach(button=>{
+  button.addEventListener('click',()=>{
+   buttons.forEach(b=>b.classList.remove('active'));
+   button.classList.add('active');
+   const filter=button.dataset.filter;
+   cards.forEach(card=>{
+    const categories=card.dataset.category.split(' ');
+    card.hidden=filter!=='all'&&!categories.includes(filter);
+   });
+  });
+ });
+}
+setupFilters('projectGrid');
+setupFilters('pluginGrid');
+
 document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>
