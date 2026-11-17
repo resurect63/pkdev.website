@@ -1,135 +1,114 @@
 
-# THE PKDEV
+# RESURECT — Personal Portfolio
 
 <p align="center">
-  <strong>A DIGITAL EMPIRE</strong>
+  <strong>A Dark Fantasy Developer Portfolio</strong>
   <br>
-  An Independent Development Identity by Resurect
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Project-THE%20PKDEV-101d2b?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Status-In%20Development-72b9ed?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Creator-Resurect-172a40?style=for-the-badge">
+  Designed and developed by <strong>Resurect</strong>
 </p>
 
 ---
 
-## About
+## Overview
 
-**THE PKDEV** is a personal development portfolio created by **Resurect**.
+**RESURECT** is a personal developer portfolio built to showcase projects, technical skills, Minecraft plugins, and software development work in a modern Dark Fantasy environment.
 
-It showcases software projects, development skills, technologies, and creative experiments through a cinematic interface inspired by storms, ancient empires, and digital battlefields.
-
-Built with pure HTML, CSS, and JavaScript, the website focuses on visual atmosphere, interactive elements, and a responsive experience.
+The website combines a minimal interface, atmospheric visual effects, smooth navigation, and a responsive layout to create a distinctive developer identity.
 
 ## Features
 
-- Cinematic loading screen
-- Animated storm background
-- Procedurally generated lightning effects
-- Synthetic thunder and wind audio
-- Interactive sound controls
-- Responsive navigation
-- Developer introduction
-- Technology and skills showcase
-- Project filtering system
-- Releases and development archive
-- Interactive command terminal
-- GitHub and Telegram links
-- Discord username copy button
-- Scroll reveal animations
-- Responsive design
+- **Dark Fantasy Design** — Dark interface with crimson accents and atmospheric effects.
+- **Single Page Navigation** — Separate sections without traditional page reloads.
+- **About Section** — Developer introduction and background.
+- **Skills Showcase** — Organized programming languages, frameworks, databases, and development tools.
+- **Projects Showcase** — A collection of software and development projects.
+- **Minecraft Plugins** — Dedicated section for Minecraft plugin development.
+- **Marketplace** — Featured products and development tools.
+- **Releases** — Project version and release information.
+- **Account System** — Login, registration, and user profiles.
+- **Responsive Layout** — Optimized for desktop, tablet, and mobile devices.
+- **Visual Effects** — Animated particles, transitions, and background atmosphere.
 
-## Technologies
+## Projects
 
-| Technology | Usage |
+| Project | Description |
 |---|---|
-| HTML5 | Website structure |
-| CSS3 | Styling and animations |
-| JavaScript | Interactions and logic |
-| Canvas API | Storm and lightning effects |
-| Web Audio API | Thunder and wind sound |
+| Imperial Launcher | Minecraft Java launcher |
+| ProjectDelta | Minecraft game-mode project |
+| PKDEV Store | Minecraft server store plugin |
+| RESURECT Website | Personal portfolio website |
+
+## Plugin Collection
+
+- PKDEV.Store
+- PKDEV.AntiCheat
+- StaffNotifier
+- PKDEV.Bounty
+- PKDEV.Nox
+- PKDEV.Core
+- PKDEV.Quests
+- PKDEV.Dungeons
+- PKDEV.Crates
+- PKDEV.Economy
+- PKDEV.Backup
+
+## Tech Stack
+
+- HTML5
+- CSS3
+- JavaScript
+- LocalStorage
+- Web Crypto API
+- Devicon
+
+## Getting Started
+
+No build tools or package installation are required.
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/resurect63/RESURECT.git
+   ```
+
+2. Open the project folder.
+
+3. Launch `index.html` in your browser.
 
 ## Project Structure
 
 ```text
-THE-PKDEV/
-│
+RESURECT/
 ├── index.html
 └── README.md
 ```
 
-## Getting Started
+The current implementation is a single-file website containing its HTML, CSS, and JavaScript.
 
-### 1. Clone the repository
+## Account System Notice
 
-```bash
-git clone https://github.com/resurect63/THE-PKDEV.git
-```
+The account system currently uses browser-based storage for demonstration purposes.
 
-### 2. Enter the project directory
+It is not intended for production authentication. A production version should use a secure backend, server-side authentication, and a database.
 
-```bash
-cd THE-PKDEV
-```
+## Branding
 
-### 3. Run the website
+**RESURECT** is the primary brand.
 
-Open `index.html` in your browser.
-
-For the best development experience, use **Visual Studio Code** with the Live Server extension.
-
-## Featured Projects
-
-| Project | Category |
-|---|---|
-| Imperial Launcher | Windows / Desktop |
-| PKDEV.Security | Software / Security |
-| PKDEV.Hub | Windows / Desktop |
-| PkdevStore | Minecraft |
-| Project Delta | Minecraft |
-| Moderator Academy | Web / Education |
-
-## Audio
-
-The website uses the Web Audio API to generate synthetic thunder and wind effects.
-
-Audio is disabled by default. Click the **SOUND: OFF** button to enable it.
-
-No external audio files are required.
-
-## Customization
-
-You can customize the website by editing:
-
-- Colors and visual theme in the CSS variables.
-- Project cards in the Projects section.
-- Skills in the Skills section.
-- Release information in the Releases section.
-- Social links in the Contact section.
-- Storm behavior and audio settings in JavaScript.
+**PKDEV** is a secondary development identity associated with selected projects and products.
 
 ## Developer
 
-**Resurect**
+**Created by Resurect**
 
-- GitHub: https://github.com/resurect63
-- Telegram: https://t.me/Resurect63
-- Discord: `.Resurect.`
-
-## License
-
-This project is currently provided without a specified open-source license.
-
-Contact the creator before redistributing or reusing the project.
+- GitHub: [@resurect63](https://github.com/resurect63)
+- Telegram: [@Resurect63](https://t.me/Resurect63)
+- Website: [RESURECT](https://resurect.dev)
 
 ---
 
 <p align="center">
-  <strong>THE PKDEV</strong>
+  <strong>RESURECT</strong>
   <br>
-  Built with code. Driven by vision.
-  <br><br>
-  Created by Resurect
+  Independent Development. Distinct Identity.
 </p>
