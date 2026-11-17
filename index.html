@@ -5,2970 +5,2237 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111116">
-<meta name="description" content="Resurect — Independent Developer, Minecraft Systems & Digital Projects.">
-<title>Resurect — Developer Portfolio</title>
+<meta name="description" content="RESURECT — Independent Developer, Creator and Project Manager.">
+<title>RESURECT — Digital Realm</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cinzel:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
 <style>
 :root {
-  --bg: #111116;
-  --bg2: #17151c;
-  --panel: #1b1820;
-  --panel2: #211b24;
-  --red: #a82e4c;
-  --pink: #f05270;
-  --light: #ffacbd;
-  --white: #fff3f5;
-  --muted: #a69aa3;
-  --border: rgba(255,172,189,.13);
-  --glow: rgba(240,82,112,.22);
-  --radius: 18px;
-  --max: 1240px;
+    --bg: #0d0d12;
+    --bg2: #131219;
+    --panel: #18171f;
+    --panel2: #201b24;
+    --red: #a82e4c;
+    --pink: #f05270;
+    --light: #ffacbd;
+    --white: #fff3f5;
+    --muted: #a49ba5;
+    --border: rgba(255,255,255,.08);
+    --glow: rgba(240,82,112,.2);
+    --radius: 18px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-  background:
-    radial-gradient(ellipse at 80% 5%, rgba(168,46,76,.13), transparent 35%),
-    radial-gradient(ellipse at 5% 55%, rgba(93,33,57,.12), transparent 35%),
-    var(--bg);
-  color: var(--white);
-  font-family: Inter, sans-serif;
-  overflow-x: hidden;
+    background: var(--bg);
+    color: var(--white);
+    font-family: Inter, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  opacity: .16;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+button, input, textarea, select {
+    font: inherit;
 }
 
-a { color: inherit; text-decoration: none; }
-button, input, textarea, select { font: inherit; }
-button { cursor: pointer; }
-img { max-width: 100%; }
-
-.container {
-  width: min(var(--max), calc(100% - 48px));
-  margin: auto;
+button {
+    cursor: pointer;
 }
 
-.section {
-  padding: 110px 0;
-  position: relative;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.section-head {
-  margin-bottom: 42px;
-  max-width: 680px;
+::selection {
+    background: var(--pink);
+    color: white;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--light);
-  font-size: 11px;
-  letter-spacing: 3px;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 17px;
+#ambient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -2;
+    background:
+        radial-gradient(ellipse at 80% 15%, rgba(168,46,76,.13), transparent 38%),
+        radial-gradient(ellipse at 10% 80%, rgba(80,30,65,.12), transparent 35%),
+        linear-gradient(145deg,#0c0b10,#121018 55%,#100d13);
 }
 
-.eyebrow::before {
-  content: "";
-  width: 25px;
-  height: 1px;
-  background: var(--pink);
-  box-shadow: 0 0 12px var(--pink);
+#ambient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .15;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size: 55px 55px;
+    mask-image: linear-gradient(to bottom,black,transparent);
 }
 
-.section-title {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(32px, 5vw, 52px);
-  line-height: 1.08;
-  letter-spacing: -2px;
-  margin-bottom: 16px;
+.orb {
+    position: fixed;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .12;
+    pointer-events: none;
+    z-index: -1;
+    animation: drift 14s ease-in-out infinite alternate;
 }
 
-.section-desc {
-  color: var(--muted);
-  line-height: 1.9;
-  font-size: 14px;
+.orb.one {
+    background: #c02e59;
+    top: 15%;
+    right: -200px;
 }
 
-.gradient-text {
-  background: linear-gradient(110deg, #fff3f5, #ffacbd 45%, #f05270);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.orb.two {
+    background: #702b60;
+    bottom: 0;
+    left: -220px;
+    animation-delay: -5s;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 13px 21px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  color: var(--white);
-  background: rgba(255,255,255,.035);
-  font-size: 12px;
-  font-weight: 800;
-  transition: .25s;
+@keyframes drift {
+    from { transform: translate(0,0); }
+    to { transform: translate(-80px,60px); }
 }
 
-.btn:hover {
-  transform: translateY(-3px);
-  border-color: var(--pink);
-  box-shadow: 0 10px 30px rgba(240,82,112,.13);
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
 }
 
-.btn-primary {
-  border: 1px solid var(--pink);
-  color: white;
-  background: linear-gradient(110deg, #8d263f, #d94465);
-  box-shadow: 0 8px 28px rgba(240,82,112,.19);
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ff9bad;
+    border-radius: 50%;
+    opacity: .4;
+    animation: floatUp linear infinite;
+    box-shadow: 0 0 12px #f05270;
 }
 
-.btn-primary:hover {
-  box-shadow: 0 12px 36px rgba(240,82,112,.32);
-}
-
-.tag {
-  display: inline-flex;
-  padding: 6px 10px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--light);
-  background: rgba(240,82,112,.06);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .5px;
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 0; }
+    20% { opacity: .5; }
+    80% { opacity: .4; }
+    to { transform: translateY(-110vh); opacity: 0; }
 }
 
 /* NAVBAR */
 
-.nav-wrap {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-  border-bottom: 1px solid transparent;
-  transition: .3s;
-}
-
-.nav-wrap.scrolled {
-  background: rgba(17,17,22,.88);
-  backdrop-filter: blur(18px);
-  border-color: var(--border);
-}
-
 .navbar {
-  height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    min-height: 78px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: rgba(13,13,18,.82);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 19px;
-  font-weight: 900;
-  letter-spacing: -.7px;
+.wordmark {
+    font-family: Cinzel, serif;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: var(--white);
+    white-space: nowrap;
 }
 
-.brand-symbol {
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
-  display: grid;
-  place-items: center;
-  color: white;
-  font-size: 20px;
-  font-weight: 900;
-  background: linear-gradient(140deg, #d94b6a, #671b35);
-  box-shadow: 0 0 24px rgba(240,82,112,.25);
-}
-
-.brand small {
-  display: block;
-  color: var(--muted);
-  font-size: 8px;
-  letter-spacing: 3px;
-  margin-top: 2px;
+.wordmark span {
+    color: var(--pink);
 }
 
 .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 
-.nav-links a {
-  color: #bdb1b9;
-  font-size: 11px;
-  font-weight: 700;
-  transition: .2s;
+.nav-link {
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 11px 12px;
+    border-radius: 9px;
+    transition: .25s;
 }
 
-.nav-links a:hover { color: var(--light); }
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.nav-link:hover,
+.nav-link.active {
+    color: var(--white);
+    background: rgba(240,82,112,.11);
 }
 
-.admin-nav {
-  font-size: 10px;
-  padding: 10px 14px;
+.nav-link.active {
+    box-shadow: inset 0 -2px var(--pink);
 }
 
-.menu-btn {
-  display: none;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
+.nav-account {
+    border: 1px solid rgba(240,82,112,.4);
+    color: var(--light);
+    padding: 10px 17px;
+    border-radius: 9px;
+    background: rgba(240,82,112,.08);
+    font-size: 12px;
+    font-weight: 700;
+    transition: .25s;
+    white-space: nowrap;
 }
 
-/* HERO */
+.nav-account:hover {
+    background: var(--red);
+    color: white;
+    box-shadow: 0 0 25px var(--glow);
+}
+
+/* PAGE SYSTEM */
+
+main {
+    min-height: calc(100vh - 150px);
+}
+
+.page {
+    display: none;
+    max-width: 1320px;
+    margin: auto;
+    padding: 65px 7% 100px;
+    animation: pageIn .45s ease both;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--pink);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--pink);
+}
+
+.section-heading {
+    font-family: Cinzel, serif;
+    font-size: clamp(30px,4vw,48px);
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.section-description {
+    color: var(--muted);
+    max-width: 650px;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.section-top {
+    margin-bottom: 38px;
+}
+
+/* BUTTONS */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 14px 21px;
+    border: 1px solid transparent;
+    font-size: 12px;
+    font-weight: 800;
+    transition: .25s;
+}
+
+.btn-primary {
+    background: linear-gradient(120deg,#a82e4c,#e74b6a);
+    color: white;
+    box-shadow: 0 8px 30px rgba(168,46,76,.22);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(240,82,112,.35);
+}
+
+.btn-outline {
+    border-color: var(--border);
+    background: rgba(255,255,255,.025);
+    color: var(--white);
+}
+
+.btn-outline:hover {
+    border-color: var(--pink);
+    color: var(--light);
+}
+
+/* HOME */
 
 .hero {
-  min-height: 760px;
-  display: flex;
-  align-items: center;
-  padding: 140px 0 80px;
-  overflow: hidden;
-  position: relative;
+    min-height: 570px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 50px;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  width: 650px;
-  height: 650px;
-  right: -150px;
-  top: 40px;
-  background: radial-gradient(circle, rgba(168,46,76,.19), transparent 68%);
-  pointer-events: none;
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  align-items: center;
-  gap: 45px;
-  position: relative;
-  z-index: 2;
+.hero-title {
+    font-family: Cinzel, serif;
+    font-size: clamp(43px,6.5vw,82px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 22px;
 }
 
-.hero-label {
-  color: var(--light);
-  font-size: 11px;
-  letter-spacing: 3px;
-  font-weight: 800;
-  margin-bottom: 25px;
+.hero-title span {
+    color: var(--pink);
+    text-shadow: 0 0 40px rgba(240,82,112,.2);
 }
 
-.hero h1 {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(55px, 7vw, 92px);
-  letter-spacing: -6px;
-  line-height: .98;
-  margin-bottom: 26px;
+.hero-subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 520px;
+    margin-bottom: 30px;
 }
 
-.hero h1 span { display: block; }
-
-.hero-text {
-  max-width: 550px;
-  color: #b6aab2;
-  font-size: 14px;
-  line-height: 2;
-  margin-bottom: 30px;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .hero-meta {
-  display: flex;
-  gap: 25px;
-  margin-top: 45px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 35px;
+    margin-top: 45px;
+    flex-wrap: wrap;
 }
 
 .meta-item strong {
-  display: block;
-  font-size: 23px;
-  font-family: "Space Grotesk", sans-serif;
+    display: block;
+    font-size: 24px;
+    color: var(--white);
+    font-family: Cinzel, serif;
 }
 
-.meta-item span {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-  margin-top: 5px;
-  letter-spacing: .7px;
+.meta-item small {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
-
-/* FANTASY VISUAL */
 
 .hero-art {
-  min-height: 500px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  isolation: isolate;
-}
-
-.art-glow {
-  position: absolute;
-  width: 390px;
-  height: 390px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(240,82,112,.23), rgba(168,46,76,.06) 45%, transparent 70%);
-  filter: blur(15px);
-  animation: pulse 5s infinite alternate;
-}
-
-@keyframes pulse {
-  from { transform: scale(.9); opacity: .6; }
-  to { transform: scale(1.13); opacity: 1; }
-}
-
-.castle-scene {
-  position: relative;
-  width: min(100%, 490px);
-  height: 440px;
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  overflow: hidden;
+    height: 460px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,.06);
+    background:
+        linear-gradient(to top,rgba(13,13,18,.98),rgba(13,13,18,.05)),
+        radial-gradient(ellipse at 50% 50%,rgba(175,48,83,.28),transparent 60%),
+        linear-gradient(145deg,#241821,#15121a);
 }
 
 .moon {
-  position: absolute;
-  width: 125px;
-  height: 125px;
-  border-radius: 50%;
-  top: 42px;
-  right: 90px;
-  background: radial-gradient(circle at 35% 35%, #fff1f1, #e98da1 55%, #8b304d);
-  box-shadow: 0 0 70px rgba(240,82,112,.5);
-  opacity: .88;
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    top: 55px;
+    right: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,#ffccd4,#bb536c 60%,#64243c);
+    box-shadow: 0 0 90px rgba(240,82,112,.3);
+    opacity: .85;
 }
 
 .castle {
-  position: relative;
-  width: 350px;
-  height: 300px;
-  filter: drop-shadow(0 0 35px rgba(240,82,112,.18));
+    position: absolute;
+    bottom: 0;
+    width: 85%;
+    height: 65%;
+    filter: drop-shadow(0 0 30px rgba(240,82,112,.12));
 }
 
 .castle-main {
-  position: absolute;
-  bottom: 0;
-  left: 75px;
-  width: 200px;
-  height: 195px;
-  background: linear-gradient(100deg, #211c27, #49303c 55%, #1b1720);
-  border: 1px solid rgba(255,172,189,.22);
-  clip-path: polygon(0 18%, 12% 18%, 12% 0, 22% 0, 22% 18%, 78% 18%, 78% 0, 88% 0, 88% 18%, 100% 18%, 100% 100%, 0 100%);
+    position: absolute;
+    left: 24%;
+    bottom: 0;
+    width: 52%;
+    height: 66%;
+    background: linear-gradient(90deg,#21151f,#48303d,#21151f);
+    clip-path: polygon(10% 0,90% 0,100% 100%,0 100%);
 }
 
-.castle-tower {
-  position: absolute;
-  bottom: 0;
-  width: 72px;
-  height: 260px;
-  background: linear-gradient(90deg, #211923, #543443, #211923);
-  border: 1px solid rgba(255,172,189,.23);
+.tower {
+    position: absolute;
+    bottom: 0;
+    width: 17%;
+    height: 95%;
+    background: linear-gradient(90deg,#241621,#563341,#241621);
 }
 
-.castle-tower::before {
-  content: "";
-  position: absolute;
-  top: -65px;
-  left: -1px;
-  width: 72px;
-  height: 70px;
-  background: #73334b;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  border-top: 2px solid var(--light);
+.tower::before {
+    content: "";
+    position: absolute;
+    top: -35px;
+    left: -15%;
+    width: 130%;
+    height: 42px;
+    background: #6b3a4b;
+    clip-path: polygon(50% 0,100% 100%,0 100%);
 }
 
-.tower-left { left: 28px; height: 235px; transform: scale(.88); }
-.tower-right { right: 28px; height: 235px; transform: scale(.88); }
-
-.tower-center {
-  position: absolute;
-  left: 139px;
-  bottom: 95px;
-  width: 75px;
-  height: 300px;
-  background: linear-gradient(90deg, #241922, #684052, #251b25);
-  border: 1px solid rgba(255,172,189,.3);
+.tower.left {
+    left: 16%;
+    height: 75%;
 }
 
-.tower-center::before {
-  content: "";
-  position: absolute;
-  top: -80px;
-  left: -1px;
-  width: 75px;
-  height: 82px;
-  background: #a33b5b;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+.tower.right {
+    right: 16%;
+    height: 75%;
+}
+
+.tower.center {
+    left: 42%;
+    height: 105%;
+    width: 16%;
 }
 
 .castle-window {
-  position: absolute;
-  width: 15px;
-  height: 29px;
-  border-radius: 12px 12px 0 0;
-  background: #ffb2a0;
-  box-shadow: 0 0 20px #ff8b9e;
+    position: absolute;
+    width: 9px;
+    height: 26px;
+    border-radius: 10px 10px 0 0;
+    background: #ffb2a0;
+    box-shadow: 0 0 18px #ff826e;
 }
 
-.w1 { bottom: 70px; left: 24px; }
-.w2 { bottom: 70px; right: 24px; }
-.w3 { bottom: 100px; left: 92px; }
-.w4 { bottom: 100px; right: 92px; }
-.w5 { bottom: 135px; left: 29px; }
-.w6 { bottom: 135px; right: 29px; }
+.castle-window.w1 { left: 34%; bottom: 28%; }
+.castle-window.w2 { left: 49%; bottom: 32%; }
+.castle-window.w3 { left: 64%; bottom: 28%; }
 
-.castle-door {
-  position: absolute;
-  bottom: 0;
-  left: 155px;
-  width: 42px;
-  height: 72px;
-  border-radius: 24px 24px 0 0;
-  background: #100e14;
-  border: 1px solid rgba(255,172,189,.3);
-  box-shadow: 0 0 25px rgba(240,82,112,.3);
+.art-caption {
+    position: absolute;
+    bottom: 22px;
+    left: 24px;
+    right: 24px;
+    display: flex;
+    justify-content: space-between;
+    color: #d3b5c0;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-.fog {
-  position: absolute;
-  bottom: 0;
-  width: 140%;
-  height: 100px;
-  background: linear-gradient(0deg, rgba(240,82,112,.14), transparent);
-  filter: blur(17px);
-  animation: fogmove 9s infinite alternate ease-in-out;
+/* CARDS */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 17px;
 }
 
-@keyframes fogmove {
-  from { transform: translateX(-25px); }
-  to { transform: translateX(25px); }
+.card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg,rgba(32,27,36,.94),rgba(20,18,25,.94));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 25px;
+    transition: .3s;
 }
 
-.floating-card {
-  position: absolute;
-  padding: 13px 16px;
-  border: 1px solid var(--border);
-  background: rgba(24,20,28,.82);
-  backdrop-filter: blur(14px);
-  border-radius: 12px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.25);
-  animation: float 5s infinite ease-in-out;
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(240,82,112,.35);
+    box-shadow: 0 15px 45px rgba(0,0,0,.2);
 }
 
-.floating-card strong {
-  display: block;
-  font-size: 11px;
-  margin-bottom: 5px;
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 1px;
+    background: var(--pink);
+    opacity: .7;
 }
 
-.floating-card span {
-  color: var(--muted);
-  font-size: 9px;
+.card h3 {
+    font-size: 17px;
+    margin: 13px 0 10px;
 }
 
-.card-one { left: 0; top: 100px; }
-.card-two { right: 0; bottom: 75px; animation-delay: -2s; }
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-13px); }
+.card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
 }
 
-/* QUICK INFO */
-
-.info-strip {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: rgba(255,255,255,.015);
+.card-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    background: rgba(240,82,112,.1);
+    border: 1px solid rgba(240,82,112,.15);
+    border-radius: 12px;
+    color: var(--pink);
+    font-size: 19px;
 }
 
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
+.tag {
+    display: inline-block;
+    color: var(--light);
+    background: rgba(240,82,112,.09);
+    border: 1px solid rgba(240,82,112,.16);
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .6px;
+    margin: 4px 3px 0 0;
 }
 
-.info-box {
-  padding: 25px 20px;
-  border-right: 1px solid var(--border);
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #d5b5bd;
+    font-size: 10px;
+    margin-top: 17px;
 }
 
-.info-box:last-child { border: 0; }
-
-.info-box strong {
-  display: block;
-  font-size: 13px;
-  margin-bottom: 7px;
-}
-
-.info-box span {
-  font-size: 10px;
-  color: var(--muted);
+.status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #e9a0b0;
+    border-radius: 50%;
 }
 
 /* ABOUT */
 
-.about-grid {
-  display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  gap: 65px;
-  align-items: start;
+.about-layout {
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: 25px;
 }
 
-.about-card {
-  padding: 30px;
-  background: linear-gradient(145deg, rgba(168,46,76,.12), rgba(255,255,255,.025));
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  position: relative;
-  overflow: hidden;
+.about-panel {
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: linear-gradient(145deg,#211b25,#15131a);
 }
 
-.about-card::after {
-  content: "R";
-  position: absolute;
-  right: 12px;
-  bottom: -75px;
-  font-family: "Space Grotesk";
-  font-size: 260px;
-  font-weight: 900;
-  color: rgba(255,172,189,.035);
-  pointer-events: none;
+.about-panel h3 {
+    font-family: Cinzel,serif;
+    font-size: 25px;
+    margin-bottom: 15px;
 }
 
-.about-card h3 {
-  font-family: "Space Grotesk";
-  font-size: 27px;
-  margin-bottom: 14px;
+.about-panel p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
 }
 
-.about-card p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 2;
+.about-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 25px;
 }
 
-.about-points {
-  display: grid;
-  gap: 15px;
-  margin-top: 25px;
+.about-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    font-size: 12px;
 }
 
-.about-point {
-  display: flex;
-  gap: 13px;
-  align-items: flex-start;
-}
-
-.point-icon {
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  color: var(--light);
-  background: rgba(240,82,112,.1);
-  border: 1px solid var(--border);
-}
-
-.about-point strong {
-  font-size: 12px;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.about-point span {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.7;
+.about-row span:first-child {
+    color: var(--muted);
 }
 
 /* SKILLS */
 
-.skills-layout {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 17px;
+.skill-category {
+    margin-top: 35px;
 }
 
-.skill-group {
-  padding: 24px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.025);
-  border-radius: var(--radius);
-  transition: .25s;
+.skill-category h3 {
+    font-size: 16px;
+    margin-bottom: 18px;
+    color: var(--light);
 }
 
-.skill-group:hover {
-  border-color: rgba(240,82,112,.4);
-  transform: translateY(-4px);
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 13px;
 }
 
-.skill-group h3 {
-  font-size: 15px;
-  margin-bottom: 7px;
+.skill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.025);
+    border-radius: 12px;
+    transition: .25s;
 }
 
-.skill-group p {
-  font-size: 10px;
-  color: var(--muted);
-  margin-bottom: 19px;
+.skill:hover {
+    background: rgba(240,82,112,.07);
+    border-color: rgba(240,82,112,.3);
+    transform: translateY(-3px);
 }
 
-.skill-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+.skill img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
-.skill-tags span {
-  padding: 8px 11px;
-  border-radius: 7px;
-  background: rgba(255,255,255,.045);
-  border: 1px solid rgba(255,255,255,.06);
-  color: #e5d7df;
-  font-size: 10px;
-  transition: .2s;
+.skill span {
+    font-size: 12px;
+    font-weight: 700;
 }
 
-.skill-tags span:hover {
-  color: var(--light);
-  border-color: var(--pink);
-  background: rgba(240,82,112,.08);
+.skill i {
+    font-size: 27px;
+    color: var(--light);
 }
 
-/* PROJECTS */
-
-.project-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-bottom: 27px;
-}
+/* FILTERS */
 
 .filters {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
 }
 
-.filter-btn {
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.025);
-  color: var(--muted);
-  padding: 10px 15px;
-  border-radius: 7px;
-  font-size: 10px;
-  font-weight: 800;
-  transition: .2s;
+.filter {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+    font-size: 11px;
+    transition: .2s;
 }
 
-.filter-btn.active,
-.filter-btn:hover {
-  color: white;
-  background: rgba(240,82,112,.14);
-  border-color: var(--pink);
+.filter.active,
+.filter:hover {
+    color: white;
+    border-color: var(--pink);
+    background: rgba(240,82,112,.12);
 }
 
-.search {
-  background: rgba(255,255,255,.035);
-  border: 1px solid var(--border);
-  padding: 12px 14px;
-  border-radius: 8px;
-  color: white;
-  outline: none;
-  width: 220px;
-  font-size: 11px;
+.project-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 235px;
 }
 
-.search:focus { border-color: var(--pink); }
-
-.project-grid,
-.plugin-grid,
-.market-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 18px;
+.project-card .project-bottom {
+    margin-top: auto;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.project-card,
-.plugin-card,
-.market-card {
-  background: linear-gradient(145deg, #211b25, #17151b);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  overflow: hidden;
-  transition: .28s;
-  position: relative;
+/* ACCOUNT */
+
+.account-wrap {
+    max-width: 480px;
+    margin: 35px auto;
 }
 
-.project-card:hover,
-.plugin-card:hover,
-.market-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(240,82,112,.5);
-  box-shadow: 0 20px 45px rgba(0,0,0,.22);
+.account-box {
+    background: linear-gradient(145deg,#211b25,#15131a);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
 }
 
-.project-cover {
-  height: 150px;
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at 50% 100%, rgba(240,82,112,.28), transparent 55%),
-    linear-gradient(135deg, #39202d, #17141d);
+.account-box h2 {
+    font-family: Cinzel,serif;
+    font-size: 27px;
+    margin-bottom: 10px;
 }
 
-.project-cover::before {
-  content: "";
-  position: absolute;
-  width: 170px;
-  height: 170px;
-  border: 1px solid rgba(255,172,189,.16);
-  border-radius: 50%;
-  box-shadow: 0 0 0 20px rgba(255,172,189,.025), 0 0 0 40px rgba(255,172,189,.02);
+.account-box > p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 25px;
 }
 
-.cover-letter {
-  position: relative;
-  font-family: "Space Grotesk";
-  font-size: 45px;
-  font-weight: 900;
-  color: rgba(255,243,245,.9);
-  text-shadow: 0 0 35px rgba(240,82,112,.5);
+.form-group {
+    margin-bottom: 16px;
 }
 
-.project-content,
-.plugin-content,
-.market-content {
-  padding: 21px;
+.form-group label {
+    display: block;
+    color: #d7cbd0;
+    font-size: 11px;
+    margin-bottom: 8px;
 }
 
-.project-top,
-.plugin-top,
-.market-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
+.form-control {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: #100e14;
+    color: white;
+    padding: 14px;
+    outline: none;
+    border-radius: 9px;
+    font-size: 12px;
+    transition: .2s;
 }
 
-.project-content h3,
-.plugin-content h3,
-.market-content h3 {
-  font-size: 16px;
-  margin-bottom: 9px;
+.form-control:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px rgba(240,82,112,.08);
 }
 
-.project-content p,
-.plugin-content p,
-.market-content p {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.8;
-  min-height: 59px;
+.account-box .btn {
+    width: 100%;
+    margin-top: 10px;
 }
 
-.project-footer,
-.plugin-footer,
-.market-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--border);
-  margin-top: 19px;
-  padding-top: 15px;
+.switch-auth {
+    color: var(--light);
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 22px;
+    text-align: center;
 }
 
-.project-footer span,
-.plugin-footer span,
-.market-footer span {
-  color: var(--muted);
-  font-size: 10px;
+.message {
+    font-size: 11px;
+    margin-top: 13px;
+    line-height: 1.6;
 }
 
-.text-action {
-  background: none;
-  border: none;
-  color: var(--light);
-  font-size: 10px;
-  font-weight: 800;
+.message.error { color: #ff8193; }
+.message.success { color: #9bd9b0; }
+
+.profile-card {
+    display: none;
+    text-align: center;
 }
 
-.text-action:hover { color: white; }
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .5px;
+.profile-avatar {
+    width: 75px;
+    height: 75px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    color: white;
+    font-family: Cinzel,serif;
+    font-size: 25px;
+    background: linear-gradient(135deg,#a82e4c,#f05270);
 }
 
-.status::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
+.owner-access {
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+    padding-top: 22px;
 }
 
-.status.released { color: #7ed7aa; }
-.status.development { color: #f2b66b; }
-.status.planned { color: #a99ce8; }
-
-/* PLUGINS */
-
-.plugin-section {
-  background: linear-gradient(180deg, transparent, rgba(168,46,76,.045), transparent);
+.owner-access p {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
 }
 
-.plugin-card {
-  padding: 23px;
+/* ADMIN */
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 13px;
+    margin: 25px 0;
 }
 
-.plugin-symbol {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 13px;
-  background: linear-gradient(135deg, #9d304e, #421c31);
-  border: 1px solid rgba(255,172,189,.2);
-  color: white;
-  font-size: 18px;
-  font-weight: 900;
-  margin-bottom: 19px;
-  box-shadow: 0 7px 24px rgba(240,82,112,.12);
+.admin-stat {
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--panel);
 }
 
-.plugin-content { padding: 0; }
-
-.plugin-content p { min-height: 65px; }
-
-/* MARKETPLACE */
-
-.market-card {
-  padding: 0;
+.admin-stat strong {
+    display: block;
+    font-size: 27px;
+    color: var(--pink);
+    font-family: Cinzel,serif;
 }
 
-.market-cover {
-  height: 125px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #3b1d30, #19151d);
-  color: var(--light);
-  font-family: "Space Grotesk";
-  font-weight: 900;
-  font-size: 26px;
-  letter-spacing: 2px;
-  border-bottom: 1px solid var(--border);
+.admin-stat span {
+    color: var(--muted);
+    font-size: 10px;
 }
 
-.market-content p { min-height: 50px; }
-
-.market-price {
-  font-size: 13px;
-  font-weight: 900;
-  color: var(--light);
+.admin-form {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+    margin-bottom: 25px;
 }
 
-/* RELEASES */
-
-.release-list {
-  border-left: 1px solid rgba(240,82,112,.35);
-  margin-left: 9px;
-  display: grid;
-  gap: 26px;
+.admin-form textarea {
+    min-height: 90px;
+    resize: vertical;
 }
 
-.release {
-  position: relative;
-  padding-left: 28px;
+.admin-list {
+    display: grid;
+    gap: 10px;
 }
 
-.release::before {
-  content: "";
-  position: absolute;
-  left: -5px;
-  top: 4px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--pink);
-  box-shadow: 0 0 15px var(--pink);
+.admin-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.025);
 }
 
-.release-version {
-  color: var(--light);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+.admin-item strong {
+    font-size: 12px;
 }
 
-.release h3 {
-  font-size: 15px;
-  margin-bottom: 7px;
+.admin-item small {
+    display: block;
+    color: var(--muted);
+    margin-top: 5px;
+    font-size: 10px;
 }
 
-.release p {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.8;
+.delete-btn {
+    background: rgba(240,82,112,.1);
+    border: 1px solid rgba(240,82,112,.2);
+    color: var(--light);
+    padding: 8px 11px;
+    border-radius: 7px;
+    font-size: 10px;
 }
 
 /* CONTACT */
 
-.contact-box {
-  padding: 55px;
-  border: 1px solid rgba(240,82,112,.22);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 100% 0%, rgba(240,82,112,.2), transparent 40%),
-    linear-gradient(135deg, #211922, #17151c);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
+.contact-layout {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 20px;
 }
 
-.contact-box h2 {
-  font-family: "Space Grotesk";
-  font-size: clamp(30px,4vw,44px);
-  letter-spacing: -2px;
-  margin-bottom: 12px;
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.025);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: .25s;
 }
 
-.contact-box p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-  max-width: 560px;
+.contact-link:hover {
+    border-color: var(--pink);
+    transform: translateX(4px);
+}
+
+.contact-link strong {
+    font-size: 12px;
+}
+
+.contact-link small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 5px;
 }
 
 /* FOOTER */
 
 footer {
-  padding: 35px 0;
-  border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    padding: 27px 7%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 10px;
 }
 
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+footer strong {
+    color: var(--light);
+    letter-spacing: 1px;
 }
 
-.footer-copy {
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.8;
+/* MOBILE */
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    color: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
 }
 
-.footer-links {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  color: #b8aab3;
-  font-size: 10px;
-}
-
-.footer-links a:hover { color: var(--light); }
-
-/* MODALS */
-
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  background: rgba(5,4,8,.83);
-  backdrop-filter: blur(12px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.modal.open { display: flex; }
-
-.modal-box {
-  width: min(650px,100%);
-  max-height: 88vh;
-  overflow-y: auto;
-  border: 1px solid rgba(240,82,112,.3);
-  border-radius: 16px;
-  background: #1b1720;
-  padding: 28px;
-  box-shadow: 0 30px 100px rgba(0,0,0,.55);
-  animation: modalIn .25s ease;
-}
-
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(15px) scale(.98); }
-  to { opacity: 1; transform: none; }
-}
-
-.modal-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  align-items: center;
-  margin-bottom: 23px;
-}
-
-.modal-head h2 {
-  font-family: "Space Grotesk";
-  font-size: 23px;
-}
-
-.close-btn {
-  width: 35px;
-  height: 35px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.04);
-  color: white;
-  font-size: 18px;
-}
-
-.modal-description {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 2;
-  margin: 15px 0;
-}
-
-.modal-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-/* ADMIN */
-
-.admin-modal {
-  padding: 0;
-  width: min(1150px,100%);
-  height: min(800px,92vh);
-  display: flex;
-  overflow: hidden;
-  border-radius: 17px;
-  background: #15131a;
-  border: 1px solid rgba(240,82,112,.3);
-}
-
-.admin-sidebar {
-  width: 230px;
-  flex-shrink: 0;
-  padding: 25px 16px;
-  background: #1c1720;
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-}
-
-.admin-brand {
-  font-family: "Space Grotesk";
-  font-weight: 900;
-  font-size: 18px;
-  padding: 0 10px 25px;
-}
-
-.admin-brand span { color: var(--pink); }
-
-.admin-nav-label {
-  color: #786b75;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  padding: 15px 10px 9px;
-}
-
-.admin-menu {
-  display: grid;
-  gap: 5px;
-}
-
-.admin-menu button {
-  border: 0;
-  text-align: left;
-  padding: 12px 11px;
-  border-radius: 8px;
-  background: transparent;
-  color: #a99da7;
-  font-size: 11px;
-  font-weight: 700;
-  transition: .2s;
-}
-
-.admin-menu button:hover,
-.admin-menu button.active {
-  background: rgba(240,82,112,.13);
-  color: var(--light);
-}
-
-.admin-close {
-  margin-top: auto;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--muted);
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 10px;
-}
-
-.admin-main {
-  flex: 1;
-  min-width: 0;
-  overflow-y: auto;
-  padding: 30px;
-}
-
-.admin-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.admin-top h2 {
-  font-family: "Space Grotesk";
-  font-size: 24px;
-}
-
-.admin-top p {
-  color: var(--muted);
-  font-size: 10px;
-  margin-top: 6px;
-}
-
-.admin-warning {
-  padding: 12px 15px;
-  border: 1px solid rgba(242,182,107,.25);
-  background: rgba(242,182,107,.07);
-  color: #e9bd83;
-  border-radius: 9px;
-  font-size: 10px;
-  line-height: 1.8;
-  margin-bottom: 23px;
-}
-
-.admin-stats {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 13px;
-  margin-bottom: 25px;
-}
-
-.admin-stat {
-  padding: 19px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.025);
-  border-radius: 11px;
-}
-
-.admin-stat span {
-  color: var(--muted);
-  font-size: 10px;
-}
-
-.admin-stat strong {
-  display: block;
-  font-size: 28px;
-  font-family: "Space Grotesk";
-  margin-top: 10px;
-}
-
-.admin-panel {
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.02);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 18px;
-}
-
-.admin-panel h3 {
-  font-size: 13px;
-  margin-bottom: 16px;
-}
-
-.admin-table-wrap { overflow-x: auto; }
-
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 520px;
-}
-
-.admin-table th,
-.admin-table td {
-  padding: 13px 10px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  font-size: 10px;
-}
-
-.admin-table th {
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.admin-table td { color: #e7dce3; }
-
-.table-actions {
-  display: flex;
-  gap: 7px;
-}
-
-.small-btn {
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.04);
-  color: var(--light);
-  border-radius: 6px;
-  padding: 7px 9px;
-  font-size: 9px;
-}
-
-.small-btn.danger {
-  color: #ff8798;
-}
-
-.admin-form {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 13px;
-}
-
-.field { display: grid; gap: 7px; }
-.field.full { grid-column: 1/-1; }
-
-.field label {
-  color: #b9aab4;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.field input,
-.field textarea,
-.field select {
-  width: 100%;
-  background: #111016;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  padding: 11px 12px;
-  color: white;
-  font-size: 11px;
-  outline: none;
-}
-
-.field textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus { border-color: var(--pink); }
-
-.admin-form-actions {
-  display: flex;
-  gap: 9px;
-  justify-content: flex-end;
-  grid-column: 1/-1;
-  margin-top: 5px;
-}
-
-.empty-state {
-  color: var(--muted);
-  font-size: 11px;
-  text-align: center;
-  padding: 30px;
-}
-
-/* SCROLL */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: .7s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: none;
-}
-
-::-webkit-scrollbar { width: 7px; }
-::-webkit-scrollbar-track { background: #111116; }
-::-webkit-scrollbar-thumb {
-  background: #673044;
-  border-radius: 20px;
-}
-::-webkit-scrollbar-thumb:hover { background: var(--pink); }
-
-/* RESPONSIVE */
-
-@media(max-width:950px) {
-  .nav-links { gap: 14px; }
-  .hero-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
-  .project-grid,.plugin-grid,.market-grid { grid-template-columns: repeat(2,1fr); }
-  .about-grid { gap: 30px; }
+@media(max-width:1000px) {
+    .navbar { padding: 15px 5%; }
+    .nav-links { gap: 0; }
+    .nav-link { padding: 10px 8px; font-size: 10px; }
+    .hero { gap: 25px; }
+    .skill-grid { grid-template-columns: repeat(3,1fr); }
 }
 
 @media(max-width:760px) {
-  .container { width: min(100% - 32px, var(--max)); }
-  .navbar { height: 68px; }
-  .menu-btn { display: block; }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 68px;
-    left: 16px;
-    right: 16px;
-    padding: 17px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: #1b1720;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a { padding: 13px 8px; border-bottom: 1px solid var(--border); }
-  .admin-nav { display: none; }
-  .hero { min-height: auto; padding: 125px 0 55px; }
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero h1 { font-size: clamp(55px,15vw,80px); }
-  .hero-art { min-height: 390px; }
-  .castle-scene { transform: scale(.85); }
-  .section { padding: 75px 0; }
-  .info-grid { grid-template-columns: repeat(2,1fr); }
-  .info-box:nth-child(2) { border-right: 0; }
-  .info-box:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
-  .about-grid { grid-template-columns: 1fr; }
-  .skills-layout { grid-template-columns: 1fr; }
-  .contact-box { padding: 30px; flex-direction: column; align-items: flex-start; }
-  .admin-modal { flex-direction: column; height: 94vh; }
-  .admin-sidebar {
-    width: 100%;
-    padding: 12px;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .admin-brand { padding: 4px 8px 12px; }
-  .admin-nav-label { display: none; }
-  .admin-menu {
-    display: flex;
-    overflow-x: auto;
-  }
-  .admin-menu button { white-space: nowrap; }
-  .admin-close { display: none; }
-  .admin-main { padding: 18px; }
+    .navbar {
+        flex-wrap: wrap;
+        min-height: 70px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-account {
+        margin-left: auto;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+        order: 5;
+        padding: 10px 0 5px;
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .nav-links.open {
+        display: grid;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+    }
+
+    .hero-art {
+        height: 350px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .about-layout,
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .admin-stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .page {
+        padding: 45px 5% 75px;
+    }
 }
 
-@media(max-width:520px) {
-  .project-grid,.plugin-grid,.market-grid { grid-template-columns: 1fr; }
-  .hero-meta { gap: 17px; }
-  .hero-art { min-height: 320px; }
-  .castle-scene { transform: scale(.68); }
-  .card-one { left: -4px; top: 55px; }
-  .card-two { right: -3px; bottom: 40px; }
-  .search { width: 100%; }
-  .project-toolbar { align-items: stretch; }
-  .admin-stats { grid-template-columns: 1fr; }
-  .admin-form { grid-template-columns: 1fr; }
-  .field.full { grid-column: auto; }
-  .admin-form-actions { grid-column: auto; }
-  .modal-box { padding: 20px; }
+@media(max-width:450px) {
+    .wordmark { font-size: 19px; letter-spacing: 3px; }
+    .grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 45px; }
+    .hero-meta { gap: 20px; }
+    .account-box { padding: 24px; }
+    .admin-form { grid-template-columns: 1fr; }
+    .admin-item { align-items: flex-start; }
+    footer { flex-direction: column; }
 }
 </style>
 </head>
 
 <body>
 
-<header class="nav-wrap" id="navbar">
-  <div class="container navbar">
-    <a href="#home" class="brand">
-      <div class="brand-symbol">R</div>
-      <div>
-        RESURECT
-        <small>INDEPENDENT DEVELOPER</small>
-      </div>
-    </a>
+<div id="ambient"></div>
+<div class="orb one"></div>
+<div class="orb two"></div>
+<div id="particles"></div>
+
+<header class="navbar">
+    <a class="wordmark" href="#home">RESURECT<span>.</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
 
     <nav class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Expertise</a>
-      <a href="#projects">Projects</a>
-      <a href="#plugins">Plugins</a>
-      <a href="#marketplace">Marketplace</a>
-      <a href="#contact">Contact</a>
+        <button class="nav-link active" data-page="home">Home</button>
+        <button class="nav-link" data-page="about">About</button>
+        <button class="nav-link" data-page="skills">Skills</button>
+        <button class="nav-link" data-page="projects">Projects</button>
+        <button class="nav-link" data-page="plugins">Plugins</button>
+        <button class="nav-link" data-page="marketplace">Marketplace</button>
+        <button class="nav-link" data-page="releases">Releases</button>
+        <button class="nav-link" data-page="contact">Contact</button>
     </nav>
 
-    <div class="nav-actions">
-      <button class="btn admin-nav" onclick="openAdmin()">Admin Panel ↗</button>
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
-    </div>
-  </div>
+    <button class="nav-account" data-page="account">Account ↗</button>
 </header>
 
 <main>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <div class="hero-label">INDEPENDENT DEVELOPER / PROJECT BUILDER</div>
+<!-- HOME -->
 
-      <h1>
-        Building
-        <span class="gradient-text">Digital</span>
-        Worlds.
-      </h1>
+<section class="page active" id="home">
+    <div class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">Independent Creator & Developer</div>
 
-      <p class="hero-text">
-        I create software, Minecraft systems, custom plugins and digital
-        experiences. Focused on building reliable projects, developing
-        communities and turning ideas into functional products.
-      </p>
+            <h1 class="hero-title">
+                Building<br>
+                <span>Digital</span><br>
+                Realms.
+            </h1>
 
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">Explore Projects ↗</a>
-        <a href="#contact" class="btn">Get in Touch</a>
-      </div>
+            <p class="hero-subtitle">
+                I create digital experiences, development tools and Minecraft projects.
+                Focused on building meaningful systems, managing communities and
+                turning ideas into reality.
+            </p>
 
-      <div class="hero-meta">
-        <div class="meta-item">
-          <strong>05+</strong>
-          <span>Years of Management</span>
+            <div class="hero-actions">
+                <button class="btn btn-primary" data-page="projects">Explore Projects ↗</button>
+                <button class="btn btn-outline" data-page="about">Discover My Story</button>
+            </div>
+
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <strong>05+</strong>
+                    <small>Years Management</small>
+                </div>
+                <div class="meta-item">
+                    <strong>10+</strong>
+                    <small>Digital Projects</small>
+                </div>
+                <div class="meta-item">
+                    <strong>∞</strong>
+                    <small>Ideas to Build</small>
+                </div>
+            </div>
         </div>
-        <div class="meta-item">
-          <strong>Java</strong>
-          <span>Minecraft Development</span>
+
+        <div class="hero-art">
+            <div class="moon"></div>
+            <div class="castle">
+                <div class="castle-main"></div>
+                <div class="tower left"></div>
+                <div class="tower right"></div>
+                <div class="tower center"></div>
+                <div class="castle-window w1"></div>
+                <div class="castle-window w2"></div>
+                <div class="castle-window w3"></div>
+            </div>
+            <div class="art-caption">
+                <span>Beyond the ordinary</span>
+                <span>Est. Resurect</span>
+            </div>
         </div>
-        <div class="meta-item">
-          <strong>Resurect</strong>
-          <span>Independent Brand</span>
-        </div>
-      </div>
     </div>
 
-    <div class="hero-art">
-      <div class="art-glow"></div>
-      <div class="floating-card card-one">
-        <strong>✦ Minecraft Systems</strong>
-        <span>Plugins · Networks · Tools</span>
-      </div>
-
-      <div class="castle-scene">
-        <div class="moon"></div>
-        <div class="castle">
-          <div class="castle-tower tower-left"></div>
-          <div class="castle-tower tower-right"></div>
-          <div class="castle-main">
-            <div class="castle-window w1"></div>
-            <div class="castle-window w2"></div>
-            <div class="castle-window w3"></div>
-            <div class="castle-window w4"></div>
-            <div class="castle-window w5"></div>
-            <div class="castle-window w6"></div>
-          </div>
-          <div class="tower-center"></div>
-          <div class="castle-door"></div>
-        </div>
-        <div class="fog"></div>
-      </div>
-
-      <div class="floating-card card-two">
-        <strong>PKDEV / Products</strong>
-        <span>Tools built under Resurect</span>
-      </div>
+    <div class="section-top">
+        <div class="eyebrow">What I Do</div>
+        <h2 class="section-heading">Creating Across Different Worlds</h2>
+        <p class="section-description">
+            From software development to Minecraft systems and digital products,
+            every project is an opportunity to build something different.
+        </p>
     </div>
-  </div>
+
+    <div class="grid">
+        <article class="card">
+            <div class="card-icon">⌘</div>
+            <h3>Software Development</h3>
+            <p>Building applications, tools, websites and custom software solutions.</p>
+        </article>
+        <article class="card">
+            <div class="card-icon">⚔</div>
+            <h3>Minecraft Projects</h3>
+            <p>Creating custom gameplay systems, plugins and community experiences.</p>
+        </article>
+        <article class="card">
+            <div class="card-icon">◇</div>
+            <h3>Project Management</h3>
+            <p>Organizing teams, managing workflows and developing online communities.</p>
+        </article>
+    </div>
 </section>
 
-<!-- INFO STRIP -->
-<div class="info-strip">
-  <div class="container info-grid">
-    <div class="info-box">
-      <strong>Independent Development</strong>
-      <span>Building products and digital tools</span>
-    </div>
-    <div class="info-box">
-      <strong>Minecraft Ecosystem</strong>
-      <span>Plugins, servers and custom systems</span>
-    </div>
-    <div class="info-box">
-      <strong>Project Management</strong>
-      <span>Community and team coordination</span>
-    </div>
-    <div class="info-box">
-      <strong>PKDEV Products</strong>
-      <span>A growing collection of tools</span>
-    </div>
-  </div>
-</div>
-
 <!-- ABOUT -->
-<section class="section" id="about">
-  <div class="container about-grid">
-    <div class="reveal">
-      <div class="eyebrow">ABOUT RESURECT</div>
-      <h2 class="section-title">
-        More than just <span class="gradient-text">development.</span>
-      </h2>
-      <p class="section-desc">
-        My work combines software development, technical problem-solving,
-        project organization and community management.
-      </p>
 
-      <div style="margin-top:27px">
-        <a href="#contact" class="btn btn-primary">Let's Work Together ↗</a>
-      </div>
+<section class="page" id="about">
+    <div class="section-top">
+        <div class="eyebrow">About Me</div>
+        <h2 class="section-heading">The Person Behind Resurect</h2>
+        <p class="section-description">
+            A creator focused on technology, digital products and building
+            experiences that have a purpose.
+        </p>
     </div>
 
-    <div class="about-card reveal">
-      <div class="tag">THE PERSON BEHIND THE PROJECTS</div>
-      <h3 style="margin-top:20px">Resurect</h3>
-      <p>
-        An independent developer and project builder interested in creating
-        practical software and memorable digital experiences. My background
-        includes Minecraft development, server infrastructure, staff
-        organization and managing online communities.
-      </p>
-
-      <div class="about-points">
-        <div class="about-point">
-          <div class="point-icon">01</div>
-          <div>
-            <strong>Development Experience</strong>
-            <span>Building plugins, applications, websites and custom systems.</span>
-          </div>
+    <div class="about-layout">
+        <div class="about-panel">
+            <div class="eyebrow">My Philosophy</div>
+            <h3>Ideas Become Reality.</h3>
+            <p>
+                I believe every great project starts with an idea, but what makes
+                it valuable is the process behind it: planning, consistency,
+                development and continuous improvement.
+                <br><br>
+                My journey has involved software development, Minecraft
+                communities, team management and independent digital projects.
+            </p>
         </div>
 
-        <div class="about-point">
-          <div class="point-icon">02</div>
-          <div>
-            <strong>Management Background</strong>
-            <span>Over five years of experience in project and community management.</span>
-          </div>
-        </div>
+        <div class="about-panel">
+            <div class="eyebrow">Background</div>
+            <h3>Experience & Focus</h3>
+            <p>
+                My work combines technical development with practical experience
+                in managing projects and online communities.
+            </p>
 
-        <div class="about-point">
-          <div class="point-icon">03</div>
-          <div>
-            <strong>Product-Oriented Thinking</strong>
-            <span>Turning concepts into structured, maintainable and useful products.</span>
-          </div>
+            <div class="about-list">
+                <div class="about-row">
+                    <span>Brand</span>
+                    <strong>RESURECT</strong>
+                </div>
+                <div class="about-row">
+                    <span>Experience</span>
+                    <strong>5+ Years in Management</strong>
+                </div>
+                <div class="about-row">
+                    <span>Main Focus</span>
+                    <strong>Software & Minecraft</strong>
+                </div>
+                <div class="about-row">
+                    <span>Development</span>
+                    <strong>Independent</strong>
+                </div>
+                <div class="about-row">
+                    <span>Secondary Brand</span>
+                    <strong>PKDEV</strong>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <!-- SKILLS -->
-<section class="section" id="skills">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">TECHNICAL EXPERTISE</div>
-      <h2 class="section-title">Tools behind the <span class="gradient-text">work.</span></h2>
-      <p class="section-desc">
-        A collection of programming languages, frameworks, databases and
-        Minecraft technologies used across different projects.
-      </p>
+
+<section class="page" id="skills">
+    <div class="section-top">
+        <div class="eyebrow">Technical Arsenal</div>
+        <h2 class="section-heading">Skills & Technologies</h2>
+        <p class="section-description">
+            Languages, frameworks, databases and tools used across my projects.
+        </p>
     </div>
 
-    <div class="skills-layout">
-
-      <div class="skill-group reveal">
+    <div class="skill-category">
         <h3>Programming Languages</h3>
-        <p>Core development languages</p>
-        <div class="skill-tags">
-          <span>Java</span>
-          <span>JavaScript</span>
-          <span>TypeScript</span>
-          <span>PHP</span>
-          <span>C</span>
-          <span>HTML5</span>
-          <span>CSS3</span>
+        <div class="skill-grid">
+            <div class="skill"><i class="devicon-java-plain colored"></i><span>Java</span></div>
+            <div class="skill"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+            <div class="skill"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
+            <div class="skill"><i class="devicon-php-plain colored"></i><span>PHP</span></div>
+            <div class="skill"><i class="devicon-html5-plain colored"></i><span>HTML5</span></div>
+            <div class="skill"><i class="devicon-css3-plain colored"></i><span>CSS3</span></div>
+            <div class="skill"><i class="devicon-c-plain colored"></i><span>C</span></div>
         </div>
-      </div>
-
-      <div class="skill-group reveal">
-        <h3>Minecraft Development</h3>
-        <p>Server platforms and plugin ecosystems</p>
-        <div class="skill-tags">
-          <span>Paper</span>
-          <span>Spigot</span>
-          <span>Bukkit</span>
-          <span>Velocity</span>
-          <span>BungeeCord</span>
-          <span>LuckPerms</span>
-          <span>Vault</span>
-          <span>PlaceholderAPI</span>
-          <span>WorldGuard</span>
-          <span>Multiverse</span>
-          <span>TAB</span>
-          <span>FancyNpcs</span>
-          <span>Adventure API</span>
-        </div>
-      </div>
-
-      <div class="skill-group reveal">
-        <h3>Databases & Data</h3>
-        <p>Data storage and database technologies</p>
-        <div class="skill-tags">
-          <span>MySQL</span>
-          <span>MongoDB</span>
-          <span>SQLite</span>
-          <span>SQL</span>
-          <span>Database Design</span>
-          <span>Data Management</span>
-        </div>
-      </div>
-
-      <div class="skill-group reveal">
-        <h3>Web Development</h3>
-        <p>Frontend, backend and application technologies</p>
-        <div class="skill-tags">
-          <span>React</span>
-          <span>Next.js</span>
-          <span>Node.js</span>
-          <span>REST API</span>
-          <span>Tailwind CSS</span>
-          <span>Responsive UI</span>
-        </div>
-      </div>
-
-      <div class="skill-group reveal">
-        <h3>Tools & Infrastructure</h3>
-        <p>Development workflow and server environments</p>
-        <div class="skill-tags">
-          <span>Git</span>
-          <span>Docker</span>
-          <span>Linux</span>
-          <span>Maven</span>
-          <span>Gradle</span>
-          <span>IntelliJ IDEA</span>
-          <span>GitHub</span>
-        </div>
-      </div>
-
-      <div class="skill-group reveal">
-        <h3>Management & Operations</h3>
-        <p>Project planning and team coordination</p>
-        <div class="skill-tags">
-          <span>Project Management</span>
-          <span>Staff Management</span>
-          <span>Team Coordination</span>
-          <span>Community Management</span>
-          <span>System Planning</span>
-          <span>Technical Support</span>
-        </div>
-      </div>
-
     </div>
-  </div>
+
+    <div class="skill-category">
+        <h3>Frameworks & Runtime</h3>
+        <div class="skill-grid">
+            <div class="skill"><i class="devicon-react-original colored"></i><span>React</span></div>
+            <div class="skill"><i class="devicon-nextjs-original"></i><span>Next.js</span></div>
+            <div class="skill"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+            <div class="skill"><i class="devicon-tailwindcss-original colored"></i><span>Tailwind CSS</span></div>
+        </div>
+    </div>
+
+    <div class="skill-category">
+        <h3>Databases & Infrastructure</h3>
+        <div class="skill-grid">
+            <div class="skill"><i class="devicon-mysql-original colored"></i><span>MySQL</span></div>
+            <div class="skill"><i class="devicon-mongodb-plain colored"></i><span>MongoDB</span></div>
+            <div class="skill"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+            <div class="skill"><i class="devicon-linux-plain"></i><span>Linux</span></div>
+            <div class="skill"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+            <div class="skill"><i class="devicon-github-original"></i><span>GitHub</span></div>
+        </div>
+    </div>
+
+    <div class="skill-category">
+        <h3>Minecraft Development</h3>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">⚙</div>
+                <h3>Custom Plugin Systems</h3>
+                <p>Designing custom gameplay features, commands and modular systems.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">◇</div>
+                <h3>Game Mechanics</h3>
+                <p>Creating progression, economy, combat and player interaction systems.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⌘</div>
+                <h3>API Integrations</h3>
+                <p>Connecting services, databases and external systems to projects.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="section" id="projects">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">SELECTED WORK</div>
-      <h2 class="section-title">Projects & <span class="gradient-text">experiments.</span></h2>
-      <p class="section-desc">
-        A selection of software, Minecraft systems and web projects.
-        Explore each project to learn more about its purpose and technology.
-      </p>
+
+<section class="page" id="projects">
+    <div class="section-top">
+        <div class="eyebrow">Selected Work</div>
+        <h2 class="section-heading">Projects</h2>
+        <p class="section-description">
+            A collection of independent projects, applications and development work.
+        </p>
     </div>
 
-    <div class="project-toolbar">
-      <div class="filters" id="projectFilters">
-        <button class="filter-btn active" data-filter="All">All Projects</button>
-        <button class="filter-btn" data-filter="Minecraft">Minecraft</button>
-        <button class="filter-btn" data-filter="Windows">Windows</button>
-        <button class="filter-btn" data-filter="Web">Web</button>
-      </div>
-      <input class="search" id="projectSearch" placeholder="Search projects...">
+    <div class="filters" id="projectFilters">
+        <button class="filter active" data-filter="All">All Projects</button>
+        <button class="filter" data-filter="Windows">Windows</button>
+        <button class="filter" data-filter="Minecraft">Minecraft</button>
+        <button class="filter" data-filter="Web">Web</button>
     </div>
 
-    <div class="project-grid" id="projectGrid"></div>
-  </div>
+    <div class="grid" id="projectGrid"></div>
 </section>
 
 <!-- PLUGINS -->
-<section class="section plugin-section" id="plugins">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">PKDEV ECOSYSTEM</div>
-      <h2 class="section-title">Minecraft <span class="gradient-text">Plugins.</span></h2>
-      <p class="section-desc">
-        Custom Minecraft plugins and server tools developed under the PKDEV
-        product label, part of the Resurect ecosystem.
-      </p>
+
+<section class="page" id="plugins">
+    <div class="section-top">
+        <div class="eyebrow">Minecraft Ecosystem</div>
+        <h2 class="section-heading">Plugins & Systems</h2>
+        <p class="section-description">
+            Custom Minecraft tools and systems developed under the PKDEV ecosystem.
+        </p>
     </div>
 
-    <div class="project-toolbar">
-      <div class="filters" id="pluginFilters">
-        <button class="filter-btn active" data-filter="All">All Plugins</button>
-        <button class="filter-btn" data-filter="Released">Released</button>
-        <button class="filter-btn" data-filter="In Development">In Development</button>
-        <button class="filter-btn" data-filter="Planned">Planned</button>
-      </div>
-      <input class="search" id="pluginSearch" placeholder="Search plugins...">
-    </div>
-
-    <div class="plugin-grid" id="pluginGrid"></div>
-  </div>
+    <div class="grid" id="pluginGrid"></div>
 </section>
 
 <!-- MARKETPLACE -->
-<section class="section" id="marketplace">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">DIGITAL STORE</div>
-      <h2 class="section-title">The <span class="gradient-text">Marketplace.</span></h2>
-      <p class="section-desc">
-        Discover digital products, plugins and development resources.
-        Product listings can be managed through the administration panel.
-      </p>
+
+<section class="page" id="marketplace">
+    <div class="section-top">
+        <div class="eyebrow">Digital Products</div>
+        <h2 class="section-heading">Marketplace</h2>
+        <p class="section-description">
+            A place for digital tools, plugins and products. Product listings
+            can be managed through the owner dashboard.
+        </p>
     </div>
 
-    <div class="project-toolbar">
-      <div class="filters" id="marketFilters">
-        <button class="filter-btn active" data-filter="All">All Products</button>
-        <button class="filter-btn" data-filter="Plugins">Plugins</button>
-        <button class="filter-btn" data-filter="Tools">Tools</button>
-        <button class="filter-btn" data-filter="Resources">Resources</button>
-      </div>
-      <input class="search" id="marketSearch" placeholder="Search marketplace...">
+    <div class="filters">
+        <input class="form-control" id="marketSearch" placeholder="Search products..." style="max-width:350px">
     </div>
 
-    <div class="market-grid" id="marketGrid"></div>
-  </div>
+    <div class="grid" id="marketGrid"></div>
 </section>
 
 <!-- RELEASES -->
-<section class="section" id="releases">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">DEVELOPMENT LOG</div>
-      <h2 class="section-title">Latest <span class="gradient-text">Updates.</span></h2>
-      <p class="section-desc">
-        Development milestones and product updates.
-      </p>
+
+<section class="page" id="releases">
+    <div class="section-top">
+        <div class="eyebrow">Updates & Versions</div>
+        <h2 class="section-heading">Releases</h2>
+        <p class="section-description">
+            Latest updates, development milestones and software releases.
+        </p>
     </div>
 
-    <div class="release-list" id="releaseList"></div>
-  </div>
+    <div class="grid" id="releaseGrid"></div>
+</section>
+
+<!-- ACCOUNT -->
+
+<section class="page" id="account">
+    <div class="section-top" style="text-align:center">
+        <div class="eyebrow">Your Space</div>
+        <h2 class="section-heading">Account Access</h2>
+        <p class="section-description" style="margin:auto">
+            Sign in or create an account to access your personal area.
+        </p>
+    </div>
+
+    <div class="account-wrap">
+        <div class="account-box" id="authBox">
+            <h2 id="authTitle">Welcome Back.</h2>
+            <p id="authDescription">Sign in to your Resurect account.</p>
+
+            <div id="registerName" class="form-group" style="display:none">
+                <label>Your Name</label>
+                <input class="form-control" id="authName" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input class="form-control" id="authEmail" type="email" placeholder="name@example.com">
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" id="authPassword" type="password" placeholder="Enter password">
+            </div>
+
+            <button class="btn btn-primary" id="authSubmit">Sign In</button>
+            <div class="message" id="authMessage"></div>
+
+            <div class="switch-auth" id="authSwitch">
+                Don't have an account? Create one.
+            </div>
+
+            <div class="owner-access">
+                <p>Site owner? Access the owner dashboard using your private access key.</p>
+                <input class="form-control" id="ownerKey" type="password" placeholder="Owner access key">
+                <button class="btn btn-outline" id="ownerLogin">Owner Access ↗</button>
+            </div>
+        </div>
+
+        <div class="account-box profile-card" id="profileBox">
+            <div class="profile-avatar" id="profileAvatar">R</div>
+            <h2 id="profileName">Account</h2>
+            <p id="profileEmail"></p>
+            <span class="tag" id="profileRole">MEMBER</span>
+            <button class="btn btn-outline" id="logoutButton">Sign Out</button>
+            <button class="btn btn-primary" id="profileAdmin" style="display:none">Open Dashboard ↗</button>
+        </div>
+    </div>
+</section>
+
+<!-- ADMIN -->
+
+<section class="page" id="admin">
+    <div class="section-top">
+        <div class="eyebrow">Private Workspace</div>
+        <h2 class="section-heading">Owner Dashboard</h2>
+        <p class="section-description">
+            Manage projects, plugins, products and releases.
+        </p>
+    </div>
+
+    <div class="admin-stats">
+        <div class="admin-stat"><strong id="countProjects">0</strong><span>Projects</span></div>
+        <div class="admin-stat"><strong id="countPlugins">0</strong><span>Plugins</span></div>
+        <div class="admin-stat"><strong id="countMarket">0</strong><span>Products</span></div>
+        <div class="admin-stat"><strong id="countReleases">0</strong><span>Releases</span></div>
+    </div>
+
+    <div class="card" style="margin-bottom:25px">
+        <h3>Add New Content</h3>
+
+        <div class="admin-form">
+            <select class="form-control" id="adminType">
+                <option value="project">Project</option>
+                <option value="plugin">Plugin</option>
+                <option value="market">Marketplace Product</option>
+                <option value="release">Release</option>
+            </select>
+
+            <input class="form-control" id="adminTitle" placeholder="Title">
+
+            <input class="form-control" id="adminSubtitle" placeholder="Subtitle">
+
+            <select class="form-control" id="adminCategory">
+                <option value="Windows">Windows</option>
+                <option value="Minecraft">Minecraft</option>
+                <option value="Web">Web</option>
+                <option value="Development">Development</option>
+            </select>
+
+            <select class="form-control" id="adminStatus">
+                <option>In Development</option>
+                <option>Released</option>
+                <option>Planned</option>
+            </select>
+
+            <input class="form-control" id="adminVersion" placeholder="Version (optional)">
+
+            <input class="form-control" id="adminLink" placeholder="Project URL (optional)">
+
+            <textarea class="form-control" id="adminDescription" placeholder="Description"></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="addContent">Add Content +</button>
+        <div class="message" id="adminMessage"></div>
+    </div>
+
+    <div class="card">
+        <h3>Manage Existing Content</h3>
+        <div class="filters" style="margin-top:18px">
+            <button class="filter active" data-admin-filter="project">Projects</button>
+            <button class="filter" data-admin-filter="plugin">Plugins</button>
+            <button class="filter" data-admin-filter="market">Marketplace</button>
+            <button class="filter" data-admin-filter="release">Releases</button>
+        </div>
+        <div class="admin-list" id="adminList"></div>
+    </div>
 </section>
 
 <!-- CONTACT -->
-<section class="section" id="contact">
-  <div class="container">
-    <div class="contact-box reveal">
-      <div>
-        <div class="eyebrow">LET'S CONNECT</div>
-        <h2>Have an idea? <span class="gradient-text">Let's build it.</span></h2>
-        <p>
-          Interested in a project, collaboration or Minecraft development?
-          Get in touch through one of the links below.
+
+<section class="page" id="contact">
+    <div class="section-top">
+        <div class="eyebrow">Get In Touch</div>
+        <h2 class="section-heading">Let's Connect.</h2>
+        <p class="section-description">
+            Have a project, idea or collaboration in mind?
+            Feel free to reach out.
         </p>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn btn-primary" href="https://github.com/resurect63" target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="btn" href="https://t.me/Resurect63" target="_blank" rel="noopener">Telegram ↗</a>
-      </div>
     </div>
-  </div>
+
+    <div class="contact-layout">
+        <div>
+            <a class="contact-link" href="https://github.com/resurect63" target="_blank" rel="noopener">
+                <div class="card-icon">⌘</div>
+                <div><strong>GitHub</strong><small>github.com/resurect63</small></div>
+            </a>
+
+            <a class="contact-link" href="https://t.me/Resurect63" target="_blank" rel="noopener">
+                <div class="card-icon">➤</div>
+                <div><strong>Telegram</strong><small>t.me/Resurect63</small></div>
+            </a>
+
+            <div class="contact-link">
+                <div class="card-icon">◇</div>
+                <div><strong>Discord</strong><small>.Resurect.</small></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>PKDEV — Development Ecosystem</h3>
+            <p>
+                PKDEV is the secondary product label behind selected software
+                and development projects created by Resurect.
+            </p>
+            <div style="margin-top:25px">
+                <span class="tag">SOFTWARE</span>
+                <span class="tag">MINECRAFT</span>
+                <span class="tag">DIGITAL PRODUCTS</span>
+            </div>
+        </div>
+    </div>
 </section>
 
 </main>
 
 <footer>
-  <div class="container footer-inner">
-    <div class="footer-copy">
-      <strong style="color:var(--white);font-size:13px">RESURECT</strong><br>
-      Independent Development & Digital Projects<br>
-      © <span id="year"></span> Resurect. All rights reserved.
-    </div>
-
-    <div class="footer-links">
-      <a href="#home">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#plugins">Plugins</a>
-      <a href="https://github.com/resurect63" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://t.me/Resurect63" target="_blank" rel="noopener">Telegram</a>
-      <a href="#" onclick="openAdmin();return false">Admin</a>
-    </div>
-
-    <div class="footer-copy">Created by <strong style="color:var(--light)">Resurect</strong></div>
-  </div>
+    <span>© <span id="year"></span> RESURECT. All rights reserved.</span>
+    <span>Independent Development · <strong>Created by Resurect</strong></span>
+    <span>PKDEV — Digital Products</span>
 </footer>
 
-<!-- DETAILS MODAL -->
-<div class="modal" id="detailsModal" onclick="backdropClose(event,'detailsModal')">
-  <div class="modal-box">
-    <div class="modal-head">
-      <h2 id="detailTitle">Project Details</h2>
-      <button class="close-btn" onclick="closeModal('detailsModal')">×</button>
-    </div>
-    <div id="detailBody"></div>
-  </div>
-</div>
-
-<!-- ADMIN MODAL -->
-<div class="modal" id="adminModal" onclick="backdropClose(event,'adminModal')">
-  <div class="admin-modal">
-    <aside class="admin-sidebar">
-      <div class="admin-brand">RESURECT<span>.</span> ADMIN</div>
-
-      <div class="admin-nav-label">WORKSPACE</div>
-      <div class="admin-menu">
-        <button class="active" data-page="overview">▦ Overview</button>
-        <button data-page="projects">◈ Projects</button>
-        <button data-page="plugins">⬡ Plugin Manager</button>
-        <button data-page="market">▣ Marketplace</button>
-        <button data-page="releases">↻ Releases</button>
-      </div>
-
-      <div class="admin-nav-label">SYSTEM</div>
-      <div class="admin-menu">
-        <button data-page="settings">⚙ Settings</button>
-      </div>
-
-      <button class="admin-close" onclick="closeModal('adminModal')">← Back to Website</button>
-    </aside>
-
-    <section class="admin-main">
-      <div class="admin-top">
-        <div>
-          <h2 id="adminPageTitle">Overview</h2>
-          <p>Resurect Content Management Preview</p>
-        </div>
-        <button class="close-btn" onclick="closeModal('adminModal')">×</button>
-      </div>
-
-      <div class="admin-warning">
-        DEMO MODE — This panel stores changes in this browser using LocalStorage.
-        It is not a secure authentication system and does not publish changes to other visitors.
-      </div>
-
-      <div id="adminContent"></div>
-    </section>
-  </div>
-</div>
-
 <script>
-/* ========================================
-   RESURECT WEBSITE DATA
-======================================== */
+/* =========================================
+   RESURECT — SINGLE FILE WEBSITE
+========================================= */
+
+/*
+  DEMO SECURITY NOTICE:
+  This is a frontend-only prototype.
+  The owner key and account data are handled
+  in the browser. Do not use this as production
+  authentication or store real user passwords.
+  A secure owner dashboard needs server-side
+  authentication and authorization.
+*/
+
+const OWNER_ACCESS_KEY = "CHANGE-THIS-OWNER-KEY";
+
+/* NAVIGATION */
+
+const pages = document.querySelectorAll(".page");
+const navLinks = document.querySelectorAll("[data-page]");
+const navMenu = document.getElementById("navLinks");
+
+function showPage(pageId) {
+    const target = document.getElementById(pageId);
+
+    if (!target) return;
+
+    if (pageId === "admin" && !isOwner()) {
+        showPage("account");
+        showMessage("Please sign in with owner access first.", "error");
+        return;
+    }
+
+    pages.forEach(page => page.classList.remove("active"));
+    target.classList.add("active");
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.classList.toggle("active", link.dataset.page === pageId);
+    });
+
+    navMenu.classList.remove("open");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (pageId === "admin") renderAdmin();
+}
+
+navLinks.forEach(link => {
+    link.addEventListener("click", () => showPage(link.dataset.page));
+});
+
+document.getElementById("menuToggle").addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+});
+
+window.addEventListener("hashchange", () => {
+    const page = location.hash.replace("#", "") || "home";
+    if (document.getElementById(page)) showPage(page);
+});
+
+/* PARTICLES */
+
+const particleLayer = document.getElementById("particles");
+
+for (let i = 0; i < 35; i++) {
+    const particle = document.createElement("span");
+    particle.className = "particle";
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.top = Math.random() * 100 + "%";
+    particle.style.animationDuration = (9 + Math.random() * 15) + "s";
+    particle.style.animationDelay = (-Math.random() * 20) + "s";
+    particleLayer.appendChild(particle);
+}
+
+/* DEFAULT CONTENT */
 
 const defaultProjects = [
-  {
-    id: "imperial-launcher",
-    title: "Imperial Launcher",
-    category: "Windows",
-    status: "In Development",
-    year: "2026",
-    letter: "IL",
-    description: "A modern Minecraft Java launcher with a custom interface, version management and an improved user experience.",
-    stack: ["Electron", "Java", "JavaScript", "HTML", "CSS"],
-    details: "Imperial Launcher is a desktop launcher concept focused on Minecraft Java. The project aims to provide version management, mod loader support, offline profiles and a polished launcher experience."
-  },
-  {
-    id: "project-delta",
-    title: "ProjectDelta",
-    category: "Minecraft",
-    status: "In Development",
-    year: "2026",
-    letter: "PD",
-    description: "An extraction-inspired Minecraft game mode with custom loot, arenas, combat and progression.",
-    stack: ["Java", "Paper", "Vault", "WorldGuard", "EliteMobs"],
-    details: "ProjectDelta is a Minecraft Java server project inspired by extraction gameplay. Its systems include deployment, loot collection, custom arenas and extraction-based rounds."
-  },
-  {
-    id: "pkdev-store",
-    title: "PKDEV.Store",
-    category: "Minecraft",
-    status: "In Development",
-    year: "2026",
-    letter: "PS",
-    description: "A premium in-game store plugin with GUI navigation, Vault economy and rank integration.",
-    stack: ["Java", "Paper", "Vault", "LuckPerms"],
-    details: "PKDEV.Store provides a customizable server store interface. The project focuses on inventory navigation, product management and integration with server economy and permissions."
-  },
-  {
-    id: "resurect-portfolio",
-    title: "Resurect Website",
-    category: "Web",
-    status: "In Development",
-    year: "2026",
-    letter: "R",
-    description: "A personal development portfolio and product ecosystem for Resurect.",
-    stack: ["HTML", "CSS", "JavaScript"],
-    details: "The Resurect website is a central place for projects, plugins, products and development updates."
-  },
-  {
-    id: "pkdev-anticheat",
-    title: "PKDEV.AntiCheat",
-    category: "Minecraft",
-    status: "Planned",
-    year: "2026",
-    letter: "AC",
-    description: "A planned server protection and monitoring solution for Minecraft networks.",
-    stack: ["Java", "Paper", "MySQL"],
-    details: "A planned anti-cheat and server monitoring project. Features and supported versions will be announced as development progresses."
-  },
-  {
-    id: "staff-notifier",
-    title: "StaffNotifier",
-    category: "Minecraft",
-    status: "In Development",
-    year: "2026",
-    letter: "SN",
-    description: "A staff notification and coordination tool for Minecraft server teams.",
-    stack: ["Java", "Paper", "Discord API"],
-    details: "StaffNotifier is designed to help server teams communicate important events and coordinate staff activity."
-  }
+    {
+        id: 1,
+        title: "Imperial Launcher",
+        subtitle: "Minecraft Java Launcher",
+        description: "A modern Minecraft Java launcher with version management, mod support and a custom user experience.",
+        category: "Windows",
+        status: "In Development",
+        version: "2.9"
+    },
+    {
+        id: 2,
+        title: "ProjectDelta",
+        subtitle: "Minecraft Game Mode",
+        description: "An extraction-inspired Minecraft experience focused on exploration, equipment, combat and progression.",
+        category: "Minecraft",
+        status: "In Development",
+        version: "Development"
+    },
+    {
+        id: 3,
+        title: "Victoria III Imperial Guide",
+        subtitle: "Strategy Game Companion",
+        description: "A strategy guide website featuring countries, historical content, mods and interactive learning.",
+        category: "Web",
+        status: "In Development",
+        version: "1.0"
+    },
+    {
+        id: 4,
+        title: "Resurect Website",
+        subtitle: "Personal Portfolio",
+        description: "The official digital home for Resurect projects, technologies and development work.",
+        category: "Web",
+        status: "In Development",
+        version: "1.0"
+    },
+    {
+        id: 5,
+        title: "PKDEV Store",
+        subtitle: "Minecraft Store System",
+        description: "A custom store experience with rank management, product history and an extensible architecture.",
+        category: "Minecraft",
+        status: "In Development",
+        version: "1.2.0"
+    }
 ];
 
 const defaultPlugins = [
-  {
-    id: "pkdev-store",
-    name: "PKDEV.Store",
-    version: "1.2.0",
-    status: "In Development",
-    category: "Economy",
-    description: "A premium in-game store with GUI navigation, Vault economy and LuckPerms integration.",
-    compatibility: "Paper · Java 21",
-    features: ["Inventory GUI", "Vault Economy", "LuckPerms Integration", "Purchase History", "Discount Codes"],
-    details: "A server store system designed for a polished player experience and flexible product management."
-  },
-  {
-    id: "pkdev-anticheat",
-    name: "PKDEV.AntiCheat",
-    version: "Planned",
-    status: "Planned",
-    category: "Security",
-    description: "A planned protection and monitoring system for Minecraft servers.",
-    compatibility: "To be announced",
-    features: ["Detection Systems", "Staff Alerts", "Configuration", "Logging"],
-    details: "Development plans and technical specifications will be published when the project enters active development."
-  },
-  {
-    id: "staff-notifier",
-    name: "StaffNotifier",
-    version: "0.1.0",
-    status: "In Development",
-    category: "Administration",
-    description: "Staff notifications and server team coordination tools.",
-    compatibility: "Paper",
-    features: ["Staff Notifications", "Event Alerts", "Configuration"],
-    details: "A utility plugin concept for improving communication between server staff members."
-  },
-  {
-    id: "pkdev-bounty",
-    name: "PKDEV.Bounty",
-    version: "Planned",
-    status: "Planned",
-    category: "Gameplay",
-    description: "A bounty system for Minecraft servers with player rewards.",
-    compatibility: "Paper",
-    features: ["Player Bounties", "Vault Support", "Bounty Lookup"],
-    details: "A gameplay plugin concept that allows players to create and track bounties."
-  },
-  {
-    id: "pkdev-nox",
-    name: "PKDEV.Nox",
-    version: "Planned",
-    status: "Planned",
-    category: "Utility",
-    description: "A planned utility plugin within the PKDEV ecosystem.",
-    compatibility: "To be announced",
-    features: ["Modular Design", "Custom Configuration"],
-    details: "Further information will be published as the project takes shape."
-  },
-  {
-    id: "pkdev-core",
-    name: "PKDEV.Core",
-    version: "Planned",
-    status: "Planned",
-    category: "Core",
-    description: "A shared foundation for future PKDEV Minecraft plugins.",
-    compatibility: "Paper",
-    features: ["Shared Utilities", "Configuration", "Database Layer"],
-    details: "PKDEV.Core is planned as a common foundation for reusable systems across the PKDEV plugin family."
-  },
-  {
-    id: "pkdev-quests",
-    name: "PKDEV.Quests",
-    version: "Planned",
-    status: "Planned",
-    category: "Gameplay",
-    description: "A configurable quest and objective system.",
-    compatibility: "Paper",
-    features: ["Custom Quests", "Objectives", "Rewards"],
-    details: "A planned quest framework for Minecraft server owners."
-  },
-  {
-    id: "pkdev-dungeons",
-    name: "PKDEV.Dungeons",
-    version: "Planned",
-    status: "Planned",
-    category: "Gameplay",
-    description: "A dungeon framework for custom Minecraft adventures.",
-    compatibility: "Paper",
-    features: ["Dungeon Instances", "Custom Rewards", "Progression"],
-    details: "A planned dungeon system for adventure-focused servers."
-  },
-  {
-    id: "pkdev-crates",
-    name: "PKDEV.Crates",
-    version: "Planned",
-    status: "Planned",
-    category: "Rewards",
-    description: "A configurable crate and reward system.",
-    compatibility: "Paper",
-    features: ["Custom Crates", "Reward Tables", "Keys"],
-    details: "A planned reward and crate management plugin."
-  },
-  {
-    id: "pkdev-economy",
-    name: "PKDEV.Economy",
-    version: "Planned",
-    status: "Planned",
-    category: "Economy",
-    description: "An economy system designed for Minecraft networks.",
-    compatibility: "Paper",
-    features: ["Currency", "Transactions", "Database Storage"],
-    details: "A planned economy system with extensible storage and integration options."
-  },
-  {
-    id: "pkdev-backup",
-    name: "PKDEV.Backup",
-    version: "Planned",
-    status: "Planned",
-    category: "Utility",
-    description: "A backup management tool for Minecraft servers.",
-    compatibility: "Paper",
-    features: ["Backup Management", "Scheduling", "Restore Planning"],
-    details: "A planned tool for organizing server backup workflows."
-  }
+    {
+        id: 101,
+        title: "PKDEV.Store",
+        subtitle: "Minecraft Store",
+        description: "A customizable store system with Vault economy integration and rank management.",
+        status: "In Development",
+        version: "1.2.0"
+    },
+    {
+        id: 102,
+        title: "PKDEV.AntiCheat",
+        subtitle: "Security System",
+        description: "A custom anti-cheat project focused on detection, monitoring and server protection.",
+        status: "In Development",
+        version: "Development"
+    },
+    {
+        id: 103,
+        title: "StaffNotifier",
+        subtitle: "Staff Management",
+        description: "Staff notifications and useful moderation workflow tools.",
+        status: "Planned",
+        version: "Coming Soon"
+    },
+    {
+        id: 104,
+        title: "PKDEV.Bounty",
+        subtitle: "Bounty System",
+        description: "A player bounty system with economy integration and management commands.",
+        status: "In Development",
+        version: "Development"
+    },
+    {
+        id: 105,
+        title: "PKDEV.Nox",
+        subtitle: "Utility Plugin",
+        description: "A custom utility plugin in the PKDEV ecosystem.",
+        status: "Planned",
+        version: "Coming Soon"
+    },
+    {
+        id: 106,
+        title: "PKDEV.Core",
+        subtitle: "Core Framework",
+        description: "A planned foundation for shared features and reusable plugin systems.",
+        status: "Planned",
+        version: "Coming Soon"
+    },
+    {
+        id: 107,
+        title: "PKDEV.Quests",
+        subtitle: "Quest System",
+        description: "A modular quest and progression system.",
+        status: "Planned",
+        version: "Coming Soon"
+    },
+    {
+        id: 108,
+        title: "PKDEV.Dungeons",
+        subtitle: "Dungeon System",
+        description: "A planned dungeon experience with challenges and rewards.",
+        status: "Planned",
+        version: "Coming Soon"
+    },
+    {
+        id: 109,
+        title: "PKDEV.Crates",
+        subtitle: "Crate System",
+        description: "A customizable reward and crate management system.",
+        status: "Planned",
+        version: "Coming Soon"
+    },
+    {
+        id: 110,
+        title: "PKDEV.Economy",
+        subtitle: "Economy System",
+        description: "A planned economy toolkit for Minecraft communities.",
+        status: "Planned",
+        version: "Coming Soon"
+    },
+    {
+        id: 111,
+        title: "PKDEV.Backup",
+        subtitle: "Backup Utility",
+        description: "A planned backup and restoration tool.",
+        status: "Planned",
+        version: "Coming Soon"
+    }
 ];
 
 const defaultMarket = [
-  {
-    id: "store-plugin",
-    name: "PKDEV.Store",
-    category: "Plugins",
-    price: "Coming Soon",
-    status: "In Development",
-    description: "Premium Minecraft server store plugin.",
-    link: "",
-    details: "A premium store plugin with GUI navigation and server economy integration."
-  },
-  {
-    id: "launcher",
-    name: "Imperial Launcher",
-    category: "Tools",
-    price: "Coming Soon",
-    status: "In Development",
-    description: "A custom launcher experience for Minecraft Java.",
-    link: "",
-    details: "Desktop launcher project. Release information will be announced here."
-  },
-  {
-    id: "server-resources",
-    name: "Server Resources",
-    category: "Resources",
-    price: "Free",
-    status: "Planned",
-    description: "A future collection of server development resources.",
-    link: "",
-    details: "Guides, resources and useful materials for Minecraft server projects."
-  }
+    {
+        id: 201,
+        title: "PKDEV Store",
+        subtitle: "Minecraft Plugin",
+        description: "A customizable Minecraft store plugin.",
+        category: "Minecraft",
+        status: "In Development",
+        version: "1.2.0"
+    },
+    {
+        id: 202,
+        title: "Imperial Launcher",
+        subtitle: "Desktop Application",
+        description: "A modern launcher for Minecraft Java Edition.",
+        category: "Windows",
+        status: "In Development",
+        version: "2.9"
+    }
 ];
 
 const defaultReleases = [
-  {
-    id: "release-1",
-    version: "2026 / Portfolio",
-    title: "Resurect Website Development",
-    description: "The Resurect portfolio and product ecosystem is being developed with a dedicated plugin and marketplace management interface."
-  },
-  {
-    id: "release-2",
-    version: "PKDEV / 1.2.0",
-    title: "PKDEV.Store Development",
-    description: "Continued work on the store GUI, economy integration and product management systems."
-  },
-  {
-    id: "release-3",
-    version: "IMPERIAL / 2.9",
-    title: "Imperial Launcher",
-    description: "Planned launcher improvements, update workflow and interface refinements."
-  }
+    {
+        id: 301,
+        title: "Imperial Launcher 2.8",
+        subtitle: "Launcher Update",
+        description: "A launcher development milestone. Check the official release channel for availability.",
+        status: "Released",
+        version: "2.8"
+    },
+    {
+        id: 302,
+        title: "PKDEV.Store 1.2.0",
+        subtitle: "Store Plugin",
+        description: "A development milestone for the PKDEV Store plugin.",
+        status: "In Development",
+        version: "1.2.0"
+    }
 ];
 
-/* ========================================
-   STORAGE
-======================================== */
-
-function loadData(key, defaults) {
-  try {
-    const saved = localStorage.getItem("resurect_" + key);
-    return saved ? JSON.parse(saved) : structuredClone(defaults);
-  } catch {
-    return structuredClone(defaults);
-  }
+function loadData(key, fallback) {
+    try {
+        const saved = localStorage.getItem(key);
+        return saved ? JSON.parse(saved) : fallback;
+    } catch {
+        return fallback;
+    }
 }
 
-let projects = loadData("projects", defaultProjects);
-let plugins = loadData("plugins", defaultPlugins);
-let market = loadData("market", defaultMarket);
-let releases = loadData("releases", defaultReleases);
+let projects = loadData("resurect_projects", defaultProjects);
+let plugins = loadData("resurect_plugins", defaultPlugins);
+let market = loadData("resurect_market", defaultMarket);
+let releases = loadData("resurect_releases", defaultReleases);
 
-function saveData(key, data) {
-  localStorage.setItem("resurect_" + key, JSON.stringify(data));
+function saveData() {
+    localStorage.setItem("resurect_projects", JSON.stringify(projects));
+    localStorage.setItem("resurect_plugins", JSON.stringify(plugins));
+    localStorage.setItem("resurect_market", JSON.stringify(market));
+    localStorage.setItem("resurect_releases", JSON.stringify(releases));
 }
 
-/* ========================================
-   UTILITIES
-======================================== */
+/* SAFE HTML */
 
 function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[char]);
 }
 
-function slugify(value) {
-  return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+/* CARD RENDERING */
+
+function projectCard(item) {
+    return `
+        <article class="card project-card">
+            <div class="eyebrow">${escapeHTML(item.category || "Project")}</div>
+            <h3>${escapeHTML(item.title)}</h3>
+            <p>${escapeHTML(item.description)}</p>
+            <div class="project-bottom">
+                <span class="status">${escapeHTML(item.status)}</span>
+                <span class="tag">${escapeHTML(item.version || "Project")}</span>
+            </div>
+        </article>
+    `;
 }
 
-function statusClass(status) {
-  if (status === "Released") return "released";
-  if (status === "In Development") return "development";
-  return "planned";
+function pluginCard(item) {
+    return `
+        <article class="card project-card">
+            <div class="card-icon">⚙</div>
+            <h3>${escapeHTML(item.title)}</h3>
+            <p>${escapeHTML(item.description)}</p>
+            <div class="project-bottom">
+                <span class="status">${escapeHTML(item.status)}</span>
+                <span class="tag">${escapeHTML(item.version || "Plugin")}</span>
+            </div>
+        </article>
+    `;
 }
 
-function showModal(id) {
-  document.getElementById(id).classList.add("open");
-  document.body.style.overflow = "hidden";
+function marketCard(item) {
+    return `
+        <article class="card project-card">
+            <div class="card-icon">◇</div>
+            <h3>${escapeHTML(item.title)}</h3>
+            <p>${escapeHTML(item.description)}</p>
+            <div class="project-bottom">
+                <span class="status">${escapeHTML(item.status)}</span>
+                <span class="tag">${escapeHTML(item.category || "Digital")}</span>
+            </div>
+        </article>
+    `;
 }
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove("open");
-  if (!document.querySelector(".modal.open")) {
-    document.body.style.overflow = "";
-  }
+function releaseCard(item) {
+    return `
+        <article class="card project-card">
+            <div class="eyebrow">Release Update</div>
+            <h3>${escapeHTML(item.title)}</h3>
+            <p>${escapeHTML(item.description)}</p>
+            <div class="project-bottom">
+                <span class="status">${escapeHTML(item.status)}</span>
+                <span class="tag">${escapeHTML(item.version || "Update")}</span>
+            </div>
+        </article>
+    `;
 }
 
-function backdropClose(event, id) {
-  if (event.target.id === id) closeModal(id);
+function renderProjects(filter = "All") {
+    const filtered = filter === "All"
+        ? projects
+        : projects.filter(item => item.category === filter);
+
+    document.getElementById("projectGrid").innerHTML =
+        filtered.length
+            ? filtered.map(projectCard).join("")
+            : `<p class="section-description">No projects found in this category.</p>`;
 }
-
-/* ========================================
-   PROJECT RENDERING
-======================================== */
-
-let projectFilter = "All";
-
-function renderProjects() {
-  const query = document.getElementById("projectSearch").value.toLowerCase();
-
-  const filtered = projects.filter(project => {
-    const categoryMatch = projectFilter === "All" || project.category === projectFilter;
-    const searchMatch = [
-      project.title,
-      project.description,
-      project.category,
-      ...(project.stack || [])
-    ].join(" ").toLowerCase().includes(query);
-
-    return categoryMatch && searchMatch;
-  });
-
-  const grid = document.getElementById("projectGrid");
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="empty-state">No projects found.</div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map(project => `
-    <article class="project-card reveal visible">
-      <div class="project-cover">
-        <div class="cover-letter">${escapeHTML(project.letter || project.title.slice(0,2))}</div>
-      </div>
-      <div class="project-content">
-        <div class="project-top">
-          <span class="tag">${escapeHTML(project.category)}</span>
-          <span class="status ${statusClass(project.status)}">${escapeHTML(project.status)}</span>
-        </div>
-        <h3>${escapeHTML(project.title)}</h3>
-        <p>${escapeHTML(project.description)}</p>
-        <div class="project-footer">
-          <span>${escapeHTML(project.year || "Project")}</span>
-          <button class="text-action" onclick="showProject('${escapeHTML(project.id)}')">View Details ↗</button>
-        </div>
-      </div>
-    </article>
-  `).join("");
-}
-
-document.getElementById("projectFilters").addEventListener("click", event => {
-  const button = event.target.closest("button[data-filter]");
-  if (!button) return;
-
-  projectFilter = button.dataset.filter;
-  document.querySelectorAll("#projectFilters .filter-btn").forEach(item => item.classList.remove("active"));
-  button.classList.add("active");
-  renderProjects();
-});
-
-document.getElementById("projectSearch").addEventListener("input", renderProjects);
-
-function showProject(id) {
-  const project = projects.find(item => item.id === id);
-  if (!project) return;
-
-  document.getElementById("detailTitle").textContent = project.title;
-
-  document.getElementById("detailBody").innerHTML = `
-    <span class="tag">${escapeHTML(project.category)}</span>
-    <span class="status ${statusClass(project.status)}" style="margin-left:10px">${escapeHTML(project.status)}</span>
-    <p class="modal-description">${escapeHTML(project.details || project.description)}</p>
-    <h4 style="font-size:12px;margin-top:20px">Technology Stack</h4>
-    <div class="modal-tags">
-      ${(project.stack || []).map(item => `<span class="tag">${escapeHTML(item)}</span>`).join("")}
-    </div>
-  `;
-
-  showModal("detailsModal");
-}
-
-/* ========================================
-   PLUGIN RENDERING
-======================================== */
-
-let pluginFilter = "All";
 
 function renderPlugins() {
-  const query = document.getElementById("pluginSearch").value.toLowerCase();
-
-  const filtered = plugins.filter(plugin => {
-    const statusMatch = pluginFilter === "All" || plugin.status === pluginFilter;
-    const searchMatch = [
-      plugin.name,
-      plugin.category,
-      plugin.description,
-      plugin.compatibility
-    ].join(" ").toLowerCase().includes(query);
-
-    return statusMatch && searchMatch;
-  });
-
-  const grid = document.getElementById("pluginGrid");
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="empty-state">No plugins found.</div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map(plugin => `
-    <article class="plugin-card reveal visible">
-      <div class="plugin-symbol">${escapeHTML(plugin.name.replace("PKDEV.","").slice(0,2).toUpperCase())}</div>
-      <div class="plugin-content">
-        <div class="plugin-top">
-          <span class="tag">${escapeHTML(plugin.category)}</span>
-          <span class="status ${statusClass(plugin.status)}">${escapeHTML(plugin.status)}</span>
-        </div>
-        <h3>${escapeHTML(plugin.name)}</h3>
-        <p>${escapeHTML(plugin.description)}</p>
-        <div class="plugin-footer">
-          <span>${escapeHTML(plugin.version)} · ${escapeHTML(plugin.compatibility)}</span>
-          <button class="text-action" onclick="showPlugin('${escapeHTML(plugin.id)}')">Details ↗</button>
-        </div>
-      </div>
-    </article>
-  `).join("");
+    document.getElementById("pluginGrid").innerHTML =
+        plugins.map(pluginCard).join("");
 }
-
-document.getElementById("pluginFilters").addEventListener("click", event => {
-  const button = event.target.closest("button[data-filter]");
-  if (!button) return;
-
-  pluginFilter = button.dataset.filter;
-  document.querySelectorAll("#pluginFilters .filter-btn").forEach(item => item.classList.remove("active"));
-  button.classList.add("active");
-  renderPlugins();
-});
-
-document.getElementById("pluginSearch").addEventListener("input", renderPlugins);
-
-function showPlugin(id) {
-  const plugin = plugins.find(item => item.id === id);
-  if (!plugin) return;
-
-  document.getElementById("detailTitle").textContent = plugin.name;
-
-  document.getElementById("detailBody").innerHTML = `
-    <span class="tag">Version ${escapeHTML(plugin.version)}</span>
-    <span class="status ${statusClass(plugin.status)}" style="margin-left:10px">${escapeHTML(plugin.status)}</span>
-    <p class="modal-description">${escapeHTML(plugin.details || plugin.description)}</p>
-    <h4 style="font-size:12px;margin-top:20px">Features</h4>
-    <div class="modal-tags">
-      ${(plugin.features || []).map(item => `<span class="tag">${escapeHTML(item)}</span>`).join("")}
-    </div>
-    <p class="modal-description"><strong style="color:var(--white)">Compatibility:</strong> ${escapeHTML(plugin.compatibility)}</p>
-  `;
-
-  showModal("detailsModal");
-}
-
-/* ========================================
-   MARKETPLACE
-======================================== */
-
-let marketFilter = "All";
 
 function renderMarket() {
-  const query = document.getElementById("marketSearch").value.toLowerCase();
+    const query = document.getElementById("marketSearch").value.toLowerCase();
 
-  const filtered = market.filter(product => {
-    const categoryMatch = marketFilter === "All" || product.category === marketFilter;
-    const searchMatch = [
-      product.name,
-      product.category,
-      product.description
-    ].join(" ").toLowerCase().includes(query);
+    const filtered = market.filter(item =>
+        item.title.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+    );
 
-    return categoryMatch && searchMatch;
-  });
-
-  const grid = document.getElementById("marketGrid");
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="empty-state">No products found.</div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map(product => `
-    <article class="market-card reveal visible">
-      <div class="market-cover">${escapeHTML(product.name.slice(0,15).toUpperCase())}</div>
-      <div class="market-content">
-        <div class="market-top">
-          <span class="tag">${escapeHTML(product.category)}</span>
-          <span class="status ${statusClass(product.status)}">${escapeHTML(product.status)}</span>
-        </div>
-        <h3>${escapeHTML(product.name)}</h3>
-        <p>${escapeHTML(product.description)}</p>
-        <div class="market-footer">
-          <span class="market-price">${escapeHTML(product.price)}</span>
-          <button class="text-action" onclick="showMarketProduct('${escapeHTML(product.id)}')">View Product ↗</button>
-        </div>
-      </div>
-    </article>
-  `).join("");
+    document.getElementById("marketGrid").innerHTML =
+        filtered.length
+            ? filtered.map(marketCard).join("")
+            : `<p class="section-description">No products found.</p>`;
 }
 
-document.getElementById("marketFilters").addEventListener("click", event => {
-  const button = event.target.closest("button[data-filter]");
-  if (!button) return;
+function renderReleases() {
+    document.getElementById("releaseGrid").innerHTML =
+        releases.map(releaseCard).join("");
+}
 
-  marketFilter = button.dataset.filter;
-  document.querySelectorAll("#marketFilters .filter-btn").forEach(item => item.classList.remove("active"));
-  button.classList.add("active");
-  renderMarket();
+/* FILTERS */
+
+document.querySelectorAll("#projectFilters .filter").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll("#projectFilters .filter")
+            .forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+        renderProjects(button.dataset.filter);
+    });
 });
 
 document.getElementById("marketSearch").addEventListener("input", renderMarket);
 
-function showMarketProduct(id) {
-  const product = market.find(item => item.id === id);
-  if (!product) return;
+/* AUTH — FRONTEND DEMO */
 
-  document.getElementById("detailTitle").textContent = product.name;
+let authMode = "login";
 
-  const link = product.link && /^https?:\/\//i.test(product.link)
-    ? `<a class="btn btn-primary" href="${escapeHTML(product.link)}" target="_blank" rel="noopener">Open Product ↗</a>`
-    : `<span class="tag">Purchase Link Not Available Yet</span>`;
-
-  document.getElementById("detailBody").innerHTML = `
-    <span class="tag">${escapeHTML(product.category)}</span>
-    <span class="status ${statusClass(product.status)}" style="margin-left:10px">${escapeHTML(product.status)}</span>
-    <p class="modal-description">${escapeHTML(product.details || product.description)}</p>
-    <p style="color:var(--light);font-size:15px;font-weight:900;margin:20px 0">${escapeHTML(product.price)}</p>
-    ${link}
-  `;
-
-  showModal("detailsModal");
+function getUsers() {
+    return loadData("resurect_demo_users", []);
 }
 
-/* ========================================
-   RELEASES
-======================================== */
-
-function renderReleases() {
-  const list = document.getElementById("releaseList");
-
-  if (!releases.length) {
-    list.innerHTML = '<div class="empty-state">No updates published yet.</div>';
-    return;
-  }
-
-  list.innerHTML = releases.map(item => `
-    <article class="release">
-      <div class="release-version">${escapeHTML(item.version)}</div>
-      <h3>${escapeHTML(item.title)}</h3>
-      <p>${escapeHTML(item.description)}</p>
-    </article>
-  `).join("");
+function currentUser() {
+    return loadData("resurect_demo_session", null);
 }
 
-/* ========================================
-   ADMIN PANEL
-======================================== */
-
-let adminPage = "overview";
-
-function openAdmin() {
-  showModal("adminModal");
-  renderAdmin();
+function setSession(user) {
+    localStorage.setItem("resurect_demo_session", JSON.stringify(user));
 }
 
-document.querySelectorAll(".admin-menu button[data-page]").forEach(button => {
-  button.addEventListener("click", () => {
-    adminPage = button.dataset.page;
+function isOwner() {
+    const user = currentUser();
+    return !!user && user.role === "owner";
+}
 
-    document.querySelectorAll(".admin-menu button").forEach(item => item.classList.remove("active"));
-    button.classList.add("active");
+function showMessage(text, type) {
+    const element = document.getElementById("authMessage");
+    if (!element) return;
+    element.textContent = text;
+    element.className = "message " + type;
+}
 
-    renderAdmin();
-  });
+function setAuthMode(mode) {
+    authMode = mode;
+
+    const isRegister = mode === "register";
+
+    document.getElementById("authTitle").textContent =
+        isRegister ? "Create Account." : "Welcome Back.";
+
+    document.getElementById("authDescription").textContent =
+        isRegister
+            ? "Create your Resurect member account."
+            : "Sign in to your Resurect account.";
+
+    document.getElementById("registerName").style.display =
+        isRegister ? "block" : "none";
+
+    document.getElementById("authSubmit").textContent =
+        isRegister ? "Create Account" : "Sign In";
+
+    document.getElementById("authSwitch").textContent =
+        isRegister
+            ? "Already have an account? Sign in."
+            : "Don't have an account? Create one.";
+
+    showMessage("", "");
+}
+
+document.getElementById("authSwitch").addEventListener("click", () => {
+    setAuthMode(authMode === "login" ? "register" : "login");
 });
 
-function renderAdmin() {
-  const content = document.getElementById("adminContent");
-  const title = document.getElementById("adminPageTitle");
-
-  const titles = {
-    overview: "Dashboard Overview",
-    projects: "Project Manager",
-    plugins: "Plugin Manager",
-    market: "Marketplace Manager",
-    releases: "Release Manager",
-    settings: "System Settings"
-  };
-
-  title.textContent = titles[adminPage] || "Dashboard";
-
-  if (adminPage === "overview") {
-    content.innerHTML = `
-      <div class="admin-stats">
-        <div class="admin-stat">
-          <span>Total Projects</span>
-          <strong>${projects.length}</strong>
-        </div>
-        <div class="admin-stat">
-          <span>Total Plugins</span>
-          <strong>${plugins.length}</strong>
-        </div>
-        <div class="admin-stat">
-          <span>Marketplace Products</span>
-          <strong>${market.length}</strong>
-        </div>
-      </div>
-
-      <div class="admin-panel">
-        <h3>Quick Actions</h3>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="adminPage='plugins';renderAdmin()">Manage Plugins</button>
-          <button class="btn" onclick="adminPage='market';renderAdmin()">Manage Marketplace</button>
-          <button class="btn" onclick="adminPage='projects';renderAdmin()">Manage Projects</button>
-        </div>
-      </div>
-
-      <div class="admin-panel">
-        <h3>Website Information</h3>
-        <p style="color:var(--muted);font-size:11px;line-height:2">
-          Main Brand: Resurect<br>
-          Product Label: PKDEV<br>
-          Website: Resurect.dev<br>
-          Storage: Browser LocalStorage
-        </p>
-      </div>
-    `;
-    return;
-  }
-
-  if (adminPage === "projects") {
-    content.innerHTML = `
-      <div class="admin-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <h3>All Projects (${projects.length})</h3>
-          <button class="btn btn-primary" onclick="openEditor('projects')">+ Add Project</button>
-        </div>
-        ${adminTable(projects, "projects", ["title","category","status"])}
-      </div>
-    `;
-    return;
-  }
-
-  if (adminPage === "plugins") {
-    content.innerHTML = `
-      <div class="admin-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <h3>Plugin Collection (${plugins.length})</h3>
-          <button class="btn btn-primary" onclick="openEditor('plugins')">+ Add Plugin</button>
-        </div>
-        ${adminTable(plugins, "plugins", ["name","version","status"])}
-      </div>
-    `;
-    return;
-  }
-
-  if (adminPage === "market") {
-    content.innerHTML = `
-      <div class="admin-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <h3>Marketplace Listings (${market.length})</h3>
-          <button class="btn btn-primary" onclick="openEditor('market')">+ Add Product</button>
-        </div>
-        ${adminTable(market, "market", ["name","category","price"])}
-      </div>
-    `;
-    return;
-  }
-
-  if (adminPage === "releases") {
-    content.innerHTML = `
-      <div class="admin-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <h3>Published Updates (${releases.length})</h3>
-          <button class="btn btn-primary" onclick="openEditor('releases')">+ Add Release</button>
-        </div>
-        ${adminTable(releases, "releases", ["version","title","description"])}
-      </div>
-    `;
-    return;
-  }
-
-  if (adminPage === "settings") {
-    content.innerHTML = `
-      <div class="admin-panel">
-        <h3>Local Data Management</h3>
-        <p style="font-size:11px;color:var(--muted);line-height:1.9;margin-bottom:18px">
-          Export your current website content as a JSON backup or restore the original demonstration data.
-        </p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="exportData()">Export JSON Backup</button>
-          <button class="btn" onclick="importData()">Import JSON Backup</button>
-          <button class="btn" onclick="resetData()">Restore Default Data</button>
-        </div>
-      </div>
-
-      <div class="admin-panel">
-        <h3>About This Admin Panel</h3>
-        <p style="font-size:11px;color:var(--muted);line-height:2">
-          This is a browser-based management preview. It is not connected to a server database.
-          Local changes are not shared with other visitors. For production use, connect a secure
-          backend, authenticated admin API and database.
-        </p>
-      </div>
-    `;
-  }
+async function hashPassword(password) {
+    const data = new TextEncoder().encode(password);
+    const hash = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(hash))
+        .map(byte => byte.toString(16).padStart(2, "0"))
+        .join("");
 }
 
-function adminTable(items, type, columns) {
-  if (!items.length) return '<div class="empty-state">No records available.</div>';
+document.getElementById("authSubmit").addEventListener("click", async () => {
+    const name = document.getElementById("authName").value.trim();
+    const email = document.getElementById("authEmail").value.trim().toLowerCase();
+    const password = document.getElementById("authPassword").value;
 
-  return `
-    <div class="admin-table-wrap">
-      <table class="admin-table">
-        <thead>
-          <tr>
-            ${columns.map(col => `<th>${escapeHTML(col)}</th>`).join("")}
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${items.map(item => `
-            <tr>
-              ${columns.map(col => `<td>${escapeHTML(item[col] || "")}</td>`).join("")}
-              <td>
-                <div class="table-actions">
-                  <button class="small-btn" onclick="openEditor('${type}','${escapeHTML(item.id)}')">Edit</button>
-                  <button class="small-btn danger" onclick="deleteItem('${type}','${escapeHTML(item.id)}')">Delete</button>
-                </div>
-              </td>
-            </tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-/* ========================================
-   ADMIN EDITOR
-======================================== */
-
-function openEditor(type, id = null) {
-  const collections = {
-    projects,
-    plugins,
-    market,
-    releases
-  };
-
-  const collection = collections[type];
-  if (!collection) return;
-
-  const item = id ? collection.find(entry => entry.id === id) : null;
-
-  const schemas = {
-    projects: [
-      ["title","Project Name","text"],
-      ["category","Category","select","Minecraft,Windows,Web"],
-      ["status","Status","select","Released,In Development,Planned"],
-      ["year","Year","text"],
-      ["letter","Card Letters","text"],
-      ["description","Short Description","textarea"],
-      ["stack","Technology Stack (comma separated)","text"],
-      ["details","Full Details","textarea"]
-    ],
-    plugins: [
-      ["name","Plugin Name","text"],
-      ["version","Version","text"],
-      ["status","Status","select","Released,In Development,Planned"],
-      ["category","Category","text"],
-      ["compatibility","Compatibility","text"],
-      ["description","Short Description","textarea"],
-      ["features","Features (comma separated)","text"],
-      ["details","Full Details","textarea"]
-    ],
-    market: [
-      ["name","Product Name","text"],
-      ["category","Category","select","Plugins,Tools,Resources"],
-      ["price","Price","text"],
-      ["status","Status","select","Released,In Development,Planned"],
-      ["description","Short Description","textarea"],
-      ["link","Product URL","text"],
-      ["details","Product Details","textarea"]
-    ],
-    releases: [
-      ["version","Version / Label","text"],
-      ["title","Release Title","text"],
-      ["description","Description","textarea"]
-    ]
-  };
-
-  const schema = schemas[type];
-
-  document.getElementById("detailTitle").textContent = item ? "Edit Record" : "Create New Record";
-
-  const fields = schema.map(([key,label,kind,options]) => {
-    const value = item ? item[key] : "";
-
-    if (kind === "select") {
-      const optionHTML = options.split(",").map(option =>
-        `<option value="${escapeHTML(option)}" ${value === option ? "selected" : ""}>${escapeHTML(option)}</option>`
-      ).join("");
-
-      return `
-        <div class="field">
-          <label>${escapeHTML(label)}</label>
-          <select name="${key}">${optionHTML}</select>
-        </div>
-      `;
+    if (!email || !password) {
+        return showMessage("Please fill in all required fields.", "error");
     }
 
-    if (kind === "textarea") {
-      return `
-        <div class="field full">
-          <label>${escapeHTML(label)}</label>
-          <textarea name="${key}">${escapeHTML(Array.isArray(value) ? value.join(", ") : value || "")}</textarea>
-        </div>
-      `;
+    if (password.length < 8) {
+        return showMessage("Password must contain at least 8 characters.", "error");
     }
 
-    return `
-      <div class="field">
-        <label>${escapeHTML(label)}</label>
-        <input name="${key}" value="${escapeHTML(Array.isArray(value) ? value.join(", ") : value || "")}" required>
-      </div>
-    `;
-  }).join("");
+    const users = getUsers();
+    const hash = await hashPassword(password);
 
-  document.getElementById("detailBody").innerHTML = `
-    <form class="admin-form" id="recordForm">
-      ${fields}
-      <div class="admin-form-actions">
-        <button type="button" class="btn" onclick="closeModal('detailsModal')">Cancel</button>
-        <button type="submit" class="btn btn-primary">${item ? "Save Changes" : "Create Record"}</button>
-      </div>
-    </form>
-  `;
-
-  showModal("detailsModal");
-
-  document.getElementById("recordForm").addEventListener("submit", event => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const record = {};
-
-    schema.forEach(([key]) => {
-      const value = String(formData.get(key) || "").trim();
-
-      if (["stack","features"].includes(key)) {
-        record[key] = value.split(",").map(part => part.trim()).filter(Boolean);
-      } else {
-        record[key] = value;
-      }
-    });
-
-    if (item) {
-      Object.assign(item, record);
-    } else {
-      record.id = slugify(record.title || record.name || record.version) + "-" + Date.now();
-      collection.unshift(record);
-    }
-
-    saveData(type, collection);
-
-    closeModal("detailsModal");
-    renderEverything();
-    renderAdmin();
-  });
-}
-
-function deleteItem(type, id) {
-  const collections = {
-    projects,
-    plugins,
-    market,
-    releases
-  };
-
-  const collection = collections[type];
-  if (!collection) return;
-
-  const item = collection.find(entry => entry.id === id);
-  if (!item) return;
-
-  if (!confirm(`Delete "${item.title || item.name || item.version}"?`)) return;
-
-  const next = collection.filter(entry => entry.id !== id);
-
-  if (type === "projects") projects = next;
-  if (type === "plugins") plugins = next;
-  if (type === "market") market = next;
-  if (type === "releases") releases = next;
-
-  saveData(type, next);
-  renderEverything();
-  renderAdmin();
-}
-
-/* ========================================
-   EXPORT / IMPORT / RESET
-======================================== */
-
-function exportData() {
-  const backup = {
-    projects,
-    plugins,
-    market,
-    releases,
-    exportedAt: new Date().toISOString()
-  };
-
-  const blob = new Blob([JSON.stringify(backup, null, 2)], {
-    type: "application/json"
-  });
-
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "resurect-website-backup.json";
-  link.click();
-  URL.revokeObjectURL(url);
-}
-
-function importData() {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = ".json,application/json";
-
-  input.onchange = () => {
-    const file = input.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      try {
-        const data = JSON.parse(reader.result);
-
-        if (
-          !Array.isArray(data.projects) ||
-          !Array.isArray(data.plugins) ||
-          !Array.isArray(data.market) ||
-          !Array.isArray(data.releases)
-        ) {
-          throw new Error("Invalid backup format");
+    if (authMode === "register") {
+        if (name.length < 2) {
+            return showMessage("Please enter your name.", "error");
         }
 
-        projects = data.projects;
-        plugins = data.plugins;
-        market = data.market;
-        releases = data.releases;
+        if (email === "owner@resurect.dev") {
+            return showMessage("This email is reserved.", "error");
+        }
 
-        saveData("projects", projects);
-        saveData("plugins", plugins);
-        saveData("market", market);
-        saveData("releases", releases);
+        if (users.some(user => user.email === email)) {
+            return showMessage("This email is already registered.", "error");
+        }
 
-        renderEverything();
+        users.push({ name, email, passwordHash: hash, role: "user" });
+
+        localStorage.setItem("resurect_demo_users", JSON.stringify(users));
+
+        setSession({ name, email, role: "user" });
+        updateAccountUI();
+
+        showMessage("Account created successfully.", "success");
+        return;
+    }
+
+    const user = users.find(item =>
+        item.email === email && item.passwordHash === hash
+    );
+
+    if (!user) {
+        return showMessage("Incorrect email or password.", "error");
+    }
+
+    setSession({ name: user.name, email: user.email, role: "user" });
+    updateAccountUI();
+    showMessage("Welcome back.", "success");
+});
+
+function updateAccountUI() {
+    const user = currentUser();
+    const authBox = document.getElementById("authBox");
+    const profileBox = document.getElementById("profileBox");
+
+    if (!user) {
+        authBox.style.display = "block";
+        profileBox.style.display = "none";
+        return;
+    }
+
+    authBox.style.display = "none";
+    profileBox.style.display = "block";
+
+    document.getElementById("profileName").textContent = user.name;
+    document.getElementById("profileEmail").textContent = user.email;
+    document.getElementById("profileAvatar").textContent =
+        user.name.charAt(0).toUpperCase();
+
+    document.getElementById("profileRole").textContent =
+        user.role === "owner" ? "SITE OWNER" : "MEMBER";
+
+    document.getElementById("profileAdmin").style.display =
+        user.role === "owner" ? "block" : "none";
+}
+
+document.getElementById("logoutButton").addEventListener("click", () => {
+    localStorage.removeItem("resurect_demo_session");
+    updateAccountUI();
+});
+
+document.getElementById("profileAdmin").addEventListener("click", () => {
+    showPage("admin");
+});
+
+/* OWNER ACCESS — FRONTEND DEMO ONLY */
+
+document.getElementById("ownerLogin").addEventListener("click", () => {
+    const key = document.getElementById("ownerKey").value;
+
+    if (key !== OWNER_ACCESS_KEY || OWNER_ACCESS_KEY === "CHANGE-THIS-OWNER-KEY") {
+        showMessage("Owner key is not configured or is incorrect.", "error");
+        return;
+    }
+
+    setSession({
+        name: "Resurect",
+        email: "owner@resurect.dev",
+        role: "owner"
+    });
+
+    updateAccountUI();
+    showMessage("Owner session started.", "success");
+});
+
+updateAccountUI();
+
+/* ADMIN */
+
+let adminFilter = "project";
+
+function getCollection(type) {
+    return {
+        project: projects,
+        plugin: plugins,
+        market: market,
+        release: releases
+    }[type];
+}
+
+function setCollection(type, data) {
+    if (type === "project") projects = data;
+    if (type === "plugin") plugins = data;
+    if (type === "market") market = data;
+    if (type === "release") releases = data;
+
+    saveData();
+    renderAll();
+}
+
+function renderAdmin() {
+    if (!isOwner()) {
+        showPage("account");
+        return;
+    }
+
+    document.getElementById("countProjects").textContent = projects.length;
+    document.getElementById("countPlugins").textContent = plugins.length;
+    document.getElementById("countMarket").textContent = market.length;
+    document.getElementById("countReleases").textContent = releases.length;
+
+    const items = getCollection(adminFilter);
+
+    document.getElementById("adminList").innerHTML = items.map(item => `
+        <div class="admin-item">
+            <div>
+                <strong>${escapeHTML(item.title)}</strong>
+                <small>${escapeHTML(item.status)} · ${escapeHTML(item.version || "")}</small>
+            </div>
+            <button class="delete-btn" data-delete="${item.id}">Delete</button>
+        </div>
+    `).join("") || `<p class="section-description">No items yet.</p>`;
+
+    document.querySelectorAll("[data-delete]").forEach(button => {
+        button.addEventListener("click", () => {
+            const id = Number(button.dataset.delete);
+            const next = getCollection(adminFilter).filter(item => item.id !== id);
+            setCollection(adminFilter, next);
+            renderAdmin();
+        });
+    });
+}
+
+document.querySelectorAll("[data-admin-filter]").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll("[data-admin-filter]")
+            .forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+        adminFilter = button.dataset.adminFilter;
         renderAdmin();
-        alert("Backup imported successfully.");
-      } catch {
-        alert("Could not import this backup file.");
-      }
+    });
+});
+
+document.getElementById("addContent").addEventListener("click", () => {
+    if (!isOwner()) return;
+
+    const type = document.getElementById("adminType").value;
+    const title = document.getElementById("adminTitle").value.trim();
+
+    if (!title) {
+        document.getElementById("adminMessage").textContent =
+            "Please enter a title.";
+        return;
+    }
+
+    const item = {
+        id: Date.now(),
+        title,
+        subtitle: document.getElementById("adminSubtitle").value,
+        category: document.getElementById("adminCategory").value,
+        status: document.getElementById("adminStatus").value,
+        version: document.getElementById("adminVersion").value,
+        link: document.getElementById("adminLink").value,
+        description: document.getElementById("adminDescription").value
     };
 
-    reader.readAsText(file);
-  };
+    const collection = getCollection(type);
+    collection.push(item);
 
-  input.click();
-}
+    setCollection(type, collection);
 
-function resetData() {
-  if (!confirm("Restore all default website data? Your local changes will be lost.")) return;
+    document.getElementById("adminTitle").value = "";
+    document.getElementById("adminSubtitle").value = "";
+    document.getElementById("adminVersion").value = "";
+    document.getElementById("adminLink").value = "";
+    document.getElementById("adminDescription").value = "";
 
-  projects = structuredClone(defaultProjects);
-  plugins = structuredClone(defaultPlugins);
-  market = structuredClone(defaultMarket);
-  releases = structuredClone(defaultReleases);
+    document.getElementById("adminMessage").textContent =
+        "Content added successfully.";
 
-  saveData("projects", projects);
-  saveData("plugins", plugins);
-  saveData("market", market);
-  saveData("releases", releases);
-
-  renderEverything();
-  renderAdmin();
-}
-
-/* ========================================
-   UI / ANIMATIONS
-======================================== */
-
-function renderEverything() {
-  renderProjects();
-  renderPlugins();
-  renderMarket();
-  renderReleases();
-}
-
-document.getElementById("menuBtn").addEventListener("click", () => {
-  document.getElementById("navLinks").classList.toggle("open");
+    adminFilter = type;
+    renderAdmin();
 });
 
-document.querySelectorAll("#navLinks a").forEach(link => {
-  link.addEventListener("click", () => {
-    document.getElementById("navLinks").classList.remove("open");
-  });
-});
+/* RENDER EVERYTHING */
 
-window.addEventListener("scroll", () => {
-  document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 25);
-});
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: .12 });
-
-function observeReveals() {
-  document.querySelectorAll(".reveal:not(.visible)").forEach(element => observer.observe(element));
+function renderAll() {
+    renderProjects();
+    renderPlugins();
+    renderMarket();
+    renderReleases();
 }
+
+renderAll();
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-renderEverything();
-observeReveals();
+/* OPEN INITIAL PAGE */
 
+const initialPage = location.hash.replace("#", "");
+
+if (initialPage && document.getElementById(initialPage)) {
+    showPage(initialPage);
+} else {
+    showPage("home");
+}
 </script>
 
 </body>
