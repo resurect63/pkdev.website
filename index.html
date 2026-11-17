@@ -5,16 +5,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05080d">
-<meta name="description" content="THE PKDEV — Independent Development by Resurect">
+<meta name="description" content="THE PKDEV — Independent Development by Resurect.">
 <title>THE PKDEV — Resurect</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-:root {
+<style>
+:root{
   --bg:#05080d;
   --panel:#0b111a;
-  --panel2:#101a26;
   --white:#edf4fb;
   --gray:#a1b0c0;
   --muted:#637487;
@@ -38,7 +39,7 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer}
 ::selection{background:#a9d9ff;color:#06101a}
 
-/* WORLD BACKGROUND */
+/* BACKGROUND */
 
 #world{
   position:fixed;
@@ -100,7 +101,7 @@ button{font:inherit;cursor:pointer}
   align-items:center;
   background:#03060a;
   overflow:hidden;
-  transition:opacity .9s ease,visibility .9s ease;
+  transition:opacity .45s ease,visibility .45s ease;
 }
 #loader.hide{
   opacity:0;
@@ -148,7 +149,7 @@ button{font:inherit;cursor:pointer}
 }
 .loader-description{
   max-width:390px;
-  margin-top:29px;
+  margin-top:25px;
   color:#74889e;
   font-size:12px;
   line-height:2;
@@ -156,7 +157,7 @@ button{font:inherit;cursor:pointer}
 .loader-track{
   height:2px;
   background:#1b2938;
-  margin-top:42px;
+  margin-top:35px;
   overflow:hidden;
 }
 #loaderProgress{
@@ -174,7 +175,7 @@ button{font:inherit;cursor:pointer}
   letter-spacing:1px;
 }
 .loader-quote{
-  margin-top:39px;
+  margin-top:30px;
   color:#6e8296;
   font:10px var(--mono);
   letter-spacing:2px;
@@ -221,7 +222,7 @@ header{
   letter-spacing:3px;
   margin-top:3px;
 }
-nav{display:flex;gap:25px}
+nav{display:flex;gap:23px}
 nav a{
   font:10px var(--mono);
   color:#9aabba;
@@ -238,12 +239,10 @@ nav a:hover{color:#d8edff}
   font:9px var(--mono);
   letter-spacing:1px;
 }
-.sound-button:hover,.menu-button:hover{
-  border-color:#9bd2ff;
-}
+.sound-button:hover,.menu-button:hover{border-color:#9bd2ff}
 .menu-button{display:none}
 
-/* MAIN */
+/* HERO */
 
 main{position:relative;z-index:2}
 .hero{
@@ -358,7 +357,7 @@ main{position:relative;z-index:2}
   background:linear-gradient(0deg,#05080d,transparent);
 }
 
-/* SECTION BASE */
+/* SECTIONS */
 
 .section{padding:105px 10%;position:relative}
 .section-line{
@@ -496,7 +495,7 @@ main{position:relative;z-index:2}
   font:10px var(--mono);
 }
 
-/* PROJECT FILTER */
+/* PROJECTS */
 
 .filters{
   display:flex;
@@ -578,7 +577,12 @@ main{position:relative;z-index:2}
 }
 .release-version{color:#9acbf1;font:11px var(--mono)}
 .release h3{font-size:15px}
-.release p{color:#8496a8;font-size:11px;margin-top:7px;line-height:1.8}
+.release p{
+  color:#8496a8;
+  font-size:11px;
+  margin-top:7px;
+  line-height:1.8;
+}
 .release-state{color:#9fcaf0;font:9px var(--mono)}
 
 /* ARCHIVES */
@@ -626,6 +630,8 @@ main{position:relative;z-index:2}
 .terminal-body{
   padding:20px;
   min-height:185px;
+  max-height:300px;
+  overflow-y:auto;
   color:#a9c9e5;
   font:11px/2 var(--mono);
 }
@@ -789,7 +795,8 @@ footer{
     <div class="loader-sub">A DIGITAL EMPIRE</div>
 
     <p class="loader-description">
-      Preparing the environment. The storm is approaching.
+      Preparing the environment.
+      The storm is approaching.
       A new chapter is about to begin.
     </p>
 
@@ -798,11 +805,11 @@ footer{
     </div>
 
     <div class="loader-meta">
-      <span id="loaderStatus">INITIALIZING ENVIRONMENT</span>
+      <span id="loaderStatus">INITIALIZING SYSTEM</span>
       <span id="loaderPercent">0%</span>
     </div>
 
-    <div class="loader-quote" id="loaderQuote">
+    <div class="loader-quote">
       THROUGH THE STORM, WE BUILD.
     </div>
   </div>
@@ -920,35 +927,38 @@ footer{
       <h2>Beyond<br>the ordinary.</h2>
 
       <p class="intro">
-        I'm Resurect, an independent developer focused on
-        software development, web technologies, desktop
-        applications and Minecraft systems.
+        I'm Resurect, an independent developer with
+        5 years of management experience.
+        My background combines software development,
+        project management and team leadership.
       </p>
     </div>
 
     <div class="about-panel reveal">
       <p>
-        THE PKDEV is my personal development identity.
-        It represents a collection of ideas, experiments,
-        software and projects built around technology.
+        I'm focused on building digital products,
+        managing projects and creating meaningful
+        technology experiences.
       </p>
       <br>
       <p>
-        From web platforms to desktop applications and
-        Minecraft development, every project is an opportunity
-        to learn, create and improve.
+        With 5 years of management experience,
+        I bring an understanding of leadership,
+        team coordination and project organization
+        alongside my technical background.
       </p>
     </div>
   </div>
 
   <div class="about-stats reveal">
     <div class="stat">
-      <strong>PKDEV</strong>
-      <span>DEVELOPMENT BRAND</span>
+      <strong>5+ YEARS</strong>
+      <span>MANAGEMENT EXPERIENCE</span>
     </div>
+
     <div class="stat">
       <strong>RESURECT</strong>
-      <span>CREATOR</span>
+      <span>CREATOR OF THE PKDEV</span>
     </div>
   </div>
 </section>
@@ -968,6 +978,7 @@ footer{
   </div>
 
   <div class="skill-grid">
+
     <div class="skill-group reveal">
       <h3>Programming & Web Languages</h3>
       <div class="skills">
@@ -1009,16 +1020,6 @@ footer{
       </div>
     </div>
 
-    <div class="skill-group reveal">
-      <h3>Minecraft Development</h3>
-      <div class="skills">
-        <span class="skill">Paper</span>
-        <span class="skill">Spigot</span>
-        <span class="skill">Velocity</span>
-        <span class="skill">BungeeCord</span>
-        <span class="skill">REST API</span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1123,6 +1124,7 @@ footer{
   </div>
 
   <div class="release-list reveal">
+
     <div class="release">
       <div class="release-version">2.9</div>
       <div>
@@ -1149,6 +1151,7 @@ footer{
       </div>
       <div class="release-state">CURRENT</div>
     </div>
+
   </div>
 </section>
 
@@ -1166,6 +1169,7 @@ footer{
   </div>
 
   <div class="archive-grid">
+
     <div class="archive reveal">
       <small>01 / SOFTWARE</small>
       <h3>Desktop Development</h3>
@@ -1179,10 +1183,11 @@ footer{
     </div>
 
     <div class="archive reveal">
-      <small>03 / GAMING</small>
-      <h3>Minecraft Systems</h3>
-      <p>Plugins, server systems and custom game modes.</p>
+      <small>03 / MANAGEMENT</small>
+      <h3>Project Management</h3>
+      <p>Project organization, team coordination and leadership.</p>
     </div>
+
   </div>
 </section>
 
@@ -1269,11 +1274,14 @@ let rain = [];
 let particles = [];
 let bolts = [];
 let flash = 0;
-let stormFrame = 0;
 
 const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 function resizeWorld() {
   dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -1286,12 +1294,7 @@ function resizeWorld() {
   canvas.style.height = H + "px";
 
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
   createWorldElements();
-}
-
-function random(min, max) {
-  return Math.random() * (max - min) + min;
 }
 
 function createWorldElements() {
@@ -1338,7 +1341,7 @@ function createWorldElements() {
 window.addEventListener("resize", resizeWorld);
 resizeWorld();
 
-/* Clouds */
+/* CLOUDS */
 
 function drawClouds() {
   for (const c of clouds) {
@@ -1364,7 +1367,7 @@ function drawClouds() {
   }
 }
 
-/* Rain */
+/* RAIN */
 
 function drawRain() {
   if (reducedMotion) return;
@@ -1388,7 +1391,7 @@ function drawRain() {
   }
 }
 
-/* Dust */
+/* DUST */
 
 function drawDust() {
   for (const p of particles) {
@@ -1409,43 +1412,38 @@ function drawDust() {
   }
 }
 
-/* Lightning */
+/* LIGHTNING */
 
 function createBolt(x, y, depth = 0) {
-  const points = [{ x, y }];
+  const points = [{x,y}];
   let px = x;
   let py = y;
-
-  const end = H * random(.42, .85);
+  const end = H * random(.42,.85);
 
   while (py < end && points.length < 50) {
-    px += random(-42, 42);
-    py += random(12, 28);
-    points.push({ x: px, y: py });
+    px += random(-42,42);
+    py += random(12,28);
+    points.push({x:px,y:py});
   }
 
   bolts.push({
     points,
-    life: 1,
-    width: depth === 0 ? 2.3 : .9,
+    life:1,
+    width:depth === 0 ? 2.3 : .9,
     depth
   });
 
   if (depth < 2 && Math.random() > .35) {
     const point = points[
-      Math.floor(points.length * random(.3, .7))
+      Math.floor(points.length * random(.3,.7))
     ];
 
-    createBolt(
-      point.x,
-      point.y,
-      depth + 1
-    );
+    createBolt(point.x,point.y,depth+1);
   }
 }
 
 function strikeLightning() {
-  createBolt(random(W * .15, W * .85), -10);
+  createBolt(random(W*.15,W*.85),-10);
   flash = 1;
   playThunder();
 }
@@ -1464,11 +1462,11 @@ function drawBolts() {
 
     ctx.beginPath();
 
-    bolt.points.forEach((point, index) => {
+    bolt.points.forEach((point,index) => {
       if (index === 0) {
-        ctx.moveTo(point.x, point.y);
+        ctx.moveTo(point.x,point.y);
       } else {
-        ctx.lineTo(point.x, point.y);
+        ctx.lineTo(point.x,point.y);
       }
     });
 
@@ -1478,28 +1476,21 @@ function drawBolts() {
     bolt.life -= .09;
 
     if (bolt.life <= 0) {
-      bolts.splice(i, 1);
+      bolts.splice(i,1);
     }
   }
 }
 
-/* Full screen light */
-
 function drawFlash() {
   if (flash <= .01) return;
 
-  ctx.fillStyle = `rgba(195,225,255,${flash * .075})`;
-  ctx.fillRect(0, 0, W, H);
-
+  ctx.fillStyle = `rgba(195,225,255,${flash*.075})`;
+  ctx.fillRect(0,0,W,H);
   flash *= .76;
 }
 
-/* Main animation */
-
 function animateWorld() {
-  stormFrame++;
-
-  ctx.clearRect(0, 0, W, H);
+  ctx.clearRect(0,0,W,H);
 
   drawClouds();
   drawRain();
@@ -1512,26 +1503,19 @@ function animateWorld() {
 
 animateWorld();
 
-/* Random storm */
+/* RANDOM STORM */
 
 function scheduleLightning() {
-  const delay = random(5500, 12000);
-
   setTimeout(() => {
-    if (!reducedMotion) {
-      strikeLightning();
-    }
-
+    if (!reducedMotion) strikeLightning();
     scheduleLightning();
-  }, delay);
+  },random(5500,12000));
 }
 
-if (!reducedMotion) {
-  scheduleLightning();
-}
+if (!reducedMotion) scheduleLightning();
 
 /* =================================
-   2. CINEMATIC AUDIO ENGINE
+   2. AUDIO ENGINE
 ================================= */
 
 let audioContext = null;
@@ -1548,7 +1532,6 @@ function initAudio() {
     if (!AudioCtx) return false;
 
     audioContext = new AudioCtx();
-
     masterGain = audioContext.createGain();
     masterGain.gain.value = .55;
     masterGain.connect(audioContext.destination);
@@ -1561,19 +1544,16 @@ function initAudio() {
   return true;
 }
 
-/* Noise generator */
-
-function makeNoise(duration, frequency, volume, delay = 0) {
+function makeNoise(duration,frequency,volume,delay=0) {
   if (!audioContext || !masterGain) return;
 
   const rate = audioContext.sampleRate;
-  const length = Math.floor(rate * duration);
-
-  const buffer = audioContext.createBuffer(1, length, rate);
+  const length = Math.floor(rate*duration);
+  const buffer = audioContext.createBuffer(1,length,rate);
   const data = buffer.getChannelData(0);
 
-  for (let i = 0; i < length; i++) {
-    data[i] = Math.random() * 2 - 1;
+  for (let i=0;i<length;i++) {
+    data[i] = Math.random()*2-1;
   }
 
   const source = audioContext.createBufferSource();
@@ -1584,101 +1564,68 @@ function makeNoise(duration, frequency, volume, delay = 0) {
   filter.frequency.value = frequency;
 
   const gain = audioContext.createGain();
-  const start = audioContext.currentTime + delay;
+  const start = audioContext.currentTime+delay;
 
-  gain.gain.setValueAtTime(.0001, start);
-  gain.gain.exponentialRampToValueAtTime(
-    volume,
-    start + .025
-  );
-  gain.gain.exponentialRampToValueAtTime(
-    .0001,
-    start + duration
-  );
+  gain.gain.setValueAtTime(.0001,start);
+  gain.gain.exponentialRampToValueAtTime(volume,start+.025);
+  gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
 
   source.connect(filter);
   filter.connect(gain);
   gain.connect(masterGain);
 
   source.start(start);
-  source.stop(start + duration + .05);
+  source.stop(start+duration+.05);
 }
 
-/* Deep rumble */
-
-function makeRumble(delay, volume, duration) {
+function makeRumble(delay,volume,duration) {
   if (!audioContext || !masterGain) return;
 
-  const start = audioContext.currentTime + delay;
+  const start = audioContext.currentTime+delay;
 
   const oscillator = audioContext.createOscillator();
   const filter = audioContext.createBiquadFilter();
   const gain = audioContext.createGain();
 
   oscillator.type = "triangle";
-  oscillator.frequency.setValueAtTime(65, start);
-  oscillator.frequency.exponentialRampToValueAtTime(
-    28,
-    start + duration
-  );
+  oscillator.frequency.setValueAtTime(65,start);
+  oscillator.frequency.exponentialRampToValueAtTime(28,start+duration);
 
   filter.type = "lowpass";
   filter.frequency.value = 115;
 
-  gain.gain.setValueAtTime(.0001, start);
-  gain.gain.exponentialRampToValueAtTime(
-    volume,
-    start + .12
-  );
-  gain.gain.exponentialRampToValueAtTime(
-    .0001,
-    start + duration
-  );
+  gain.gain.setValueAtTime(.0001,start);
+  gain.gain.exponentialRampToValueAtTime(volume,start+.12);
+  gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
 
   oscillator.connect(filter);
   filter.connect(gain);
   gain.connect(masterGain);
 
   oscillator.start(start);
-  oscillator.stop(start + duration + .1);
+  oscillator.stop(start+duration+.1);
 }
-
-/* Thunder sound */
 
 function playThunder() {
   if (!soundEnabled || !audioContext) return;
 
-  // Sharp initial crack
-  makeNoise(.28, 2400, .19);
-
-  // Main thunder impact
-  makeNoise(1.8, 430, .15, .07);
-
-  // Long low-frequency thunder
-  makeRumble(.05, .21, 3.8);
-  makeRumble(.65, .1, 3.2);
-
-  // Distant echoes
-  makeNoise(2.8, 180, .045, .9);
-  makeRumble(1.25, .065, 3.4);
+  makeNoise(.28,2400,.19);
+  makeNoise(1.8,430,.15,.07);
+  makeRumble(.05,.21,3.8);
+  makeRumble(.65,.1,3.2);
+  makeNoise(2.8,180,.045,.9);
+  makeRumble(1.25,.065,3.4);
 }
-
-/* Wind ambience */
 
 function startWind() {
   if (!audioContext || !soundEnabled || windSource) return;
 
   const rate = audioContext.sampleRate;
-  const buffer = audioContext.createBuffer(
-    1,
-    rate * 4,
-    rate
-  );
-
+  const buffer = audioContext.createBuffer(1,rate*4,rate);
   const data = buffer.getChannelData(0);
 
-  for (let i = 0; i < data.length; i++) {
-    data[i] = Math.random() * 2 - 1;
+  for (let i=0;i<data.length;i++) {
+    data[i] = Math.random()*2-1;
   }
 
   windSource = audioContext.createBufferSource();
@@ -1720,17 +1667,13 @@ function stopWind() {
   }
 
   setTimeout(() => {
-    try {
-      oldSource.stop();
-    } catch (error) {}
-  }, 700);
+    try { oldSource.stop(); } catch(error) {}
+  },700);
 }
-
-/* Sound toggle */
 
 const soundButton = document.getElementById("soundButton");
 
-soundButton.addEventListener("click", () => {
+soundButton.addEventListener("click",() => {
   if (!initAudio()) {
     soundButton.textContent = "AUDIO UNAVAILABLE";
     return;
@@ -1741,92 +1684,69 @@ soundButton.addEventListener("click", () => {
   if (soundEnabled) {
     startWind();
     soundButton.textContent = "SOUND: ON";
-    soundButton.setAttribute("aria-pressed", "true");
-    makeRumble(0, .06, .8);
+    soundButton.setAttribute("aria-pressed","true");
+    makeRumble(0,.06,.8);
   } else {
     stopWind();
     soundButton.textContent = "SOUND: OFF";
-    soundButton.setAttribute("aria-pressed", "false");
+    soundButton.setAttribute("aria-pressed","false");
   }
 });
 
 /* =================================
-   3. LOADING SEQUENCE
+   3. FAST LOADING SEQUENCE
 ================================= */
 
 const loader = document.getElementById("loader");
 const loaderProgress = document.getElementById("loaderProgress");
 const loaderPercent = document.getElementById("loaderPercent");
 const loaderStatus = document.getElementById("loaderStatus");
-const loaderQuote = document.getElementById("loaderQuote");
 const flashScreen = document.getElementById("flashScreen");
 
-const messages = [
-  "INITIALIZING ENVIRONMENT",
+const loadingMessages = [
+  "INITIALIZING SYSTEM",
+  "LOADING ENVIRONMENT",
   "PREPARING THE WORLD",
-  "ESTABLISHING SYSTEMS",
-  "LOADING PROJECTS",
   "WELCOME TO THE PKDEV"
 ];
 
-const quotes = [
-  "THROUGH THE STORM, WE BUILD.",
-  "EVERY EMPIRE BEGINS WITH AN IDEA.",
-  "BUILT WITH CODE. DRIVEN BY VISION.",
-  "THE JOURNEY NEVER ENDS."
-];
+const loadingDuration = 1500;
+const loadingStart = performance.now();
 
-let progressValue = 0;
-let loadingFinished = false;
-
-function loadingTick() {
-  if (loadingFinished) return;
-
-  progressValue = Math.min(
-    100,
-    progressValue + Math.random() * 3.5 + 1.2
+function loadingTick(now) {
+  const progress = Math.min(
+    (now-loadingStart)/loadingDuration,
+    1
   );
 
-  loaderProgress.style.width = progressValue + "%";
-  loaderPercent.textContent = Math.floor(progressValue) + "%";
+  const percentage = Math.floor(progress*100);
+
+  loaderProgress.style.width = percentage+"%";
+  loaderPercent.textContent = percentage+"%";
 
   const index = Math.min(
-    messages.length - 1,
-    Math.floor(progressValue / 21)
+    loadingMessages.length-1,
+    Math.floor(progress*loadingMessages.length)
   );
 
-  loaderStatus.textContent = messages[index];
+  loaderStatus.textContent = loadingMessages[index];
 
-  if (progressValue >= 100) {
-    loadingFinished = true;
-
+  if (progress < 1) {
+    requestAnimationFrame(loadingTick);
+  } else {
     setTimeout(() => {
       loader.classList.add("hide");
       document.body.classList.remove("loading");
-    }, 650);
-
-    return;
+    },100);
   }
-
-  setTimeout(loadingTick, 85);
 }
 
-loaderQuote.textContent =
-  quotes[Math.floor(Math.random() * quotes.length)];
-
 setTimeout(() => {
   flashScreen.classList.add("active");
   strikeLightning();
-}, 850);
+},450);
 
-setTimeout(() => {
-  flashScreen.classList.remove("active");
-  void flashScreen.offsetWidth;
-  flashScreen.classList.add("active");
-  strikeLightning();
-}, 2600);
-
-setTimeout(loadingTick, 250);
+requestAnimationFrame(loadingTick);
 
 /* =================================
    4. SCROLL REVEAL
@@ -1839,7 +1759,7 @@ const revealObserver = new IntersectionObserver(entries => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: .12 });
+},{threshold:.12});
 
 document.querySelectorAll(".reveal").forEach(element => {
   revealObserver.observe(element);
@@ -1853,7 +1773,7 @@ const filters = document.querySelectorAll(".filter");
 const projects = document.querySelectorAll(".project");
 
 filters.forEach(button => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click",() => {
     filters.forEach(item => item.classList.remove("active"));
     button.classList.add("active");
 
@@ -1876,14 +1796,15 @@ filters.forEach(button => {
 const menuButton = document.getElementById("menuButton");
 const navigation = document.getElementById("navigation");
 
-menuButton.addEventListener("click", () => {
+menuButton.addEventListener("click",() => {
   navigation.classList.toggle("open");
+
   menuButton.textContent =
     navigation.classList.contains("open") ? "CLOSE" : "MENU";
 });
 
 navigation.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click",() => {
     navigation.classList.remove("open");
     menuButton.textContent = "MENU";
   });
@@ -1897,10 +1818,12 @@ const terminalInput = document.getElementById("terminalInput");
 const terminalOutput = document.getElementById("terminalOutput");
 const terminalRun = document.getElementById("terminalRun");
 
-function terminalPrint(text, className = "") {
+function terminalPrint(text,className="") {
   const line = document.createElement("div");
   line.textContent = text;
+
   if (className) line.className = className;
+
   terminalOutput.appendChild(line);
   terminalOutput.scrollTop = terminalOutput.scrollHeight;
 }
@@ -1910,10 +1833,10 @@ function executeCommand() {
 
   if (!command) return;
 
-  terminalPrint("> " + command, "terminal-line");
+  terminalPrint("> "+command,"terminal-line");
 
   const commands = {
-    help: [
+    help:[
       "AVAILABLE COMMANDS:",
       "help       - Show commands",
       "about      - About THE PKDEV",
@@ -1923,23 +1846,32 @@ function executeCommand() {
       "status     - System status",
       "clear      - Clear terminal"
     ],
-    about: ["THE PKDEV — Independent Development Identity."],
-    creator: ["Creator: Resurect"],
-    skills: [
+
+    about:[
+      "THE PKDEV — Independent Development Identity."
+    ],
+
+    creator:[
+      "Creator: Resurect",
+      "Management Experience: 5+ Years"
+    ],
+
+    skills:[
       "Java, JavaScript, TypeScript, PHP, HTML, CSS, C",
       "React, Next.js, Node.js, Tailwind CSS",
-      "MySQL, MongoDB, Git, Docker, Linux",
-      "Paper, Spigot, Velocity, BungeeCord"
+      "MySQL, MongoDB, Git, Docker, Linux"
     ],
-    projects: [
+
+    projects:[
       "Imperial Launcher",
       "PKDEV.Security",
+      "PKDEV.Hub",
       "PkdevStore",
       "Project Delta",
-      "Moderator Academy",
-      "PKDEV.Hub"
+      "Moderator Academy"
     ],
-    status: [
+
+    status:[
       "SYSTEM: ONLINE",
       "IDENTITY: THE PKDEV",
       "CREATOR: RESURECT",
@@ -1962,9 +1894,9 @@ function executeCommand() {
   terminalInput.value = "";
 }
 
-terminalRun.addEventListener("click", executeCommand);
+terminalRun.addEventListener("click",executeCommand);
 
-terminalInput.addEventListener("keydown", event => {
+terminalInput.addEventListener("keydown",event => {
   if (event.key === "Enter") executeCommand();
 });
 
@@ -1972,7 +1904,7 @@ terminalInput.addEventListener("keydown", event => {
    8. DISCORD COPY
 ================================= */
 
-document.getElementById("discordCopy").addEventListener("click", async event => {
+document.getElementById("discordCopy").addEventListener("click",async event => {
   event.preventDefault();
 
   const link = event.currentTarget;
@@ -1983,8 +1915,8 @@ document.getElementById("discordCopy").addEventListener("click", async event => 
 
     setTimeout(() => {
       link.textContent = "DISCORD: .RESURECT.";
-    }, 2000);
-  } catch (error) {
+    },2000);
+  } catch(error) {
     link.textContent = "USERNAME: .RESURECT.";
   }
 });
@@ -1995,12 +1927,12 @@ document.getElementById("discordCopy").addEventListener("click", async event => 
 
 const topButton = document.getElementById("topButton");
 
-window.addEventListener("scroll", () => {
-  topButton.classList.toggle("show", window.scrollY > 500);
+window.addEventListener("scroll",() => {
+  topButton.classList.toggle("show",window.scrollY>500);
 });
 
-topButton.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+topButton.addEventListener("click",() => {
+  window.scrollTo({top:0,behavior:"smooth"});
 });
 </script>
 
