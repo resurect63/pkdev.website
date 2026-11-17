@@ -3,1065 +3,349 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b090d">
-<meta name="description" content="Resurect — Minecraft Developer, Creative Designer and Server Management.">
-<title>Resurect — Minecraft Development & Creative Studio</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111116">
+<title>Resurect — Development Studio</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-:root {
-  --bg: #0b090d;
-  --surface: #131016;
-  --surface2: #1b141c;
-  --border: rgba(255,255,255,.08);
-  --red: #f05270;
-  --red2: #b82e4c;
-  --pink: #ffacbd;
-  --white: #fff5f7;
-  --muted: #a99ba3;
-  --green: #72d6a2;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: Inter, Arial, sans-serif;
-  overflow-x: hidden;
-}
-
-button, input, textarea {
-  font: inherit;
-}
-
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button { cursor: pointer; }
-
-::selection {
-  background: var(--red);
-  color: white;
-}
-
-.container {
-  width: min(1160px, 91%);
-  margin: auto;
-}
-
-.section {
-  padding: 105px 0;
-  position: relative;
-}
-
-.section-label {
-  color: var(--red);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-}
-
-.section-title {
-  font-size: clamp(30px, 5vw, 48px);
-  letter-spacing: -2px;
-  line-height: 1.1;
-  margin-bottom: 15px;
-}
-
-.section-description {
-  color: var(--muted);
-  line-height: 1.8;
-  max-width: 620px;
-  font-size: 14px;
-}
-
-/* BACKGROUND */
-
-.background-glow {
-  position: fixed;
-  inset: 0;
-  z-index: -5;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 15% 15%, rgba(130,22,52,.15), transparent 38%),
-    radial-gradient(ellipse at 85% 65%, rgba(240,82,112,.07), transparent 35%),
-    #0b090d;
-}
-
-.stars {
-  position: fixed;
-  inset: 0;
-  z-index: -4;
-  pointer-events: none;
-  opacity: .5;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%, #fff 99%, transparent),
-    radial-gradient(1px 1px at 35% 60%, #f05270 99%, transparent),
-    radial-gradient(2px 2px at 70% 30%, #fff 99%, transparent),
-    radial-gradient(1px 1px at 85% 75%, #ffacbd 99%, transparent),
-    radial-gradient(1px 1px at 50% 15%, #fff 99%, transparent);
-  background-size: 240px 240px;
-  animation: starsMove 30s linear infinite;
-}
-
-@keyframes starsMove {
-  from { transform: translateY(0); }
-  to { transform: translateY(-240px); }
-}
-
-/* NAVBAR */
-
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  background: rgba(11,9,13,.76);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
-}
-
-.navbar {
-  min-height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand {
-  font-size: 23px;
-  font-weight: 900;
-  letter-spacing: -1.5px;
-}
-
-.brand span { color: var(--red); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 27px;
-}
-
-.nav-links a {
-  color: #c4b7be;
-  font-size: 12px;
-  font-weight: 600;
-  transition: .2s;
-}
-
-.nav-links a:hover { color: var(--pink); }
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 19px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  font-size: 12px;
-  font-weight: 800;
-  transition: .25s;
-}
-
-.btn-primary {
-  color: white;
-  background: linear-gradient(135deg, #c32e4d, #f05270);
-  border-color: transparent;
-  box-shadow: 0 7px 25px rgba(240,82,112,.17);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 32px rgba(240,82,112,.3);
-}
-
-.btn-outline {
-  background: rgba(255,255,255,.035);
-  color: white;
-}
-
-.btn-outline:hover {
-  border-color: var(--red);
-  color: var(--pink);
-}
-
-.menu-toggle {
-  display: none;
-  color: white;
-  background: none;
-  border: 0;
-  font-size: 25px;
-}
-
-/* HERO */
-
-.hero {
-  min-height: 760px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  padding-top: 90px;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 4;
-  max-width: 720px;
-}
-
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  border: 1px solid rgba(240,82,112,.3);
-  background: rgba(240,82,112,.07);
-  color: var(--pink);
-  padding: 9px 14px;
-  border-radius: 50px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  margin-bottom: 28px;
-}
-
-.live-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--red);
-  border-radius: 50%;
-  box-shadow: 0 0 12px var(--red);
-}
-
-.hero h1 {
-  font-size: clamp(58px, 10vw, 110px);
-  font-weight: 900;
-  line-height: .95;
-  letter-spacing: -7px;
-}
-
-.hero h1 span {
-  color: var(--red);
-  text-shadow: 0 0 45px rgba(240,82,112,.2);
-}
-
-.hero-subtitle {
-  font-size: clamp(16px, 2.4vw, 22px);
-  color: #d8cbd1;
-  margin-top: 26px;
-  font-weight: 500;
-}
-
-.hero-description {
-  color: var(--muted);
-  max-width: 550px;
-  line-height: 1.9;
-  font-size: 14px;
-  margin-top: 17px;
-}
-
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 34px;
-}
-
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  margin-top: 48px;
-}
-
-.meta-item strong {
-  display: block;
-  font-size: 21px;
-  color: var(--pink);
-}
-
-.meta-item span {
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-/* CSS MINECRAFT CASTLE */
-
-.world {
-  position: absolute;
-  width: 600px;
-  height: 470px;
-  right: -60px;
-  bottom: 0;
-  opacity: .8;
-  pointer-events: none;
-}
-
-.moon {
-  position: absolute;
-  width: 115px;
-  height: 115px;
-  border-radius: 50%;
-  right: 160px;
-  top: 30px;
-  background: #ffb4c3;
-  box-shadow: 0 0 60px rgba(240,82,112,.35),
-              0 0 150px rgba(240,82,112,.15);
-  opacity: .8;
-}
-
-.castle {
-  position: absolute;
-  bottom: 0;
-  left: 70px;
-  width: 430px;
-  height: 300px;
-  filter: drop-shadow(0 0 30px rgba(240,82,112,.12));
-}
-
-.castle-main {
-  position: absolute;
-  bottom: 0;
-  left: 120px;
-  width: 200px;
-  height: 185px;
-  background: linear-gradient(90deg,#24131d,#38202c);
-  border: 3px solid #5a2a3c;
-}
-
-.castle-main::before {
-  content: "";
-  position: absolute;
-  top: -24px;
-  left: -3px;
-  width: 200px;
-  height: 25px;
-  background: repeating-linear-gradient(90deg,#59283b 0 20px,#28131d 20px 28px);
-}
-
-.tower {
-  position: absolute;
-  bottom: 0;
-  width: 75px;
-  height: 260px;
-  background: linear-gradient(90deg,#1c111a,#3b2030);
-  border: 3px solid #5a2a3c;
-}
-
-.tower::before {
-  content: "";
-  position: absolute;
-  top: -42px;
-  left: -3px;
-  width: 75px;
-  height: 40px;
-  background: #713147;
-  clip-path: polygon(50% 0,100% 100%,0 100%);
-}
-
-.tower.left { left: 65px; height: 225px; }
-.tower.right { right: 65px; height: 245px; }
-
-.castle-window {
-  position: absolute;
-  width: 18px;
-  height: 38px;
-  bottom: 65px;
-  background: #f05270;
-  box-shadow: 0 0 20px rgba(240,82,112,.6);
-  border-radius: 10px 10px 0 0;
-}
-
-.castle-window.one { left: 185px; }
-.castle-window.two { left: 235px; }
-.castle-window.three { left: 285px; }
-
-.castle-door {
-  position: absolute;
-  bottom: 0;
-  left: 200px;
-  width: 42px;
-  height: 65px;
-  background: #100b10;
-  border: 2px solid #713147;
-  border-radius: 20px 20px 0 0;
-}
-
-.ground {
-  position: absolute;
-  bottom: 0;
-  left: -100px;
-  width: 800px;
-  height: 55px;
-  background: linear-gradient(#28131e,#100b10);
-  clip-path: polygon(0 25%,15% 10%,28% 30%,45% 0,60% 30%,80% 8%,100% 25%,100% 100%,0 100%);
-}
-
-.fog {
-  position: absolute;
-  bottom: 20px;
-  width: 700px;
-  height: 80px;
-  background: radial-gradient(ellipse,rgba(240,82,112,.16),transparent 70%);
-  filter: blur(20px);
-  animation: fogMove 9s ease-in-out infinite alternate;
-}
-
-@keyframes fogMove {
-  from { transform: translateX(-35px); }
-  to { transform: translateX(35px); }
-}
-
-/* PROJECT CARDS */
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 18px;
-  margin-top: 45px;
-}
-
-.card {
-  position: relative;
-  background: linear-gradient(145deg,rgba(29,20,29,.9),rgba(16,13,18,.9));
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 23px;
-  overflow: hidden;
-  transition: .3s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(240,82,112,.4);
-  box-shadow: 0 15px 45px rgba(0,0,0,.2);
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  right: -60px;
-  top: -60px;
-  background: rgba(240,82,112,.08);
-  filter: blur(30px);
-  border-radius: 50%;
-}
-
-.card-icon {
-  width: 47px;
-  height: 47px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: rgba(240,82,112,.1);
-  border: 1px solid rgba(240,82,112,.18);
-  color: var(--pink);
-  font-size: 21px;
-  margin-bottom: 20px;
-}
-
-.card h3 {
-  font-size: 17px;
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.8;
-  min-height: 44px;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 22px;
-  gap: 10px;
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.035);
-  border-radius: 50px;
-  padding: 6px 9px;
-  color: #d8cbd1;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .5px;
-}
-
-.status::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  background: var(--red);
-  border-radius: 50%;
-}
-
-.status.soon::before { background: #e5ad65; }
-.status.idea::before { background: #9d8ae8; }
-
-.text-button {
-  color: var(--pink);
-  border: 0;
-  background: none;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 32px;
-}
-
-.filter {
-  background: #171219;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  padding: 9px 15px;
-  border-radius: 50px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.filter.active,
-.filter:hover {
-  background: rgba(240,82,112,.13);
-  border-color: var(--red);
-  color: var(--pink);
-}
-
-/* FEATURED LAUNCHER */
-
-.launcher-box {
-  margin-top: 45px;
-  padding: 38px;
-  border: 1px solid rgba(240,82,112,.25);
-  border-radius: 20px;
-  background:
-    radial-gradient(circle at 90% 10%,rgba(240,82,112,.13),transparent 35%),
-    linear-gradient(135deg,#1d111b,#110d13);
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 30px;
-  align-items: center;
-}
-
-.launcher-box h3 {
-  font-size: clamp(27px,4vw,39px);
-  margin: 16px 0 12px;
-}
-
-.launcher-box p {
-  color: var(--muted);
-  line-height: 1.9;
-  font-size: 13px;
-  max-width: 520px;
-}
-
-.launcher-visual {
-  min-height: 220px;
-  border: 1px solid rgba(240,82,112,.18);
-  background:
-    linear-gradient(rgba(240,82,112,.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(240,82,112,.05) 1px,transparent 1px),
-    #100b11;
-  background-size: 25px 25px;
-  border-radius: 15px;
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.launcher-logo {
-  width: 110px;
-  height: 110px;
-  display: grid;
-  place-items: center;
-  border-radius: 28px;
-  background: linear-gradient(145deg,#f05270,#711c35);
-  box-shadow: 0 0 55px rgba(240,82,112,.35);
-  font-size: 45px;
-  font-weight: 900;
-  transform: rotate(-8deg);
-}
-
-/* MANAGEMENT */
-
-.management-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 15px;
-  margin-top: 38px;
-}
-
-.management-item {
-  padding: 25px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-}
-
-.management-item .number {
-  color: var(--red);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.management-item h3 {
-  margin: 17px 0 10px;
-  font-size: 16px;
-}
-
-.management-item p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-/* ABOUT */
-
-.about-grid {
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 60px;
-  align-items: center;
-  margin-top: 45px;
-}
-
-.about-art {
-  min-height: 330px;
-  border-radius: 18px;
-  border: 1px solid rgba(240,82,112,.22);
-  background:
-    radial-gradient(circle at 50% 40%,rgba(240,82,112,.2),transparent 45%),
-    linear-gradient(145deg,#20121d,#0e0b10);
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.about-symbol {
-  font-size: 105px;
-  font-weight: 900;
-  color: var(--red);
-  text-shadow: 0 0 60px rgba(240,82,112,.4);
-}
-
-.about-content p {
-  color: var(--muted);
-  line-height: 2;
-  font-size: 13px;
-  margin-top: 17px;
-}
-
-.about-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 25px;
-}
-
-.about-pills span {
-  padding: 9px 12px;
-  border-radius: 7px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.025);
-  color: #e5d6dd;
-  font-size: 10px;
-}
-
-/* MARKETPLACE */
-
-.market-banner {
-  margin-top: 42px;
-  padding: 30px;
-  border-radius: 17px;
-  background: linear-gradient(120deg,#35121f,#171018);
-  border: 1px solid rgba(240,82,112,.24);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.market-banner h3 {
-  font-size: 23px;
-  margin-bottom: 8px;
-}
-
-.market-banner p {
-  color: #c0aeb6;
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-/* CONTACT */
-
-.contact-box {
-  margin-top: 40px;
-  padding: 40px;
-  border-radius: 18px;
-  background: linear-gradient(135deg,#21121d,#120e14);
-  border: 1px solid rgba(240,82,112,.2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-}
-
-.contact-box h3 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.contact-box p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-/* FOOTER */
-
-footer {
-  border-top: 1px solid var(--border);
-  padding: 35px 0;
-  background: rgba(0,0,0,.15);
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.footer-inner p {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.8;
-}
-
-.footer-brand {
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.footer-brand span { color: var(--red); }
-
-.footer-pkdev {
-  color: var(--pink);
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-top: 6px;
-  font-weight: 800;
-}
-
-/* MODALS */
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  background: rgba(0,0,0,.75);
-  backdrop-filter: blur(8px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-}
-
-.modal-backdrop.open { display: flex; }
-
-.modal {
-  width: min(450px,100%);
-  background: #171119;
-  border: 1px solid rgba(240,82,112,.28);
-  border-radius: 17px;
-  padding: 27px;
-  box-shadow: 0 20px 80px rgba(0,0,0,.5);
-  position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.modal p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-  margin-bottom: 20px;
-}
-
-.close-modal {
-  position: absolute;
-  right: 17px;
-  top: 15px;
-  background: none;
-  border: 0;
-  color: #b9aab2;
-  font-size: 23px;
-}
-
-.field {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 13px;
-  color: white;
-  background: #0e0b10;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  outline: none;
-}
-
-.field:focus { border-color: var(--red); }
-
-.modal .btn { width: 100%; margin-top: 10px; }
-
-.toast {
-  position: fixed;
-  bottom: 25px;
-  left: 50%;
-  transform: translate(-50%,30px);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 500;
-  padding: 13px 20px;
-  border-radius: 9px;
-  background: #27151e;
-  border: 1px solid rgba(240,82,112,.4);
-  color: white;
-  font-size: 12px;
-  transition: .3s;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translate(-50%,0);
-}
-
-/* ADMIN PREVIEW */
-
-.admin-preview {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 250;
-  background: #0b090d;
-  overflow-y: auto;
-  padding: 35px 0;
-}
-
-.admin-preview.open { display: block; }
-
-.admin-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 35px;
-}
-
-.admin-stats {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 15px;
-  margin: 25px 0;
-}
-
-.admin-stat {
-  padding: 23px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-}
-
-.admin-stat strong {
-  display: block;
-  color: var(--pink);
-  font-size: 25px;
-  margin-top: 10px;
-}
-
-.admin-note {
-  background: #21121d;
-  border: 1px solid rgba(240,82,112,.3);
-  border-radius: 12px;
-  padding: 20px;
-  color: #d9c4cc;
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px) {
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 76px;
-    left: 0;
-    width: 100%;
-    padding: 25px;
-    background: #100c12;
-    border-bottom: 1px solid var(--border);
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-links.open { display: flex; }
-  .menu-toggle { display: block; }
-  .nav-actions .btn-outline { display: none; }
-  .world { opacity: .25; right: -230px; }
-  .grid { grid-template-columns: repeat(2,1fr); }
-  .about-grid { grid-template-columns: 1fr; gap: 25px; }
-}
-
-@media(max-width:600px) {
-  .section { padding: 75px 0; }
-  .hero { min-height: 690px; }
-  .hero h1 { letter-spacing: -4px; }
-  .world { right: -300px; opacity: .18; }
-  .grid { grid-template-columns: 1fr; }
-  .management-grid { grid-template-columns: 1fr; }
-  .launcher-box { grid-template-columns: 1fr; padding: 24px; }
-  .market-banner, .contact-box {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 25px;
-  }
-  .admin-stats { grid-template-columns: 1fr; }
+:root{
+ --bg:#111116;--panel:#1b1a22;--panel2:#24212b;
+ --red:#a82e4c;--pink:#f05270;--soft:#ffacbd;
+ --text:#fff3f5;--muted:#aaa0a8;--line:#ffffff16;
+ --green:#78d6ae;--radius:17px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+ font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}
+button,input,textarea,select{font:inherit}
+button,a{cursor:pointer}
+a{color:inherit;text-decoration:none}
+button{color:inherit}
+.hidden{display:none!important}
+.container{width:min(1150px,calc(100% - 36px));margin:auto}
+.muted{color:var(--muted)}
+.eyebrow{color:var(--soft);font-size:12px;
+ letter-spacing:3px;text-transform:uppercase;font-weight:800}
+.btn{display:inline-flex;align-items:center;justify-content:center;
+ gap:8px;padding:11px 17px;border-radius:11px;
+ border:1px solid var(--line);background:#ffffff08;
+ color:white;font-weight:750;transition:.2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--pink)}
+.btn.primary{background:linear-gradient(130deg,var(--red),var(--pink));border:0}
+.btn.danger{color:#ff9cac;background:#ff718710}
+.btn.small{padding:8px 12px;font-size:13px}
+.topbar{height:74px;position:sticky;top:0;z-index:30;
+ background:#111116df;backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--line)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:950;letter-spacing:3px;display:flex;align-items:center;gap:11px}
+.brand-icon{width:38px;height:38px;border-radius:12px;
+ display:grid;place-items:center;color:var(--soft);
+ border:1px solid #f0527066;background:#f0527014;font-size:20px}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:2px}
+.navlinks{display:flex;gap:23px;color:#c9bec5;font-size:14px}
+.navlinks a:hover{color:var(--soft)}
+.nav-actions{display:flex;gap:9px;align-items:center}
+.menu{display:none}
+.hero{min-height:650px;position:relative;overflow:hidden;
+ display:flex;align-items:center;border-bottom:1px solid var(--line);
+ background:radial-gradient(ellipse at 80% 50%,#a82e4c38,transparent 40%),
+ linear-gradient(120deg,#111116,#21131c)}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;
+ opacity:.15;background-image:linear-gradient(#fff1 1px,transparent 1px),
+ linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:55px 55px}
+.hero-content{position:relative;z-index:2;max-width:660px;padding:90px 0}
+.hero h1{font-size:clamp(55px,8vw,100px);line-height:.98;
+ letter-spacing:-6px;margin:20px 0}
+.hero h1 span{color:var(--pink)}
+.hero p{max-width:560px;color:#c5b9c1;font-size:17px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero-stats{display:flex;gap:35px;margin-top:55px;flex-wrap:wrap}
+.hero-stats strong{display:block;font-size:20px}
+.hero-stats small{color:var(--muted)}
+.castle{position:absolute;right:3%;bottom:0;width:48%;height:80%;
+ opacity:.75;pointer-events:none}
+.castle:before{content:"";position:absolute;bottom:0;left:15%;width:70%;
+ height:72%;background:linear-gradient(90deg,#17141c,#34232d,#17141c);
+ clip-path:polygon(0 15%,15% 15%,15% 0,85% 0,85% 15%,100% 15%,100% 100%,0 100%);
+ border-top:2px solid #ffacbd44}
+.castle:after{content:"";position:absolute;bottom:0;left:0;right:0;height:25%;
+ background:linear-gradient(90deg,transparent,#d8aab522,transparent);
+ filter:blur(25px);animation:fog 12s infinite alternate}
+.tower{position:absolute;bottom:0;width:20%;height:57%;
+ background:linear-gradient(90deg,#17141c,#30222c,#17141c);
+ clip-path:polygon(0 18%,20% 18%,20% 0,80% 0,80% 18%,100% 18%,100% 100%,0 100%)}
+.tower.left{left:5%}.tower.right{right:5%;height:65%}
+@keyframes fog{to{transform:translateX(30px)}}
+section{padding:95px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;
+ gap:20px;margin-bottom:30px}
+.section-head h2{font-size:clamp(30px,5vw,48px);letter-spacing:-2px;margin:7px 0}
+.section-head p{max-width:430px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{padding:24px;border:1px solid var(--line);border-radius:var(--radius);
+ background:linear-gradient(145deg,#ffffff0c,#ffffff03);transition:.2s}
+.card:hover{transform:translateY(-5px);border-color:#f0527055}
+.card-icon{width:45px;height:45px;border-radius:13px;
+ display:grid;place-items:center;background:#f052701b;color:var(--soft);
+ font-size:22px;margin-bottom:18px}
+.card h3{margin:8px 0}.card p{color:var(--muted);font-size:14px}
+.tag{display:inline-block;padding:4px 9px;border-radius:30px;
+ color:#ffb7c5;background:#f0527015;border:1px solid #f0527035;
+ font-size:11px;font-weight:800}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:17px}
+.price{color:var(--soft);font-weight:850}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.about-box{background:var(--panel);border:1px solid var(--line);
+ border-radius:20px;padding:28px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.skills span{border:1px solid var(--line);padding:6px 10px;border-radius:8px;font-size:12px}
+.contact-box{display:flex;justify-content:space-between;align-items:center;
+ gap:20px;padding:35px;border-radius:20px;
+ border:1px solid #f0527040;background:linear-gradient(120deg,#a82e4c2b,#ffffff05)}
+footer{border-top:1px solid var(--line);padding:27px 0;color:var(--muted);font-size:13px}
+.footer-row{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footer-row a:hover{color:var(--soft)}
+/* Login */
+.login-screen{min-height:calc(100vh - 74px);display:grid;place-items:center;
+ padding:30px;background:radial-gradient(circle at center,#a82e4c30,transparent 50%)}
+.login-card{width:min(430px,100%);padding:30px;border:1px solid var(--line);
+ border-radius:20px;background:var(--panel)}
+.login-card h1{margin:8px 0;font-size:30px}
+.field{display:grid;gap:7px;margin:15px 0}
+.field label{font-size:13px;font-weight:750;color:#e6d9df}
+.field input,.field textarea,.field select{
+ width:100%;padding:12px;border-radius:10px;
+ border:1px solid var(--line);background:#111116;color:white;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--pink)}
+.field textarea{min-height:90px;resize:vertical}
+.notice{padding:12px;border:1px solid #f0527040;background:#f0527010;
+ color:#ffc0cc;border-radius:10px;font-size:12px;margin:15px 0}
+/* Admin */
+.admin-layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 74px)}
+.sidebar{background:#17161d;border-right:1px solid var(--line);padding:22px 13px}
+.side-label{font-size:10px;letter-spacing:2px;color:#827982;padding:14px 10px 7px}
+.side-link{display:block;width:100%;text-align:left;padding:11px;
+ border:1px solid transparent;border-radius:10px;background:none;color:#c5bac2;
+ margin:3px 0;font-weight:700}
+.side-link:hover,.side-link.active{background:#f0527015;border-color:#f0527035;color:white}
+.admin-main{padding:30px;min-width:0}
+.admin-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}
+.admin-heading h1{margin:4px 0;font-size:32px;letter-spacing:-1px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:13px}
+.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px}
+.panel{padding:21px;background:var(--panel);border:1px solid var(--line);
+ border-radius:15px;margin-bottom:17px;min-width:0}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}
+.panel-head h2{font-size:18px;margin:0}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}
+.toolbar input,.toolbar select{max-width:260px;padding:10px}
+.rows{display:grid;gap:9px}
+.data-row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:13px;border:1px solid var(--line);border-radius:11px}
+.data-info{min-width:0}.data-info strong{display:block;overflow-wrap:anywhere}
+.data-info small{color:var(--muted);overflow-wrap:anywhere}
+.row-actions{display:flex;gap:7px;flex-shrink:0}
+.status{font-size:10px;padding:4px 8px;border-radius:20px;
+ color:var(--green);background:#78d6ae15}
+.status.draft{color:#ffd18b;background:#ffd18b15}
+.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.log{display:flex;justify-content:space-between;gap:12px;padding:12px 0;
+ border-bottom:1px solid var(--line);font-size:13px}
+.log time{color:var(--muted);white-space:nowrap}
+.modal-bg{position:fixed;inset:0;background:#000b;z-index:70;
+ display:grid;place-items:center;padding:18px}
+.modal{width:min(530px,100%);max-height:90vh;overflow:auto;
+ padding:23px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.modal-head{display:flex;justify-content:space-between;align-items:center}
+.toast{position:fixed;right:20px;bottom:20px;background:#29232d;
+ border:1px solid #f0527055;padding:12px 17px;border-radius:10px;z-index:100}
+@media(max-width:850px){
+ .cards{grid-template-columns:repeat(2,1fr)}
+ .castle{right:-15%;width:65%;opacity:.4}
+ .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+ .topbar{height:66px}.navlinks{display:none;position:absolute;top:66px;left:0;right:0;
+ background:#17161d;padding:18px;flex-direction:column}
+ .navlinks.open{display:flex}.menu{display:inline-flex}
+ .nav-actions .desktop-admin{display:none}
+ .hero{min-height:620px}.hero h1{font-size:58px;letter-spacing:-4px}
+ .hero-content{padding:75px 0}.castle{width:100%;right:-40%;opacity:.3}
+ .section-head{display:block}.cards{grid-template-columns:1fr}
+ .about{grid-template-columns:1fr}.contact-box{display:block;padding:25px}
+ .contact-box .btn{margin-top:18px}
+ .admin-layout{display:block}.sidebar{display:flex;overflow:auto;padding:9px;
+ position:sticky;top:66px;z-index:20;border-right:0;border-bottom:1px solid var(--line)}
+ .side-label{display:none}.side-link{white-space:nowrap;width:auto;font-size:12px}
+ .admin-main{padding:18px 13px}.admin-heading{align-items:flex-start;flex-direction:column}
+ .data-row{align-items:flex-start;flex-direction:column}.row-actions{width:100%}
+ .row-actions .btn{flex:1}.stats{gap:8px}.stat{padding:12px}
+ .footer-row{display:block}.footer-row>*{margin:6px 0}
 }
 </style>
 </head>
-
 <body>
 
-<div class="background-glow"></div>
-<div class="stars"></div>
-
-<header>
-  <div class="container navbar">
-    <a href="#home" class="brand">RESU<span>RECT</span></a>
-
-    <nav class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#gamemodes">Game Modes</a>
-      <a href="#store">Marketplace</a>
-      <a href="#management">Management</a>
-      <a href="#about">About</a>
-    </nav>
-
-    <div class="nav-actions">
-      <button class="btn btn-outline" onclick="openAccount()">My Account</button>
-      <button class="btn btn-primary" onclick="openAccount()">Sign In</button>
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    </div>
+<header class="topbar" id="header">
+ <div class="container nav">
+  <a class="brand" href="#" onclick="showPage('home');return false">
+   <span class="brand-icon">R</span>
+   <span>RESURECT<small>INDEPENDENT DEVELOPMENT</small></span>
+  </a>
+  <nav class="navlinks" id="navLinks">
+   <a href="#projects">Projects</a>
+   <a href="#plugins">Plugins</a>
+   <a href="#marketplace">Marketplace</a>
+   <a href="#about">About</a>
+   <a href="#contact">Contact</a>
+   <a href="#" onclick="showPage('login');return false">Admin Access ↗</a>
+  </nav>
+  <div class="nav-actions">
+   <button class="btn small desktop-admin" onclick="showPage('login')">Admin ↗</button>
+   <button class="btn primary small" onclick="document.getElementById('plugins').scrollIntoView({behavior:'smooth'})">Explore</button>
+   <button class="btn small menu" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
   </div>
+ </div>
 </header>
 
-<main>
+<main id="homePage">
+ <section class="hero">
+  <div class="castle"><div class="tower left"></div><div class="tower right"></div></div>
+  <div class="container"><div class="hero-content">
+   <div class="eyebrow">Minecraft Development Studio · By Resurect</div>
+   <h1>Build beyond<br>the <span>ordinary.</span></h1>
+   <p>Custom Minecraft experiences, powerful plugins and digital tools for communities that want something different.</p>
+   <div class="hero-buttons">
+    <a class="btn primary" href="#plugins">Explore Plugins ↗</a>
+    <a class="btn" href="#projects">Discover Projects</a>
+   </div>
+   <div class="hero-stats">
+    <div><strong>5+ Years</strong><small>Management Experience</small></div>
+    <div><strong>Java · Web</strong><small>Development Focus</small></div>
+    <div><strong>PKDEV</strong><small>Product Division</small></div>
+   </div>
+  </div></div>
+ </section>
 
-<!-- HERO -->
-
-<section class="hero" id="home">
+ <section id="projects">
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-tag">
-        <span class="live-dot"></span>
-        INDEPENDENT CREATOR & DEVELOPER
-      </div>
-
-      <h1>RESU<span>RECT</span></h1>
-
-      <div class="hero-subtitle">
-        Minecraft Developer. Creative Mind. Team Leader.
-      </div>
-
-      <p class="hero-description">
-        Building custom Minecraft experiences, developing unique plugins
-        and creating tools for Minecraft communities.
-        Combining creativity, development and server management.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">Explore Projects ↗</a>
-        <a href="#store" class="btn btn-outline">Visit Marketplace</a>
-      </div>
-
-      <div class="hero-meta">
-        <div class="meta-item">
-          <strong>5+</strong>
-          <span>Years Management Experience</span>
-        </div>
-        <div class="meta-item">
-          <strong>Minecraft</strong>
-          <span>Main Development Focus</span>
-        </div>
-        <div class="meta-item">
-          <strong>PKDEV</strong>
-          <span>Product Brand</span>
-        </div>
-      </div>
-    </div>
+   <div class="section-head"><div><div class="eyebrow">Selected work</div><h2>Projects & Expertise</h2></div>
+   <p>From server infrastructure to custom gameplay systems, built with performance and maintainability in mind.</p></div>
+   <div class="cards">
+    <article class="card"><div class="card-icon">⚔</div><h3>Custom Game Modes</h3><p>Unique gameplay systems, progression and custom mechanics for Minecraft communities.</p><span class="tag">GAMEPLAY</span></article>
+    <article class="card"><div class="card-icon">⌘</div><h3>Server Infrastructure</h3><p>Network architecture, permissions, performance and server operations.</p><span class="tag">INFRASTRUCTURE</span></article>
+    <article class="card"><div class="card-icon">◇</div><h3>Development Tools</h3><p>Desktop utilities, web dashboards, automation and practical tools.</p><span class="tag">SOFTWARE</span></article>
+   </div>
   </div>
+ </section>
 
-  <!-- CSS-ONLY FANTASY CASTLE -->
-  <div class="world">
-    <div class="moon"></div>
-    <div class="castle">
-      <div class="tower left"></div>
-      <div class="tower right"></div>
-      <div class="castle-main"></div>
-      <div class="castle-window one"></div>
-      <div class="castle-window two"></div>
-      <div class="castle-window three"></div>
-      <div class="castle-door"></div>
-    </div>
-    <div class="ground"></div>
-    <div class="fog"></div>
- 
+ <section id="plugins" style="background:#15141b;border-block:1px solid var(--line)">
+  <div class="container">
+   <div class="section-head"><div><div class="eyebrow">PKDEV Plugin Division</div><h2>Plugin Collection</h2></div>
+   <p>Explore the plugin lineup. Published items can be updated from the admin panel.</p></div>
+   <div class="cards" id="publicPlugins"></div>
+  </div>
+ </section>
+
+ <section id="marketplace">
+  <div class="container">
+   <div class="section-head"><div><div class="eyebrow">Digital Goods</div><h2>Marketplace</h2></div>
+   <p>Plugins, configurations and digital resources for Minecraft server owners.</p></div>
+   <div class="cards" id="publicMarket"></div>
+  </div>
+ </section>
+
+ <section id="about" style="background:#15141b;border-block:1px solid var(--line)">
+  <div class="container about">
+   <div><div class="eyebrow">Behind the projects</div>
+    <h2 style="font-size:clamp(36px,5vw,58px);line-height:1.05;letter-spacing:-3px">Independent by nature.<br><span style="color:var(--pink)">Built with purpose.</span></h2>
+    <p class="muted">Resurect is an independent development identity focused on Minecraft projects, custom software and practical digital products. PKDEV operates as a product label within the Resurect ecosystem.</p>
+    <a class="btn" href="https://github.com/resurect63" target="_blank">GitHub ↗</a>
+   </div>
+   <div class="about-box"><div class="eyebrow">Core Focus</div><h3>Development meets community.</h3>
+    <p class="muted">Experience across Minecraft server development, staff operations, community systems and software projects.</p>
+    <div class="skills"><span>Java</span><span>JavaScript</span><span>TypeScript</span><span>Paper / Spigot</span><span>HTML & CSS</span><span>MySQL</span><span>Linux</span><span>Git</span></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="contact"><div class="container">
+  <div class="contact-box"><div><div class="eyebrow">Have a project in mind?</div>
+   <h2>Let's build something.</h2><p class="muted">For collaborations and development requests.</p></div>
+   <a class="btn primary" href="https://t.me/Resurect63" target="_blank">Contact Resurect ↗</a>
+  </div>
+ </div></section>
+
+ <footer><div class="container footer-row">
+  <div><strong style="color:white;letter-spacing:2px">RESURECT</strong> · PKDEV Product Division</div>
+  <div>Created by Resurect · <a href="https://github.com/resurect63" target="_blank">GitHub</a> · <a href="https://t.me/Resurect63" target="_blank">Telegram</a> · <a href="#" onclick="showPage('login');return false">Admin Access ↗</a></div>
+ </div></footer>
+</main>
+
+<!-- Admin login preview -->
+<section id="loginPage" class="hidden">
+ <div class="login-screen">
+  <form class="login-card" id="loginForm">
+   <div class="eyebrow">Resurect Control Center</div>
+   <h1>Administrator Access</h1>
+   <p class="muted">Enter the reserved administrator username to open the admin preview.</p>
+   <div class="field"><label>Username</label><input id="adminUsername" placeholder="Resurect" required></div>
+   <div class="field"><label>Password</label><input id="adminPassword" type="password" placeholder="Preview only" required></div>
+   <div class="notice"><b>Static demo:</b> this HTML-only version does not provide real authentication. The password is not securely verified. Do not use it to protect real data.</div>
+   <button class="btn primary" style="width:100%">Enter Admin Panel ↗</button>
+   <button class="btn" type="button" style="width:100%;margin-top:9px" onclick="showPage('home')">Back to Website</button>
+  </form>
+ </div>
+</section>
+
+<!-- Admin panel -->
+<section id="adminPage" class="hidden">
+ <div class="admin-layout">
+  <aside class="sidebar">
+   <div class="side-label">WORKSPACE</div>
+   <button class="side-link active" data-tab="overview">▦ Overview</button>
+   <button class="side-link" data-tab="plugins">◇ Plugin Manager</button>
+   <button class="side-link" data-tab="market">▣ Marketplace</button>
+   <button class="side-link" data-tab="logs">≡ Activity Logs</button>
+   <div class="side-label">WEBSITE</div>
+   <button class="side-link" onclick="showPage('home')">↗ View Website</button>
+   <button class="side-link" onclick="logout()">⇥ Exit Admin</button>
+  </aside>
+  <div class="admin-main">
+   <div class="admin-heading"><div><div class="eyebrow">Resurect / Admin</div><h1 id="adminTitle">Overview</h1></div><span class="tag">LOCAL PREVIEW</span></div>
+   <div class="notice"><b>Important:</b> changes are saved only in this browser. This panel is not secure authentication, a shared database, or real server-side logs. Do not publish private information here.</div>
+   <div id="adminContent"></div>
+  </div>
+ </div>
+</section>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script>
+const defaultPlugins=[
+ {id:1,name:"PKDEV.Store",version:"1.2.0",compat:"Paper 1.20–1.21.11",status:"Published",description:"A premium in-game store system with Vault economy and LuckPerms rank delivery.",icon:"◇"},
+ {id:2,name:"PKDEV.AntiCheat",version:"In Development",compat:"Paper",status:"Development",description:"A server protection project focused on fair gameplay and moderation workflows.",icon:"⌁"},
+ {id:3,name:"StaffNotifier",version:"1.0.0",compat:"Paper / Spigot",status:"Published",description:"Staff notifications and useful moderation alerts for Minecraft teams.",icon:"◉"},
+ {id:4,name:"PKDEV.Bounty",version:"Planned",compat:"Paper",status:"Development",description:"A bounty system designed around Vault economy.",icon:"✧"},
+ {id:5,name:"PKDEV.Nox",version:"In Development",compat:"Paper",status:"Development",description:"A utility plugin in the PKDEV plugin family.",icon:"◈"}
+];
+const defaultMarket=[
+ {id:101,name:"PKDEV.Store",category:"Minecraft Plugin",price:"Free / Contact",status:"Available",description:"Premium-style server store with rank integration.",icon:"◇",link:""},
+ {id:102,name:"Server Setup Package",category:"Configuration",price:"Coming Soon",status:"Coming Soon",description:"A structured setup package for Minecraft server networks.",icon:"▦",link:""},
+ {id:103,name:"Custom Plugin Development",category:"Development Service",price:"Request a quote",status:"Available",description:"Custom plugin development tailored to your server.",icon:"⌘",link:"https://t.me/Resurect63"}
+];
+
+function read(key,fallback){
+ try{const v=JSON.parse(localStorage.getItem(key));return Array.isArray(v)?v:fallback.map(x=>({...x}))}
+ catch{return fallback.map(x=>({...x}))}
+}
+let plugins=read("resurect_plugins",defaultPlugins);
+let market=read("resurect_market",defaultMarket);
+let logs=read("resurect_logs",[]);
+let currentTab="overview";
+
+function save(){
+ lo
