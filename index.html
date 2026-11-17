@@ -11,1037 +11,367 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cinzel:wght@500;600;700;800&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
 <style>
 :root {
-    --bg: #0d0d12;
-    --bg2: #131219;
-    --panel: #18171f;
-    --panel2: #201b24;
-    --red: #a82e4c;
-    --pink: #f05270;
-    --light: #ffacbd;
-    --white: #fff3f5;
-    --muted: #a49ba5;
-    --border: rgba(255,255,255,.08);
-    --glow: rgba(240,82,112,.2);
-    --radius: 18px;
+    --bg:#0d0d12;
+    --bg2:#131219;
+    --panel:#18171f;
+    --panel2:#201b24;
+    --red:#a82e4c;
+    --pink:#f05270;
+    --light:#ffacbd;
+    --white:#fff3f5;
+    --muted:#a49ba5;
+    --border:rgba(255,255,255,.08);
+    --glow:rgba(240,82,112,.2);
+    --radius:18px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:Inter,sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
 }
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:white}
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: Inter, sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-button, input, textarea, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-::selection {
-    background: var(--pink);
-    color: white;
-}
-
-#ambient {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: -2;
+#ambient{
+    position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-2;
     background:
-        radial-gradient(ellipse at 80% 15%, rgba(168,46,76,.13), transparent 38%),
-        radial-gradient(ellipse at 10% 80%, rgba(80,30,65,.12), transparent 35%),
-        linear-gradient(145deg,#0c0b10,#121018 55%,#100d13);
+    radial-gradient(ellipse at 80% 15%,rgba(168,46,76,.13),transparent 38%),
+    radial-gradient(ellipse at 10% 80%,rgba(80,30,65,.12),transparent 35%),
+    linear-gradient(145deg,#0c0b10,#121018 55%,#100d13);
 }
-
-#ambient::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: .15;
+#ambient::before{
+    content:"";position:absolute;inset:0;opacity:.15;
     background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-    background-size: 55px 55px;
-    mask-image: linear-gradient(to bottom,black,transparent);
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:55px 55px;
+    mask-image:linear-gradient(to bottom,black,transparent);
 }
-
-.orb {
-    position: fixed;
-    width: 380px;
-    height: 380px;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: .12;
-    pointer-events: none;
-    z-index: -1;
-    animation: drift 14s ease-in-out infinite alternate;
+.orb{
+    position:fixed;width:380px;height:380px;border-radius:50%;
+    filter:blur(100px);opacity:.12;pointer-events:none;z-index:-1;
+    animation:drift 14s ease-in-out infinite alternate;
 }
-
-.orb.one {
-    background: #c02e59;
-    top: 15%;
-    right: -200px;
+.orb.one{background:#c02e59;top:15%;right:-200px}
+.orb.two{background:#702b60;bottom:0;left:-220px;animation-delay:-5s}
+@keyframes drift{
+    from{transform:translate(0,0)}
+    to{transform:translate(-80px,60px)}
 }
-
-.orb.two {
-    background: #702b60;
-    bottom: 0;
-    left: -220px;
-    animation-delay: -5s;
+#particles{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.particle{
+    position:absolute;width:3px;height:3px;background:#ff9bad;
+    border-radius:50%;opacity:.4;animation:floatUp linear infinite;
+    box-shadow:0 0 12px #f05270;
 }
-
-@keyframes drift {
-    from { transform: translate(0,0); }
-    to { transform: translate(-80px,60px); }
-}
-
-#particles {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #ff9bad;
-    border-radius: 50%;
-    opacity: .4;
-    animation: floatUp linear infinite;
-    box-shadow: 0 0 12px #f05270;
-}
-
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 0; }
-    20% { opacity: .5; }
-    80% { opacity: .4; }
-    to { transform: translateY(-110vh); opacity: 0; }
+@keyframes floatUp{
+    from{transform:translateY(0);opacity:0}
+    20%{opacity:.5}
+    80%{opacity:.4}
+    to{transform:translateY(-110vh);opacity:0}
 }
 
 /* NAVBAR */
-
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-    min-height: 78px;
-    padding: 0 7%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-    background: rgba(13,13,18,.82);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
+.navbar{
+    position:sticky;top:0;z-index:100;width:100%;min-height:78px;
+    padding:0 7%;display:flex;align-items:center;justify-content:space-between;
+    gap:25px;background:rgba(13,13,18,.82);
+    backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
 }
-
-.wordmark {
-    font-family: Cinzel, serif;
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: 5px;
-    color: var(--white);
-    white-space: nowrap;
+.wordmark{
+    font-family:Cinzel,serif;font-size:24px;font-weight:800;
+    letter-spacing:5px;color:var(--white);white-space:nowrap;
 }
-
-.wordmark span {
-    color: var(--pink);
+.wordmark span{color:var(--pink)}
+.nav-links{
+    display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap;
 }
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    flex-wrap: wrap;
+.nav-link{
+    background:transparent;border:0;color:var(--muted);
+    font-size:12px;padding:11px 12px;border-radius:9px;transition:.25s;
 }
-
-.nav-link {
-    background: transparent;
-    border: 0;
-    color: var(--muted);
-    font-size: 12px;
-    padding: 11px 12px;
-    border-radius: 9px;
-    transition: .25s;
+.nav-link:hover,.nav-link.active{
+    color:var(--white);background:rgba(240,82,112,.11);
 }
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--white);
-    background: rgba(240,82,112,.11);
+.nav-link.active{box-shadow:inset 0 -2px var(--pink)}
+.nav-account{
+    border:1px solid rgba(240,82,112,.4);color:var(--light);
+    padding:10px 17px;border-radius:9px;background:rgba(240,82,112,.08);
+    font-size:12px;font-weight:700;transition:.25s;white-space:nowrap;
 }
-
-.nav-link.active {
-    box-shadow: inset 0 -2px var(--pink);
-}
-
-.nav-account {
-    border: 1px solid rgba(240,82,112,.4);
-    color: var(--light);
-    padding: 10px 17px;
-    border-radius: 9px;
-    background: rgba(240,82,112,.08);
-    font-size: 12px;
-    font-weight: 700;
-    transition: .25s;
-    white-space: nowrap;
-}
-
-.nav-account:hover {
-    background: var(--red);
-    color: white;
-    box-shadow: 0 0 25px var(--glow);
+.nav-account:hover{
+    background:var(--red);color:white;box-shadow:0 0 25px var(--glow);
 }
 
 /* PAGE SYSTEM */
-
-main {
-    min-height: calc(100vh - 150px);
+main{min-height:calc(100vh - 150px)}
+.page{
+    display:none;max-width:1320px;margin:auto;
+    padding:65px 7% 100px;animation:pageIn .45s ease both;
 }
-
-.page {
-    display: none;
-    max-width: 1320px;
-    margin: auto;
-    padding: 65px 7% 100px;
-    animation: pageIn .45s ease both;
+.page.active{display:block}
+@keyframes pageIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
 }
-
-.page.active {
-    display: block;
+.eyebrow{
+    display:inline-flex;align-items:center;gap:10px;color:var(--pink);
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;
+    font-weight:800;margin-bottom:18px;
 }
-
-@keyframes pageIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--pink)}
+.section-heading{
+    font-family:Cinzel,serif;font-size:clamp(30px,4vw,48px);
+    line-height:1.2;margin-bottom:15px;
 }
-
-.eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--pink);
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 800;
-    margin-bottom: 18px;
+.section-description{
+    color:var(--muted);max-width:650px;line-height:1.8;font-size:14px;
 }
-
-.eyebrow::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--pink);
-}
-
-.section-heading {
-    font-family: Cinzel, serif;
-    font-size: clamp(30px,4vw,48px);
-    line-height: 1.2;
-    margin-bottom: 15px;
-}
-
-.section-description {
-    color: var(--muted);
-    max-width: 650px;
-    line-height: 1.8;
-    font-size: 14px;
-}
-
-.section-top {
-    margin-bottom: 38px;
-}
+.section-top{margin-bottom:38px}
 
 /* BUTTONS */
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 10px;
-    padding: 14px 21px;
-    border: 1px solid transparent;
-    font-size: 12px;
-    font-weight: 800;
-    transition: .25s;
+.btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    border-radius:10px;padding:14px 21px;border:1px solid transparent;
+    font-size:12px;font-weight:800;transition:.25s;
 }
-
-.btn-primary {
-    background: linear-gradient(120deg,#a82e4c,#e74b6a);
-    color: white;
-    box-shadow: 0 8px 30px rgba(168,46,76,.22);
+.btn-primary{
+    background:linear-gradient(120deg,#a82e4c,#e74b6a);color:white;
+    box-shadow:0 8px 30px rgba(168,46,76,.22);
 }
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(240,82,112,.35);
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 35px rgba(240,82,112,.35);
 }
-
-.btn-outline {
-    border-color: var(--border);
-    background: rgba(255,255,255,.025);
-    color: var(--white);
+.btn-outline{
+    border-color:var(--border);background:rgba(255,255,255,.025);
+    color:var(--white);
 }
-
-.btn-outline:hover {
-    border-color: var(--pink);
-    color: var(--light);
-}
+.btn-outline:hover{border-color:var(--pink);color:var(--light)}
 
 /* HOME */
-
-.hero {
-    min-height: 570px;
-    display: grid;
-    grid-template-columns: 1.1fr .9fr;
-    align-items: center;
-    gap: 50px;
+.hero{
+    min-height:570px;display:flex;align-items:center;
 }
-
-.hero-content {
-    position: relative;
-    z-index: 2;
+.hero-content{position:relative;z-index:2;max-width:850px}
+.hero-title{
+    font-family:Cinzel,serif;font-size:clamp(43px,6.5vw,82px);
+    line-height:1.05;letter-spacing:-2px;margin-bottom:22px;
 }
-
-.hero-title {
-    font-family: Cinzel, serif;
-    font-size: clamp(43px,6.5vw,82px);
-    line-height: 1.05;
-    letter-spacing: -2px;
-    margin-bottom: 22px;
+.hero-title span{color:var(--pink);text-shadow:0 0 40px rgba(240,82,112,.2)}
+.hero-subtitle{
+    color:var(--muted);font-size:15px;line-height:1.9;
+    max-width:600px;margin-bottom:30px;
 }
-
-.hero-title span {
-    color: var(--pink);
-    text-shadow: 0 0 40px rgba(240,82,112,.2);
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:35px;margin-top:45px;flex-wrap:wrap}
+.meta-item strong{
+    display:block;font-size:24px;color:var(--white);font-family:Cinzel,serif;
 }
-
-.hero-subtitle {
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.9;
-    max-width: 520px;
-    margin-bottom: 30px;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.hero-meta {
-    display: flex;
-    gap: 35px;
-    margin-top: 45px;
-    flex-wrap: wrap;
-}
-
-.meta-item strong {
-    display: block;
-    font-size: 24px;
-    color: var(--white);
-    font-family: Cinzel, serif;
-}
-
-.meta-item small {
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.hero-art {
-    height: 460px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 25px;
-    border: 1px solid rgba(255,255,255,.06);
-    background:
-        linear-gradient(to top,rgba(13,13,18,.98),rgba(13,13,18,.05)),
-        radial-gradient(ellipse at 50% 50%,rgba(175,48,83,.28),transparent 60%),
-        linear-gradient(145deg,#241821,#15121a);
-}
-
-.moon {
-    position: absolute;
-    width: 170px;
-    height: 170px;
-    top: 55px;
-    right: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%,#ffccd4,#bb536c 60%,#64243c);
-    box-shadow: 0 0 90px rgba(240,82,112,.3);
-    opacity: .85;
-}
-
-.castle {
-    position: absolute;
-    bottom: 0;
-    width: 85%;
-    height: 65%;
-    filter: drop-shadow(0 0 30px rgba(240,82,112,.12));
-}
-
-.castle-main {
-    position: absolute;
-    left: 24%;
-    bottom: 0;
-    width: 52%;
-    height: 66%;
-    background: linear-gradient(90deg,#21151f,#48303d,#21151f);
-    clip-path: polygon(10% 0,90% 0,100% 100%,0 100%);
-}
-
-.tower {
-    position: absolute;
-    bottom: 0;
-    width: 17%;
-    height: 95%;
-    background: linear-gradient(90deg,#241621,#563341,#241621);
-}
-
-.tower::before {
-    content: "";
-    position: absolute;
-    top: -35px;
-    left: -15%;
-    width: 130%;
-    height: 42px;
-    background: #6b3a4b;
-    clip-path: polygon(50% 0,100% 100%,0 100%);
-}
-
-.tower.left {
-    left: 16%;
-    height: 75%;
-}
-
-.tower.right {
-    right: 16%;
-    height: 75%;
-}
-
-.tower.center {
-    left: 42%;
-    height: 105%;
-    width: 16%;
-}
-
-.castle-window {
-    position: absolute;
-    width: 9px;
-    height: 26px;
-    border-radius: 10px 10px 0 0;
-    background: #ffb2a0;
-    box-shadow: 0 0 18px #ff826e;
-}
-
-.castle-window.w1 { left: 34%; bottom: 28%; }
-.castle-window.w2 { left: 49%; bottom: 32%; }
-.castle-window.w3 { left: 64%; bottom: 28%; }
-
-.art-caption {
-    position: absolute;
-    bottom: 22px;
-    left: 24px;
-    right: 24px;
-    display: flex;
-    justify-content: space-between;
-    color: #d3b5c0;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.meta-item small{
+    color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase;
 }
 
 /* CARDS */
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 17px;
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{
+    position:relative;overflow:hidden;
+    background:linear-gradient(145deg,rgba(32,27,36,.94),rgba(20,18,25,.94));
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:25px;transition:.3s;
 }
-
-.card {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(145deg,rgba(32,27,36,.94),rgba(20,18,25,.94));
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 25px;
-    transition: .3s;
+.card:hover{
+    transform:translateY(-5px);border-color:rgba(240,82,112,.35);
+    box-shadow:0 15px 45px rgba(0,0,0,.2);
 }
-
-.card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(240,82,112,.35);
-    box-shadow: 0 15px 45px rgba(0,0,0,.2);
+.card::after{
+    content:"";position:absolute;top:0;left:0;width:70px;height:1px;
+    background:var(--pink);opacity:.7;
 }
-
-.card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70px;
-    height: 1px;
-    background: var(--pink);
-    opacity: .7;
+.card h3{font-size:17px;margin:13px 0 10px}
+.card p{color:var(--muted);font-size:12px;line-height:1.8}
+.card-icon{
+    width:43px;height:43px;display:grid;place-items:center;
+    background:rgba(240,82,112,.1);border:1px solid rgba(240,82,112,.15);
+    border-radius:12px;color:var(--pink);font-size:19px;
 }
-
-.card h3 {
-    font-size: 17px;
-    margin: 13px 0 10px;
+.tag{
+    display:inline-block;color:var(--light);background:rgba(240,82,112,.09);
+    border:1px solid rgba(240,82,112,.16);padding:6px 9px;
+    border-radius:6px;font-size:9px;font-weight:800;letter-spacing:.6px;
+    margin:4px 3px 0 0;
 }
-
-.card p {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.8;
+.status{
+    display:inline-flex;align-items:center;gap:6px;
+    color:#d5b5bd;font-size:10px;margin-top:17px;
 }
-
-.card-icon {
-    width: 43px;
-    height: 43px;
-    display: grid;
-    place-items: center;
-    background: rgba(240,82,112,.1);
-    border: 1px solid rgba(240,82,112,.15);
-    border-radius: 12px;
-    color: var(--pink);
-    font-size: 19px;
-}
-
-.tag {
-    display: inline-block;
-    color: var(--light);
-    background: rgba(240,82,112,.09);
-    border: 1px solid rgba(240,82,112,.16);
-    padding: 6px 9px;
-    border-radius: 6px;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: .6px;
-    margin: 4px 3px 0 0;
-}
-
-.status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #d5b5bd;
-    font-size: 10px;
-    margin-top: 17px;
-}
-
-.status::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    background: #e9a0b0;
-    border-radius: 50%;
+.status::before{
+    content:"";width:6px;height:6px;background:#e9a0b0;border-radius:50%;
 }
 
 /* ABOUT */
-
-.about-layout {
-    display: grid;
-    grid-template-columns: .85fr 1.15fr;
-    gap: 25px;
+.about-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:25px}
+.about-panel{
+    padding:35px;border-radius:20px;border:1px solid var(--border);
+    background:linear-gradient(145deg,#211b25,#15131a);
 }
-
-.about-panel {
-    padding: 35px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: linear-gradient(145deg,#211b25,#15131a);
+.about-panel h3{font-family:Cinzel,serif;font-size:25px;margin-bottom:15px}
+.about-panel p{color:var(--muted);font-size:13px;line-height:2}
+.about-list{display:grid;gap:12px;margin-top:25px}
+.about-row{
+    display:flex;justify-content:space-between;gap:20px;
+    border-bottom:1px solid var(--border);padding-bottom:12px;font-size:12px;
 }
-
-.about-panel h3 {
-    font-family: Cinzel,serif;
-    font-size: 25px;
-    margin-bottom: 15px;
-}
-
-.about-panel p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 2;
-}
-
-.about-list {
-    display: grid;
-    gap: 12px;
-    margin-top: 25px;
-}
-
-.about-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 12px;
-    font-size: 12px;
-}
-
-.about-row span:first-child {
-    color: var(--muted);
-}
+.about-row span:first-child{color:var(--muted)}
 
 /* SKILLS */
-
-.skill-category {
-    margin-top: 35px;
+.skill-category{margin-top:35px}
+.skill-category h3{font-size:16px;margin-bottom:18px;color:var(--light)}
+.skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.skill{
+    display:flex;align-items:center;gap:12px;padding:16px;
+    border:1px solid var(--border);background:rgba(255,255,255,.025);
+    border-radius:12px;transition:.25s;
 }
-
-.skill-category h3 {
-    font-size: 16px;
-    margin-bottom: 18px;
-    color: var(--light);
+.skill:hover{
+    background:rgba(240,82,112,.07);
+    border-color:rgba(240,82,112,.3);transform:translateY(-3px);
 }
-
-.skill-grid {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 13px;
-}
-
-.skill {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,.025);
-    border-radius: 12px;
-    transition: .25s;
-}
-
-.skill:hover {
-    background: rgba(240,82,112,.07);
-    border-color: rgba(240,82,112,.3);
-    transform: translateY(-3px);
-}
-
-.skill img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-.skill span {
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.skill i {
-    font-size: 27px;
-    color: var(--light);
-}
+.skill img{width:28px;height:28px;object-fit:contain}
+.skill span{font-size:12px;font-weight:700}
+.skill i{font-size:27px;color:var(--light)}
 
 /* FILTERS */
-
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 25px;
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:25px}
+.filter{
+    padding:10px 15px;border-radius:8px;border:1px solid var(--border);
+    color:var(--muted);background:transparent;font-size:11px;transition:.2s;
 }
-
-.filter {
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: transparent;
-    font-size: 11px;
-    transition: .2s;
+.filter.active,.filter:hover{
+    color:white;border-color:var(--pink);background:rgba(240,82,112,.12);
 }
-
-.filter.active,
-.filter:hover {
-    color: white;
-    border-color: var(--pink);
-    background: rgba(240,82,112,.12);
-}
-
-.project-card {
-    display: flex;
-    flex-direction: column;
-    min-height: 235px;
-}
-
-.project-card .project-bottom {
-    margin-top: auto;
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.project-card{display:flex;flex-direction:column;min-height:235px}
+.project-card .project-bottom{
+    margin-top:auto;padding-top:20px;display:flex;
+    justify-content:space-between;align-items:center;gap:10px;
 }
 
 /* ACCOUNT */
-
-.account-wrap {
-    max-width: 480px;
-    margin: 35px auto;
+.account-wrap{max-width:480px;margin:35px auto}
+.account-box{
+    background:linear-gradient(145deg,#211b25,#15131a);
+    border:1px solid var(--border);border-radius:20px;padding:35px;
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
-
-.account-box {
-    background: linear-gradient(145deg,#211b25,#15131a);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+.account-box h2{font-family:Cinzel,serif;font-size:27px;margin-bottom:10px}
+.account-box>p{
+    color:var(--muted);font-size:12px;line-height:1.8;margin-bottom:25px;
 }
-
-.account-box h2 {
-    font-family: Cinzel,serif;
-    font-size: 27px;
-    margin-bottom: 10px;
+.form-group{margin-bottom:16px}
+.form-group label{
+    display:block;color:#d7cbd0;font-size:11px;margin-bottom:8px;
 }
-
-.account-box > p {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.8;
-    margin-bottom: 25px;
+.form-control{
+    width:100%;border:1px solid var(--border);background:#100e14;
+    color:white;padding:14px;outline:none;border-radius:9px;
+    font-size:12px;transition:.2s;
 }
-
-.form-group {
-    margin-bottom: 16px;
+.form-control:focus{
+    border-color:var(--pink);box-shadow:0 0 0 3px rgba(240,82,112,.08);
 }
-
-.form-group label {
-    display: block;
-    color: #d7cbd0;
-    font-size: 11px;
-    margin-bottom: 8px;
+.account-box .btn{width:100%;margin-top:10px}
+.switch-auth{
+    color:var(--light);font-size:11px;cursor:pointer;
+    margin-top:22px;text-align:center;
 }
-
-.form-control {
-    width: 100%;
-    border: 1px solid var(--border);
-    background: #100e14;
-    color: white;
-    padding: 14px;
-    outline: none;
-    border-radius: 9px;
-    font-size: 12px;
-    transition: .2s;
+.message{font-size:11px;margin-top:13px;line-height:1.6}
+.message.error{color:#ff8193}
+.message.success{color:#9bd9b0}
+.profile-card{display:none;text-align:center}
+.profile-avatar{
+    width:75px;height:75px;display:grid;place-items:center;
+    margin:0 auto 20px;border-radius:50%;color:white;
+    font-family:Cinzel,serif;font-size:25px;
+    background:linear-gradient(135deg,#a82e4c,#f05270);
 }
-
-.form-control:focus {
-    border-color: var(--pink);
-    box-shadow: 0 0 0 3px rgba(240,82,112,.08);
+.profile-role{
+    display:inline-block;margin:5px 0 15px;padding:7px 13px;
+    border:1px solid rgba(240,82,112,.3);
+    background:rgba(240,82,112,.1);color:var(--light);
+    border-radius:7px;font-size:10px;font-weight:800;letter-spacing:1px;
 }
-
-.account-box .btn {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.switch-auth {
-    color: var(--light);
-    font-size: 11px;
-    cursor: pointer;
-    margin-top: 22px;
-    text-align: center;
-}
-
-.message {
-    font-size: 11px;
-    margin-top: 13px;
-    line-height: 1.6;
-}
-
-.message.error { color: #ff8193; }
-.message.success { color: #9bd9b0; }
-
-.profile-card {
-    display: none;
-    text-align: center;
-}
-
-.profile-avatar {
-    width: 75px;
-    height: 75px;
-    display: grid;
-    place-items: center;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    color: white;
-    font-family: Cinzel,serif;
-    font-size: 25px;
-    background: linear-gradient(135deg,#a82e4c,#f05270);
-}
-
-.owner-access {
-    margin-top: 30px;
-    border-top: 1px solid var(--border);
-    padding-top: 22px;
-}
-
-.owner-access p {
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 12px;
-}
-
-/* ADMIN */
-
-.admin-stats {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 13px;
-    margin: 25px 0;
-}
-
-.admin-stat {
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--panel);
-}
-
-.admin-stat strong {
-    display: block;
-    font-size: 27px;
-    color: var(--pink);
-    font-family: Cinzel,serif;
-}
-
-.admin-stat span {
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.admin-form {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.admin-form textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-
-.admin-list {
-    display: grid;
-    gap: 10px;
-}
-
-.admin-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,.025);
-}
-
-.admin-item strong {
-    font-size: 12px;
-}
-
-.admin-item small {
-    display: block;
-    color: var(--muted);
-    margin-top: 5px;
-    font-size: 10px;
-}
-
-.delete-btn {
-    background: rgba(240,82,112,.1);
-    border: 1px solid rgba(240,82,112,.2);
-    color: var(--light);
-    padding: 8px 11px;
-    border-radius: 7px;
-    font-size: 10px;
+.demo-notice{
+    margin-top:20px;padding:12px;border:1px solid var(--border);
+    border-radius:9px;color:var(--muted);font-size:10px;line-height:1.7;
 }
 
 /* CONTACT */
-
-.contact-layout {
-    display: grid;
-    grid-template-columns: .8fr 1.2fr;
-    gap: 20px;
+.contact-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}
+.contact-link{
+    display:flex;align-items:center;gap:14px;padding:17px;
+    border:1px solid var(--border);background:rgba(255,255,255,.025);
+    border-radius:12px;margin-bottom:10px;transition:.25s;
 }
-
-.contact-link {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 17px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,.025);
-    border-radius: 12px;
-    margin-bottom: 10px;
-    transition: .25s;
-}
-
-.contact-link:hover {
-    border-color: var(--pink);
-    transform: translateX(4px);
-}
-
-.contact-link strong {
-    font-size: 12px;
-}
-
-.contact-link small {
-    display: block;
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 5px;
+.contact-link:hover{border-color:var(--pink);transform:translateX(4px)}
+.contact-link strong{font-size:12px}
+.contact-link small{
+    display:block;color:var(--muted);font-size:10px;margin-top:5px;
 }
 
 /* FOOTER */
-
-footer {
-    border-top: 1px solid var(--border);
-    padding: 27px 7%;
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    flex-wrap: wrap;
-    color: var(--muted);
-    font-size: 10px;
+footer{
+    border-top:1px solid var(--border);padding:27px 7%;
+    display:flex;justify-content:space-between;gap:15px;
+    flex-wrap:wrap;color:var(--muted);font-size:10px;
 }
-
-footer strong {
-    color: var(--light);
-    letter-spacing: 1px;
-}
+footer strong{color:var(--light);letter-spacing:1px}
 
 /* MOBILE */
-
-.menu-toggle {
-    display: none;
-    background: transparent;
-    color: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 9px 12px;
+.menu-toggle{
+    display:none;background:transparent;color:white;
+    border:1px solid var(--border);border-radius:8px;padding:9px 12px;
 }
 
-@media(max-width:1000px) {
-    .navbar { padding: 15px 5%; }
-    .nav-links { gap: 0; }
-    .nav-link { padding: 10px 8px; font-size: 10px; }
-    .hero { gap: 25px; }
-    .skill-grid { grid-template-columns: repeat(3,1fr); }
+@media(max-width:1000px){
+    .navbar{padding:15px 5%}
+    .nav-links{gap:0}
+    .nav-link{padding:10px 8px;font-size:10px}
+    .skill-grid{grid-template-columns:repeat(3,1fr)}
 }
-
-@media(max-width:760px) {
-    .navbar {
-        flex-wrap: wrap;
-        min-height: 70px;
+@media(max-width:760px){
+    .navbar{flex-wrap:wrap;min-height:70px}
+    .menu-toggle{display:block}
+    .nav-account{margin-left:auto}
+    .nav-links{
+        display:none;width:100%;order:5;padding:10px 0 5px;
+        grid-template-columns:repeat(3,1fr);
     }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-account {
-        margin-left: auto;
-    }
-
-    .nav-links {
-        display: none;
-        width: 100%;
-        order: 5;
-        padding: 10px 0 5px;
-        grid-template-columns: repeat(3,1fr);
-    }
-
-    .nav-links.open {
-        display: grid;
-    }
-
-    .nav-link {
-        width: 100%;
-        text-align: center;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-        padding-top: 20px;
-    }
-
-    .hero-art {
-        height: 350px;
-    }
-
-    .grid {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .about-layout,
-    .contact-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .skill-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .admin-stats {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .page {
-        padding: 45px 5% 75px;
-    }
+    .nav-links.open{display:grid}
+    .nav-link{width:100%;text-align:center}
+    .hero{min-height:500px;padding-top:20px}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .about-layout,.contact-layout{grid-template-columns:1fr}
+    .skill-grid{grid-template-columns:repeat(2,1fr)}
+    .page{padding:45px 5% 75px}
 }
-
-@media(max-width:450px) {
-    .wordmark { font-size: 19px; letter-spacing: 3px; }
-    .grid { grid-template-columns: 1fr; }
-    .hero-title { font-size: 45px; }
-    .hero-meta { gap: 20px; }
-    .account-box { padding: 24px; }
-    .admin-form { grid-template-columns: 1fr; }
-    .admin-item { align-items: flex-start; }
-    footer { flex-direction: column; }
+@media(max-width:450px){
+    .wordmark{font-size:19px;letter-spacing:3px}
+    .grid{grid-template-columns:1fr}
+    .hero-title{font-size:45px}
+    .hero-meta{gap:20px}
+    .account-box{padding:24px}
+    footer{flex-direction:column}
 }
 </style>
 </head>
@@ -1075,7 +405,6 @@ footer strong {
 <main>
 
 <!-- HOME -->
-
 <section class="page active" id="home">
     <div class="hero">
         <div class="hero-content">
@@ -1113,23 +442,6 @@ footer strong {
                 </div>
             </div>
         </div>
-
-        <div class="hero-art">
-            <div class="moon"></div>
-            <div class="castle">
-                <div class="castle-main"></div>
-                <div class="tower left"></div>
-                <div class="tower right"></div>
-                <div class="tower center"></div>
-                <div class="castle-window w1"></div>
-                <div class="castle-window w2"></div>
-                <div class="castle-window w3"></div>
-            </div>
-            <div class="art-caption">
-                <span>Beyond the ordinary</span>
-                <span>Est. Resurect</span>
-            </div>
-        </div>
     </div>
 
     <div class="section-top">
@@ -1161,7 +473,6 @@ footer strong {
 </section>
 
 <!-- ABOUT -->
-
 <section class="page" id="about">
     <div class="section-top">
         <div class="eyebrow">About Me</div>
@@ -1195,33 +506,17 @@ footer strong {
             </p>
 
             <div class="about-list">
-                <div class="about-row">
-                    <span>Brand</span>
-                    <strong>RESURECT</strong>
-                </div>
-                <div class="about-row">
-                    <span>Experience</span>
-                    <strong>5+ Years in Management</strong>
-                </div>
-                <div class="about-row">
-                    <span>Main Focus</span>
-                    <strong>Software & Minecraft</strong>
-                </div>
-                <div class="about-row">
-                    <span>Development</span>
-                    <strong>Independent</strong>
-                </div>
-                <div class="about-row">
-                    <span>Secondary Brand</span>
-                    <strong>PKDEV</strong>
-                </div>
+                <div class="about-row"><span>Brand</span><strong>RESURECT</strong></div>
+                <div class="about-row"><span>Experience</span><strong>5+ Years in Management</strong></div>
+                <div class="about-row"><span>Main Focus</span><strong>Software & Minecraft</strong></div>
+                <div class="about-row"><span>Development</span><strong>Independent</strong></div>
+                <div class="about-row"><span>Secondary Brand</span><strong>PKDEV</strong></div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- SKILLS -->
-
 <section class="page" id="skills">
     <div class="section-top">
         <div class="eyebrow">Technical Arsenal</div>
@@ -1289,7 +584,6 @@ footer strong {
 </section>
 
 <!-- PROJECTS -->
-
 <section class="page" id="projects">
     <div class="section-top">
         <div class="eyebrow">Selected Work</div>
@@ -1310,7 +604,6 @@ footer strong {
 </section>
 
 <!-- PLUGINS -->
-
 <section class="page" id="plugins">
     <div class="section-top">
         <div class="eyebrow">Minecraft Ecosystem</div>
@@ -1324,14 +617,12 @@ footer strong {
 </section>
 
 <!-- MARKETPLACE -->
-
 <section class="page" id="marketplace">
     <div class="section-top">
         <div class="eyebrow">Digital Products</div>
         <h2 class="section-heading">Marketplace</h2>
         <p class="section-description">
-            A place for digital tools, plugins and products. Product listings
-            can be managed through the owner dashboard.
+            A place for digital tools, plugins and products created within the Resurect ecosystem.
         </p>
     </div>
 
@@ -1343,7 +634,6 @@ footer strong {
 </section>
 
 <!-- RELEASES -->
-
 <section class="page" id="releases">
     <div class="section-top">
         <div class="eyebrow">Updates & Versions</div>
@@ -1357,7 +647,6 @@ footer strong {
 </section>
 
 <!-- ACCOUNT -->
-
 <section class="page" id="account">
     <div class="section-top" style="text-align:center">
         <div class="eyebrow">Your Space</div>
@@ -1374,30 +663,29 @@ footer strong {
 
             <div id="registerName" class="form-group" style="display:none">
                 <label>Your Name</label>
-                <input class="form-control" id="authName" placeholder="Enter your name">
+                <input class="form-control" id="authName" placeholder="Enter your name" autocomplete="name">
             </div>
 
             <div class="form-group">
                 <label>Email Address</label>
-                <input class="form-control" id="authEmail" type="email" placeholder="name@example.com">
+                <input class="form-control" id="authEmail" type="email" placeholder="name@example.com" autocomplete="email">
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input class="form-control" id="authPassword" type="password" placeholder="Enter password">
+                <input class="form-control" id="authPassword" type="password" placeholder="Enter password" autocomplete="current-password">
             </div>
 
             <button class="btn btn-primary" id="authSubmit">Sign In</button>
-            <div class="message" id="authMessage"></div>
+            <div class="message" id="authMessage" role="status"></div>
 
             <div class="switch-auth" id="authSwitch">
                 Don't have an account? Create one.
             </div>
 
-            <div class="owner-access">
-                <p>Site owner? Access the owner dashboard using your private access key.</p>
-                <input class="form-control" id="ownerKey" type="password" placeholder="Owner access key">
-                <button class="btn btn-outline" id="ownerLogin">Owner Access ↗</button>
+            <div class="demo-notice">
+                This website uses a browser-based demo account system.
+                Do not use personal or reused passwords.
             </div>
         </div>
 
@@ -1405,84 +693,13 @@ footer strong {
             <div class="profile-avatar" id="profileAvatar">R</div>
             <h2 id="profileName">Account</h2>
             <p id="profileEmail"></p>
-            <span class="tag" id="profileRole">MEMBER</span>
+            <div class="profile-role" id="profileRole">MEMBER</div>
             <button class="btn btn-outline" id="logoutButton">Sign Out</button>
-            <button class="btn btn-primary" id="profileAdmin" style="display:none">Open Dashboard ↗</button>
         </div>
-    </div>
-</section>
-
-<!-- ADMIN -->
-
-<section class="page" id="admin">
-    <div class="section-top">
-        <div class="eyebrow">Private Workspace</div>
-        <h2 class="section-heading">Owner Dashboard</h2>
-        <p class="section-description">
-            Manage projects, plugins, products and releases.
-        </p>
-    </div>
-
-    <div class="admin-stats">
-        <div class="admin-stat"><strong id="countProjects">0</strong><span>Projects</span></div>
-        <div class="admin-stat"><strong id="countPlugins">0</strong><span>Plugins</span></div>
-        <div class="admin-stat"><strong id="countMarket">0</strong><span>Products</span></div>
-        <div class="admin-stat"><strong id="countReleases">0</strong><span>Releases</span></div>
-    </div>
-
-    <div class="card" style="margin-bottom:25px">
-        <h3>Add New Content</h3>
-
-        <div class="admin-form">
-            <select class="form-control" id="adminType">
-                <option value="project">Project</option>
-                <option value="plugin">Plugin</option>
-                <option value="market">Marketplace Product</option>
-                <option value="release">Release</option>
-            </select>
-
-            <input class="form-control" id="adminTitle" placeholder="Title">
-
-            <input class="form-control" id="adminSubtitle" placeholder="Subtitle">
-
-            <select class="form-control" id="adminCategory">
-                <option value="Windows">Windows</option>
-                <option value="Minecraft">Minecraft</option>
-                <option value="Web">Web</option>
-                <option value="Development">Development</option>
-            </select>
-
-            <select class="form-control" id="adminStatus">
-                <option>In Development</option>
-                <option>Released</option>
-                <option>Planned</option>
-            </select>
-
-            <input class="form-control" id="adminVersion" placeholder="Version (optional)">
-
-            <input class="form-control" id="adminLink" placeholder="Project URL (optional)">
-
-            <textarea class="form-control" id="adminDescription" placeholder="Description"></textarea>
-        </div>
-
-        <button class="btn btn-primary" id="addContent">Add Content +</button>
-        <div class="message" id="adminMessage"></div>
-    </div>
-
-    <div class="card">
-        <h3>Manage Existing Content</h3>
-        <div class="filters" style="margin-top:18px">
-            <button class="filter active" data-admin-filter="project">Projects</button>
-            <button class="filter" data-admin-filter="plugin">Plugins</button>
-            <button class="filter" data-admin-filter="market">Marketplace</button>
-            <button class="filter" data-admin-filter="release">Releases</button>
-        </div>
-        <div class="admin-list" id="adminList"></div>
     </div>
 </section>
 
 <!-- CONTACT -->
-
 <section class="page" id="contact">
     <div class="section-top">
         <div class="eyebrow">Get In Touch</div>
@@ -1537,36 +754,28 @@ footer strong {
 <script>
 /* =========================================
    RESURECT — SINGLE FILE WEBSITE
+   Frontend demonstration only
 ========================================= */
 
-/*
-  DEMO SECURITY NOTICE:
-  This is a frontend-only prototype.
-  The owner key and account data are handled
-  in the browser. Do not use this as production
-  authentication or store real user passwords.
-  A secure owner dashboard needs server-side
-  authentication and authorization.
+/* BUILT-IN DEVELOPER ACCOUNT
+   This is not secure production authentication.
+   The password is visible in the website source.
 */
-
-const OWNER_ACCESS_KEY = "CHANGE-THIS-OWNER-KEY";
+const DEVELOPER_ACCOUNT = {
+    name: "Resurect",
+    email: "resurect@resurect.dev",
+    password: "pooya12345",
+    role: "Developer"
+};
 
 /* NAVIGATION */
-
 const pages = document.querySelectorAll(".page");
 const navLinks = document.querySelectorAll("[data-page]");
 const navMenu = document.getElementById("navLinks");
 
 function showPage(pageId) {
     const target = document.getElementById(pageId);
-
     if (!target) return;
-
-    if (pageId === "admin" && !isOwner()) {
-        showPage("account");
-        showMessage("Please sign in with owner access first.", "error");
-        return;
-    }
 
     pages.forEach(page => page.classList.remove("active"));
     target.classList.add("active");
@@ -1576,9 +785,7 @@ function showPage(pageId) {
     });
 
     navMenu.classList.remove("open");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-    if (pageId === "admin") renderAdmin();
+    window.scrollTo({top:0,behavior:"smooth"});
 }
 
 navLinks.forEach(link => {
@@ -1590,206 +797,149 @@ document.getElementById("menuToggle").addEventListener("click", () => {
 });
 
 window.addEventListener("hashchange", () => {
-    const page = location.hash.replace("#", "") || "home";
+    const page = location.hash.replace("#","") || "home";
     if (document.getElementById(page)) showPage(page);
 });
 
 /* PARTICLES */
-
 const particleLayer = document.getElementById("particles");
 
-for (let i = 0; i < 35; i++) {
+for (let i=0;i<35;i++) {
     const particle = document.createElement("span");
     particle.className = "particle";
-    particle.style.left = Math.random() * 100 + "%";
-    particle.style.top = Math.random() * 100 + "%";
-    particle.style.animationDuration = (9 + Math.random() * 15) + "s";
-    particle.style.animationDelay = (-Math.random() * 20) + "s";
+    particle.style.left = Math.random()*100+"%";
+    particle.style.top = Math.random()*100+"%";
+    particle.style.animationDuration = (9+Math.random()*15)+"s";
+    particle.style.animationDelay = (-Math.random()*20)+"s";
     particleLayer.appendChild(particle);
 }
 
 /* DEFAULT CONTENT */
-
 const defaultProjects = [
     {
-        id: 1,
-        title: "Imperial Launcher",
-        subtitle: "Minecraft Java Launcher",
-        description: "A modern Minecraft Java launcher with version management, mod support and a custom user experience.",
-        category: "Windows",
-        status: "In Development",
-        version: "2.9"
+        id:1,
+        title:"Imperial Launcher",
+        subtitle:"Minecraft Java Launcher",
+        description:"A modern Minecraft Java launcher with version management, mod support and a custom user experience.",
+        category:"Windows",
+        status:"In Development",
+        version:"2.9"
     },
     {
-        id: 2,
-        title: "ProjectDelta",
-        subtitle: "Minecraft Game Mode",
-        description: "An extraction-inspired Minecraft experience focused on exploration, equipment, combat and progression.",
-        category: "Minecraft",
-        status: "In Development",
-        version: "Development"
+        id:2,
+        title:"ProjectDelta",
+        subtitle:"Minecraft Game Mode",
+        description:"An extraction-inspired Minecraft experience focused on exploration, equipment, combat and progression.",
+        category:"Minecraft",
+        status:"In Development",
+        version:"Development"
     },
     {
-        id: 3,
-        title: "Victoria III Imperial Guide",
-        subtitle: "Strategy Game Companion",
-        description: "A strategy guide website featuring countries, historical content, mods and interactive learning.",
-        category: "Web",
-        status: "In Development",
-        version: "1.0"
+        id:4,
+        title:"Resurect Website",
+        subtitle:"Personal Portfolio",
+        description:"The official digital home for Resurect projects, technologies and development work.",
+        category:"Web",
+        status:"In Development",
+        version:"1.0"
     },
     {
-        id: 4,
-        title: "Resurect Website",
-        subtitle: "Personal Portfolio",
-        description: "The official digital home for Resurect projects, technologies and development work.",
-        category: "Web",
-        status: "In Development",
-        version: "1.0"
-    },
-    {
-        id: 5,
-        title: "PKDEV Store",
-        subtitle: "Minecraft Store System",
-        description: "A custom store experience with rank management, product history and an extensible architecture.",
-        category: "Minecraft",
-        status: "In Development",
-        version: "1.2.0"
+        id:5,
+        title:"PKDEV Store",
+        subtitle:"Minecraft Store System",
+        description:"A custom store experience with rank management, product history and an extensible architecture.",
+        category:"Minecraft",
+        status:"In Development",
+        version:"1.2.0"
     }
 ];
 
 const defaultPlugins = [
     {
-        id: 101,
-        title: "PKDEV.Store",
-        subtitle: "Minecraft Store",
-        description: "A customizable store system with Vault economy integration and rank management.",
-        status: "In Development",
-        version: "1.2.0"
+        id:101,title:"PKDEV.Store",subtitle:"Minecraft Store",
+        description:"A customizable store system with Vault economy integration and rank management.",
+        status:"In Development",version:"1.2.0"
     },
     {
-        id: 102,
-        title: "PKDEV.AntiCheat",
-        subtitle: "Security System",
-        description: "A custom anti-cheat project focused on detection, monitoring and server protection.",
-        status: "In Development",
-        version: "Development"
+        id:102,title:"PKDEV.AntiCheat",subtitle:"Security System",
+        description:"A custom anti-cheat project focused on detection, monitoring and server protection.",
+        status:"In Development",version:"Development"
     },
     {
-        id: 103,
-        title: "StaffNotifier",
-        subtitle: "Staff Management",
-        description: "Staff notifications and useful moderation workflow tools.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:103,title:"StaffNotifier",subtitle:"Staff Management",
+        description:"Staff notifications and useful moderation workflow tools.",
+        status:"Planned",version:"Coming Soon"
     },
     {
-        id: 104,
-        title: "PKDEV.Bounty",
-        subtitle: "Bounty System",
-        description: "A player bounty system with economy integration and management commands.",
-        status: "In Development",
-        version: "Development"
+        id:104,title:"PKDEV.Bounty",subtitle:"Bounty System",
+        description:"A player bounty system with economy integration and management commands.",
+        status:"In Development",version:"Development"
     },
     {
-        id: 105,
-        title: "PKDEV.Nox",
-        subtitle: "Utility Plugin",
-        description: "A custom utility plugin in the PKDEV ecosystem.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:105,title:"PKDEV.Nox",subtitle:"Utility Plugin",
+        description:"A custom utility plugin in the PKDEV ecosystem.",
+        status:"Planned",version:"Coming Soon"
     },
     {
-        id: 106,
-        title: "PKDEV.Core",
-        subtitle: "Core Framework",
-        description: "A planned foundation for shared features and reusable plugin systems.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:106,title:"PKDEV.Core",subtitle:"Core Framework",
+        description:"A planned foundation for shared features and reusable plugin systems.",
+        status:"Planned",version:"Coming Soon"
     },
     {
-        id: 107,
-        title: "PKDEV.Quests",
-        subtitle: "Quest System",
-        description: "A modular quest and progression system.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:107,title:"PKDEV.Quests",subtitle:"Quest System",
+        description:"A modular quest and progression system.",
+        status:"Planned",version:"Coming Soon"
     },
     {
-        id: 108,
-        title: "PKDEV.Dungeons",
-        subtitle: "Dungeon System",
-        description: "A planned dungeon experience with challenges and rewards.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:108,title:"PKDEV.Dungeons",subtitle:"Dungeon System",
+        description:"A planned dungeon experience with challenges and rewards.",
+        status:"Planned",version:"Coming Soon"
     },
     {
-        id: 109,
-        title: "PKDEV.Crates",
-        subtitle: "Crate System",
-        description: "A customizable reward and crate management system.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:109,title:"PKDEV.Crates",subtitle:"Crate System",
+        description:"A customizable reward and crate management system.",
+        status:"Planned",version:"Coming Soon"
     },
     {
-        id: 110,
-        title: "PKDEV.Economy",
-        subtitle: "Economy System",
-        description: "A planned economy toolkit for Minecraft communities.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:110,title:"PKDEV.Economy",subtitle:"Economy System",
+        description:"A planned economy toolkit for Minecraft communities.",
+        status:"Planned",version:"Coming Soon"
     },
     {
-        id: 111,
-        title: "PKDEV.Backup",
-        subtitle: "Backup Utility",
-        description: "A planned backup and restoration tool.",
-        status: "Planned",
-        version: "Coming Soon"
+        id:111,title:"PKDEV.Backup",subtitle:"Backup Utility",
+        description:"A planned backup and restoration tool.",
+        status:"Planned",version:"Coming Soon"
     }
 ];
 
 const defaultMarket = [
     {
-        id: 201,
-        title: "PKDEV Store",
-        subtitle: "Minecraft Plugin",
-        description: "A customizable Minecraft store plugin.",
-        category: "Minecraft",
-        status: "In Development",
-        version: "1.2.0"
+        id:201,title:"PKDEV Store",subtitle:"Minecraft Plugin",
+        description:"A customizable Minecraft store plugin.",
+        category:"Minecraft",status:"In Development",version:"1.2.0"
     },
     {
-        id: 202,
-        title: "Imperial Launcher",
-        subtitle: "Desktop Application",
-        description: "A modern launcher for Minecraft Java Edition.",
-        category: "Windows",
-        status: "In Development",
-        version: "2.9"
+        id:202,title:"Imperial Launcher",subtitle:"Desktop Application",
+        description:"A modern launcher for Minecraft Java Edition.",
+        category:"Windows",status:"In Development",version:"2.9"
     }
 ];
 
 const defaultReleases = [
     {
-        id: 301,
-        title: "Imperial Launcher 2.8",
-        subtitle: "Launcher Update",
-        description: "A launcher development milestone. Check the official release channel for availability.",
-        status: "Released",
-        version: "2.8"
+        id:301,title:"Imperial Launcher 2.8",subtitle:"Launcher Update",
+        description:"A launcher development milestone. Check the official release channel for availability.",
+        status:"Released",version:"2.8"
     },
     {
-        id: 302,
-        title: "PKDEV.Store 1.2.0",
-        subtitle: "Store Plugin",
-        description: "A development milestone for the PKDEV Store plugin.",
-        status: "In Development",
-        version: "1.2.0"
+        id:302,title:"PKDEV.Store 1.2.0",subtitle:"Store Plugin",
+        description:"A development milestone for the PKDEV Store plugin.",
+        status:"In Development",version:"1.2.0"
     }
 ];
 
-function loadData(key, fallback) {
+/* STORAGE */
+function loadData(key,fallback) {
     try {
         const saved = localStorage.getItem(key);
         return saved ? JSON.parse(saved) : fallback;
@@ -1798,32 +948,30 @@ function loadData(key, fallback) {
     }
 }
 
-let projects = loadData("resurect_projects", defaultProjects);
-let plugins = loadData("resurect_plugins", defaultPlugins);
-let market = loadData("resurect_market", defaultMarket);
-let releases = loadData("resurect_releases", defaultReleases);
+let projects = loadData("resurect_projects",defaultProjects);
+let plugins = loadData("resurect_plugins",defaultPlugins);
+let market = loadData("resurect_market",defaultMarket);
+let releases = loadData("resurect_releases",defaultReleases);
 
 function saveData() {
-    localStorage.setItem("resurect_projects", JSON.stringify(projects));
-    localStorage.setItem("resurect_plugins", JSON.stringify(plugins));
-    localStorage.setItem("resurect_market", JSON.stringify(market));
-    localStorage.setItem("resurect_releases", JSON.stringify(releases));
+    localStorage.setItem("resurect_projects",JSON.stringify(projects));
+    localStorage.setItem("resurect_plugins",JSON.stringify(plugins));
+    localStorage.setItem("resurect_market",JSON.stringify(market));
+    localStorage.setItem("resurect_releases",JSON.stringify(releases));
 }
 
 /* SAFE HTML */
-
 function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
+    return String(value ?? "").replace(/[&<>"']/g,char => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
     })[char]);
 }
 
 /* CARD RENDERING */
-
 function projectCard(item) {
     return `
         <article class="card project-card">
@@ -1880,15 +1028,15 @@ function releaseCard(item) {
     `;
 }
 
-function renderProjects(filter = "All") {
-    const filtered = filter === "All"
+function renderProjects(filter="All") {
+    const filtered = filter==="All"
         ? projects
-        : projects.filter(item => item.category === filter);
+        : projects.filter(item=>item.category===filter);
 
     document.getElementById("projectGrid").innerHTML =
         filtered.length
-            ? filtered.map(projectCard).join("")
-            : `<p class="section-description">No projects found in this category.</p>`;
+        ? filtered.map(projectCard).join("")
+        : `<p class="section-description">No projects found in this category.</p>`;
 }
 
 function renderPlugins() {
@@ -1900,14 +1048,14 @@ function renderMarket() {
     const query = document.getElementById("marketSearch").value.toLowerCase();
 
     const filtered = market.filter(item =>
-        item.title.toLowerCase().includes(query) ||
-        item.description.toLowerCase().includes(query)
+        String(item.title).toLowerCase().includes(query) ||
+        String(item.description).toLowerCase().includes(query)
     );
 
     document.getElementById("marketGrid").innerHTML =
         filtered.length
-            ? filtered.map(marketCard).join("")
-            : `<p class="section-description">No products found.</p>`;
+        ? filtered.map(marketCard).join("")
+        : `<p class="section-description">No products found.</p>`;
 }
 
 function renderReleases() {
@@ -1916,41 +1064,34 @@ function renderReleases() {
 }
 
 /* FILTERS */
-
 document.querySelectorAll("#projectFilters .filter").forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click",()=>{
         document.querySelectorAll("#projectFilters .filter")
-            .forEach(item => item.classList.remove("active"));
+            .forEach(item=>item.classList.remove("active"));
 
         button.classList.add("active");
         renderProjects(button.dataset.filter);
     });
 });
 
-document.getElementById("marketSearch").addEventListener("input", renderMarket);
+document.getElementById("marketSearch").addEventListener("input",renderMarket);
 
-/* AUTH — FRONTEND DEMO */
-
+/* AUTHENTICATION — FRONTEND DEMO */
 let authMode = "login";
 
 function getUsers() {
-    return loadData("resurect_demo_users", []);
+    return loadData("resurect_demo_users",[]);
 }
 
 function currentUser() {
-    return loadData("resurect_demo_session", null);
+    return loadData("resurect_demo_session",null);
 }
 
 function setSession(user) {
-    localStorage.setItem("resurect_demo_session", JSON.stringify(user));
+    localStorage.setItem("resurect_demo_session",JSON.stringify(user));
 }
 
-function isOwner() {
-    const user = currentUser();
-    return !!user && user.role === "owner";
-}
-
-function showMessage(text, type) {
+function showMessage(text,type) {
     const element = document.getElementById("authMessage");
     if (!element) return;
     element.textContent = text;
@@ -1959,16 +1100,15 @@ function showMessage(text, type) {
 
 function setAuthMode(mode) {
     authMode = mode;
-
-    const isRegister = mode === "register";
+    const isRegister = mode==="register";
 
     document.getElementById("authTitle").textContent =
         isRegister ? "Create Account." : "Welcome Back.";
 
     document.getElementById("authDescription").textContent =
         isRegister
-            ? "Create your Resurect member account."
-            : "Sign in to your Resurect account.";
+        ? "Create your Resurect member account."
+        : "Sign in to your Resurect account.";
 
     document.getElementById("registerName").style.display =
         isRegister ? "block" : "none";
@@ -1978,77 +1118,118 @@ function setAuthMode(mode) {
 
     document.getElementById("authSwitch").textContent =
         isRegister
-            ? "Already have an account? Sign in."
-            : "Don't have an account? Create one.";
+        ? "Already have an account? Sign in."
+        : "Don't have an account? Create one.";
 
-    showMessage("", "");
+    document.getElementById("authPassword").autocomplete =
+        isRegister ? "new-password" : "current-password";
+
+    showMessage("","");
 }
 
-document.getElementById("authSwitch").addEventListener("click", () => {
-    setAuthMode(authMode === "login" ? "register" : "login");
+document.getElementById("authSwitch").addEventListener("click",()=>{
+    setAuthMode(authMode==="login" ? "register" : "login");
 });
 
 async function hashPassword(password) {
     const data = new TextEncoder().encode(password);
-    const hash = await crypto.subtle.digest("SHA-256", data);
+    const hash = await crypto.subtle.digest("SHA-256",data);
     return Array.from(new Uint8Array(hash))
-        .map(byte => byte.toString(16).padStart(2, "0"))
+        .map(byte=>byte.toString(16).padStart(2,"0"))
         .join("");
 }
 
-document.getElementById("authSubmit").addEventListener("click", async () => {
+document.getElementById("authSubmit").addEventListener("click",async()=>{
     const name = document.getElementById("authName").value.trim();
     const email = document.getElementById("authEmail").value.trim().toLowerCase();
     const password = document.getElementById("authPassword").value;
 
     if (!email || !password) {
-        return showMessage("Please fill in all required fields.", "error");
+        return showMessage("Please fill in all required fields.","error");
     }
 
-    if (password.length < 8) {
-        return showMessage("Password must contain at least 8 characters.", "error");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return showMessage("Please enter a valid email address.","error");
     }
 
-    const users = getUsers();
-    const hash = await hashPassword(password);
-
-    if (authMode === "register") {
-        if (name.length < 2) {
-            return showMessage("Please enter your name.", "error");
+    if (authMode==="register") {
+        if (name.length<2) {
+            return showMessage("Please enter your name.","error");
         }
 
-        if (email === "owner@resurect.dev") {
-            return showMessage("This email is reserved.", "error");
+        if (password.length<8) {
+            return showMessage("Password must contain at least 8 characters.","error");
         }
 
-        if (users.some(user => user.email === email)) {
-            return showMessage("This email is already registered.", "error");
+        if (email===DEVELOPER_ACCOUNT.email) {
+            return showMessage("This email address is reserved.","error");
         }
 
-        users.push({ name, email, passwordHash: hash, role: "user" });
+        const users = getUsers();
 
-        localStorage.setItem("resurect_demo_users", JSON.stringify(users));
+        if (users.some(user=>user.email===email)) {
+            return showMessage("This email is already registered.","error");
+        }
 
-        setSession({ name, email, role: "user" });
+        const hash = await hashPassword(password);
+
+        users.push({
+            name,
+            email,
+            passwordHash:hash,
+            role:"Member"
+        });
+
+        localStorage.setItem("resurect_demo_users",JSON.stringify(users));
+
+        setSession({name,email,role:"Member"});
         updateAccountUI();
-
-        showMessage("Account created successfully.", "success");
+        showMessage("Account created successfully.","success");
         return;
     }
 
+    /* BUILT-IN DEVELOPER LOGIN */
+    if (
+        email===DEVELOPER_ACCOUNT.email &&
+        password===DEVELOPER_ACCOUNT.password
+    ) {
+        setSession({
+            name:DEVELOPER_ACCOUNT.name,
+            email:DEVELOPER_ACCOUNT.email,
+            role:DEVELOPER_ACCOUNT.role
+        });
+
+        updateAccountUI();
+        showMessage("Welcome back, Resurect.","success");
+        return;
+    }
+
+    if (password.length<8) {
+        return showMessage("Password must contain at least 8 characters.","error");
+    }
+
+    const hash = await hashPassword(password);
+    const users = getUsers();
+
     const user = users.find(item =>
-        item.email === email && item.passwordHash === hash
+        item.email===email && item.passwordHash===hash
     );
 
     if (!user) {
-        return showMessage("Incorrect email or password.", "error");
+        return showMessage("Incorrect email or password.","error");
     }
 
-    setSession({ name: user.name, email: user.email, role: "user" });
+    setSession({
+        name:user.name,
+        email:user.email,
+        role:"Member"
+    });
+
     updateAccountUI();
-    showMessage("Welcome back.", "success");
+    showMessage("Welcome back.","success");
 });
 
+/* ACCOUNT PROFILE */
 function updateAccountUI() {
     const user = currentUser();
     const authBox = document.getElementById("authBox");
@@ -2069,153 +1250,16 @@ function updateAccountUI() {
         user.name.charAt(0).toUpperCase();
 
     document.getElementById("profileRole").textContent =
-        user.role === "owner" ? "SITE OWNER" : "MEMBER";
-
-    document.getElementById("profileAdmin").style.display =
-        user.role === "owner" ? "block" : "none";
+        String(user.role || "Member").toUpperCase();
 }
 
-document.getElementById("logoutButton").addEventListener("click", () => {
+document.getElementById("logoutButton").addEventListener("click",()=>{
     localStorage.removeItem("resurect_demo_session");
     updateAccountUI();
-});
-
-document.getElementById("profileAdmin").addEventListener("click", () => {
-    showPage("admin");
-});
-
-/* OWNER ACCESS — FRONTEND DEMO ONLY */
-
-document.getElementById("ownerLogin").addEventListener("click", () => {
-    const key = document.getElementById("ownerKey").value;
-
-    if (key !== OWNER_ACCESS_KEY || OWNER_ACCESS_KEY === "CHANGE-THIS-OWNER-KEY") {
-        showMessage("Owner key is not configured or is incorrect.", "error");
-        return;
-    }
-
-    setSession({
-        name: "Resurect",
-        email: "owner@resurect.dev",
-        role: "owner"
-    });
-
-    updateAccountUI();
-    showMessage("Owner session started.", "success");
-});
-
-updateAccountUI();
-
-/* ADMIN */
-
-let adminFilter = "project";
-
-function getCollection(type) {
-    return {
-        project: projects,
-        plugin: plugins,
-        market: market,
-        release: releases
-    }[type];
-}
-
-function setCollection(type, data) {
-    if (type === "project") projects = data;
-    if (type === "plugin") plugins = data;
-    if (type === "market") market = data;
-    if (type === "release") releases = data;
-
-    saveData();
-    renderAll();
-}
-
-function renderAdmin() {
-    if (!isOwner()) {
-        showPage("account");
-        return;
-    }
-
-    document.getElementById("countProjects").textContent = projects.length;
-    document.getElementById("countPlugins").textContent = plugins.length;
-    document.getElementById("countMarket").textContent = market.length;
-    document.getElementById("countReleases").textContent = releases.length;
-
-    const items = getCollection(adminFilter);
-
-    document.getElementById("adminList").innerHTML = items.map(item => `
-        <div class="admin-item">
-            <div>
-                <strong>${escapeHTML(item.title)}</strong>
-                <small>${escapeHTML(item.status)} · ${escapeHTML(item.version || "")}</small>
-            </div>
-            <button class="delete-btn" data-delete="${item.id}">Delete</button>
-        </div>
-    `).join("") || `<p class="section-description">No items yet.</p>`;
-
-    document.querySelectorAll("[data-delete]").forEach(button => {
-        button.addEventListener("click", () => {
-            const id = Number(button.dataset.delete);
-            const next = getCollection(adminFilter).filter(item => item.id !== id);
-            setCollection(adminFilter, next);
-            renderAdmin();
-        });
-    });
-}
-
-document.querySelectorAll("[data-admin-filter]").forEach(button => {
-    button.addEventListener("click", () => {
-        document.querySelectorAll("[data-admin-filter]")
-            .forEach(item => item.classList.remove("active"));
-
-        button.classList.add("active");
-        adminFilter = button.dataset.adminFilter;
-        renderAdmin();
-    });
-});
-
-document.getElementById("addContent").addEventListener("click", () => {
-    if (!isOwner()) return;
-
-    const type = document.getElementById("adminType").value;
-    const title = document.getElementById("adminTitle").value.trim();
-
-    if (!title) {
-        document.getElementById("adminMessage").textContent =
-            "Please enter a title.";
-        return;
-    }
-
-    const item = {
-        id: Date.now(),
-        title,
-        subtitle: document.getElementById("adminSubtitle").value,
-        category: document.getElementById("adminCategory").value,
-        status: document.getElementById("adminStatus").value,
-        version: document.getElementById("adminVersion").value,
-        link: document.getElementById("adminLink").value,
-        description: document.getElementById("adminDescription").value
-    };
-
-    const collection = getCollection(type);
-    collection.push(item);
-
-    setCollection(type, collection);
-
-    document.getElementById("adminTitle").value = "";
-    document.getElementById("adminSubtitle").value = "";
-    document.getElementById("adminVersion").value = "";
-    document.getElementById("adminLink").value = "";
-    document.getElementById("adminDescription").value = "";
-
-    document.getElementById("adminMessage").textContent =
-        "Content added successfully.";
-
-    adminFilter = type;
-    renderAdmin();
+    setAuthMode("login");
 });
 
 /* RENDER EVERYTHING */
-
 function renderAll() {
     renderProjects();
     renderPlugins();
@@ -2224,12 +1268,12 @@ function renderAll() {
 }
 
 renderAll();
+updateAccountUI();
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
 /* OPEN INITIAL PAGE */
-
-const initialPage = location.hash.replace("#", "");
+const initialPage = location.hash.replace("#","");
 
 if (initialPage && document.getElementById(initialPage)) {
     showPage(initialPage);
