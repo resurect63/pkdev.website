@@ -1,716 +1,462 @@
 
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10070d">
-<meta name="description" content="Resurect — Developer, Minecraft creator and digital projects.">
-<title>Resurect — Official Website</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+<meta name="theme-color" content="#080808">
+<title>RESURECT. — Personal Portfolio</title>
 
 <style>
-:root{
- --accent:#ff477e;
- --accent2:#ff9ab8;
- --glow:rgba(255,71,126,.24);
- --bg:#10070d;
- --surface:#1b0d16;
- --surface2:#28131f;
- --text:#fff0f5;
- --muted:#b99aa8;
- --border:rgba(255,160,190,.15);
- --shadow:0 20px 70px rgba(0,0,0,.3);
- --radius:22px;
-}
-html[data-theme="light"]{
- --bg:#fff6f9;
- --surface:#fff;
- --surface2:#ffeaf1;
- --text:#351522;
- --muted:#876575;
- --border:rgba(180,55,100,.17);
- --shadow:0 20px 70px rgba(110,30,60,.10);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:95px}
-body{
- background:var(--bg);
- color:var(--text);
- font-family:Inter,sans-serif;
- overflow-x:hidden;
- transition:background .35s,color .35s;
- cursor:none;
-}
-a{color:inherit;text-decoration:none}
-button,input,select{font:inherit}
-button{cursor:none}
-::selection{background:var(--accent);color:white}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-#cursor{
- position:fixed;width:18px;height:18px;
- border:1px solid var(--accent);border-radius:50%;
- pointer-events:none;z-index:9999;
- transform:translate(-50%,-50%);
- box-shadow:0 0 18px var(--glow);
- transition:width .2s,height .2s;
+:root {
+  --bg: #080808;
+  --text: #f4f4f4;
+  --muted: #858585;
+  --line: rgba(255,255,255,.13);
 }
-#cursor-dot{
- position:fixed;width:4px;height:4px;
- background:var(--accent);border-radius:50%;
- pointer-events:none;z-index:10000;
- transform:translate(-50%,-50%);
-}
-#petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.petal{
- position:absolute;top:-35px;width:12px;height:18px;
- border-radius:90% 5% 90% 5%;
- background:linear-gradient(140deg,#ffc3d8,#f34e89);
- opacity:.65;filter:drop-shadow(0 0 5px #ff7ca7);
- animation:fall linear infinite;
-}
-@keyframes fall{
- to{transform:translate3d(var(--drift),110vh,0) rotate(720deg)}
-}
-.ambient{
- position:fixed;inset:0;pointer-events:none;z-index:0;
- background:
- radial-gradient(ellipse at 15% 15%,var(--glow),transparent 40%),
- radial-gradient(ellipse at 85% 55%,rgba(180,40,100,.09),transparent 42%);
-}
-header{
- position:fixed;top:14px;left:50%;transform:translateX(-50%);
- width:min(1160px,94%);height:68px;padding:0 22px;
- display:flex;align-items:center;justify-content:space-between;gap:15px;
- border:1px solid var(--border);border-radius:18px;
- background:var(--surface);background:color-mix(in srgb,var(--surface) 88%,transparent);
- backdrop-filter:blur(22px);z-index:100;box-shadow:var(--shadow);
-}
-.brand{font:800 23px Outfit;letter-spacing:-1px}
-.brand span{color:var(--accent)}
-nav{display:flex;align-items:center;gap:24px}
-nav a{font-size:12px;color:var(--muted);transition:.2s}
-nav a:hover{color:var(--accent)}
-.header-actions{display:flex;align-items:center;gap:8px}
-.icon-btn,.small-btn{
- border:1px solid var(--border);background:var(--surface2);
- color:var(--text);border-radius:12px;padding:10px 12px;
- font-size:12px;transition:.2s;
-}
-.icon-btn:hover,.small-btn:hover{border-color:var(--accent);color:var(--accent)}
-.container{width:min(1100px,90%);margin:auto;position:relative;z-index:1}
-section{padding:105px 0}
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:120px}
-.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:45px;align-items:center}
-.eyebrow{color:var(--accent);font-size:11px;letter-spacing:3px;font-weight:700;text-transform:uppercase}
-.hero h1{font:800 clamp(52px,8vw,94px)/1.02 Outfit;letter-spacing:-5px;margin:22px 0 10px}
-.hero h1 .pink{color:var(--accent);text-shadow:0 0 35px var(--glow)}
-.hero h2{font:600 clamp(20px,3vw,30px) Outfit;color:var(--accent2);margin-bottom:20px}
-.hero p{max-width:580px;color:var(--muted);line-height:1.9;font-size:14px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.btn{
- padding:14px 20px;border-radius:13px;font-weight:700;font-size:12px;
- display:inline-flex;align-items:center;gap:9px;transition:.25s;
- border:1px solid var(--border);
-}
-.btn-primary{background:var(--accent);color:white;border-color:var(--accent);box-shadow:0 0 30px var(--glow)}
-.btn:hover{transform:translateY(-3px)}
-.btn-secondary{background:var(--surface);color:var(--text)}
-.hero-art{
- min-height:360px;border:1px solid var(--border);border-radius:32px;
- background:radial-gradient(circle at 50% 45%,var(--glow),transparent 65%),var(--surface);
- display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:var(--shadow);
-}
-.flower{font-size:150px;filter:drop-shadow(0 0 35px var(--accent));animation:float 5s ease-in-out infinite}
-.hero-art:before,.hero-art:after{
- content:"";position:absolute;width:230px;height:230px;
- border:1px solid var(--border);border-radius:50%;
- animation:spin 18s linear infinite;
-}
-.hero-art:after{width:290px;height:290px;animation-direction:reverse}
-@keyframes float{50%{transform:translateY(-15px) rotate(5deg)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.art-label{position:absolute;bottom:22px;font-size:10px;letter-spacing:3px;color:var(--muted)}
-.section-head{margin-bottom:35px}
-.section-head h2{font:800 clamp(30px,5vw,45px) Outfit;margin-top:10px}
-.section-head p{color:var(--muted);font-size:13px;margin-top:10px;line-height:1.8}
-.panel{
- background:var(--surface);border:1px solid var(--border);
- border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);
-}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.about-copy{color:var(--muted);font-size:13px;line-height:2}
-.about-copy strong{color:var(--text)}
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
-.chip{
- font-size:11px;padding:9px 12px;border-radius:30px;
- background:var(--surface2);border:1px solid var(--border);color:var(--muted);
-}
-.socials{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.social{
- width:48px;height:48px;display:grid;place-items:center;
- border-radius:15px;background:var(--surface2);
- border:1px solid var(--border);transition:.25s;
-}
-.social img{width:21px;height:21px}
-.social:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 0 20px var(--glow)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-.stat{padding:17px;background:var(--surface2);border-radius:15px;text-align:center}
-.stat strong{display:block;font:800 25px Outfit;color:var(--accent)}
-.stat span{font-size:10px;color:var(--muted)}
-.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
-.skill{
- background:var(--surface);border:1px solid var(--border);
- border-radius:17px;padding:18px 12px;text-align:center;transition:.25s;
-}
-.skill:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 0 25px var(--glow)}
-.skill i{font-size:34px;display:block;margin-bottom:12px}
-.skill span{font-size:11px;color:var(--muted)}
-.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-.filter-row input,.filter-row select{
- background:var(--surface);border:1px solid var(--border);
- color:var(--text);padding:12px 14px;border-radius:12px;outline:none;
-}
-.filter-row input{flex:1;min-width:180px}
-.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.project{
- background:var(--surface);border:1px solid var(--border);
- border-radius:20px;padding:22px;transition:.25s;min-width:0;
-}
-.project:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 15px 35px var(--glow)}
-.project-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.project-icon{font-size:25px}
-.project h3{font:700 19px Outfit;margin:17px 0 8px;overflow-wrap:anywhere}
-.project p{color:var(--muted);font-size:12px;line-height:1.8;min-height:42px}
-.project-meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:10px;margin-top:18px}
-.project-meta span{display:flex;align-items:center;gap:5px}
-.project-link{display:inline-block;color:var(--accent);font-size:11px;font-weight:700;margin-top:17px}
-.loading{color:var(--muted);font-size:13px;padding:25px;text-align:center}
-.notice{color:var(--muted);font-size:11px;line-height:1.8;margin-top:16px}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.gallery-card{
- min-height:190px;border-radius:19px;border:1px solid var(--border);
- background:linear-gradient(145deg,var(--surface2),var(--surface));
- display:flex;flex-direction:column;justify-content:end;padding:20px;
- position:relative;overflow:hidden;
-}
-.gallery-card:before{
- content:"✿";position:absolute;right:15px;top:5px;
- font-size:90px;color:var(--accent);opacity:.15;
-}
-.gallery-card h3{font:700 18px Outfit}
-.gallery-card p{font-size:11px;color:var(--muted);margin-top:8px}
-.contact-box{text-align:center;padding:55px 25px}
-.contact-box h2{font:800 clamp(30px,5vw,48px) Outfit;margin:15px 0}
-.contact-box p{color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:24px}
-footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:11px}
-.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 
-#studio{
- position:fixed;right:18px;top:95px;width:min(310px,90vw);z-index:150;
- background:var(--surface);border:1px solid var(--border);
- border-radius:20px;padding:20px;box-shadow:var(--shadow);display:none;
-}
-#studio.open{display:block;animation:pop .2s ease}
-@keyframes pop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-#studio h3{font:700 17px Outfit;margin-bottom:16px}
-.studio-label{font-size:10px;color:var(--muted);margin:15px 0 9px;display:block}
-.swatches{display:flex;gap:9px;flex-wrap:wrap}
-.swatch{width:27px;height:27px;border:2px solid var(--border);border-radius:50%}
-.studio-row{
- display:flex;justify-content:space-between;align-items:center;
- font-size:12px;margin:14px 0;color:var(--muted);
-}
-.studio-row input{accent-color:var(--accent)}
-#customColor{width:38px;height:30px;border:0;background:none}
-#toast{
- position:fixed;bottom:25px;left:50%;transform:translateX(-50%);
- background:var(--surface2);border:1px solid var(--border);
- padding:12px 18px;border-radius:12px;font-size:12px;z-index:300;display:none;
-}
-#topBtn{position:fixed;bottom:20px;right:20px;z-index:80}
-html[dir="rtl"] .hero h1{letter-spacing:0}
-html[dir="rtl"] .hero-grid,html[dir="rtl"] .about-grid{direction:rtl}
+* { margin:0; padding:0; box-sizing:border-box; }
 
-@media(max-width:800px){
- nav{display:none}
- .hero-grid,.about-grid{grid-template-columns:1fr}
- .hero-art{min-height:260px}
- .skills-grid{grid-template-columns:repeat(3,1fr)}
- .gallery-grid{grid-template-columns:1fr 1fr}
+html { scroll-behavior:smooth; }
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
 }
-@media(max-width:520px){
- .hero h1{letter-spacing:-3px}
- .projects-grid{grid-template-columns:1fr}
- .skills-grid{grid-template-columns:repeat(2,1fr)}
- .gallery-grid{grid-template-columns:1fr}
- header{padding:0 13px}
- .brand{font-size:20px}
+
+a { color:inherit; text-decoration:none; }
+
+#intro {
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#080808;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
 }
-@media(pointer:coarse){
- body,button{cursor:auto}
- #cursor,#cursor-dot{display:none}
+
+.intro-content {
+  text-align:center;
+  width:100%;
+  padding:20px;
 }
-@media(prefers-reduced-motion:reduce){
- *,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important}
+
+.letters {
+  display:flex;
+  justify-content:center;
+  gap:clamp(1px,1vw,9px);
+  flex-wrap:wrap;
+  font-size:clamp(30px,8vw,90px);
+  font-weight:900;
+  letter-spacing:-5px;
+}
+
+.letters span {
+  display:inline-block;
+  opacity:0;
+  transform:translateY(-120vh) rotate(15deg);
+  animation:drop .48s cubic-bezier(.15,.8,.25,1) forwards;
+  animation-delay:calc(var(--i) * 65ms);
+}
+
+.manager {
+  margin-top:12px;
+  font-size:clamp(17px,4vw,36px);
+  font-weight:800;
+  letter-spacing:clamp(5px,2vw,15px);
+  opacity:0;
+  transform:scaleX(.35);
+}
+
+.manager.show {
+  animation:assemble .8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes drop {
+  0% { opacity:0; transform:translateY(-120vh) rotate(15deg); }
+  75% { opacity:1; transform:translateY(12px) rotate(-3deg); }
+  100% { opacity:1; transform:translateY(0) rotate(0); }
+}
+
+@keyframes assemble {
+  0% { opacity:0; transform:scaleX(.35); letter-spacing:20px; }
+  100% { opacity:1; transform:scaleX(1); letter-spacing:clamp(5px,2vw,15px); }
+}
+
+.intro-line {
+  width:0;
+  height:1px;
+  background:white;
+  margin:30px auto 0;
+  animation:line 1s 1.9s forwards;
+}
+
+@keyframes line { to { width:min(260px,70vw); } }
+
+#intro.hide {
+  animation:exitIntro .8s forwards;
+  pointer-events:none;
+}
+
+@keyframes exitIntro {
+  to { opacity:0; visibility:hidden; }
+}
+
+.site {
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+.site.visible { opacity:1; }
+
+header {
+  max-width:1250px;
+  margin:auto;
+  padding:30px 7%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+
+.logo {
+  font-weight:900;
+  letter-spacing:3px;
+  font-size:19px;
+}
+
+nav { display:flex; gap:30px; }
+
+nav a {
+  color:#aaa;
+  font-size:12px;
+  transition:.3s;
+}
+
+nav a:hover { color:white; }
+
+.hero {
+  max-width:1250px;
+  min-height:690px;
+  margin:auto;
+  padding:75px 7%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:60px;
+}
+
+.photo {
+  position:relative;
+  height:520px;
+  overflow:hidden;
+  background:linear-gradient(145deg,#242424,#090909);
+  border-radius:3px;
+}
+
+.photo::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg,#080808 0%,transparent 55%),
+             linear-gradient(90deg,transparent 60%,#080808 100%);
+}
+
+.photo img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 25%;
+  filter:grayscale(100%);
+  opacity:.88;
+}
+
+.hero-content .eyebrow {
+  color:#999;
+  font-size:11px;
+  letter-spacing:4px;
+  margin-bottom:25px;
+}
+
+h1 {
+  font-size:clamp(48px,8vw,100px);
+  font-weight:900;
+  letter-spacing:-6px;
+  line-height:.95;
+}
+
+.subtitle {
+  margin-top:25px;
+  color:#aaa;
+  font-size:13px;
+  letter-spacing:2px;
+}
+
+.description {
+  max-width:430px;
+  color:#999;
+  font-size:14px;
+  line-height:2;
+  margin-top:30px;
+}
+
+.main-link {
+  display:inline-flex;
+  align-items:center;
+  gap:25px;
+  margin-top:35px;
+  padding:16px 22px;
+  border:1px solid #555;
+  font-size:12px;
+  transition:.3s;
+}
+
+.main-link:hover {
+  background:white;
+  color:black;
+  border-color:white;
+}
+
+.links-section {
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:35px 7%;
+}
+
+.quick-links {
+  max-width:1250px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.quick-links a {
+  color:#999;
+  font-size:13px;
+  transition:.3s;
+}
+
+.quick-links a:hover { color:white; }
+
+.content {
+  max-width:1100px;
+  margin:auto;
+  padding:100px 7%;
+}
+
+.section-title {
+  font-size:30px;
+  letter-spacing:-1px;
+  margin-bottom:25px;
+}
+
+.about-text {
+  max-width:650px;
+  color:#999;
+  line-height:2.1;
+  font-size:14px;
+}
+
+.status {
+  margin-top:25px;
+  color:#aaa;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.status span { color:white; }
+
+footer {
+  border-top:1px solid var(--line);
+  padding:35px 7%;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:20px;
+  color:#777;
+  font-size:11px;
+}
+
+.socials { display:flex; gap:20px; }
+.socials a:hover { color:white; }
+
+@media(max-width:750px) {
+  header { padding:24px 6%; }
+  nav { gap:13px; }
+  nav a { font-size:10px; }
+  .hero {
+    grid-template-columns:1fr;
+    padding:40px 6%;
+    gap:35px;
+  }
+  .photo { height:420px; }
+  .hero-content { padding:10px 0 35px; }
+  h1 { letter-spacing:-3px; }
+  .quick-links { justify-content:flex-start; gap:25px; }
+  .content { padding:75px 6%; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
 }
 </style>
 </head>
 
 <body>
-<div id="cursor"></div>
-<div id="cursor-dot"></div>
-<div id="petals"></div>
-<div class="ambient"></div>
+
+<div id="intro">
+  <div class="intro-content">
+    <div class="letters" id="letters"></div>
+    <div class="manager" id="manager">PROJECT MANAGER</div>
+    <div class="intro-line"></div>
+  </div>
+</div>
+
+<div class="site" id="site">
 
 <header>
- <a class="brand" href="#home">Resu<span>rect</span>.</a>
- <nav>
-  <a href="#home" data-en="Home" data-fa="خانه">Home</a>
-  <a href="#about" data-en="About" data-fa="درباره من">About</a>
-  <a href="#skills" data-en="Skills" data-fa="مهارت‌ها">Skills</a>
-  <a href="#projects" data-en="Projects" data-fa="پروژه‌ها">Projects</a>
-  <a href="#contact" data-en="Contact" data-fa="ارتباط">Contact</a>
- </nav>
- <div class="header-actions">
-  <button class="icon-btn" id="langBtn">FA</button>
-  <button class="icon-btn" id="themeBtn" title="Toggle light/dark">☼</button>
-  <button class="icon-btn" id="studioBtn" title="Theme Studio">✿</button>
- </div>
+  <a href="#" class="logo">RESURECT.</a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+  </nav>
 </header>
 
-<aside id="studio">
- <h3>✿ Theme Studio</h3>
- <span class="studio-label">ACCENT COLOR</span>
- <div class="swatches">
-  <button class="swatch" style="background:#ff477e" data-color="#ff477e" aria-label="Rose"></button>
-  <button class="swatch" style="background:#ff334f" data-color="#ff334f" aria-label="Red"></button>
-  <button class="swatch" style="background:#d946ef" data-color="#d946ef" aria-label="Pink"></button>
-  <button class="swatch" style="background:#a78bfa" data-color="#a78bfa" aria-label="Violet"></button>
-  <button class="swatch" style="background:#38bdf8" data-color="#38bdf8" aria-label="Blue"></button>
-  <button class="swatch" style="background:#34d399" data-color="#34d399" aria-label="Emerald"></button>
-  <button class="swatch" style="background:#eab308" data-color="#eab308" aria-label="Gold"></button>
-  <input type="color" id="customColor" value="#ff477e" title="Custom color">
- </div>
- <span class="studio-label">DISPLAY OPTIONS</span>
- <label class="studio-row">Falling petals <input type="checkbox" id="petalToggle" checked></label>
- <label class="studio-row">Background glow <input type="checkbox" id="glowToggle" checked></label>
- <label class="studio-row">Custom cursor <input type="checkbox" id="cursorToggle" checked></label>
- <label class="studio-row">Animations <input type="checkbox" id="animToggle" checked></label>
- <button class="small-btn" id="resetBtn" style="width:100%">Reset appearance</button>
-</aside>
-
 <main>
+
 <section class="hero" id="home">
- <div class="container hero-grid">
-  <div>
-   <div class="eyebrow" data-en="INDEPENDENT CREATOR · DEVELOPER" data-fa="توسعه‌دهنده · خالق مستقل">INDEPENDENT CREATOR · DEVELOPER</div>
-   <h1>Hi, I'm <span class="pink">Pooya.</span></h1>
-   <h2>Resurect</h2>
-   <p data-en="I build software, develop Minecraft systems, and create digital experiences. I enjoy turning ideas into real projects through code, creativity, and experimentation."
-      data-fa="من نرم‌افزار می‌سازم، سیستم‌های ماینکرفت توسعه می‌دهم و تجربه‌های دیجیتال خلق می‌کنم. از تبدیل ایده‌ها به پروژه‌های واقعی با کدنویسی و خلاقیت لذت می‌برم.">
-   I build software, develop Minecraft systems, and create digital experiences. I enjoy turning ideas into real projects through code, creativity, and experimentation.</p>
-   <div class="hero-actions">
-    <a href="#projects" class="btn btn-primary" data-en="Explore Projects ↗" data-fa="مشاهده پروژه‌ها ↗">Explore Projects ↗</a>
-    <a href="https://github.com/resurect63" target="_blank" rel="noopener" class="btn btn-secondary">GitHub ↗</a>
-   </div>
-   <div class="socials">
-    <a class="social" href="https://discord.com" target="_blank" rel="noopener" title="Discord: .Resurect.">
-     <img src="https://cdn.simpleicons.org/discord/ffffff" alt="Discord">
+
+  <div class="photo">
+    <img src="assets/profile.png" alt="Resurect profile portrait">
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow">DEVELOPER · CREATOR · FORMER MANAGER</div>
+
+    <h1>RESURECT.</h1>
+
+    <div class="subtitle">BUILD. LEARN. INSPIRE.</div>
+
+    <p class="description">
+      Software developer and Minecraft enthusiast.
+      Former server manager with experience in team
+      leadership, community management and development.
+      Currently retired from server management.
+    </p>
+
+    <a href="#projects" class="main-link">
+      EXPLORE MY WORKS <span>↗</span>
     </a>
-    <a class="social" href="https://t.me/Resurect63" target="_blank" rel="noopener" title="Telegram: @Resurect63">
-     <img src="https://cdn.simpleicons.org/telegram/ffffff" alt="Telegram">
+  </div>
+
+</section>
+
+<section class="links-section">
+  <div class="quick-links">
+    <a href="#projects">Projects ↗</a>
+    <a href="#plugins">Plugins ↗</a>
+    <a href="#academy">Academy ↗</a>
+    <a href="#about">Profile ↗</a>
+    <a href="#contact">Contact ↗</a>
+  </div>
+</section>
+
+<section class="content" id="projects">
+  <div class="section-title">Selected Projects.</div>
+  <p class="about-text">
+    A collection of software, Minecraft development
+    and digital projects built throughout my journey.
+  </p>
+  <p style="margin-top:25px">
+    <a class="main-link" href="https://github.com/resurect63">
+      GITHUB PROFILE ↗
     </a>
-    <a class="social" href="https://github.com/resurect63" target="_blank" rel="noopener" title="GitHub: resurect63">
-     <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
+  </p>
+</section>
+
+<section class="content" id="plugins">
+  <div class="section-title">Minecraft Plugins.</div>
+  <p class="about-text">
+    Custom Minecraft plugins, server systems and
+    development experiments.
+  </p>
+</section>
+
+<section class="content" id="academy">
+  <div class="section-title">Manager Academy.</div>
+  <p class="about-text">
+    Knowledge and experience from Minecraft server
+    management, staff leadership and community operations.
+  </p>
+  <p style="margin-top:25px">
+    <a class="main-link" href="https://github.com/resurect63/moderator-academy">
+      EXPLORE ACADEMY ↗
     </a>
-   </div>
-   <div class="chips">
-    <span class="chip">Discord: .Resurect.</span>
-    <span class="chip">Telegram: Resurect63</span>
-   </div>
-  </div>
-  <div class="hero-art">
-   <div class="flower">🌸</div>
-   <div class="art-label">CREATE · BUILD · REPEAT</div>
-  </div>
- </div>
+  </p>
 </section>
 
-<section id="about">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow">01 / ABOUT</div>
-   <h2 data-en="A little about me" data-fa="کمی درباره من">A little about me</h2>
-  </div>
-  <div class="about-grid">
-   <div class="panel">
-    <p class="about-copy" data-en="I'm Pooya, known online as Resurect. My work combines software development, Minecraft development, and creative digital projects. I like building useful tools, experimenting with interfaces, and making ideas come to life."
-    data-fa="من پویا هستم و در فضای آنلاین با نام Resurect شناخته می‌شوم. فعالیت من ترکیبی از توسعه نرم‌افزار، توسعه ماینکرفت و پروژه‌های خلاقانه دیجیتال است. به ساخت ابزارهای کاربردی، طراحی رابط کاربری و تبدیل ایده‌ها به محصول علاقه دارم.">
-    I'm Pooya, known online as Resurect. My work combines software development, Minecraft development, and creative digital projects. I like building useful tools, experimenting with interfaces, and making ideas come to life.</p>
-    <div class="chips">
-     <span class="chip">Software Development</span>
-     <span class="chip">Minecraft Development</span>
-     <span class="chip">UI / UX</span>
-     <span class="chip">Creative Projects</span>
-    </div>
-   </div>
-   <div class="panel">
-    <div class="eyebrow">MY GITHUB</div>
-    <div class="stats">
-     <div class="stat"><strong id="repoCount">—</strong><span>PUBLIC REPOS</span></div>
-     <div class="stat"><strong id="followerCount">—</strong><span>FOLLOWERS</span></div>
-     <div class="stat"><strong id="followingCount">—</strong><span>FOLLOWING</span></div>
-    </div>
-    <a href="https://github.com/resurect63" class="project-link" target="_blank" rel="noopener">VIEW GITHUB PROFILE ↗</a>
-   </div>
-  </div>
- </div>
+<section class="content" id="about">
+  <div class="section-title">About Me.</div>
+  <p class="about-text">
+    My journey has been shaped by software development,
+    Minecraft communities and project management.
+    I have worked with different teams and communities,
+    gaining experience in leadership and technical development.
+  </p>
+  <div class="status">CURRENT STATUS: <span>RETIRED FROM MANAGEMENT</span></div>
 </section>
 
-<section id="skills">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow">02 / TECH STACK</div>
-   <h2 data-en="Tools I work with" data-fa="تکنولوژی‌هایی که استفاده می‌کنم">Tools I work with</h2>
-   <p data-en="A selection of technologies and tools from my development toolkit." data-fa="بخشی از زبان‌ها و ابزارهایی که در مسیر توسعه از آن‌ها استفاده می‌کنم.">A selection of technologies and tools from my development toolkit.</p>
-  </div>
-  <div class="skills-grid" id="skillsGrid"></div>
-  <p class="notice">Technology list reflects skills previously shared by the owner. Repository language labels are loaded separately from GitHub.</p>
- </div>
-</section>
-
-<section id="projects">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow">03 / SELECTED WORK</div>
-   <h2 data-en="Projects & experiments" data-fa="پروژه‌ها و تجربه‌ها">Projects & experiments</h2>
-   <p data-en="Public GitHub repositories are loaded automatically. Search and filter the list." data-fa="ریپازیتوری‌های عمومی گیت‌هاب به‌صورت خودکار نمایش داده می‌شوند.">Public GitHub repositories are loaded automatically. Search and filter the list.</p>
-  </div>
-  <div class="filter-row">
-   <input id="projectSearch" type="search" placeholder="Search repositories...">
-   <select id="languageFilter"><option value="">All languages</option></select>
-   <select id="sortFilter">
-    <option value="updated">Recently updated</option>
-    <option value="stars">Most stars</option>
-    <option value="name">Name A–Z</option>
-   </select>
-  </div>
-  <div id="projectsGrid" class="projects-grid">
-   <div class="loading">Loading public GitHub repositories...</div>
-  </div>
-  <p class="notice" id="githubStatus">Source: GitHub public API · @resurect63</p>
- </div>
-</section>
-
-<section id="gallery">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow">04 / CREATIVE SPACE</div>
-   <h2>Beyond the code</h2>
-   <p>More than development — a space for experiments and visual ideas.</p>
-  </div>
-  <div class="gallery-grid">
-   <div class="gallery-card"><h3>Minecraft Worlds</h3><p>Systems, gameplay concepts and server experiences.</p></div>
-   <div class="gallery-card"><h3>Visual Experiments</h3><p>Motion, atmosphere and interface explorations.</p></div>
-   <div class="gallery-card"><h3>Digital Products</h3><p>Tools and ideas shaped into usable experiences.</p></div>
-  </div>
- </div>
-</section>
-
-<section id="contact">
- <div class="container panel contact-box">
-  <div class="eyebrow">05 / CONTACT</div>
-  <h2>Let's create something.</h2>
-  <p>Have a project idea or want to connect? Find me on my public profiles.</p>
-  <div class="socials" style="justify-content:center">
-   <a class="social" href="https://discord.com" target="_blank" rel="noopener" title="Discord: .Resurect.">
-    <img src="https://cdn.simpleicons.org/discord/ffffff" alt="Discord">
-   </a>
-   <a class="social" href="https://t.me/Resurect63" target="_blank" rel="noopener" title="Telegram">
-    <img src="https://cdn.simpleicons.org/telegram/ffffff" alt="Telegram">
-   </a>
-   <a class="social" href="https://github.com/resurect63" target="_blank" rel="noopener" title="GitHub">
-    <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
-   </a>
-  </div>
- </div>
-</section>
 </main>
 
-<footer>
- <div class="container footer-inner">
-  <span>© <span id="year"></span> Resurect. All rights reserved.</span>
-  <span>Designed with <span style="color:var(--accent)">✿</span> by Resurect</span>
- </div>
+<footer id="contact">
+  <span>© 2026 RESURECT. ALL RIGHTS RESERVED.</span>
+  <div class="socials">
+    <a href="https://github.com/resurect63">GitHub</a>
+    <a href="https://t.me/Resurect63">Telegram</a>
+  </div>
 </footer>
 
-<button id="topBtn" class="icon-btn" aria-label="Back to top">↑</button>
-<div id="toast"></div>
+</div>
 
 <script>
-const $ = s => document.querySelector(s);
-const root = document.documentElement;
-const githubUser = "resurect63";
+const letters = "PROJECTMANAGER".split("");
+const lettersBox = document.getElementById("letters");
 
-const skills = [
- ["Java","java"],["JavaScript","javascript"],["TypeScript","typescript"],
- ["HTML5","html5"],["CSS3","css3"],["PHP","php"],["React","react"],
- ["Next.js","nextjs"],["Node.js","nodejs"],["MySQL","mysql"],
- ["MongoDB","mongodb"],["Docker","docker"],["Linux","linux"],
- ["Git","git"],["Tailwind CSS","tailwindcss"],["C","c"],
- ["Paper / Spigot","java"],["Velocity","java"]
-];
+letters.forEach((letter,index) => {
+  const span = document.createElement("span");
+  span.textContent = letter;
+  span.style.setProperty("--i",index);
+  lettersBox.appendChild(span);
+});
 
-function renderSkills(){
- $("#skillsGrid").innerHTML = skills.map(([name,icon]) => `
-  <div class="skill">
-   <i class="devicon-${icon}-plain colored" aria-hidden="true"></i>
-   <span>${name}</span>
-  </div>`).join("");
-}
-renderSkills();
+const intro = document.getElementById("intro");
+const manager = document.getElementById("manager");
+const site = document.getElementById("site");
 
-let repos = [];
+setTimeout(() => {
+  manager.classList.add("show");
+}, 1500);
 
-function escapeHTML(value=""){
- return String(value).replace(/[&<>"']/g, c => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
+function enterSite() {
+  intro.classList.add("hide");
+  site.classList.add("visible");
 }
 
-function languageIcon(lang){
- const map = {
-  HTML:"html5",CSS:"css3",JavaScript:"javascript",TypeScript:"typescript",
-  Java:"java",PHP:"php",Python:"python",C:"c", "C++":"cplusplus",
-  "C#":"csharp",Shell:"bash",Go:"go",Rust:"rust",Kotlin:"kotlin"
- };
- return map[lang] || "";
-}
-
-function renderRepos(){
- const query = $("#projectSearch").value.toLowerCase();
- const lang = $("#languageFilter").value;
- const sort = $("#sortFilter").value;
-
- let list = repos.filter(r =>
-  (r.name+" "+(r.description||"")).toLowerCase().includes(query) &&
-  (!lang || r.language === lang)
- );
-
- if(sort==="stars") list.sort((a,b)=>b.stargazers_count-a.stargazers_count);
- if(sort==="name") list.sort((a,b)=>a.name.localeCompare(b.name));
- if(sort==="updated") list.sort((a,b)=>new Date(b.pushed_at||b.updated_at)-new Date(a.pushed_at||a.updated_at));
-
- const grid=$("#projectsGrid");
-
- if(!list.length){
-  grid.innerHTML='<div class="loading">No repositories match your search.</div>';
-  return;
- }
-
- grid.innerHTML=list.map(r=>{
-  const icon=languageIcon(r.language);
-  return `<article class="project">
-   <div class="project-top">
-    <span class="project-icon">⌘</span>
-    <span class="chip">${r.fork?"Fork":"Repository"}</span>
-   </div>
-   <h3>${escapeHTML(r.name)}</h3>
-   <p>${escapeHTML(r.description||"No description provided yet.")}</p>
-   <div class="project-meta">
-    <span>${icon?`<i class="devicon-${icon}-plain colored"></i>`:"●"} ${escapeHTML(r.language||"Not specified")}</span>
-    <span>★ ${r.stargazers_count}</span>
-    <span>⑂ ${r.forks_count}</span>
-   </div>
-   <a class="project-link" href="${r.html_url}" target="_blank" rel="noopener">OPEN REPOSITORY ↗</a>
-  </article>`;
- }).join("");
-}
-
-async function loadGithub(){
- const status=$("#githubStatus");
- try{
-  const [profileResponse,reposResponse]=await Promise.all([
-   fetch(`https://api.github.com/users/${githubUser}`),
-   fetch(`https://api.github.com/users/${githubUser}/repos?per_page=100&sort=updated`)
-  ]);
-
-  if(!profileResponse.ok || !reposResponse.ok) throw new Error("GitHub API unavailable");
-
-  const profile=await profileResponse.json();
-  repos=await reposResponse.json();
-
-  $("#repoCount").textContent=profile.public_repos ?? "—";
-  $("#followerCount").textContent=profile.followers ?? "—";
-  $("#followingCount").textContent=profile.following ?? "—";
-
-  const languages=[...new Set(repos.map(r=>r.language).filter(Boolean))].sort();
-
-  $("#languageFilter").innerHTML=
-   '<option value="">All languages</option>'+
-   languages.map(l=>`<option value="${escapeHTML(l)}">${escapeHTML(l)}</option>`).join("");
-
-  renderRepos();
-  status.textContent=`Loaded ${repos.length} public repositories · GitHub API`;
- }catch(error){
-  status.textContent="Could not load GitHub data right now. Open the profile directly to browse projects.";
-  $("#projectsGrid").innerHTML=`
-   <div class="loading">
-    GitHub data is temporarily unavailable.
-    <br><br>
-    <a class="project-link" href="https://github.com/${githubUser}" target="_blank" rel="noopener">OPEN GITHUB PROFILE ↗</a>
-   </div>`;
- }
-}
-
-$("#projectSearch").addEventListener("input",renderRepos);
-$("#languageFilter").addEventListener("change",renderRepos);
-$("#sortFilter").addEventListener("change",renderRepos);
-loadGithub();
-
-function setAccent(color){
- root.style.setProperty("--accent",color);
- root.style.setProperty("--accent2",color);
- root.style.setProperty("--glow",hexToRgba(color,.22));
- localStorage.setItem("resurect-accent",color);
- $("#customColor").value=color;
-}
-
-function hexToRgba(hex,alpha){
- const n=parseInt(hex.replace("#",""),16);
- return `rgba(${n>>16},${(n>>8)&255},${n&255},${alpha})`;
-}
-
-document.querySelectorAll(".swatch").forEach(btn=>{
- btn.addEventListener("click",()=>setAccent(btn.dataset.color));
-});
-
-$("#customColor").addEventListener("input",e=>setAccent(e.target.value));
-
-function setTheme(theme){
- root.dataset.theme=theme;
- localStorage.setItem("resurect-theme",theme);
- $("#themeBtn").textContent=theme==="dark"?"☼":"☾";
-}
-
-$("#themeBtn").addEventListener("click",()=>{
- setTheme(root.dataset.theme==="dark"?"light":"dark");
-});
-
-$("#studioBtn").addEventListener("click",()=>{
- $("#studio").classList.toggle("open");
-});
-
-const petalBox=$("#petals");
-
-function makePetals(){
- petalBox.innerHTML="";
- for(let i=0;i<28;i++){
-  const p=document.createElement("i");
-  p.className="petal";
-  p.style.left=Math.random()*100+"%";
-  p.style.animationDuration=(9+Math.random()*14)+"s";
-  p.style.animationDelay=(-Math.random()*20)+"s";
-  p.style.setProperty("--drift",(Math.random()*220-110)+"px");
-  p.style.transform=`scale(${.5+Math.random()*.8})`;
-  petalBox.appendChild(p);
- }
-}
-makePetals();
-
-$("#petalToggle").addEventListener("change",e=>{
- petalBox.style.display=e.target.checked?"block":"none";
-});
-
-$("#glowToggle").addEventListener("change",e=>{
- $(".ambient").style.display=e.target.checked?"block":"none";
-});
-
-$("#cursorToggle").addEventListener("change",e=>{
- const enabled=e.target.checked;
- $("#cursor").style.display=enabled?"block":"none";
- $("#cursor-dot").style.display=enabled?"block":"none";
- document.body.style.cursor=enabled?"none":"auto";
-});
-
-$("#animToggle").addEventListener("change",e=>{
- document.body.classList.toggle("animations-off",!e.target.checked);
- document.querySelectorAll("*").forEach(el=>{
-  el.style.animationPlayState=e.target.checked?"running":"paused";
- });
-});
-
-function showToast(message){
- const t=$("#toast");
- t.textContent=message;
- t.style.display="block";
- setTimeout(()=>t.style.display="none",1800);
-}
-
-$("#resetBtn").addEventListener("click",()=>{
- setAccent("#ff477e");
- setTheme("dark");
- $("#petalToggle").checked=true;
- petalBox.style.display="block";
- $("#glowToggle").checked=true;
- $(".ambient").style.display="block";
- $("#cursorToggle").checked=true;
- $("#cursor").style.display="block";
- $("#cursor-dot").style.display="block";
- $("#animToggle").checked=true;
- document.querySelectorAll("*").forEach(el=>el.style.animationPlayState="running");
- showToast("Appearance reset");
-});
-
-const cursor=$("#cursor");
-const dot=$("#cursor-dot");
-
-document.addEventListener("mousemove",e=>{
- cursor.style.left=e.clientX+"px";
- cursor.style.top=e.clientY+"px";
- dot.style.left=e.clientX+"px";
- dot.style.top=e.clientY+"px";
-});
-
-document.addEventListener("mouseover",e=>{
- if(e.target.closest("a,button")){
-  cursor.style.width="30px";
-  cursor.style.height="30px";
- }else{
-  cursor.style.width="18px";
-  cursor.style.height="18px";
- }
-});
-
-let language="en";
-
-$("#langBtn").addEventListener("click",()=>{
- language=language==="en"?"fa":"en";
- root.lang=language;
- root.dir=language==="fa"?"rtl":"ltr";
- $("#langBtn").textContent=language==="en"?"FA":"EN";
-
- document.querySelectorAll("[data-en]").forEach(el=>{
-  el.textContent=el.dataset[language];
- });
-});
-
-$("#topBtn").addEventListener("click",()=>{
- window.scrollTo({top:0,behavior:"smooth"});
-});
-
-$("#year").textContent=new Date().getFullYear();
-
-const savedAccent=localStorage.getItem("resurect-accent");
-const savedTheme=localStorage.getItem("resurect-theme");
-
-if(savedAccent)setAccent(savedAccent);
-if(savedTheme)setTheme(savedTheme);
+setTimeout(enterSite, 3500);
 </script>
+
 </body>
 </html>
