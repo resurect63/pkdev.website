@@ -1,461 +1,1415 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-<title>RESURECT. — Personal Portfolio</title>
+<meta name="theme-color" content="#100d18">
+<meta name="description" content="RESURECT. — Minecraft development, plugins and creative systems.">
+<title>RESURECT. — Built Different.</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-:root {
-  --bg: #080808;
-  --text: #f4f4f4;
-  --muted: #858585;
-  --line: rgba(255,255,255,.13);
+:root{
+ --ink:#100d18;
+ --paper:#f2f0e9;
+ --acid:#c7ff2e;
+ --violet:#9b5cff;
+ --pink:#ff4fa3;
+ --muted:#aaa5b4;
+ --line:rgba(255,255,255,.16)
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ background:var(--ink);
+ color:var(--paper);
+ font-family:'Space Grotesk',sans-serif;
+ overflow-x:hidden
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
 
-html { scroll-behavior:smooth; }
-
-body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
-  overflow-x:hidden;
+.noise{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:20;
+ opacity:.055;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")
 }
 
-a { color:inherit; text-decoration:none; }
-
-#intro {
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:#080808;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
+.cursor-glow{
+ position:fixed;
+ width:380px;
+ height:380px;
+ border-radius:50%;
+ background:radial-gradient(circle,rgba(155,92,255,.13),transparent 68%);
+ pointer-events:none;
+ z-index:0;
+ transform:translate(-50%,-50%)
 }
 
-.intro-content {
-  text-align:center;
-  width:100%;
-  padding:20px;
+header{
+ height:82px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 5vw;
+ border-bottom:1px solid var(--line);
+ position:relative;
+ z-index:5;
+ background:rgba(16,13,24,.72);
+ backdrop-filter:blur(16px)
 }
 
-.letters {
-  display:flex;
-  justify-content:center;
-  gap:clamp(1px,1vw,9px);
-  flex-wrap:wrap;
-  font-size:clamp(30px,8vw,90px);
-  font-weight:900;
-  letter-spacing:-5px;
+.brand{
+ font-family:'Archivo Black';
+ font-size:25px;
+ letter-spacing:-1.5px
+}
+.brand span{color:var(--acid)}
+
+.nav{
+ display:flex;
+ align-items:center;
+ gap:5px;
+ padding:6px;
+ border:1px solid rgba(255,255,255,.16);
+ border-radius:999px;
+ background:rgba(255,255,255,.045);
+ box-shadow:inset 0 1px 0 #ffffff0b;
+ font:11px 'DM Mono';
+ text-transform:uppercase;
+ letter-spacing:.12em;
+ color:#d4d0dc
 }
 
-.letters span {
-  display:inline-block;
-  opacity:0;
-  transform:translateY(-120vh) rotate(15deg);
-  animation:drop .48s cubic-bezier(.15,.8,.25,1) forwards;
-  animation-delay:calc(var(--i) * 65ms);
+.nav a{
+ padding:10px 15px;
+ border-radius:999px;
+ transition:background .25s,color .25s,transform .25s
+}
+.nav a:hover{
+ background:var(--acid);
+ color:#15111d;
+ transform:translateY(-2px)
 }
 
-.manager {
-  margin-top:12px;
-  font-size:clamp(17px,4vw,36px);
-  font-weight:800;
-  letter-spacing:clamp(5px,2vw,15px);
-  opacity:0;
-  transform:scaleX(.35);
+.menu-tag{
+ font:10px 'DM Mono';
+ color:var(--acid);
+ border:1px solid rgba(199,255,46,.5);
+ padding:10px 13px;
+ border-radius:3px;
+ position:relative;
+ overflow:hidden;
+ transition:.25s
+}
+.menu-tag:hover{
+ background:var(--acid);
+ color:#15111d;
+ box-shadow:4px 4px 0 var(--violet)
 }
 
-.manager.show {
-  animation:assemble .8s cubic-bezier(.2,.8,.2,1) forwards;
+/* HERO */
+
+.hero{
+ min-height:calc(100svh - 82px);
+ position:relative;
+ display:flex;
+ align-items:center;
+ padding:8vh 8vw 10vh;
+ overflow:hidden;
+ background:
+ radial-gradient(ellipse at 68% 42%,rgba(155,92,255,.19),transparent 38%),
+ radial-gradient(ellipse at 18% 85%,rgba(199,255,46,.09),transparent 28%)
 }
 
-@keyframes drop {
-  0% { opacity:0; transform:translateY(-120vh) rotate(15deg); }
-  75% { opacity:1; transform:translateY(12px) rotate(-3deg); }
-  100% { opacity:1; transform:translateY(0) rotate(0); }
+.hero:before{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:
+ linear-gradient(115deg,transparent 40%,rgba(255,255,255,.025) 40.2%,transparent 40.5%),
+ repeating-linear-gradient(0deg,transparent 0 79px,rgba(255,255,255,.035) 80px)
 }
 
-@keyframes assemble {
-  0% { opacity:0; transform:scaleX(.35); letter-spacing:20px; }
-  100% { opacity:1; transform:scaleX(1); letter-spacing:clamp(5px,2vw,15px); }
+.hero-copy{
+ position:relative;
+ z-index:3;
+ max-width:720px
 }
 
-.intro-line {
-  width:0;
-  height:1px;
-  background:white;
-  margin:30px auto 0;
-  animation:line 1s 1.9s forwards;
+.eyebrow,.mono{
+ font:11px 'DM Mono';
+ letter-spacing:.16em;
+ text-transform:uppercase;
+ color:var(--acid)
+}
+.eyebrow:before{
+ content:"✳";
+ margin-right:10px
 }
 
-@keyframes line { to { width:min(260px,70vw); } }
-
-#intro.hide {
-  animation:exitIntro .8s forwards;
-  pointer-events:none;
+h1{
+ font-family:'Archivo Black';
+ font-size:clamp(76px,13vw,190px);
+ line-height:.78;
+ letter-spacing:-.09em;
+ margin:28px 0 26px;
+ text-transform:uppercase
 }
 
-@keyframes exitIntro {
-  to { opacity:0; visibility:hidden; }
+h1 .outline{
+ color:transparent;
+ -webkit-text-stroke:2px var(--paper);
+ display:block;
+ margin-left:7vw
+}
+h1 .acid{
+ color:var(--acid);
+ display:block;
+ margin-left:1vw
 }
 
-.site {
-  opacity:0;
-  transition:opacity 1s ease;
+.hero-desc{
+ max-width:430px;
+ color:#c5c0cd;
+ font-size:15px;
+ line-height:1.7;
+ margin:32px 0
 }
 
-.site.visible { opacity:1; }
-
-header {
-  max-width:1250px;
-  margin:auto;
-  padding:30px 7%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--line);
+.actions{
+ display:flex;
+ align-items:center;
+ gap:14px;
+ flex-wrap:wrap
 }
 
-.logo {
-  font-weight:900;
-  letter-spacing:3px;
-  font-size:19px;
+.btn{
+ display:inline-flex;
+ align-items:center;
+ gap:18px;
+ padding:15px 19px;
+ background:var(--acid);
+ color:#14111b;
+ font:11px 'DM Mono';
+ text-transform:uppercase;
+ letter-spacing:.1em;
+ font-weight:500;
+ transition:.25s
+}
+.btn:hover{
+ transform:translateY(-4px);
+ box-shadow:5px 5px 0 var(--paper)
 }
 
-nav { display:flex; gap:30px; }
-
-nav a {
-  color:#aaa;
-  font-size:12px;
-  transition:.3s;
+.text-link{
+ font:11px 'DM Mono';
+ text-transform:uppercase;
+ letter-spacing:.12em;
+ border-bottom:1px solid #817b8c;
+ padding:12px 0
 }
 
-nav a:hover { color:white; }
-
-.hero {
-  max-width:1250px;
-  min-height:690px;
-  margin:auto;
-  padding:75px 7%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:60px;
+.hero-stamp{
+ position:absolute;
+ left:8vw;
+ bottom:28px;
+ font:10px 'DM Mono';
+ color:#7e7889;
+ letter-spacing:.15em
 }
 
-.photo {
-  position:relative;
-  height:520px;
-  overflow:hidden;
-  background:linear-gradient(145deg,#242424,#090909);
-  border-radius:3px;
+/* HERO CAN */
+
+.can-stage{
+ position:absolute;
+ right:8%;
+ top:50%;
+ width:min(39vw,500px);
+ height:620px;
+ transform:translateY(-48%);
+ z-index:2
 }
 
-.photo::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(0deg,#080808 0%,transparent 55%),
-             linear-gradient(90deg,transparent 60%,#080808 100%);
+.can-shadow{
+ position:absolute;
+ bottom:7%;
+ left:17%;
+ width:70%;
+ height:55px;
+ background:#000;
+ filter:blur(28px);
+ border-radius:50%;
+ opacity:.75
 }
 
-.photo img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 25%;
-  filter:grayscale(100%);
-  opacity:.88;
+.can{
+ position:absolute;
+ width:220px;
+ height:480px;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%) rotate(11deg);
+ border-radius:37px 37px 29px 29px;
+ background:linear-gradient(90deg,#4c1c8a 0%,#8f42ef 17%,#c17cff 38%,#7d35ce 65%,#35135d 100%);
+ box-shadow:
+ inset 9px 0 14px rgba(255,255,255,.22),
+ inset -13px 0 17px rgba(0,0,0,.35),
+ 22px 35px 60px rgba(0,0,0,.55);
+ border:1px solid rgba(255,255,255,.25);
+ animation:float 5s ease-in-out infinite
 }
 
-.hero-content .eyebrow {
-  color:#999;
-  font-size:11px;
-  letter-spacing:4px;
-  margin-bottom:25px;
+.can:before{
+ content:"";
+ position:absolute;
+ left:7px;
+ right:7px;
+ top:-9px;
+ height:19px;
+ border-radius:50%;
+ background:linear-gradient(#eee,#777 40%,#222 75%,#aaa);
+ border:1px solid #ddd
 }
 
-h1 {
-  font-size:clamp(48px,8vw,100px);
-  font-weight:900;
-  letter-spacing:-6px;
-  line-height:.95;
+.can:after{
+ content:"";
+ position:absolute;
+ left:7px;
+ right:7px;
+ bottom:-8px;
+ height:18px;
+ border-radius:50%;
+ background:linear-gradient(#aaa,#333 65%,#999);
+ border:1px solid #aaa
 }
 
-.subtitle {
-  margin-top:25px;
-  color:#aaa;
-  font-size:13px;
-  letter-spacing:2px;
+.can-top{
+ position:absolute;
+ top:1px;
+ left:18%;
+ width:64%;
+ height:7px;
+ border-radius:50%;
+ background:rgba(20,15,27,.8)
 }
 
-.description {
-  max-width:430px;
-  color:#999;
-  font-size:14px;
-  line-height:2;
-  margin-top:30px;
+.can-label{
+ position:absolute;
+ inset:70px 12px 50px;
+ text-align:center;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ transform:rotate(-2deg)
 }
 
-.main-link {
-  display:inline-flex;
-  align-items:center;
-  gap:25px;
-  margin-top:35px;
-  padding:16px 22px;
-  border:1px solid #555;
-  font-size:12px;
-  transition:.3s;
+.can-small{
+ font:9px 'DM Mono';
+ letter-spacing:.22em;
+ color:#fff
 }
 
-.main-link:hover {
-  background:white;
-  color:black;
-  border-color:white;
+.can-name{
+ font-family:'Archivo Black';
+ font-size:42px;
+ line-height:.78;
+ letter-spacing:-.09em;
+ color:var(--acid);
+ text-shadow:3px 3px 0 #21152c,-1px -1px 0 #fff;
+ margin:18px 0
 }
 
-.links-section {
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:35px 7%;
+.can-sub{
+ font:8px 'DM Mono';
+ letter-spacing:.2em;
+ color:white;
+ border-top:1px solid rgba(255,255,255,.65);
+ padding-top:10px
 }
 
-.quick-links {
-  max-width:1250px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:20px;
+.can-mark{
+ font-size:58px;
+ line-height:1;
+ color:#fff;
+ text-shadow:3px 4px 0 #32104f;
+ margin:15px 0
 }
 
-.quick-links a {
-  color:#999;
-  font-size:13px;
-  transition:.3s;
+.splash{
+ position:absolute;
+ border-radius:50%;
+ filter:blur(.2px);
+ opacity:.95
 }
 
-.quick-links a:hover { color:white; }
-
-.content {
-  max-width:1100px;
-  margin:auto;
-  padding:100px 7%;
+.splash.one{
+ width:390px;
+ height:250px;
+ right:1%;
+ top:16%;
+ background:
+ radial-gradient(ellipse at 50% 50%,transparent 29%,var(--acid) 30% 32%,transparent 33%),
+ conic-gradient(from 20deg,transparent 0 12%,rgba(199,255,46,.9) 13% 15%,transparent 16% 30%,rgba(199,255,46,.65) 31% 33%,transparent 34% 100%);
+ transform:rotate(-25deg);
+ filter:drop-shadow(0 0 20px rgba(199,255,46,.14))
 }
 
-.section-title {
-  font-size:30px;
-  letter-spacing:-1px;
-  margin-bottom:25px;
+.splash.two{
+ width:300px;
+ height:190px;
+ right:13%;
+ bottom:8%;
+ background:radial-gradient(ellipse,rgba(255,79,163,.9),transparent 65%);
+ filter:blur(25px)
 }
 
-.about-text {
-  max-width:650px;
-  color:#999;
-  line-height:2.1;
-  font-size:14px;
+.droplet{
+ position:absolute;
+ width:13px;
+ height:22px;
+ border-radius:80% 10% 70% 50%;
+ background:var(--acid);
+ transform:rotate(35deg);
+ box-shadow:0 0 18px rgba(199,255,46,.4)
 }
 
-.status {
-  margin-top:25px;
-  color:#aaa;
-  font-size:11px;
-  letter-spacing:2px;
+.d1{top:17%;right:16%}
+.d2{top:70%;right:6%;width:8px;height:14px;background:var(--pink)}
+.d3{top:36%;right:0;width:6px;height:11px}
+
+.burst{
+ position:absolute;
+ font-family:'Archivo Black';
+ color:var(--acid);
+ font-size:42px;
+ z-index:1;
+ transform:rotate(18deg);
+ text-shadow:3px 3px 0 var(--violet)
+}
+.burst.a{right:5%;top:18%}
+.burst.b{
+ right:36%;
+ bottom:13%;
+ font-size:25px;
+ color:var(--pink);
+ transform:rotate(-17deg)
 }
 
-.status span { color:white; }
+/* TICKER */
 
-footer {
-  border-top:1px solid var(--line);
-  padding:35px 7%;
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:20px;
-  color:#777;
-  font-size:11px;
+.ticker{
+ background:var(--acid);
+ color:#15111d;
+ overflow:hidden;
+ white-space:nowrap;
+ transform:rotate(-1.4deg) scale(1.02);
+ padding:13px 0;
+ position:relative;
+ z-index:4;
+ font:17px 'Archivo Black';
+ letter-spacing:.03em
+}
+.ticker-track{
+ display:inline-block;
+ animation:marquee 25s linear infinite
+}
+.ticker span{padding:0 24px}
+.ticker b{color:#7a38c6}
+
+/* SECTIONS */
+
+section{padding:115px 8vw;position:relative}
+
+.section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:30px;
+ margin-bottom:55px
 }
 
-.socials { display:flex; gap:20px; }
-.socials a:hover { color:white; }
-
-@media(max-width:750px) {
-  header { padding:24px 6%; }
-  nav { gap:13px; }
-  nav a { font-size:10px; }
-  .hero {
-    grid-template-columns:1fr;
-    padding:40px 6%;
-    gap:35px;
-  }
-  .photo { height:420px; }
-  .hero-content { padding:10px 0 35px; }
-  h1 { letter-spacing:-3px; }
-  .quick-links { justify-content:flex-start; gap:25px; }
-  .content { padding:75px 6%; }
+.kicker{
+ font:10px 'DM Mono';
+ color:var(--acid);
+ letter-spacing:.17em;
+ text-transform:uppercase
 }
 
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    animation-duration:.01ms !important;
-    transition-duration:.01ms !important;
-    scroll-behavior:auto !important;
-  }
+h2{
+ font:clamp(43px,7vw,92px)/.9 'Archivo Black';
+ letter-spacing:-.075em;
+ margin:15px 0 0;
+ text-transform:uppercase
+}
+
+.section-note{
+ max-width:270px;
+ color:var(--muted);
+ font-size:13px;
+ line-height:1.6
+}
+
+/* PROJECTS */
+
+.projects{
+ background:#e9e6df;
+ color:#17131e
+}
+.projects .kicker{color:#6b35b1}
+.projects .section-note{color:#5d5864}
+
+.project-grid{
+ display:grid;
+ grid-template-columns:1.2fr .8fr;
+ gap:18px
+}
+
+.project-card{
+ min-height:370px;
+ padding:28px;
+ position:relative;
+ overflow:hidden;
+ background:#17131e;
+ color:#f2f0e9;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between
+}
+
+.project-card:nth-child(2){
+ background:#c7ff2e;
+ color:#17131e;
+ margin-top:65px;
+ min-height:305px
+}
+
+.project-card:after{
+ content:"";
+ position:absolute;
+ width:280px;
+ height:280px;
+ border:1px solid rgba(255,255,255,.2);
+ border-radius:50%;
+ right:-70px;
+ top:45px;
+ box-shadow:0 0 0 22px rgba(255,255,255,.025),0 0 0 50px rgba(255,255,255,.02)
+}
+
+.project-card:nth-child(2):after{
+ border-color:rgba(0,0,0,.2);
+ box-shadow:0 0 0 22px rgba(0,0,0,.025),0 0 0 50px rgba(0,0,0,.02)
+}
+
+.project-top{
+ display:flex;
+ justify-content:space-between;
+ font:10px 'DM Mono';
+ letter-spacing:.12em;
+ text-transform:uppercase;
+ position:relative;
+ z-index:1
+}
+
+.project-title{
+ font:clamp(36px,5vw,66px)/.88 'Archivo Black';
+ letter-spacing:-.07em;
+ position:relative;
+ z-index:1;
+ max-width:470px
+}
+
+.project-bottom{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ position:relative;
+ z-index:1
+}
+
+.status{
+ font:10px 'DM Mono';
+ border:1px solid currentColor;
+ padding:8px 10px;
+ text-transform:uppercase
+}
+.project-arrow{font-size:28px}
+
+/* TOOLKIT */
+
+.stack-grid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ border-top:1px solid var(--line);
+ border-left:1px solid var(--line)
+}
+
+.stack{
+ padding:24px 20px;
+ min-height:180px;
+ border-right:1px solid var(--line);
+ border-bottom:1px solid var(--line)
+}
+
+.stack h3{
+ font:18px 'Archivo Black';
+ margin:0 0 17px;
+ text-transform:uppercase
+}
+
+.stack p{
+ font:11px/2 'DM Mono';
+ color:#aaa4b4;
+ margin:0
+}
+
+/* MANIFESTO */
+
+.manifesto{
+ background:var(--violet);
+ color:#130e1d;
+ padding:95px 8vw;
+ overflow:hidden
+}
+
+.manifesto:after{
+ content:"";
+ position:absolute;
+ right:-70px;
+ top:-130px;
+ width:430px;
+ height:430px;
+ border:2px solid rgba(255,255,255,.25);
+ border-radius:50%;
+ box-shadow:0 0 0 35px rgba(255,255,255,.05),0 0 0 75px rgba(255,255,255,.04)
+}
+
+.manifesto h2{
+ max-width:900px;
+ font-size:clamp(48px,8vw,108px)
+}
+
+.manifesto p{
+ font:12px 'DM Mono';
+ letter-spacing:.1em;
+ text-transform:uppercase;
+ margin-top:32px
+}
+
+/* ABOUT */
+
+.about-row{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10vw;
+ align-items:center
+}
+
+.about-copy{
+ color:#c4bfcc;
+ line-height:1.8;
+ font-size:15px;
+ max-width:520px
+}
+
+.about-mark{
+ aspect-ratio:1;
+ background:
+ radial-gradient(circle at 50% 50%,#9b5cff 0 18%,transparent 19%),
+ radial-gradient(circle at 50% 50%,transparent 35%,rgba(199,255,46,.85) 36% 37%,transparent 38%),
+ linear-gradient(135deg,#25173c,#111018);
+ display:grid;
+ place-items:center;
+ position:relative;
+ overflow:hidden;
+ border:1px solid var(--line)
+}
+
+.about-mark strong{
+ font:clamp(52px,8vw,100px)/.8 'Archivo Black';
+ letter-spacing:-.1em;
+ color:var(--acid);
+ text-shadow:5px 5px 0 #291341;
+ transform:rotate(-10deg);
+ z-index:1
+}
+
+.about-mark:before,.about-mark:after{
+ content:"✳";
+ position:absolute;
+ color:var(--pink);
+ font-size:70px
+}
+.about-mark:before{top:12%;left:15%}
+.about-mark:after{
+ bottom:12%;
+ right:15%;
+ font-size:45px;
+ color:#fff
+}
+
+/* CONTACT */
+
+.contact{
+ background:#c7ff2e;
+ color:#15111d;
+ padding-bottom:65px
+}
+.contact .kicker{color:#6b35b1}
+.contact h2{font-size:clamp(60px,11vw,145px)}
+
+.contact-links{
+ display:flex;
+ gap:12px;
+ flex-wrap:wrap;
+ margin-top:38px
+}
+
+.contact-links a{
+ border:1px solid #17131e;
+ padding:13px 17px;
+ font:11px 'DM Mono';
+ text-transform:uppercase;
+ transition:.2s
+}
+.contact-links a:hover{
+ background:#17131e;
+ color:var(--acid)
+}
+
+footer{
+ padding:24px 8vw;
+ display:flex;
+ justify-content:space-between;
+ gap:20px;
+ font:10px 'DM Mono';
+ letter-spacing:.1em;
+ color:#8f8999;
+ text-transform:uppercase
+}
+
+.reveal{
+ opacity:0;
+ transform:translateY(28px);
+ transition:opacity .7s ease,transform .7s ease
+}
+.reveal.visible{
+ opacity:1;
+ transform:translateY(0)
+}
+
+@keyframes float{
+ 0%,100%{transform:translate(-50%,-50%) rotate(11deg)}
+ 50%{transform:translate(-50%,-53%) rotate(6deg)}
+}
+@keyframes marquee{
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
+}
+
+/* LOADING SCREEN */
+
+.loader-screen{
+ position:fixed;
+ inset:0;
+ z-index:1000;
+ background:#100d18;
+ display:grid;
+ place-items:center;
+ overflow:hidden;
+ transition:opacity .7s ease,visibility .7s ease
+}
+.loader-screen.is-hidden{
+ opacity:0;
+ visibility:hidden;
+ pointer-events:none
+}
+
+.loader-screen:before,.loader-screen:after{
+ content:"";
+ position:absolute;
+ width:56vw;
+ height:56vw;
+ max-width:650px;
+ max-height:650px;
+ border:1px solid rgba(199,255,46,.17);
+ border-radius:50%;
+ animation:loaderOrbit 16s linear infinite
+}
+.loader-screen:after{
+ width:42vw;
+ height:42vw;
+ border-color:rgba(155,92,255,.22);
+ animation-direction:reverse
+}
+
+.loader-inner{
+ position:relative;
+ z-index:1;
+ width:min(560px,92vw);
+ height:430px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center
+}
+
+.loader-scene{
+ position:relative;
+ width:100%;
+ height:300px
+}
+
+.loader-can{
+ position:absolute;
+ left:20%;
+ top:28px;
+ width:105px;
+ height:220px;
+ border-radius:19px 19px 15px 15px;
+ background:linear-gradient(90deg,#321052 0%,#7a2ac4 19%,#c276ff 43%,#7730bd 72%,#28103f 100%);
+ box-shadow:inset 7px 0 10px #ffffff35,inset -9px 0 12px #0009,0 24px 45px #0008;
+ border:1px solid #ffffff45;
+ transform:rotate(-9deg);
+ transform-origin:70% 85%;
+ animation:canTilt 3.7s cubic-bezier(.6,0,.3,1) forwards
+}
+
+.loader-can:before{
+ content:"";
+ position:absolute;
+ left:5px;
+ right:5px;
+ top:-7px;
+ height:15px;
+ border-radius:50%;
+ background:linear-gradient(#fafafa,#85818d 48%,#333 75%,#c9c5d0);
+ border:1px solid #ddd
+}
+
+.loader-can:after{
+ content:"";
+ position:absolute;
+ left:5px;
+ right:5px;
+ bottom:-7px;
+ height:14px;
+ border-radius:50%;
+ background:linear-gradient(#bbb,#333 65%,#999);
+ border:1px solid #aaa
+}
+
+.loader-can-top{
+ position:absolute;
+ left:27px;
+ right:25px;
+ top:-1px;
+ height:7px;
+ border-radius:50%;
+ background:#292431;
+ z-index:2;
+ transform:rotate(-9deg)
+}
+
+.loader-can-art{
+ position:absolute;
+ inset:29px 7px 25px;
+ overflow:hidden;
+ border-radius:10px;
+ text-align:center;
+ color:white;
+ background:
+ radial-gradient(circle at 50% 48%,#c7ff2e 0 2%,transparent 3%),
+ linear-gradient(145deg,transparent 34%,#ff4fa3 35% 43%,transparent 44%),
+ repeating-linear-gradient(135deg,transparent 0 15px,#ffffff13 16px 18px)
+}
+
+.loader-can-art:before{
+ content:"";
+ position:absolute;
+ width:130px;
+ height:130px;
+ border:2px solid #c7ff2e;
+ border-radius:50%;
+ left:-20px;
+ top:30px;
+ box-shadow:0 0 0 9px #c7ff2e20,0 0 0 19px #c7ff2e12
+}
+
+.loader-can-brand{
+ position:relative;
+ z-index:1;
+ font:24px/.78 'Archivo Black';
+ letter-spacing:-.1em;
+ color:#c7ff2e;
+ text-shadow:2px 3px 0 #32104f;
+ margin-top:42px;
+ transform:rotate(-7deg)
+}
+
+.loader-can-sub{
+ position:relative;
+ z-index:1;
+ font:6px 'DM Mono';
+ letter-spacing:.13em;
+ margin-top:12px
+}
+
+.loader-can-star{
+ position:relative;
+ z-index:1;
+ font-size:31px;
+ color:#fff;
+ text-shadow:2px 2px 0 #32104f;
+ margin-top:12px
+}
+
+.loader-glass{
+ position:absolute;
+ right:17%;
+ bottom:14px;
+ width:105px;
+ height:145px;
+ border:3px solid rgba(235,246,255,.8);
+ border-top:0;
+ border-radius:5px 5px 22px 22px;
+ clip-path:polygon(0 0,100% 0,85% 100%,15% 100%);
+ background:linear-gradient(90deg,#ffffff1c,#ffffff05 45%,#ffffff30);
+ box-shadow:inset 8px 0 13px #ffffff13;
+ z-index:2
+}
+
+.loader-glass:before{
+ content:"";
+ position:absolute;
+ left:5px;
+ right:5px;
+ top:8px;
+ height:3px;
+ background:#ffffff80;
+ border-radius:50%
+}
+
+.loader-liquid{
+ position:absolute;
+ bottom:0;
+ left:0;
+ right:0;
+ height:0;
+ background:linear-gradient(90deg,#8e35df,#c7ff2e 48%,#a94eff);
+ box-shadow:0 0 24px #a65cff99;
+ animation:fillGlass 3.7s ease-in-out forwards
+}
+
+.loader-liquid:before{
+ content:"";
+ position:absolute;
+ top:-6px;
+ left:0;
+ right:0;
+ height:13px;
+ border-radius:50%;
+ background:#d7ff69;
+ box-shadow:0 0 15px #c7ff2e
+}
+
+.loader-stream{
+ position:absolute;
+ right:31%;
+ top:90px;
+ width:13px;
+ height:0;
+ border-radius:50%;
+ background:linear-gradient(90deg,#8c34df,#c7ff2e,#fff);
+ transform:rotate(-13deg);
+ filter:drop-shadow(0 0 9px #c7ff2e);
+ z-index:1;
+ animation:pourStream 3.7s ease-in-out forwards
+}
+
+.loader-splash{
+ position:absolute;
+ right:23%;
+ bottom:139px;
+ width:110px;
+ height:55px;
+ border:3px solid #c7ff2e;
+ border-color:#c7ff2e transparent transparent;
+ border-radius:50%;
+ opacity:0;
+ transform:rotate(-12deg);
+ animation:splashPop 3.7s ease-out forwards
+}
+
+.loader-copy{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:10px;
+ margin-top:8px
+}
+
+.loader-word{
+ font:clamp(27px,5vw,42px)/1 'Archivo Black';
+ letter-spacing:-.08em
+}
+.loader-word span{color:#c7ff2e}
+
+.loader-caption{
+ font:10px 'DM Mono';
+ letter-spacing:.22em;
+ color:#aaa5b4;
+ text-transform:uppercase
+}
+
+.loader-track{
+ width:170px;
+ height:3px;
+ background:#ffffff20;
+ overflow:hidden;
+ margin-top:4px
+}
+.loader-track:after{
+ content:"";
+ display:block;
+ width:42%;
+ height:100%;
+ background:#c7ff2e;
+ animation:loaderProgress 1.1s ease-in-out infinite
+}
+
+@keyframes canTilt{
+ 0%,18%{transform:rotate(-9deg) translateY(0)}
+ 35%{transform:rotate(16deg) translate(22px,13px)}
+ 55%,78%{transform:rotate(22deg) translate(35px,20px)}
+ 100%{transform:rotate(-9deg) translateY(0)}
+}
+
+@keyframes pourStream{
+ 0%,30%{height:0;opacity:0}
+ 40%{height:95px;opacity:1}
+ 72%{height:95px;opacity:1}
+ 88%,100%{height:0;opacity:0}
+}
+
+@keyframes fillGlass{
+ 0%,38%{height:0}
+ 75%,88%{height:72%}
+ 100%{height:72%}
+}
+
+@keyframes splashPop{
+ 0%,48%{opacity:0;transform:scale(.5) rotate(-12deg)}
+ 58%{opacity:1;transform:scale(1.15) rotate(-12deg)}
+ 75%{opacity:.75;transform:scale(1) rotate(-12deg)}
+ 100%{opacity:0;transform:scale(1.3) rotate(-12deg)}
+}
+
+@keyframes loaderOrbit{to{transform:rotate(360deg)}}
+@keyframes loaderProgress{
+ 0%{transform:translateX(-110%)}
+ 100%{transform:translateX(260%)}
+}
+
+/* RESPONSIVE */
+
+@media(prefers-reduced-motion:reduce){
+ .loader-can,.loader-stream,.loader-liquid,.loader-splash,
+ .loader-screen:before,.loader-screen:after,.loader-track:after{
+  animation:none
+ }
+}
+
+@media(max-width:800px){
+ header{padding:0 6vw}
+ .nav{gap:0;padding:4px}
+ .nav a{padding:9px 11px;font-size:9px}
+ .loader-can{left:13%}
+ .loader-glass{right:10%}
+ .loader-stream{right:29%}
+ .hero{
+  padding:70px 7vw 420px;
+  min-height:950px;
+  align-items:flex-start
+ }
+ .hero-copy{max-width:100%}
+ h1{font-size:clamp(76px,17vw,130px)}
+ .can-stage{
+  top:auto;
+  bottom:-30px;
+  right:5%;
+  width:90%;
+  height:490px;
+  transform:none
+ }
+ .can{transform:translate(-50%,-50%) rotate(11deg) scale(.82)}
+ .can-shadow{bottom:8%}
+ .splash.one{
+  right:0;
+  top:20%;
+  transform:scale(.8) rotate(-25deg)
+ }
+ .hero-stamp{left:7vw}
+ .section-head{display:block}
+ .section-note{margin-top:22px}
+ .project-grid{grid-template-columns:1fr}
+ .project-card:nth-child(2){margin-top:0}
+ .stack-grid{grid-template-columns:repeat(2,1fr)}
+ section{padding:85px 7vw}
+ .about-row{grid-template-columns:1fr}
+ .about-mark{max-width:420px;margin:auto;width:100%}
+ .manifesto{padding:80px 7vw}
+ footer{padding:22px 7vw;flex-direction:column}
+}
+
+@media(max-width:420px){
+ .brand{font-size:22px}
+ .menu-tag{font-size:9px;padding:8px}
+ .nav a{padding:8px 9px;font-size:8px}
+ .hero{min-height:900px}
+ .can-stage{height:420px}
+ .can{transform:translate(-50%,-50%) rotate(11deg) scale(.72)}
+ .stack{padding:18px 13px;min-height:160px}
+ .stack h3{font-size:15px}
+ .stack p{font-size:10px}
+ .loader-can{left:8%;transform:scale(.88) rotate(-9deg)}
+ .loader-glass{
+  right:7%;
+  transform:scale(.9);
+  transform-origin:bottom right
+ }
+ .loader-stream{right:27%}
 }
 </style>
 </head>
 
 <body>
 
-<div id="intro">
-  <div class="intro-content">
-    <div class="letters" id="letters"></div>
-    <div class="manager" id="manager">PROJECT MANAGER</div>
-    <div class="intro-line"></div>
+<!-- LOADING ANIMATION -->
+<div class="loader-screen" id="loader" role="status" aria-label="Loading RESURECT">
+ <div class="loader-inner">
+  <div class="loader-scene">
+
+   <div class="loader-can">
+    <div class="loader-can-top"></div>
+    <div class="loader-can-art">
+     <div class="loader-can-brand">RESU<br>RECT.</div>
+     <div class="loader-can-star">✳</div>
+     <div class="loader-can-sub">ENERGY / MINECRAFT</div>
+    </div>
+   </div>
+
+   <div class="loader-stream"></div>
+   <div class="loader-splash"></div>
+
+   <div class="loader-glass">
+    <div class="loader-liquid"></div>
+   </div>
+
   </div>
+
+  <div class="loader-copy">
+   <div class="loader-word">RESURECT<span>.</span></div>
+   <div class="loader-caption">Pouring creative energy</div>
+   <div class="loader-track"></div>
+  </div>
+ </div>
 </div>
 
-<div class="site" id="site">
+<div class="noise"></div>
+<div class="cursor-glow" id="glow"></div>
 
+<!-- HEADER -->
 <header>
-  <a href="#" class="logo">RESURECT.</a>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#projects">Projects</a>
-    <a href="#about">About</a>
-  </nav>
+ <a class="brand" href="#top">RESURECT<span>.</span></a>
+
+ <nav class="nav">
+  <a href="#projects">Projects</a>
+  <a href="#stack">Toolkit</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+ </nav>
+
+ <a class="menu-tag" href="#contact">LET'S BUILD ↗</a>
 </header>
 
-<main>
+<main id="top">
 
-<section class="hero" id="home">
+<!-- HERO -->
+<section class="hero">
 
-  <div class="photo">
-    <img src="assets/profile.png" alt="Resurect profile portrait">
+ <div class="hero-copy">
+  <div class="eyebrow">Minecraft development / independent studio</div>
+
+  <h1>
+   <span class="outline">MAKE</span>
+   <span class="acid">IT</span>
+   <span>UNREAL.</span>
+  </h1>
+
+  <p class="hero-desc">
+   Custom Minecraft systems, plugins and experiences with a little more voltage.
+   Built with intention. Made to leave a mark.
+  </p>
+
+  <div class="actions">
+   <a class="btn" href="#projects">Explore the work <span>↘</span></a>
+   <a class="text-link" href="#about">Get to know me</a>
+  </div>
+ </div>
+
+ <div class="can-stage" aria-label="Decorative fictional RESURECT energy can">
+  <div class="splash one"></div>
+  <div class="splash two"></div>
+
+  <span class="droplet d1"></span>
+  <span class="droplet d2"></span>
+  <span class="droplet d3"></span>
+
+  <span class="burst a">✳</span>
+  <span class="burst b">ZAP!</span>
+
+  <div class="can-shadow"></div>
+
+  <div class="can">
+   <div class="can-top"></div>
+
+   <div class="can-label">
+    <div class="can-small">MINECRAFT / CREATIVE ENERGY</div>
+    <div class="can-mark">✳</div>
+    <div class="can-name">RESU<br>RECT.</div>
+    <div class="can-sub">BUILT DIFFERENT · EST. 2024</div>
+   </div>
+  </div>
+ </div>
+
+ <div class="hero-stamp">INDEPENDENT DEVELOPER — NO SHORTCUTS</div>
+</section>
+
+<!-- MOVING TEXT -->
+<div class="ticker">
+ <div class="ticker-track">
+  <span>CRAFT THE UNEXPECTED</span><b>✳</b>
+  <span>CODE WITH ENERGY</span><b>✳</b>
+  <span>BUILT DIFFERENT</span><b>✳</b>
+  <span>CRAFT THE UNEXPECTED</span><b>✳</b>
+  <span>CODE WITH ENERGY</span><b>✳</b>
+  <span>BUILT DIFFERENT</span><b>✳</b>
+ </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+
+ <div class="section-head reveal">
+  <div>
+   <div class="kicker">01 / Selected work</div>
+   <h2>THE<br>LINEUP.</h2>
   </div>
 
-  <div class="hero-content">
-    <div class="eyebrow">DEVELOPER · CREATOR · FORMER MANAGER</div>
+  <p class="section-note">
+   Experiments, systems and worlds in progress.
+   Every build starts with a reason to exist.
+  </p>
+ </div>
 
-    <h1>RESURECT.</h1>
+ <div class="project-grid">
 
-    <div class="subtitle">BUILD. LEARN. INSPIRE.</div>
+  <article class="project-card reveal">
+   <div class="project-top">
+    <span>01 — Project</span>
+    <span>Systems / Gameplay</span>
+   </div>
 
-    <p class="description">
-      Software developer and Minecraft enthusiast.
-      Former server manager with experience in team
-      leadership, community management and development.
-      Currently retired from server management.
-    </p>
+   <div class="project-title">PROJECT<br>DELTA.</div>
 
-    <a href="#projects" class="main-link">
-      EXPLORE MY WORKS <span>↗</span>
-    </a>
+   <div class="project-bottom">
+    <span class="status">In development</span>
+    <span class="project-arrow">↗</span>
+   </div>
+  </article>
+
+  <article class="project-card reveal">
+   <div class="project-top">
+    <span>02 — Project</span>
+    <span>Economy / Experience</span>
+   </div>
+
+   <div class="project-title">BILLIONAIRE.</div>
+
+   <div class="project-bottom">
+    <span class="status">In development</span>
+    <span class="project-arrow">↗</span>
+   </div>
+  </article>
+
+ </div>
+</section>
+
+<!-- TOOLKIT -->
+<section id="stack">
+
+ <div class="section-head reveal">
+  <div>
+   <div class="kicker">02 / The formula</div>
+   <h2>TOOLS OF<br>THE TRADE.</h2>
   </div>
 
-</section>
+  <p class="section-note">
+   A practical toolkit for building reliable Minecraft experiences —
+   from backend logic to the final details.
+  </p>
+ </div>
 
-<section class="links-section">
-  <div class="quick-links">
-    <a href="#projects">Projects ↗</a>
-    <a href="#plugins">Plugins ↗</a>
-    <a href="#academy">Academy ↗</a>
-    <a href="#about">Profile ↗</a>
-    <a href="#contact">Contact ↗</a>
+ <div class="stack-grid reveal">
+
+  <div class="stack">
+   <h3>Languages</h3>
+   <p>
+    Java<br>
+    JavaScript<br>
+    PHP<br>
+    HTML5 / CSS3
+   </p>
   </div>
+
+  <div class="stack">
+   <h3>Minecraft</h3>
+   <p>
+    Paper · Spigot · Bukkit<br>
+    Velocity · Adventure<br>
+    PlaceholderAPI
+   </p>
+  </div>
+
+  <div class="stack">
+   <h3>Data</h3>
+   <p>
+    MySQL · MongoDB<br>
+    SQLite · Redis<br>
+    HikariCP · JDBC
+   </p>
+  </div>
+
+  <div class="stack">
+   <h3>Workflow</h3>
+   <p>
+    Git · GitHub<br>
+    Maven · Gradle<br>
+    IntelliJ IDEA · Docker<br>
+    YAML · JSON · REST APIs
+   </p>
+  </div>
+
+ </div>
 </section>
 
-<section class="content" id="projects">
-  <div class="section-title">Selected Projects.</div>
-  <p class="about-text">
-    A collection of software, Minecraft development
-    and digital projects built throughout my journey.
-  </p>
-  <p style="margin-top:25px">
-    <a class="main-link" href="https://github.com/resurect63">
-      GITHUB PROFILE ↗
-    </a>
-  </p>
+<!-- MANIFESTO -->
+<section class="manifesto">
+ <div class="kicker">03 / The mindset</div>
+
+ <h2>
+  NOT JUST<br>
+  ANOTHER<br>
+  BLOCK IN THE WORLD.
+ </h2>
+
+ <p>Make it useful. Make it memorable. Make it yours. ✳</p>
 </section>
 
-<section class="content" id="plugins">
-  <div class="section-title">Minecraft Plugins.</div>
-  <p class="about-text">
-    Custom Minecraft plugins, server systems and
-    development experiments.
-  </p>
+<!-- ABOUT -->
+<section id="about">
+
+ <div class="about-row">
+
+  <div class="reveal">
+   <div class="kicker">04 / Behind the build</div>
+
+   <h2>BUILT BY<br>RESURECT.</h2>
+
+   <p class="about-copy">
+    I'm a Minecraft developer and creative builder focused on plugins,
+    server systems and the details that make a project feel complete.
+    From development and server management to modeling and animation,
+    I enjoy shaping ideas into experiences people can actually play.
+   </p>
+
+   <p class="mono">
+    JAVA-FIRST · MINECRAFT-FOCUSED · ALWAYS EXPERIMENTING
+   </p>
+  </div>
+
+  <div class="about-mark reveal">
+   <strong>R.</strong>
+  </div>
+
+ </div>
 </section>
 
-<section class="content" id="academy">
-  <div class="section-title">Manager Academy.</div>
-  <p class="about-text">
-    Knowledge and experience from Minecraft server
-    management, staff leadership and community operations.
-  </p>
-  <p style="margin-top:25px">
-    <a class="main-link" href="https://github.com/resurect63/moderator-academy">
-      EXPLORE ACADEMY ↗
-    </a>
-  </p>
-</section>
+<!-- CONTACT -->
+<section class="contact" id="contact">
 
-<section class="content" id="about">
-  <div class="section-title">About Me.</div>
-  <p class="about-text">
-    My journey has been shaped by software development,
-    Minecraft communities and project management.
-    I have worked with different teams and communities,
-    gaining experience in leadership and technical development.
-  </p>
-  <div class="status">CURRENT STATUS: <span>RETIRED FROM MANAGEMENT</span></div>
+ <div class="kicker">05 / Start something</div>
+
+ <h2>GOT AN<br>IDEA?</h2>
+
+ <p class="mono" style="color:#342a40">
+  LET'S TURN IT INTO SOMETHING REAL.
+ </p>
+
+ <div class="contact-links">
+  <a href="https://github.com/resurect63" target="_blank" rel="noopener">GitHub ↗</a>
+  <a href="https://t.me/Resurect63" target="_blank" rel="noopener">Telegram ↗</a>
+  <a href="https://discord.com" target="_blank" rel="noopener">Discord · .Resurect.</a>
+ </div>
+
 </section>
 
 </main>
 
-<footer id="contact">
-  <span>© 2026 RESURECT. ALL RIGHTS RESERVED.</span>
-  <div class="socials">
-    <a href="https://github.com/resurect63">GitHub</a>
-    <a href="https://t.me/Resurect63">Telegram</a>
-  </div>
+<footer>
+ <span>© 2026 RESURECT. — INDEPENDENT MINECRAFT DEVELOPMENT</span>
+ <span>DESIGNED TO HIT DIFFERENT ✳</span>
 </footer>
 
-</div>
-
 <script>
-const letters = "DEVELOPER".split("");
-const lettersBox = document.getElementById("letters");
+/* LOADER */
+const loader = document.getElementById('loader');
 
-letters.forEach((letter,index) => {
-  const span = document.createElement("span");
-  span.textContent = letter;
-  span.style.setProperty("--i",index);
-  lettersBox.appendChild(span);
+window.addEventListener('load', () => {
+ setTimeout(() => {
+  loader.classList.add('is-hidden');
+ }, 3900);
 });
 
-const intro = document.getElementById("intro");
-const manager = document.getElementById("manager");
-const site = document.getElementById("site");
+/* CURSOR GLOW */
+const glow = document.getElementById('glow');
 
-setTimeout(() => {
-  manager.classList.add("show");
-}, 1500);
+window.addEventListener('pointermove', e => {
+ glow.style.left = e.clientX + 'px';
+ glow.style.top = e.clientY + 'px';
+});
 
-function enterSite() {
-  intro.classList.add("hide");
-  site.classList.add("visible");
-}
+/* SCROLL REVEAL */
+const io = new IntersectionObserver(entries => {
+ entries.forEach(entry => {
+  if(entry.isIntersecting){
+   entry.target.classList.add('visible');
+   io.unobserve(entry.target);
+  }
+ });
+},{threshold:.12});
 
-setTimeout(enterSite, 3500);
+document.querySelectorAll('.reveal').forEach(el => {
+ io.observe(el);
+});
 </script>
 
 </body>
